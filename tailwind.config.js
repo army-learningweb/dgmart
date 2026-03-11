@@ -8,6 +8,9 @@ export default {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
     ],
+    safelist: [
+        'size-7'
+    ],
     darkMode: 'selector',
     theme: {
         extend: {

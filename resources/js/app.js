@@ -1,7 +1,13 @@
-import './bootstrap';
+import "./bootstrap";
 
-import Alpine from 'alpinejs';
+// Tải thư viện JQuery
+import $ from "jquery";
+// Gán thư viện jQuery vào biến $ và JQuery của trình duyệt
+window.$ = window.jQuery = $;
 
-window.Alpine = Alpine;
+// Import
+import switchMode from './switchMode';
 
-Alpine.start();
+$(function () {
+    switchMode()
+});

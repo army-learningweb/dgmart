@@ -18,7 +18,7 @@
         <!-- Remember Me -->
         <div class="flex items-center justify-between mt-4">
             <label for="remember_me">
-                <input id="remember_me" type="checkbox" class="rounded bg-[#1e1f20] text-teal-600 shadow-sm focus:ring-0 border-0 focus:outline-0 " name="remember">
+                <input id="remember_me" type="checkbox" class="border-gray-300 rounded dark:bg-[#1e1f20] text-teal-600 shadow-sm focus:ring-0 dark:border-0 focus:outline-0 " name="remember">
                 <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">Ghi nhớ đăng nhập</span>
             </label>
              @if (Route::has('password.request'))

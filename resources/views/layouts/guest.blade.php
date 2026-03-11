@@ -17,7 +17,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="dark:text-white dark:bg-[#131314] bg-gray-50">
+    <body class="dark:text-white dark:bg-[#131314] bg-gray-50 transition-colors duration-350">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
             <div>
                 <a href="/">
@@ -25,13 +25,15 @@
                 </a>
             </div>
 
-            <div class="w-full sm:max-w-md px-6 py-3 overflow-hidden sm:rounded-lg">
+            <div class="w-full sm:max-w-md mt-5 px-6 py-3 overflow-hidden sm:rounded-lg">
                 {{ $slot }}
             </div>
 
             <div class="mt-3 flex justify-center">
-                <x-button-app-mode/>
+                    <x-button-switch-mode/>
             </div>
+
+            
         </div>
     </body>
 </html>
