@@ -22,7 +22,7 @@
         </div>
 
         <div class="mt-2 text-center">
-            <a href="{{ route('login') }}" class="text-gray-600 hover:text-gray-800 dark:hover:text-gray-50">Quay lại</a>
+            <a href="{{ route('login') }}" class="text-sm text-gray-400 hover:text-gray-800 dark:hover:text-gray-50">Quay lại</a>
         </div>
     </form>
 </x-guest-layout>

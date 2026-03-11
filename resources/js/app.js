@@ -7,7 +7,9 @@ window.$ = window.jQuery = $;
 
 // Import
 import switchMode from './switchMode';
+import loadingState from "./loadingState";
 
 $(function () {
     switchMode()
+    loadingState()
 });
