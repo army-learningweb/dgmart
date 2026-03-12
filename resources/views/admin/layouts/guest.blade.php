@@ -26,7 +26,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased dark:text-gray-100 dark:bg-[#131314] bg-gray-100 transition-colors duration-350">
+<body class="font-sans antialiased dark:text-gray-100 dark:bg-[#18181b] bg-white transition-colors duration-350">
     <div class="min-h-screen flex flex-col justify-center items-center pt-6 sm:pt-0">
 
         <div

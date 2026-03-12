@@ -27,14 +27,14 @@
 </head>
 
 <body
-    class="font-sans antialiased dark:text-gray-100 dark:bg-[#131314] bg-gray-100 transition-colors duration-350 text-sm md:w-[1440px] mx-auto px-3 md:px-0">
+    class="font-sans antialiased dark:text-gray-300 dark:bg-[#18181b] bg-white transition-colors duration-350 text-sm md:w-[1440px] mx-auto px-3 md:px-0">
     <div class="min-h-screen">
         <!-- Header -->
         <header>
             <div class="w-full py-4 flex items-center justify-between">
-                <div class="flex items-center gap-10">
+                <div class="flex items-center gap-8">
                     {{-- Logo --}}
-                    <div class="md:ms-[13px]">
+                    <div class="hidden md:block md:ms-[13px]">
                         <a href="/">
                             <x-application-logo class="text-[30px]" />
                         </a>

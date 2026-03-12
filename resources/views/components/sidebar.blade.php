@@ -2,7 +2,7 @@
     <ul>
         <li>
             <a href=""
-                class="active flex items-center gap-3 px-3 py-2 rounded-md text-gray-600 hover:text-gray-900 hover:shadow-md dark:text-gray-400 dark:hover:text-emerald-400 dark:hover:bg-[#1e1f20]">
+                class="active light-active flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-emerald-600 dark:hover:text-emerald-400 dark:hover:bg-[#1e1f20] dark:text-gray-300">
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-5">
@@ -18,7 +18,7 @@
 
         <li class="mt-1">
             <a href=""
-                class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-600 hover:text-gray-900 hover:shadow-md dark:text-gray-400 dark:hover:text-emerald-400 dark:hover:bg-[#1e1f20]">
+                class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-emerald-600 dark:hover:text-emerald-400 dark:hover:bg-[#1e1f20] dark:text-gray-300">
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-5">
@@ -34,7 +34,7 @@
 
         <li class="mt-1">
             <a href=""
-                class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-600 hover:text-gray-900 hover:shadow-md dark:text-gray-400 dark:hover:text-emerald-400 dark:hover:bg-[#1e1f20]">
+                class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-emerald-600 dark:hover:text-emerald-400 dark:hover:bg-[#1e1f20] dark:text-gray-300">
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-5">
@@ -50,7 +50,7 @@
 
         <li class="mt-1">
             <a href=""
-                class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-600 hover:text-gray-900 hover:shadow-md dark:text-gray-400 dark:hover:text-emerald-400 dark:hover:bg-[#1e1f20]">
+                class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-emerald-600 dark:hover:text-emerald-400 dark:hover:bg-[#1e1f20] dark:text-gray-300">
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-5">
@@ -66,7 +66,7 @@
 
         <li class="mt-1">
             <a href=""
-                class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-600 hover:text-gray-900 hover:shadow-md dark:text-gray-400 dark:hover:text-emerald-400 dark:hover:bg-[#1e1f20]">
+                class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-emerald-600 dark:hover:text-emerald-400 dark:hover:bg-[#1e1f20] dark:text-gray-300">
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-5">
@@ -82,7 +82,7 @@
 
         <li class="mt-1">
             <a href=""
-                class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-600 hover:text-gray-900 hover:shadow-md dark:text-gray-400 dark:hover:text-emerald-400 dark:hover:bg-[#1e1f20]">
+                class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-emerald-600 dark:hover:text-emerald-400 dark:hover:bg-[#1e1f20] dark:text-gray-300">
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-5">
@@ -98,7 +98,7 @@
 
         <li class="mt-1">
             <a href=""
-                class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-600 hover:text-gray-900 hover:shadow-md dark:text-gray-400 dark:hover:text-emerald-400 dark:hover:bg-[#1e1f20]">
+                class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-emerald-600 dark:hover:text-emerald-400 dark:hover:bg-[#1e1f20] dark:text-gray-300">
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-5">
@@ -114,7 +114,7 @@
 
         <li class="mt-1">
             <a href=""
-                class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-600 hover:text-gray-900 hover:shadow-md dark:text-gray-400 dark:hover:text-emerald-400 dark:hover:bg-[#1e1f20]">
+                class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-emerald-600 dark:hover:text-emerald-400 dark:hover:bg-[#1e1f20] dark:text-gray-300">
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-5">
