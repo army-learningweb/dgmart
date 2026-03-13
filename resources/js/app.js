@@ -2,6 +2,7 @@ import "./bootstrap";
 
 // Tải thư viện JQuery
 import $ from "jquery";
+
 // Gán thư viện jQuery vào biến $ và JQuery của trình duyệt
 window.$ = window.jQuery = $;
 
@@ -15,15 +16,17 @@ $.ajaxSetup({
 // Import
 import switchMode from './switchMode';
 import loadingState from "./loadingState";
-import toggleUserMenu from "./toggleUserMenu";
-import toggleShortCutMenu from "./toggleShortCutMenu";
+import toggleElement from "./toggleElement";
 import validation from "./validation";
+import getFilterValue from "./getFilterValue";
+import modal from "./modal";
 
 
 $(function () {
     switchMode()
     loadingState()
-    toggleUserMenu()
-    toggleShortCutMenu()
+    toggleElement()
     validation()
+    getFilterValue()
+    modal()
 });

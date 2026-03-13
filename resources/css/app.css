@@ -1,4 +1,5 @@
 @import url('./global.css');
+@import url('./animate.css');
 
 @tailwind base;
 @tailwind components;

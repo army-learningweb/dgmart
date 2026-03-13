@@ -9,7 +9,8 @@ export default {
         './resources/views/**/*.blade.php',
     ],
     safelist: [
-        'size-7'
+        'bg-green-400/10',
+        'text-green-400'
     ],
     darkMode: 'selector',
     theme: {

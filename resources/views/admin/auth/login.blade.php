@@ -7,12 +7,12 @@
 
         <!-- Email Address -->
         <div>
-            <x-input-field type="text" name="email" id="email" label="Email" placeholder="yourmail@gmail.com"/>
+            <x-input-field.field label="Email" type="text" name="email" id="email" placeholder="yourmail@gmail.com"/>
         </div>
 
         <!-- Password -->
         <div class="mt-2">
-            <x-input-field type="password" name="password" id="password" label="Password"/>
+            <x-input-field.field label="Mật khẩu" type="password" name="password" id="password" />
         </div>
         
         <!-- Remember Me -->

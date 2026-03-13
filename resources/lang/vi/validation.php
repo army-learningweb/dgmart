@@ -3,6 +3,7 @@
 return [
     'required' => ':attribute không được để trống',
     'email' => ':attribute không hợp lệ',
+    'confirmed' => 'Xác nhận mật khẩu không khớp',
     
     'min' => [
         'string' => ':attribute ít nhất :min kí tự'
@@ -15,6 +16,8 @@ return [
 
     'attributes' => [
         'email' => 'Email',
-        'password' => 'Mật khẩu'
+        'password' => 'Mật khẩu',
+        'name' => 'Tên',
+        'current_password' => 'Mật khẩu hiện tại'
     ]
 ];

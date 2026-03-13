@@ -1,0 +1,12 @@
+@keyframes translate_down {
+    from{
+        transform: translateY(-200px);
+    }
+    to{
+        transform: translateY(0);
+    }
+}
+
+.animate_translate_down{
+    animation: translate_down 0.3s ease-in-out;
+}

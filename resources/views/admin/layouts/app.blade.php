@@ -26,28 +26,24 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body
-    class="font-sans antialiased dark:text-gray-300 dark:bg-[#18181b] bg-white transition-colors duration-350 text-sm md:w-[1440px] mx-auto px-3 md:px-0">
+<body class="overflow-y-scroll font-sans antialiased dark:text-gray-300 dark:bg-[#18181b] bg-white transition-colors duration-350 text-sm md:w-[1440px] mx-auto px-3 md:px-0">
+    
+    {{-- modal --}}
+    
+    {{-- Layout --}}
     <div class="min-h-screen">
         <!-- Header -->
         <header>
-            <div class="w-full py-4 flex items-center justify-between">
-                <div class="flex items-center gap-8">
-                    {{-- Logo --}}
-                    <div class="hidden md:block md:ms-[13px]">
-                        <a href="/">
-                            <x-application-logo class="text-[30px]" />
-                        </a>
-                    </div>
-                    {{-- title page --}}
-                    <div>
-                         <div class="text-xl">Dashboard</div>
-                    </div>
+            <div class="w-full pt-4 pb-3 flex items-center justify-between gap-1">
+                {{-- Logo --}}
+                <div class="w-[10%] hidden md:block md:ms-[13px]">
+                    <a href="{{ url('admin/dashboard') }}">
+                        <x-application-logo class="text-[30px]" />
+                    </a>
                 </div>
                 
-
                 {{-- Topbar --}}
-                <div>
+                <div class="flex-1">
                     <x-topbar />
                 </div>
             </div>
@@ -66,6 +62,7 @@
                 <div class="w-full md:w-[90%]">
                     {{ $slot }}
                 </div>
+
             </div>
         </main>
 

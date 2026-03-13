@@ -14,6 +14,7 @@ export default function validation() {
                 dataType: "json",
                 success: function (data) {
                     $("." + field + "_ajax_error").html(``);
+                    $("." + field + "_php_error").html(``);
                 },
                 error: function (xhr) {
                     if (xhr.status == 422) {
@@ -22,7 +23,7 @@ export default function validation() {
                             $("." + field + "_ajax_error").html(
                                 `${errors[field][0]}`,
                             );
-                            $("." + field + "_php_error").html(``);
+                            $("." + field + "_php_error").html(` `);
                         }
                     }
                 },
