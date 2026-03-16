@@ -10,7 +10,9 @@ export default {
     ],
     safelist: [
         'bg-green-400/10',
-        'text-green-400'
+        'text-green-400',
+        'bg-red-400/10',
+        'text-red-500'
     ],
     darkMode: 'selector',
     theme: {

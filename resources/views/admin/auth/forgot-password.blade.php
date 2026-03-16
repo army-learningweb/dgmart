@@ -11,7 +11,7 @@
 
         <!-- Email Address -->
         <div>
-            <x-input-field.field label="Email" type="text" name="email" id="email" placeholder="yourmail@gmail.com"/>
+            <x-input-field.field label="Email" type="text" name="email" id="email" placeholder="yourmail@gmail.com" required="*"/>
         </div>
 
         <div class="mt-2">

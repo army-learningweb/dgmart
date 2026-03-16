@@ -18,15 +18,18 @@ import switchMode from './switchMode';
 import loadingState from "./loadingState";
 import toggleElement from "./toggleElement";
 import validation from "./validation";
-import getFilterValue from "./getFilterValue";
 import modal from "./modal";
-
+import editModal from "./editModal";
+import listFilter from "./listFilter";
+import updateStatus from "./updateStatus";
 
 $(function () {
     switchMode()
     loadingState()
     toggleElement()
     validation()
-    getFilterValue()
     modal()
+    editModal()
+    listFilter()
+    updateStatus()
 });

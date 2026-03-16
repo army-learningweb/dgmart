@@ -26,7 +26,13 @@ Route::middleware('auth')->group(function () {
 
     // User
     Route::get('/admin/users',[AdminUserController::class,'list'])->name('admin.users');
+    Route::get('/admin/users/filter',[AdminUserController::class,'list_filter']);
     Route::post('/admin/users/store',[AdminUserController::class,'store'])->name('admin.users.store');
+    Route::get('/admin/users/destroy/{user}',[AdminUserController::class,'destroy'])->name('admin.users.destroy');
+    Route::get('/admin/users/edit',[AdminUserController::class,'edit'])->name('admin.users.edit');
+    Route::post('/admin/users/update',[AdminUserController::class,'update'])->name('admin.users.update');
+    Route::post('/admin/users/updateStatus',[AdminUserController::class,'updateStatus']);
+
 });
 
 require __DIR__.'/auth.php';

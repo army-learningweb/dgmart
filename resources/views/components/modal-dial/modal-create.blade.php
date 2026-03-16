@@ -6,15 +6,15 @@
 ])
 
 <div
-    class="modal-{{ $modal }} {{ $errors->any() ? '' : 'pointer-events-none opacity-0 scale-0' }}  bg-[#1a1a1a]/30 backdrop-brightness-50 backdrop-blur-sm absolute left-0 top-0 z-50 w-full h-screen flex justify-center items-start">
+    class="modal-{{ $modal }} {{ $errors->any() && old('modal') == 'create-user' ? '' : 'pointer-events-none opacity-0 scale-0' }} bg-[#1a1a1a]/30 backdrop-brightness-50 backdrop-blur-sm absolute left-0 top-0 z-50 w-full h-screen flex justify-center items-start">
 
     {{-- modal --}}
-    <div class="modal-{{ $modal }}-is-open bg-[#151517] w-[400px] p-5 rounded-lg shadow-sm mt-20">
+    <div class="modal-{{ $modal }}-is-open bg-[#151517] w-[400px] p-5 rounded-lg mt-20">
 
         {{-- title --}}
         <div class="flex justify-between text-lg">
 
-            <div>{{ $title }}</div>
+            <div class="modal-{{ $modal }}-title">{{ $title }}</div>
 
             <div>
                 <div class="cancel-modal cancel-modal-{{ $modal }} cursor-pointer dark:text-gray-400 dark:hover:text-gray-100" 

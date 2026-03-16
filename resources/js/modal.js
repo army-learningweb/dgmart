@@ -1,16 +1,18 @@
 export default function modal(){
-    $('.open-modal').on('click',function(){
+
+    // open
+    $(document).on('click','.open-modal',function(){
         let modal_name = $(this).data('modal');
-        
         $('.modal-'+modal_name).removeClass('pointer-events-none opacity-0 scale-0')
         $('.modal-'+modal_name+'-is-open').addClass('animate_translate_down');
     })
-
-    $('.cancel-modal').on('click',function(){
+   
+    // close
+    $(document).on('click','.cancel-modal',function(){
         let modal_name = $(this).data('modal');
-        
-         $('.modal-'+modal_name).addClass('pointer-events-none opacity-0 scale-0')
-         $('.modal-'+modal_name+'-is-open').removeClass('animate_translate_down');
-         $('.error').hide();
+        $('.modal-'+modal_name).find('input').val('');
+        $('.modal-'+modal_name).addClass('pointer-events-none opacity-0 scale-0')
+        $('.modal-'+modal_name+'-is-open').removeClass('animate_translate_down');
+        $('.error').hide();
     })
 }

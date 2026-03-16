@@ -26,37 +26,7 @@
     
     {{-- icon --}}
     <div class="flex items-center gap-3">
-        {{-- create --}}
-        <div class="shortcut hidden md:block relative">
-            <div
-                class="flex items-center gap-1 bg-white text-gray-600 shadow-md  hover:text-gray-900 dark:bg-[#1e1f20] px-3 py-1 rounded-md cursor-pointer dark:text-gray-400 dark:hover:text-gray-100">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="size-4">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                </svg>
-                <span>Tạo mới</span>
-            </div>
-
-            {{-- menu --}}
-            <div
-                class="shortcut-menu pointer-events-none opacity-0 scale-0 transition-all duration-100 absolute top-[40px] z-10">
-                <ul
-                    class="flex flex-col border border-gray-500/80 rounded-md shadow-md bg-white dark:bg-[#1e1f20] dark:shadow-sm">
-                    <li class="border-b border-gray-500/80"><a href="#"
-                            class="shortcut-option inline-block py-1 px-3 w-full text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-emerald-500">Sản
-                            phẩm</a></li>
-                    <li class="border-b border-gray-500/80"><a href="#"
-                            class="shortcut-option inline-block py-1 px-3  w-full text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-emerald-500">Bài
-                            viết</a></li>
-                    <li class=""><a href="#"
-                            class="shortcut-option inline-block py-1 px-3 w-full text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-emerald-500">Thành
-                            viên</a></li>
-                </ul>
-            </div>
-
-        </div>
-
-
+        
         {{-- swichtmode --}}
         <div>
             <x-button-switch-mode />

@@ -1,0 +1,1 @@
+{!! user_status($status_value) !!}

@@ -10,3 +10,25 @@
 .animate_translate_down{
     animation: translate_down 0.3s ease-in-out;
 }
+
+@keyframes translate_up {
+    0%{
+        transform: translateY(0);
+    }
+    10%{
+        transform: translateY(-30px);
+        opacity: 1;
+    }
+    90%{
+        transform: translateY(-30px);
+        opacity: 1;
+    }
+    100%{
+        transform: translateY(0);
+        opacity: 0;
+    }
+}
+
+.animate_flash_session{
+    animation:  translate_up 2.5s;
+}
