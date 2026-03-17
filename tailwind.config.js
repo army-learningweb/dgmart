@@ -11,8 +11,10 @@ export default {
     safelist: [
         'bg-green-400/10',
         'text-green-400',
+        'text-green-600',
         'bg-red-400/10',
-        'text-red-500'
+        'text-red-500',
+        'text-red-600'
     ],
     darkMode: 'selector',
     theme: {

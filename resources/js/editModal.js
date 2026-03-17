@@ -1,4 +1,6 @@
 export default function editModal() {
+
+    // User
     $(document).on("click", ".edit-user", function () {
         let modal_name = $(this).data("modal");
         let id = $(this).data("id");

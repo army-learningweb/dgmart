@@ -1,26 +1,21 @@
-@if ($users->count() > 0)
+
     <div class="bg-white dark:bg-[#1e1f20] shadow-md mt-4 py-3 px-5 rounded-md text-sm overflow-x-auto md:overflow-visible">
         <table class="min-w-[1000px] md:w-full">
             
             <tr class="dark:text-gray-300">
-                <td class="px-3 py-2">
-                    <input type="checkbox" name="" id="check_all" class="check_all rounded-[3px] mb-[2px]">
-                    <label for="check_all" class="ms-[2px] text-sm"></label>
-                </td>
                 <td class="px-5">#</td>
-                <td class="px-5">Họ tên</td>
-                <td class="px-5">Quyền</td>
-                <td class="px-5">Email</td>
-                <td class="px-3">Trạng thái</td>
-                <td class="px-3">Cập nhật trạng thái</td>
-                <td class="px-3">Ngày tham gia</td>
+                <td class="px-5">Tên quyền</td>
+                <td class="px-5">Mô tả</td>
+                <td class="px-5">Slug</td>
+                <td class="px-3">Ngày tạo</td>
+                <td class="px-3">Ngày cập nhật</td>
                 <td class="px-3 text-center">Thao tác</td>
             </tr>
             @php
                 $num = 1;
             @endphp
-            @foreach ($users as $user)
-                <tr class="dark:text-gray-300 border-b border-gray-500/40 dark:hover:bg-[#292929] hover:bg-[#f5f5f5]">
+            
+                {{-- <tr class="dark:text-gray-300 border-b border-gray-500/40 dark:hover:bg-[#292929] hover:bg-[#f5f5f5]">
                     <td class="px-3 py-4">
                         <input type="checkbox" name="user_id[]" value="{{ $user->id }}" {{ in_array($user->id,(array)old('user_id')) ? 'checked' : ''}} 
                         class="check_single rounded-[3px] mb-[2px]">
@@ -68,18 +63,18 @@
                         </div>
 
                     </td>
-                </tr>
-            @endforeach
+                </tr> --}}
+           
 
         </table>
     </div>
-@else
-    <div class="flex gap-2 items-center mt-5">
+
+    {{-- <div class="flex gap-2 items-center mt-5">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
             stroke="currentColor" class="size-6">
             <path stroke-linecap="round" stroke-linejoin="round"
                 d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Zm3.75 11.625a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
         </svg>
         Không tìm thấy bản ghi nào !
-    </div>
-@endif
+    </div> --}}
+

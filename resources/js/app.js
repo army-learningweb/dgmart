@@ -22,6 +22,7 @@ import modal from "./modal";
 import editModal from "./editModal";
 import listFilter from "./listFilter";
 import updateStatus from "./updateStatus";
+import checkAll from "./checkAll";
 
 $(function () {
     switchMode()
@@ -32,4 +33,5 @@ $(function () {
     editModal()
     listFilter()
     updateStatus()
+    checkAll()
 });

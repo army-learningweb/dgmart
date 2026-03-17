@@ -4,7 +4,7 @@ function user_status($status)
 {
     $arr_status = [
         'active' => ' <div
-                        class="inline-flex items-center gap-1 rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium text-green-400">
+                        class="inline-flex items-center gap-1 rounded-md bg-green-400/10  px-2 py-1 text-xs font-medium dark:text-green-400 text-green-600">
                         <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="size-4">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -15,7 +15,7 @@ function user_status($status)
                     </div>',
                     
         'unactive' => ' <div
-                        class="inline-flex items-center gap-1 rounded-md bg-red-400/10 px-2 py-1 text-xs font-medium text-red-400">
+                        class="inline-flex items-center gap-1 rounded-md bg-red-400/10 px-2 py-1 text-xs font-medium dark:text-red-400 text-red-600">
                         <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="size-4">
                                 <path stroke-linecap="round" stroke-linejoin="round"

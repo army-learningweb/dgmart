@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminPermissionController;
+use App\Http\Controllers\AdminRoleController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ValidationController;
@@ -32,6 +34,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/users/edit',[AdminUserController::class,'edit'])->name('admin.users.edit');
     Route::post('/admin/users/update',[AdminUserController::class,'update'])->name('admin.users.update');
     Route::post('/admin/users/updateStatus',[AdminUserController::class,'updateStatus']);
+    Route::post('/admin/users/action',[AdminUserController::class,'action'])->name('admin.users.action');
+
+    // Permission
+    Route::get('/admin/permissions',[AdminPermissionController::class,'view'])->name('admin.permissions');
+    
+    // Role
+    Route::get('/admin/roles',[AdminRoleController::class,'view'])->name('admin.roles');
+
+    
 
 });
 

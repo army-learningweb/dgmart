@@ -6,10 +6,10 @@
 ])
 
 <div
-    class="modal-{{ $modal }} {{ $errors->any() && old('modal') == 'create-user' ? '' : 'pointer-events-none opacity-0 scale-0' }} bg-[#1a1a1a]/30 backdrop-brightness-50 backdrop-blur-sm absolute left-0 top-0 z-50 w-full h-screen flex justify-center items-start">
+    class="modal-{{ $modal }} {{ $errors->any() && old('modal') == 'create' ? '' : 'pointer-events-none opacity-0 scale-0' }} bg-[#1a1a1a]/30 backdrop-brightness-50 backdrop-blur-sm fixed left-0 top-0 z-50 w-full min-h-screen flex justify-center items-start p-4 md:p-0">
 
     {{-- modal --}}
-    <div class="modal-{{ $modal }}-is-open bg-[#151517] w-[400px] p-5 rounded-lg mt-20">
+    <div class="modal-{{ $modal }}-is-open dark:bg-[#151517] bg-white shadow-md w-[400px] p-5 rounded-lg mt-20">
 
         {{-- title --}}
         <div class="flex justify-between text-lg">
@@ -36,7 +36,7 @@
 
                 {{$slot}}
 
-                <div class="mt-3 flex items-center justify-end gap-2">
+                <div class="mt-3 flex flex-col md:flex-row items-center justify-end gap-2">
                     <x-modal-dial.button-cancel modal="{{ $modal }}" />
                     <x-primary-button class="py-[5px]">{{ $button_create }}</x-primary-button>
                 </div>

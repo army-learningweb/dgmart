@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class AdminUserController extends Controller
 {
@@ -12,7 +13,10 @@ class AdminUserController extends Controller
     {
 
         $users = User::all();
-        return view('admin.user.view', compact('users'));
+        $total = User::all()->count();
+        $active = User::where('status','active')->count();
+        $unactive = User::where('status','unactive')->count();
+        return view('admin.user.view', compact('users','total','active','unactive'));
     }
 
     // thêm
@@ -79,15 +83,26 @@ class AdminUserController extends Controller
         return back()->with('status','Cập nhật thông tin thành công');
     }
 
-    // Lọc
+    // Lọc + tìm kiếm
     function list_filter(Request $request){
-        $filter_value = $request->filter_value;
 
-        if(!$filter_value){
+        $filter_value = $request->filter_value ?? '';
+        $search_value = $request->search_value ?? '';
+
+        if(!$filter_value && !$search_value){
             $users = User::all();
-        }else{
-            $users = User::where('status',$filter_value)->get();
         }
+
+        if($filter_value && !$search_value){
+            $users = User::where('status',$filter_value)->get();
+        }else{
+            $users = User::where('name','like','%'.$search_value.'%')->get();
+        }
+
+        if($filter_value && $search_value){
+            $users = User::where('status',$filter_value)->where('name','like','%'.$search_value.'%')->get();
+        }
+
        
         $view = view('admin.user.partials.list',compact('users'))->render();
         return response()->json($view);
@@ -103,8 +118,31 @@ class AdminUserController extends Controller
             'updated_at' => now()
         ]);
 
+        $active = User::where('status','active')->count();
+        $unactive = User::where('status','unactive')->count();
+
         $view = view('admin.user.partials.status',compact('status_value'))->render();
 
-        return response()->json($view);
+        $data = [
+            'active' => $active,
+            'unactive' => $unactive,
+            'view' => $view
+        ];
+        return response()->json($data);
+    }
+
+    // Hành động
+    function action(Request $request){
+
+        $action = $request->input('action');
+        $user_id = $request->user_id;
+
+        if(!$action) return back()->withInput()->with('status_failed','Thất bại, bạn chưa chọn hành động !');
+        if(!$user_id) return back()->withInput()->with('status_failed','Hành động thất bại, bạn chưa chọn User !');
+
+        $current_user_id = Auth::user()->id;
+        User::whereIn('id',$user_id)->whereNot('id',$current_user_id)->update(['status'=>$action,'updated_at'=>now()]);
+
+        return back()->with('status','Thực hiện hành động thành công');
     }
 }

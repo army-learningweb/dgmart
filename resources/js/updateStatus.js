@@ -11,7 +11,16 @@ export default function updateStatus() {
             data: data,
             dataType: "json",
             success: function (data) {
-                $(".status-" + module + "-" + id).html(data);
+                
+                $(".status-" + module + "-" + id).html(data.view);
+
+                if(data.active){
+                    $('.active-'+ module).html('(' + data.active + ')');
+                }
+
+                if(data.unactive){
+                    $('.unactive-'+ module).html('(' + data.unactive + ')');
+                }
             },
         });
     });
