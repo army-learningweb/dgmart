@@ -29,7 +29,7 @@
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <x-primary-button class="w-full">
+            <x-primary-button>
                 Đăng nhập
             </x-primary-button>
         </div>

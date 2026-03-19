@@ -10,7 +10,9 @@ class ValidationController extends Controller
         $request->validate([
             'email' => 'nullable|email',
             'password' => 'nullable|min:8|regex:/^[a-zA-Z0-9!@#$%^&*_-]+$/',
-            'name' => 'nullable|min:2|regex:/^[\p{L}\s]+$/u'
+            'name' => 'nullable|min:2|regex:/^[\p{L}\s]+$/u',
+            'desc' => 'nullable|min:8|regex:/^[\p{L}\s]+$/u',
+            'slug' => 'nullable|regex:/^[a-zA-Z0-9\.]+$/',
         ]);
 
         return response()->json();

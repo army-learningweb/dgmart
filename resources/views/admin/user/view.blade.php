@@ -48,7 +48,7 @@
     </x-modal-dial.modal-edit>
 
 
-    <div class="dark:bg-[#18181b] py-4 h-[500px] border-t border-gray-500/30">
+    <div class="dark:bg-[#18181b] py-4 h-[500px] border-t border-gray-500/10">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between">
 
             {{-- title --}}

@@ -18,6 +18,8 @@ return [
         'email' => 'Email',
         'password' => 'Mật khẩu',
         'name' => 'Tên',
-        'current_password' => 'Mật khẩu hiện tại'
+        'current_password' => 'Mật khẩu hiện tại',
+        'slug' => 'Slug',
+        'desc' => 'Mô tả'
     ]
 ];

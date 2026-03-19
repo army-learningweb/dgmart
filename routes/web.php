@@ -41,6 +41,10 @@ Route::middleware('auth')->group(function () {
     
     // Role
     Route::get('/admin/roles',[AdminRoleController::class,'view'])->name('admin.roles');
+    Route::post('/admin/roles/store',[AdminRoleController::class,'store'])->name('admin.roles.store');
+    Route::get('/admin/roles/destroy/{role}',[AdminRoleController::class,'destroy'])->name('admin.roles.destroy');
+    Route::get('/admin/roles/edit',[AdminRoleController::class,'edit']);
+    Route::post('admin/roles/update',[AdminRoleController::class,'update'])->name('admin.roles.update');
 
     
 

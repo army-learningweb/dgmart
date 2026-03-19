@@ -1,10 +1,9 @@
 export default function validation() {
     let timeout;
-    $("input").on("input", function () {
+    $(document).on("input", "input, textarea", function () {
         let field = $(this).attr("name");
         let value = $(this).val();
         let data = { [field]: value };
-
         timeout = clearTimeout(timeout);
         timeout = setTimeout(() => {
             $.ajax({
@@ -28,6 +27,6 @@ export default function validation() {
                     }
                 },
             });
-        }, 350);
+        }, 300);
     });
 }

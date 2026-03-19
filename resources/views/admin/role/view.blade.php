@@ -5,23 +5,47 @@
     <x-failed-flash-session/>
 
     {{-- modal create --}}
-    <x-modal-dial.modal-create modal="create-role" title="Tạo quyền mới" button_create="Tạo quyền" route="">
+    <x-modal-dial.modal-create modal="create-role" title="Tạo quyền mới" button_create="Tạo quyền" route="{{ route('admin.roles.store') }}">
         <div class="mt-2">
             <x-input-field.field id="name" label="Tên quyền" type="text" name="name" required="*" />
+            <span class="text-gray-400 text-xs">Ví dụ: Edit Post</span>
         </div>
 
         <div class="mt-2">
-            <x-input-field.field id="email" label="Slug" type="text" name="slug" required="*"/>
+            <x-input-field.field id="slug" label="Slug" type="text" name="slug" required="*"/>
+            <span class="text-gray-400 text-xs">Ví dụ: edit.post</span>
         </div>
 
         <div class="mt-2">
             <x-text-area id="desc" label="Mô tả" name="desc" required="*"></x-text-area>
+            <span class="text-gray-400 text-xs">Ví dụ: Chỉnh sửa bài viết</span>
         </div>
 
         <input type="hidden" name="modal" value="create">
     </x-modal-dial.modal-create>
 
-    <div class="dark:bg-[#18181b] py-4 h-[500px] border-t border-gray-500/30">
+    <x-modal-dial.modal-edit modal="edit-role" title="Cập nhật thông tin quyền" button_edit="Cập nhật thông tin" route="{{ route('admin.roles.update') }}">
+        <div class="mt-2">
+            <x-input-field.field id="name" label="Tên quyền" type="text" name="name" required="*" />
+            <span class="text-gray-400 text-xs">Ví dụ: Edit Post</span>
+        </div>
+
+        <div class="mt-2">
+            <x-input-field.field id="slug" label="Slug" type="text" name="slug" required="*"/>
+            <span class="text-gray-400 text-xs">Ví dụ: edit.post</span>
+        </div>
+
+        <div class="mt-2">
+            <x-text-area id="desc" label="Mô tả" name="desc" required="*"></x-text-area>
+            <span class="text-gray-400 text-xs">Ví dụ: Chỉnh sửa bài viết</span>
+        </div>
+
+        <input type="hidden" name="role_id" value="">
+        <input type="hidden" name="modal" value="edit">
+
+    </x-modal-dial.modal-edit>
+
+    <div class="dark:bg-[#18181b] py-4 h-[500px] border-t border-gray-500/10">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between">
 
             {{-- title --}}
