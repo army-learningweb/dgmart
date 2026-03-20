@@ -4,60 +4,80 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Role;
+use App\Models\Permission;
+use App\Models\role_permission;
 
 class AdminRoleController extends Controller
 {
-    // danh sách
+   // danh sách
     function view(){
-        $roles = Role::all()->groupBy(function($role){
-            return explode('.',$role->slug)[1];
+
+        $permissions = Permission::all()->groupBy(function($permission){
+            return explode('.',$permission->slug)[1];
         });
 
-        return view('admin.role.view',compact('roles'));
+        $roles = Role::all();
+        
+        return view('admin.role.view',compact('permissions','roles'));
     }
 
     // thêm
     function store(Request $request){
         $request->validate([
-            'name' => 'required|min:8|regex:/^[a-zA-Z0-9\s]+$/u',
-            'slug' => 'required|regex:/^[a-zA-Z0-9\-\.]+$/',
-            'desc' => 'required|min:8|regex:/^[\p{L}\s]+$/u'
+            'name' => 'required|max:255|unique:roles',
+            'desc' => 'required',
         ]);
 
-        Role::create([
+        if(!$request->permission_id) return back()->with('status_failed','Tạo mới thất bại, bạn chưa chọn quyền');
+
+        $role = Role::create([
             'name' => $request->input('name'),
-            'slug' => $request->input('slug'),
             'desc' => $request->input('desc')
         ]);
 
-        return back()->with('status','Thêm quyền thành công');
+        $role->permissions()->attach($request->permission_id);
+
+        return back()->with('status','Tạo vai trò thành công');
     }
 
     // xóa
     function destroy(Role $role){
-        Role::find($role->id)->delete();
-        return back()->with('status','Xóa quyền thành công');
+        Role::where('id',$role->id)->delete();
+        return back()->with('status','Xóa vai trò thành công');
     }
 
     // Cập nhật
     function edit(Request $request){
         $id = $request->id;
         $role = Role::find($id);
-        return response()->json($role);
+
+        $permissions = role_permission::where('role_id',$id)->get()->pluck('permission_id');
+
+        $data = [
+            'permissions' => $permissions,
+            'role' => $role
+        ];
+
+        return response()->json($data);
     }
 
     function update(Request $request){
+
         $request->validate([
-            'name' => 'required|min:8|regex:/^[a-zA-Z0-9\s]+$/u',
-            'slug' => 'required|regex:/^[a-zA-Z0-9\-\.]+$/',
-            'desc' => 'required|min:8|regex:/^[\p{L}\s]+$/u'
+            'name' => 'required|max:255|unique:roles,name,'.$request->role_id,
+            'desc' => 'required',
         ]);
 
-        Role::where('id',$request->role_id)->update([
+        if(!$request->permission_id) return back()->with('status_failed','Cập nhật thất bại, bạn chưa chọn quyền');
+
+        $role = Role::find($request->role_id);
+
+        $role->update([
             'name' => $request->input('name'),
-            'slug' => $request->input('slug'),
-            'desc' => $request->input('desc') 
+            'desc' => $request->input('desc')
         ]);
+
+        $role->permissions()->sync($request->permission_id);
 
         return back()->with('status','Cập nhật thông tin thành công');
     }

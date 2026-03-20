@@ -36,15 +36,21 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/users/updateStatus',[AdminUserController::class,'updateStatus']);
     Route::post('/admin/users/action',[AdminUserController::class,'action'])->name('admin.users.action');
 
-    // Permission
-    Route::get('/admin/permissions',[AdminPermissionController::class,'view'])->name('admin.permissions');
-    
     // Role
     Route::get('/admin/roles',[AdminRoleController::class,'view'])->name('admin.roles');
     Route::post('/admin/roles/store',[AdminRoleController::class,'store'])->name('admin.roles.store');
     Route::get('/admin/roles/destroy/{role}',[AdminRoleController::class,'destroy'])->name('admin.roles.destroy');
-    Route::get('/admin/roles/edit',[AdminRoleController::class,'edit']);
-    Route::post('admin/roles/update',[AdminRoleController::class,'update'])->name('admin.roles.update');
+    Route::get('/admin/roles/edit',[AdminRoleController::class,'edit'])->name('admin.roles.edit');
+    Route::post('/admin/roles/update',[AdminRoleController::class,'update'])->name('admin.roles.update');
+
+    // Permission
+    Route::get('/admin/permissions',[AdminPermissionController::class,'view'])->name('admin.permissions');
+    Route::post('/admin/permissions/store',[AdminPermissionController::class,'store'])->name('admin.permissions.store');
+    Route::get('/admin/permissions/destroy/{permission}',[AdminPermissionController::class,'destroy'])->name('admin.permissions.destroy');
+    Route::get('/admin/permissions/edit',[AdminPermissionController::class,'edit']);
+    Route::post('admin/permissions/update',[AdminPermissionController::class,'update'])->name('admin.permissions.update');
+    
+   
 
     
 

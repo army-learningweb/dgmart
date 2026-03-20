@@ -4,6 +4,7 @@ return [
     'required' => ':attribute không được để trống',
     'email' => ':attribute không hợp lệ',
     'confirmed' => 'Xác nhận mật khẩu không khớp',
+    'unique' => ':attribute đã tồn tại',
     
     'min' => [
         'string' => ':attribute ít nhất :min kí tự'

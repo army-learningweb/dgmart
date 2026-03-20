@@ -117,7 +117,7 @@
             </div>
 
             {{-- list --}}
-            <div class="list-users">
+            <div class="list-users pb-5">
                 @include('admin.user.partials.list')
             </div>
 
