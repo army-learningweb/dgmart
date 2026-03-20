@@ -1,5 +1,5 @@
 <div>
-    <ul>
+    <ul id="main-menu">
         <li>
             <a href="{{ route('dashboard') }}"
                 class="{{ session('module_active') == 'dashboard' ? 'active light-active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-emerald-600 dark:hover:text-emerald-400 dark:hover:bg-[#1e1f20] dark:text-gray-300">
@@ -33,8 +33,8 @@
         </li>
 
         <li class="mt-1">
-            <a href=""
-                class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-emerald-600 dark:hover:text-emerald-400 dark:hover:bg-[#1e1f20] dark:text-gray-300">
+            <a href="#"
+                class="{{ session('module_active') == 'posts' ? 'active light-active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-emerald-600 dark:hover:text-emerald-400 dark:hover:bg-[#1e1f20] dark:text-gray-300">
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-5">
@@ -45,7 +45,36 @@
                 <span>
                     Bài viết
                 </span>
+                <span class="arrow-down">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                    </svg>
+                </span>
             </a>
+            <ul class="sub-menu rounded-md {{ session('module_active') == 'posts' ? 'block' : 'hidden' }}">
+                <li class="mt-1">
+                    <a href="{{ route('admin.posts') }}"
+                        class="{{ session('module_active') == 'posts' && session('sub_module_active') == '' ? 'active light-active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-emerald-600 dark:hover:text-emerald-400 dark:hover:bg-[#1e1f20] dark:text-gray-300">
+                        <span>
+                           └
+                        </span>
+                        <span>
+                            Danh sách
+                        </span>
+                    </a>
+                </li>
+                <li class="mt-1">
+                    <a href="{{ route('admin.posts.categories') }}"
+                        class="{{ session('module_active') == 'posts' && session('sub_module_active') == 'categories' ? 'active light-active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-emerald-600 dark:hover:text-emerald-400 dark:hover:bg-[#1e1f20] dark:text-gray-300">
+                        <span>
+                            └
+                        </span>
+                        <span>
+                            Danh mục
+                        </span>
+                    </a>
+                </li>
+            </ul>
         </li>
 
         <li class="mt-1">
@@ -132,8 +161,10 @@
             <a href="{{ route('admin.roles') }}"
                 class="{{ session('module_active') == 'roles' ? 'active light-active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-emerald-600 dark:hover:text-emerald-400 dark:hover:bg-[#1e1f20] dark:text-gray-300">
                 <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
                     </svg>
                 </span>
                 <span>
@@ -146,8 +177,10 @@
             <a href="{{ route('admin.permissions') }}"
                 class="{{ session('module_active') == 'permissions' ? 'active light-active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-emerald-600 dark:hover:text-emerald-400 dark:hover:bg-[#1e1f20] dark:text-gray-300">
                 <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25Z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25Z" />
                     </svg>
                 </span>
                 <span>

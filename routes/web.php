@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\AdminCategoryController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminPermissionController;
+use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\AdminRoleController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ValidationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminUserController;
@@ -49,6 +51,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/permissions/destroy/{permission}',[AdminPermissionController::class,'destroy'])->name('admin.permissions.destroy');
     Route::get('/admin/permissions/edit',[AdminPermissionController::class,'edit']);
     Route::post('admin/permissions/update',[AdminPermissionController::class,'update'])->name('admin.permissions.update');
+
+    // Post
+    // -Category
+    Route::get('/admin/posts/categories',[AdminCategoryController::class,'view'])->name('admin.posts.categories');
+    Route::post('/admin/posts/categories/store',[AdminCategoryController::class,'store'])->name('admin.posts.categories.store');
+    
+    // =========
+    Route::get('/admin/posts',[AdminPostController::class,'view'])->name('admin.posts');
     
    
 

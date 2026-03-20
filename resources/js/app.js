@@ -23,6 +23,7 @@ import editModal from "./editModal";
 import listFilter from "./listFilter";
 import updateStatus from "./updateStatus";
 import checkAll from "./checkAll";
+import sidebar from "./sidebar";
 
 $(function () {
     switchMode()
@@ -34,4 +35,5 @@ $(function () {
     listFilter()
     updateStatus()
     checkAll()
+    sidebar()
 });

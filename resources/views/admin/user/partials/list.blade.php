@@ -35,7 +35,7 @@
                     <td class="px-5">{{ $user->email }}</td>
                     <td class="px-3 status-users-{{ $user->id }}">{!! user_status($user->status) !!}</td>
                     <td class="px-3">
-                        <x-select name="user-filter" module="users"
+                        <x-select module="users"
                             class="select-status py-[3px] shadow-none text-[12px]" data-id="{{ $user->id }}">
                             <option value="active" {{ $user->status == 'active' ? 'selected' : '' }}>Hoạt động
                             </option>
