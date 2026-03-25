@@ -22,51 +22,31 @@
             @foreach ($users as $user)
                 <tr class="dark:text-gray-300 border-b border-gray-500/40 dark:hover:bg-[#292929] hover:bg-[#f5f5f5]">
                     <td class="px-3 py-4">
-                        <input type="checkbox" name="user_id[]" value="{{ $user->id }}" {{ in_array($user->id,(array)old('user_id')) ? 'checked' : ''}} 
-                        class="check_single rounded-[3px] mb-[2px]">
+                            <input type="checkbox" name="user_id[]" value="{{ $user->id }}" {{ in_array($user->id,(array)old('user_id')) ? 'checked' : ''}} 
+                            class="check_single rounded-[3px] mb-[2px]">
                     </td>
                     <td class="px-5">{{ $num++ }}</td>
                     <td class="px-5">{{ $user->name }}</td>
                     <td class="px-5">
-                        <div class="w-[70px]">
-                            admin
+                        <div class="min-w-[70px]">
+                            Chưa có quyền 
                         </div>
                     </td>
                     <td class="px-5">{{ $user->email }}</td>
                     <td class="px-3 status-users-{{ $user->id }}">{!! user_status($user->status) !!}</td>
                     <td class="px-3">
-                        <x-select module="users"
+                        <x-form-element.select module="users"
                             class="select-status py-[3px] shadow-none text-[12px]" data-id="{{ $user->id }}">
                             <option value="active" {{ $user->status == 'active' ? 'selected' : '' }}>Hoạt động
                             </option>
                             <option value="unactive" {{ $user->status == 'unactive' ? 'selected' : '' }}>Vô hiệu hóa
                             </option>
-                        </x-select>
+                        </x-form-element.select>
                     </td>
                     <td class="px-3">{{ $user->created_at->format('d/m/Y') }}</td>
-                    <td>
-
-                        <div class="flex gap-4 justify-center">
-                            <div class="open-modal edit-user open-modal-edit flex justify-center p-1 rounded-md text-[#5d82ee] hover:text-[#4049c8] cursor-pointer"
-                                data-id="{{ $user->id }}" data-modal="edit-user" data-module="users">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="size-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                </svg>
-                            </div>
-
-                            <a href="{{ route('admin.users.destroy', $user->id) }}"
-                                onclick="return confirm('Bạn có chắc muốn xóa thành viên này ra khỏi hệ thống ?')"
-                                class="flex justify-center p-1 text-red-500 hover:text-red-700 rounded-md cursor-pointer">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="size-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                </svg>
-                            </a>
-                        </div>
-
+                    <td class="px-3 py-[10px] text-center flex justify-center items-center gap-2">
+                            <x-table.button-edit button="edit-user" module="users" id="{{$user->id}}" />
+                            <x-table.button-delete route="{{ route('admin.users.destroy', $user->id) }}" confirm="Bạn có chắc muốn xóa thành viên này ra khỏi hệ thống ?" />       
                     </td>
                 </tr>
             @endforeach

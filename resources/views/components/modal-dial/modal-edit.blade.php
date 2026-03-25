@@ -38,7 +38,7 @@
 
                 <div class="mt-3 flex items-center justify-end gap-2">
                     <x-modal-dial.button-cancel modal="{{ $modal }}" />
-                    <x-primary-button class="py-[5px] md:w-auto">{{ $button_edit }}</x-primary-button>
+                    <x-button.primary-button class="py-[5px] md:w-auto">{{ $button_edit }}</x-button.primary-button>
                 </div>
             </form>
         </div>

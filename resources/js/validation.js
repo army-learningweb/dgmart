@@ -4,7 +4,9 @@ export default function validation() {
         let field = $(this).attr("name");
         let value = $(this).val();
         let data = { [field]: value };
-        timeout = clearTimeout(timeout);
+
+        clearTimeout(timeout);
+
         timeout = setTimeout(() => {
             $.ajax({
                 type: "post",
@@ -18,7 +20,7 @@ export default function validation() {
                 error: function (xhr) {
                     if (xhr.status == 422) {
                         let errors = xhr.responseJSON.errors;
-                        if (errors) {
+                        if (errors && errors[field]) {
                             $("." + field + "_ajax_error").html(
                                 `${errors[field][0]}`,
                             );

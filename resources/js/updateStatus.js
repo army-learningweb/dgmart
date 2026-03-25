@@ -1,26 +1,42 @@
 export default function updateStatus() {
-    $(document).on("click", ".select-status", function () {
+    $(document).on("change", ".select-status", function () {
         let status_value = $(this).val();
         let id = $(this).data("id");
         let module = $(this).data("module");
         let data = { id: id, status_value: status_value };
-
+        let type = $(this).data("type") ?? '';
+        
+        // Xử lí cho danh mục sản phẩm, bài viết
+        let url = ''
+        if(type == 'categories'){
+            url = `/admin/${module}/${type}/updateStatus`
+        }else{
+            url = `/admin/${module}/updateStatus`
+        }
+        
         $.ajax({
             type: "post",
-            url: `/admin/${module}/updateStatus`,
+            url: url,
             data: data,
             dataType: "json",
             success: function (data) {
                 
-                $(".status-" + module + "-" + id).html(data.view);
-
-                if(data.active){
+                /// Xử lí cho danh mục sản phẩm, bài viết
+                if(type == 'categories'){
+                    $(".status-categories-" + module + "-" + id).html(data.view);
+                }else{
+                    $(".status-" + module + "-" + id).html(data.view);
+                }
+                
+                // Truyền data vào statis
+                if(typeof data.active != 'undefined'){
                     $('.active-'+ module).html('(' + data.active + ')');
                 }
 
-                if(data.unactive){
+                if(typeof data.unactive != 'undefined'){
                     $('.unactive-'+ module).html('(' + data.unactive + ')');
                 }
+
             },
         });
     });

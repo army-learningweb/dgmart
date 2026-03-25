@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        @if ($active)
+        @if ($active != '')
             <div class="flex items-center gap-2">
                 <div class="w-[8.5px] h-[8px] rounded-full bg-emerald-500"></div>
                 <div>
@@ -33,7 +33,7 @@
             </div>
         @endif
         
-        @if ($unactive)
+        @if ($unactive != '')
             <div class="flex items-center gap-2">
                 <div class="w-[8.5px] h-[8px] rounded-full bg-red-500"></div>
                 <div>
@@ -43,7 +43,7 @@
             </div>
         @endif
         
-        @if ($publish)
+        @if ($publish != '')
             <div class="flex items-center gap-2">
                 <div class="w-[8.5px] h-[8px] rounded-full bg-emerald-500"></div>
                 <div>
@@ -53,7 +53,7 @@
             </div>
         @endif
        
-        @if ($draft)
+        @if ($draft != '')
             <div class="flex items-center gap-2">
                 <div class="w-[8.5px] h-[8px] rounded-full bg-gray-500"></div>
                 <div>
@@ -63,7 +63,7 @@
             </div>
         @endif
         
-        @if ($pending)
+        @if ($pending != '')
             <div class="flex items-center gap-2">
                 <div class="w-[8.5px] h-[8px] rounded-full bg-gray-500"></div>
                 <div>
@@ -73,7 +73,7 @@
             </div>
         @endif
        
-        @if ($processing)
+        @if ($processing != '')
             <div class="flex items-center gap-2">
                 <div class="w-[8.5px] h-[8px] rounded-full bg-blue-500"></div>
                 <div>
@@ -83,7 +83,7 @@
             </div>
         @endif
        
-        @if ($shipped)
+        @if ($shipped != '')
             <div class="flex items-center gap-2">
                 <div class="w-[8.5px] h-[8px] rounded-full bg-amber-500"></div>
                 <div>
@@ -93,7 +93,7 @@
             </div>
         @endif
         
-        @if ($delivered)
+        @if ($delivered != '') 
             <div class="flex items-center gap-2">
                 <div class="w-[8.5px] h-[8px] rounded-full bg-emerald-500"></div>
                 <div>
@@ -103,7 +103,7 @@
             </div>
         @endif
         
-        @if ($refund)
+        @if ($refund != '')
             <div class="flex items-center gap-2">
                 <div class="w-[8.5px] h-[8px] rounded-full bg-pink-500"></div>
                 <div>

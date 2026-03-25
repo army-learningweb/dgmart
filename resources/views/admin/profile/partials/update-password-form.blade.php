@@ -15,21 +15,21 @@
 
             <div>
                 <x-input-field.field label="Mật khẩu hiện tại" type="password" name="current_password" id="update_password_current_password"/>
-                <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-1" />
+                <x-form-element.input-error :messages="$errors->updatePassword->get('current_password')" class="mt-1" />
             </div>
             
             <div>
                 <x-input-field.field label="Mật khẩu mới" type="password" name="password" id="update_password_password"/>
-                 <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-1" />
+                 <x-form-element.input-error :messages="$errors->updatePassword->get('password')" class="mt-1" />
             </div>
 
             <div>
                 <x-input-field.field label="Xác nhận mật khẩu" type="password" name="password_confirmation" id="update_password_password_confirmation"/>
-                <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-1" />
+                <x-form-element.input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-1" />
             </div>
     
         <div class="flex items-center gap-4">
-            <x-primary-button>Cập nhật</x-primary-button>
+            <x-button.primary-button class="md:w-auto">Cập nhật</x-button.primary-button>
 
             @if (session('status') === 'password-updated')
                 <p

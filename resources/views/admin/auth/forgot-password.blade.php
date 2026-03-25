@@ -15,9 +15,9 @@
         </div>
 
         <div class="mt-2">
-            <x-primary-button class="w-full">
+            <x-button.primary-button class="w-full">
                 Gửi Email liên kết đặt lại mật khẩu 
-            </x-primary-button>
+            </x-button.primary-button>
         </div>
 
         <div class="mt-2 text-center">

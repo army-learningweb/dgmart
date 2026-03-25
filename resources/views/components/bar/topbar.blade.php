@@ -29,7 +29,7 @@
         
         {{-- swichtmode --}}
         <div>
-            <x-button-switch-mode />
+            <x-button.button-switch-mode />
         </div>
 
         {{-- bell  --}}

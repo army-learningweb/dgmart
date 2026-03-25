@@ -1,8 +1,8 @@
 <x-app-layout>
 
     {{-- flash session --}}
-    <x-success-flash-session/>
-    <x-failed-flash-session/>
+    <x-flash-session.success-flash-session/>
+    <x-flash-session.failed-flash-session/>
 
     {{-- modal create --}}
     <x-modal-dial.modal-create modal="create-user" title="Tạo mới thành viên" button_create="Tạo thành viên" route="{{ route('admin.users.store') }}">
@@ -43,7 +43,7 @@
             <x-input-field.field id="password_confirmation" label="Xác nhận mật khẩu" type="password" name="password_confirmation" />
         </div>
 
-        <input type="hidden" name="user_id" value="">
+        <input type="hidden" name="id" value="">
         <input type="hidden" name="modal" value="edit">
     </x-modal-dial.modal-edit>
 
@@ -59,16 +59,16 @@
 
                 {{-- search --}}
                 <div>
-                    <x-search placeholder="Tìm kiếm theo tên..." name="search-user" module="users" class="search"/>
+                    <x-form-element.search placeholder="Tìm kiếm theo tên..." name="search-user" module="users" class="search"/>
                 </div>
 
                 {{-- filter status --}}
                 <div>
-                   <x-select name="user-filter" module="users" class="select-filter py-1">
+                   <x-form-element.select name="user-filter" module="users" class="select-filter py-1">
                         <option value="">Lọc theo trạng thái</option>
                         <option value="active">Hoạt động</option>
                         <option value="unactive">Vô hiệu hóa</option>
-                   </x-select>
+                   </x-form-element.select>
                 </div>
 
                 {{-- create modal --}}
@@ -82,7 +82,7 @@
                 
                 {{-- reset --}}
                 <div class="hidden md:block">
-                    <x-button-reset/>
+                    <x-button.button-reset/>
                 </div>
             </div>
         </div>
@@ -95,24 +95,20 @@
                 <div class="flex items-center justify-between">
                     {{-- action --}}
                     <div class="flex flex-col md:flex-row gap-2 md:items-center w-full md:w-auto">
-                        <x-select name="action" class="py-[3px]">
+                        <x-form-element.select name="action" class="py-[3px]">
                             <option value="">- Hành động hàng loạt</option>
                             <option value="active" {{ old('action') == 'active' ? 'selected' : '' }}>Hoạt động</option>
                             <option value="unactive" {{ old('action') == 'unactive' ? 'selected' : '' }}>Vô hiệu hóa</option>
-                        </x-select>
+                        </x-form-element.select>
 
-                        <x-primary-button style="padding-top:4px;padding-bottom:4px" class="flex justify-center items-center gap-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" />
-                            </svg>
-                            <span>Hành động</span>
-                        </x-primary-button>
+                       <x-button.button-action/>
                     </div>
 
                     {{-- statis module --}}
                     <div class="hidden md:block">
-                        <x-statis-module module="users" total="{{$total}}" active="{{$active}}" unactive="{{$unactive}}"/>
+                        <x-statis.statis-module module="users" total="{{$total}}" active="{{$active}}" unactive="{{$unactive}}"/>
                     </div>
+
                 </div>
             </div>
 
@@ -120,7 +116,6 @@
             <div class="list-users pb-5">
                 @include('admin.user.partials.list')
             </div>
-
         </form>
 
     </div>

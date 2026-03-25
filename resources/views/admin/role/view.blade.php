@@ -1,8 +1,8 @@
 <x-app-layout>
 
     {{-- flash session --}}
-    <x-success-flash-session />
-    <x-failed-flash-session />
+    <x-flash-session.success-flash-session />
+    <x-flash-session.failed-flash-session />
 
     {{-- modal create --}}
     <x-modal-dial.modal-create modal="create-role" title="Tạo vai trò mới" button_create="Tạo vai trò"
@@ -13,7 +13,7 @@
         </div>
 
         <div class="mt-2">
-            <x-text-area id="desc" label="Mô tả" name="desc" required="*"></x-text-area>
+            <x-form-element.text-area id="desc" label="Mô tả" name="desc" required="*"></x-form-element.text-area>
             <span class="text-gray-400 text-xs">Ví dụ: Quản lí bài viết</span>
         </div>
 
@@ -23,33 +23,14 @@
 
         <div class="h-[160px] pl-1 overflow-y-auto overflow-x-hidden">
             <div class="min-w-[700px]">
-                @foreach ($permissions as $module => $permission_list)
-                    <div class="border-t border-gray-500/50 parent_check_all">
-                        <div class="py-2" colspan="4">
-                            <div class="flex items-center gap-3">
-                                <input type="checkbox" class="check_all_permission rounded-sm">
-                                <span class="text-emerald-500">Module {{ ucfirst($module) }}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-4">
-                        @foreach ($permission_list as $permisison)
-                            <div class="py-3 col-span-1">
-                                <div class="flex items-center gap-3">
-                                    <input type="checkbox" name="permission_id[]" value="{{ $permisison->id }}"
-                                        class="check_single_permission rounded-sm">
-                                    <span>{{ $permisison->name }}</span>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                @endforeach
+                @include('admin.role.partials.permissions')
             </div>
         </div>
 
         <input type="hidden" name="modal" value="create">
     </x-modal-dial.modal-create>
 
+    {{-- modal-edit --}}
     <x-modal-dial.modal-edit modal="edit-role" title="Cập nhật thông tin vai trò" button_edit="Cập nhật thông tin"
         route="{{ route('admin.roles.update') }}">
         <div class="mt-2">
@@ -58,7 +39,7 @@
         </div>
 
         <div class="mt-2">
-            <x-text-area id="desc" label="Mô tả" name="desc" required="*"></x-text-area>
+            <x-form-element.text-area id="desc" label="Mô tả" name="desc" required="*"></x-form-element.text-area>
             <span class="text-gray-400 text-xs">Ví dụ: Quản lí bài viết</span>
         </div>
 
@@ -66,37 +47,15 @@
             <p>Vai trò này có quyền gì ?</p>
         </div>
 
-        <div class="h-[160px] pl-1 overflow-y-auto overflow-x-hidden">
-            <div class="min-w-[700px]">
-                @foreach ($permissions as $module => $permissions_list)
-                    <div class="border-t border-gray-500/50 parent_check_all">
-                        <div class="py-2" colspan="4">
-                            <div class="flex items-center gap-3">
-                                <input type="checkbox" class="check_all_permission rounded-sm">
-                                <span class="text-emerald-500">Module {{ ucfirst($module) }}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-4">
-                        @foreach ($permissions_list as $permisison)
-                            <div class="py-3 col-span-1">
-                                <div class="flex items-center gap-3">
-                                    <input type="checkbox" name="permission_id[]" value="{{ $permisison->id }}"
-                                        class="check_single_permission rounded-sm">
-                                    <span>{{ $permisison->name }}</span>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                @endforeach
-            </div>
+        <div>
+            @include('admin.role.partials.permissions')
         </div>
-
-        <input type="hidden" name="role_id" value="">
+        
+        <input type="hidden" name="id" value="">
         <input type="hidden" name="modal" value="edit">
-
     </x-modal-dial.modal-edit>
 
+    {{-- ============================== --}}
     <div class="dark:bg-[#18181b] py-4 h-[500px] border-t border-gray-500/10">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between">
 

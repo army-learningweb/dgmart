@@ -31,7 +31,7 @@
 
         <div
             class="mt-1 flex justify-center shadow-md dark:bg-[#1e1f20] p-2 rounded-full absolute right-6 top-6 transition-colors duration-350">
-            <x-button-switch-mode />
+            <x-button.button-switch-mode />
         </div>
 
         <div>

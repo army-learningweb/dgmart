@@ -62,15 +62,16 @@ class AdminRoleController extends Controller
     }
 
     function update(Request $request){
+        $request->session()->put('role_id',$request->id);
 
         $request->validate([
-            'name' => 'required|max:255|unique:roles,name,'.$request->role_id,
+            'name' => 'required|max:255|unique:roles,name,'.$request->id,
             'desc' => 'required',
         ]);
 
         if(!$request->permission_id) return back()->with('status_failed','Cập nhật thất bại, bạn chưa chọn quyền');
 
-        $role = Role::find($request->role_id);
+        $role = Role::find($request->id);
 
         $role->update([
             'name' => $request->input('name'),

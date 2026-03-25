@@ -43,7 +43,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button>Lưu thông tin</x-primary-button>
+            <x-button.primary-button class="md:w-auto">Lưu thông tin</x-button.primary-button>
 
             @if (session('status') === 'profile-updated')
                 <p

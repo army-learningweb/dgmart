@@ -11,7 +11,6 @@ class AdminUserController extends Controller
     // danh sách
     function list()
     {
-
         $users = User::all();
         $total = User::all()->count();
         $active = User::where('status','active')->count();
@@ -41,6 +40,7 @@ class AdminUserController extends Controller
     // xóa
     function destroy(User $user)
     {
+        if($user->id == Auth::user()->id) return back()->with('status_failed','Xóa thành viên thất bại');
         User::find($user->id)->delete();
         return back()->with('status', 'Xóa thành viên thành công');
     }
@@ -56,13 +56,15 @@ class AdminUserController extends Controller
 
     function update(Request $request)
     {
-
         if ($request->input('password') == '' || $request->input('password_confirmation') == '') {
+
+            if($request->id == Auth::user()->id) return back()->with('status_failed','Cập nhật thông tin thất bại');
+
             $request->validate([
                 'name' => 'required|min:2|regex:/^[\p{L}\s0-9]+$/u'
             ]);
 
-            User::find($request->input('user_id'))->update([
+            User::find($request->input('id'))->update([
                 'name' => $request->input('name'),
                 'updated_at' => now()
             ]);
@@ -73,7 +75,7 @@ class AdminUserController extends Controller
                 'password' => 'required|confirmed|min:8|'
             ]);
 
-            User::find($request->input('user_id'))->update([
+            User::find($request->input('id'))->update([
                 'name' => $request->input('name'),
                 'password' => $request->input('password'),
                 'updated_at' => now()

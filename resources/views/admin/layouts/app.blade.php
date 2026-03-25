@@ -44,7 +44,7 @@
                 
                 {{-- Topbar --}}
                 <div class="flex-1">
-                    <x-topbar />
+                    <x-bar.topbar />
                 </div>
             </div>
         </header>
@@ -55,7 +55,7 @@
 
                 {{-- sidebar --}}
                 <div class="w-full md:w-[10%]">
-                    <x-sidebar />
+                    <x-bar.sidebar />
                 </div>
 
                 {{-- data --}}

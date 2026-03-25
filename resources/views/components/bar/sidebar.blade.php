@@ -140,7 +140,7 @@
                 </span>
             </a>
         </li>
-        <hr class="my-3">
+        <hr class="my-3 border-dashed border-gray-500/50">
         <li class="mt-1">
             <a href="{{ route('admin.users') }}"
                 class="{{ session('module_active') == 'users' ? 'active light-active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-emerald-600 dark:hover:text-emerald-400 dark:hover:bg-[#1e1f20] dark:text-gray-300">

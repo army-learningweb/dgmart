@@ -48,18 +48,22 @@ class AdminPermissionController extends Controller
     }
 
     function update(Request $request){
+
+        $request->session()->put('user_id',$request->id);
+
         $request->validate([
-            'name' => 'required|min:8|regex:/^[a-zA-Z0-9\s]+$/u|unique:permissions,name,'.$request->permission_id,
+            'name' => 'required|min:8|regex:/^[a-zA-Z0-9\s]+$/u|unique:permissions,name,'.$request->id,
             'slug' => 'required|regex:/^[a-zA-Z0-9\-\.]+$/',
             'desc' => 'required|min:8|regex:/^[\p{L}\s]+$/u'
         ]);
 
-        Permission::where('id',$request->permission_id)->update([
+        Permission::where('id',$request->id)->update([
             'name' => $request->input('name'),
             'slug' => $request->input('slug'),
             'desc' => $request->input('desc') 
         ]);
 
+        $request->session()->forget('user_id');
         return back()->with('status','Cập nhật thông tin thành công');
     }
 }

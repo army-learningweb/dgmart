@@ -1,8 +1,8 @@
 <x-app-layout>
 
     {{-- flash session --}}
-    <x-success-flash-session/>
-    <x-failed-flash-session/>
+    <x-flash-session.success-flash-session/>
+    <x-flash-session.failed-flash-session/>
 
     {{-- modal create --}}
     {{-- <x-modal-dial.modal-create modal="create-user" title="Tạo mới thành viên" button_create="Tạo thành viên" route="{{ route('admin.users.store') }}">

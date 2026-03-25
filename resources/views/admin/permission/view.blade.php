@@ -1,8 +1,8 @@
 <x-app-layout>
 
     {{-- flash session --}}
-    <x-success-flash-session/>
-    <x-failed-flash-session/>
+    <x-flash-session.success-flash-session/>
+    <x-flash-session.failed-flash-session/>
 
     {{-- modal create --}}
     <x-modal-dial.modal-create modal="create-permission" title="Tạo quyền mới" button_create="Tạo quyền" route="{{ route('admin.permissions.store') }}">
@@ -17,13 +17,14 @@
         </div>
 
         <div class="mt-2">
-            <x-text-area id="desc" label="Mô tả" name="desc" required="*"></x-text-area>
+            <x-form-element.text-area id="desc" label="Mô tả" name="desc" required="*"></x-form-element.text-area>
             <span class="text-gray-400 text-xs">Ví dụ: Chỉnh sửa bài viết</span>
         </div>
 
         <input type="hidden" name="modal" value="create">
     </x-modal-dial.modal-create>
 
+    {{-- modal-edit --}}
     <x-modal-dial.modal-edit modal="edit-permission" title="Cập nhật thông tin quyền" button_edit="Cập nhật thông tin" route="{{ route('admin.permissions.update') }}">
         <div class="mt-2">
             <x-input-field.field id="name" label="Tên quyền" type="text" name="name" required="*" />
@@ -36,11 +37,11 @@
         </div>
 
         <div class="mt-2">
-            <x-text-area id="desc" label="Mô tả" name="desc" required="*"></x-text-area>
+            <x-form-element.text-area id="desc" label="Mô tả" name="desc" required="*"></x-form-element.text-area>
             <span class="text-gray-400 text-xs">Ví dụ: Chỉnh sửa bài viết</span>
         </div>
 
-        <input type="hidden" name="permission_id" value="">
+        <input type="hidden" name="id" value="{{ session('user_id') ? session('user_id') : '' }}">
         <input type="hidden" name="modal" value="edit">
 
     </x-modal-dial.modal-edit>

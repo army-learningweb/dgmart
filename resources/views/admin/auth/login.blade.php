@@ -29,9 +29,9 @@
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
+            <x-button.primary-button>
                 Đăng nhập
-            </x-primary-button>
+            </x-button.primary-button>
         </div>
     </form>
 </x-guest-layout>

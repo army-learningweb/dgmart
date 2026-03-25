@@ -15,4 +15,9 @@ class Category extends Model
         'status',
         'updated_at'
     ];
+
+    function user() {
+        return $this->belongsTo('\App\Models\User');
+    }
 }
+
