@@ -1,4 +1,4 @@
- <x-button.primary-button style="padding-top:4px;padding-bottom:4px" class="flex justify-center items-center gap-1">
+ <x-button.primary-button style="" class="flex justify-center items-center gap-1 md:py-1">
      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
          class="size-5">
          <path stroke-linecap="round" stroke-linejoin="round"

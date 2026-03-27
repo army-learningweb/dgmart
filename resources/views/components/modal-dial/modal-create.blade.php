@@ -9,7 +9,7 @@
     class="modal-{{ $modal }} {{ $errors->any() && old('modal') == 'create' ? '' : 'pointer-events-none opacity-0 scale-0' }} bg-[#1a1a1a]/30 backdrop-brightness-50 backdrop-blur-sm fixed left-0 top-0 z-50 w-full min-h-screen flex justify-center items-start p-4 md:p-0">
 
     {{-- modal --}}
-    <div class="modal-{{ $modal }}-is-open dark:bg-[#151517] bg-white shadow-md min-w-[400px] p-5 rounded-lg mt-20">
+    <div class="modal-{{ $modal }}-is-open dark:bg-[#151517] bg-white shadow-md min-w-[300px] md:min-w-[400px] p-5 rounded-lg mt-20">
 
         {{-- title --}}
         <div class="flex justify-between text-lg">

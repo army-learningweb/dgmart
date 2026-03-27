@@ -53,7 +53,6 @@ Route::middleware('auth')->group(function () {
     Route::post('admin/permissions/update',[AdminPermissionController::class,'update'])->name('admin.permissions.update');
 
     // Post
-    // -Category
     Route::get('/admin/posts/categories',[AdminCategoryController::class,'view'])->name('admin.posts.categories');
     Route::post('/admin/posts/categories/store',[AdminCategoryController::class,'store'])->name('admin.posts.categories.store');
     Route::post('/admin/posts/categories/updateStatus', [AdminCategoryController::class,'updateStatus']);
@@ -62,7 +61,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/posts/categories/destroy/{category}',[AdminCategoryController::class,'destroy'])->name('admin.posts.categories.destroy');
     Route::post('/admin/posts/categories/action',[AdminCategoryController::class,'action'])->name('admin.post.categories.action');
     
-    // =========
+    
     Route::get('/admin/posts',[AdminPostController::class,'view'])->name('admin.posts');
     
    

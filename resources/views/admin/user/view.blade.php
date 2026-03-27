@@ -47,7 +47,6 @@
         <input type="hidden" name="modal" value="edit">
     </x-modal-dial.modal-edit>
 
-
     <div class="dark:bg-[#18181b] py-4 h-[500px] border-t border-gray-500/10">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between">
 
@@ -93,9 +92,10 @@
             {{-- statis & action --}}
             <div class="my-5">
                 <div class="flex items-center justify-between">
+
                     {{-- action --}}
                     <div class="flex flex-col md:flex-row gap-2 md:items-center w-full md:w-auto">
-                        <x-form-element.select name="action" class="py-[3px]">
+                        <x-form-element.select name="action" class="">
                             <option value="">- Hành động hàng loạt</option>
                             <option value="active" {{ old('action') == 'active' ? 'selected' : '' }}>Hoạt động</option>
                             <option value="unactive" {{ old('action') == 'unactive' ? 'selected' : '' }}>Vô hiệu hóa</option>

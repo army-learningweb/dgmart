@@ -26,7 +26,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="overflow-y-scroll font-sans antialiased dark:text-gray-300 dark:bg-[#18181b] bg-[#fafafa] transition-colors duration-350 text-sm md:w-[1440px] mx-auto px-3 md:px-0">
+<body class="overflow-x-hidden overflow-y-scroll font-sans antialiased dark:text-gray-300 dark:bg-[#18181b] bg-[#fafafa] text-sm md:max-w-[1440px] mx-auto px-3 md:px-0">
     
     {{-- modal --}}
     
@@ -59,7 +59,7 @@
                 </div>
 
                 {{-- data --}}
-                <div class="w-full md:w-[90%]">
+                <div class="w-full md:flex-1">
                     {{ $slot }}
                 </div>
 

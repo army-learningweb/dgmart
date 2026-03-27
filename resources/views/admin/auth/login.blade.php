@@ -18,11 +18,11 @@
         <!-- Remember Me -->
         <div class="flex items-center justify-between mt-4">
             <label for="remember_me">
-                <input id="remember_me" type="checkbox" class="border-gray-300 rounded dark:bg-[#1e1f20] text-teal-600 shadow-sm focus:ring-0 dark:border-0 focus:outline-0 transition-colors duration-350" name="remember">
+                <input id="remember_me" type="checkbox" class="border-gray-300 rounded dark:bg-[#1e1f20] text-teal-600 shadow-sm focus:ring-0 dark:border-0 focus:outline-0" name="remember">
                 <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">Ghi nhớ đăng nhập</span>
             </label>
              @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none dark:focus:ring-offset-gray-800 transition-colors duration-350" href="{{ route('password.request') }}">
+                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
                     Quên mật khẩu ?
                 </a>
             @endif

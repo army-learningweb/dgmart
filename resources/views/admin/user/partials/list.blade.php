@@ -35,13 +35,13 @@
                     <td class="px-5">{{ $user->email }}</td>
                     <td class="px-3 status-users-{{ $user->id }}">{!! user_status($user->status) !!}</td>
                     <td class="px-3">
-                        <x-form-element.select module="users"
+                        <x-table.select module="users"
                             class="select-status py-[3px] shadow-none text-[12px]" data-id="{{ $user->id }}">
                             <option value="active" {{ $user->status == 'active' ? 'selected' : '' }}>Hoạt động
                             </option>
                             <option value="unactive" {{ $user->status == 'unactive' ? 'selected' : '' }}>Vô hiệu hóa
                             </option>
-                        </x-form-element.select>
+                        </x-table.select>
                     </td>
                     <td class="px-3">{{ $user->created_at->format('d/m/Y') }}</td>
                     <td class="px-3 py-[10px] text-center flex justify-center items-center gap-2">

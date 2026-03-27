@@ -49,12 +49,11 @@
                     </div>
                 </td>
                 <td class="px-3">
-                    <x-form-element.select module="posts" type="categories" class="select-status py-[3px] shadow-none text-[12px]"
-                        data-id="{{ $item->id }}">
+                    <x-table.select module="posts" type="categories" class="select-status shadow-none" data-id="{{ $item->id }}">
                         <option value="active" {{ $item->status == 'active' ? 'selected' : '' }}>Hoạt động</option>
                         <option value="unactive" {{ $item->status == 'unactive' ? 'selected' : '' }}>Vô hiệu hóa
                         </option>
-                    </x-form-element.select>
+                    </x-table.select>
                 </td>
                 <td class="px-3">{{ $item->created_at->format('d/m/Y') }}</td>
                 <td class="px-3">{{ $item->user->name }}</td>

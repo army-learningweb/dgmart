@@ -26,11 +26,11 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased dark:text-gray-100 dark:bg-[#18181b] bg-white transition-colors duration-350">
+<body class="font-sans antialiased dark:text-gray-100 dark:bg-[#18181b] bg-white">
     <div class="min-h-screen flex flex-col justify-center items-center pt-6 sm:pt-0">
 
         <div
-            class="mt-1 flex justify-center shadow-md dark:bg-[#1e1f20] p-2 rounded-full absolute right-6 top-6 transition-colors duration-350">
+            class="mt-1 flex justify-center shadow-md dark:bg-[#1e1f20] p-2 rounded-full absolute right-6 top-6">
             <x-button.button-switch-mode />
         </div>
 
