@@ -17,9 +17,9 @@
         </tr>
         @foreach ($categories as $item)
             <tr
-                class="dark:text-gray-300 border-b border-gray-500/40 dark:hover:bg-[#292929] hover:bg-[#f5f5f5]">
+                class="dark:text-gray-300 border-b border-gray-500/20 dark:hover:bg-[#292929] hover:bg-[#f5f5f5]">
                 <td class="px-3 py-4">
-                    @if ($item->level != 0 || $item->id != 9)
+                    @if ($item->level != 0 || $item->id != 9 && $item->id !=17)
                         <input type="checkbox" name="category_id[]" value="{{ $item->id }}"
                             class="check_single rounded-[3px] mb-[2px]">
                     @else
@@ -44,25 +44,25 @@
                 </td>
                 <td class="px-5">{{ $item->slug }}</td>
                 <td class="px-5">
-                    <div class="flex justify-center status-categories-posts-{{ $item->id }}">
+                    <div class="flex justify-center status-categories-{{$type}}s-{{ $item->id }}">
                         {!! user_status($item->status) !!}
                     </div>
                 </td>
                 <td class="px-3">
-                    <x-table.select module="posts" type="categories" class="select-status shadow-none" data-id="{{ $item->id }}">
+                    <x-table.select module="{{$type}}s" type="categories" class="select-status shadow-none" data-id="{{ $item->id }}">
                         <option value="active" {{ $item->status == 'active' ? 'selected' : '' }}>Hoạt động</option>
                         <option value="unactive" {{ $item->status == 'unactive' ? 'selected' : '' }}>Vô hiệu hóa
                         </option>
                     </x-table.select>
                 </td>
                 <td class="px-3">{{ $item->created_at->format('d/m/Y') }}</td>
-                <td class="px-3">{{ $item->user->name }}</td>
+                <td class="px-3">{{ $item->user ? $item->user->name : ' Không xác định !' }}</td>
                 <td>
-                    @if ($item->id != 9)
+                    @if ($item->id != 9 && $item->id != 17)
                         <div class="flex gap-4 justify-center">
-                            <x-table.button-edit button="edit-category" module="posts" id="{{ $item->id }}" type="categories" />
+                            <x-table.button-edit button="edit-category" module="{{$type}}s" id="{{ $item->id }}" type="categories" />
                             
-                            <a href="{{ route('admin.posts.categories.destroy', $item->id) }}"
+                            <a href="{{ route('admin.'.$type.'s.categories.destroy', $item->id) }}"
                             @if ($item->level == 0) 
                                 onclick="return confirm('Bạn có chắc muốn xóa danh mục này, đây là danh mục cha, các danh mục con sẽ được di dời sang danh mục (Lưu trữ) ?')"
                             @else

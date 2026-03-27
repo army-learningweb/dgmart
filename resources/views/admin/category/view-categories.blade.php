@@ -5,8 +5,8 @@
     <x-flash-session.failed-flash-session />
 
     {{-- modal create --}}
-    <x-modal-dial.modal-create modal="create-post-category" title="Tạo mới danh mục" button_create="Tạo danh mục"
-        route="{{ route('admin.posts.categories.store') }}">
+    <x-modal-dial.modal-create modal="create-{{$type}}-category" title="Tạo mới danh mục" button_create="Tạo danh mục"
+        route="{{ route('admin.'.$type.'s.categories.store') }}">
         <div class="mt-2">
             <x-input-field.field id="name" label="Tên danh mục" type="text" name="name" required="*" />
         </div>
@@ -22,7 +22,7 @@
             <x-form-element.select id="parent_category" name="parent_category"
                 class="py-[5px] shadow-none text-[12px] md:w-full my-1">
                 <option value="">- Chọn</option>
-                @include('admin.post.partials.parent_categories')
+                @include("admin.category.partials.parent_categories")
             </x-form-element.select>
             <span class="text-amber-600 text-xs">Để " trống " nếu bạn muốn đây là danh mục Cha</span>
         </div>
@@ -32,7 +32,7 @@
 
     {{-- modal edit --}}
     <x-modal-dial.modal-edit modal="edit-category" title="Cập nhật thông tin danh mục" button_edit="Cập nhật"
-        route="{{ route('admin.posts.categories.update') }}">
+        route="{{ route('admin.'.$type.'s.categories.update') }}">
         <div class="mt-2">
             <x-input-field.field id="name" label="Tên danh mục" type="text" name="name" required="*" />
         </div>
@@ -43,36 +43,32 @@
             <span class="text-green-600 text-xs">( Dán tên vào Slug hệ thống tự xử lí )</span>
         </div>
 
-        @if (!session('is_parent'))
-            <div class="mt-2 select-box">
-                <label for="parent_category_post">Chọn danh mục cha</label>
-                <x-form-element.select id="parent_category_post" name="parent_category"
-                    class="py-[5px] shadow-none text-[12px] md:w-full my-1">
-                    <option value="">( Làm danh mục cha )</option>
-                    @include('admin.post.partials.parent_categories')
-                </x-form-element.select>
-                <span class="text-amber-600 text-xs">Để " trống " nếu bạn muốn đây là danh mục Cha</span>
-            </div>
-        @endif
+        <div class="mt-2 flex flex-col">
+            <label for="parent_category_{{$type}}">Chọn danh mục cha</label>
+            <select id="parent_category_{{$type}}" name="parent_category" {{ old('is_parent') == 0 ? 'disabled' : '' }} class="select-parent-category py-[5px] shadow-md text-[12px] md:w-auto my-1 rounded-md md:py-[3px] text-sm dark:text-gray-400 dark:bg-[#1e1f20] focus:border-emerald-500 focus:ring-emerald-500 w-full">
+                <option value="0">( Trống )</option>
+                @include("admin.category.partials.parent_categories")
+            </select>
+            <span class="text-amber-600 text-xs">Để " trống " nếu bạn muốn tạo danh mục Cha</span>
+        </div>
 
-        <input type="hidden" name="id" value="{{ session('category_id') ? session('category_id') : '' }}">
+        <input type="hidden" name="id" value="{{ old('id') }}">
         <input type="hidden" name="modal" value="edit">
-        <input type="hidden" name="is_parent" value="">
+        <input type="hidden" name="is_parent" value="{{ old('is_parent') }}">
     </x-modal-dial.modal-edit>
 
     {{-- =================================== --}}
-    <div class="dark:bg-[#18181b] py-4 h-[500px] border-t border-gray-500/10">
+    <div class="dark:bg-[#18181b] py-4 h-[500px] border-t border-gray-500/50 border-dashed">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between">
 
             {{-- title --}}
-            <div class="text-lg"> Danh mục bài viết </div>
-
+            <div class="text-lg"> {{ $type == 'post' ? 'Danh mục bài viết' : 'Danh mục sản phẩm' }}</div>
             {{-- option --}}
             <div class="flex flex-col md:flex-row md:items-center gap-2 mt-3 md:mt-0">
 
                 {{-- create modal --}}
                 <div>
-                    <x-modal-dial.button-open modal="create-post-category">
+                    <x-modal-dial.button-open modal="create-{{$type}}-category">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-5">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -84,7 +80,7 @@
             </div>
         </div>
 
-        <form action="{{ route('admin.post.categories.action') }}" method="post">
+        <form action="{{ route("admin.{$type}s.categories.action") }}" method="post">
             @csrf
 
             {{-- statis & action --}}
@@ -105,15 +101,15 @@
 
                     {{-- statis module --}}
                     <div class="hidden md:block">
-                        <x-statis.statis-module module="posts" total="{{ $total }}" active="{{ $active }}"
+                        <x-statis.statis-module module="{{$type}}s" total="{{ $total }}" active="{{ $active }}"
                             unactive="{{ $unactive ? $unactive : 0 }}" />
                     </div>
                 </div>
             </div>
 
             {{-- list --}}
-            <div class="list-posts-categories pb-5">
-                @include('admin.post.partials.list-categories')
+            <div class="list-{{ $type . 's' }}-categories pb-5">
+                @include('admin.category.partials.list-categories')
             </div>
 
         </form>

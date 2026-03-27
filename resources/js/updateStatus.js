@@ -20,7 +20,7 @@ export default function updateStatus() {
             data: data,
             dataType: "json",
             success: function (data) {
-                
+                console.log(data);
                 /// Xử lí cho danh mục sản phẩm, bài viết
                 if(type == 'categories'){
                     $(".status-categories-" + module + "-" + id).html(data.view);
@@ -29,11 +29,11 @@ export default function updateStatus() {
                 }
                 
                 // Truyền data vào statis
-                if(typeof data.active != 'undefined'){
+                if(data.active != 'undefined'){
                     $('.active-'+ module).html('(' + data.active + ')');
                 }
 
-                if(typeof data.unactive != 'undefined'){
+                if(data.unactive != 'undefined'){
                     $('.unactive-'+ module).html('(' + data.unactive + ')');
                 }
 

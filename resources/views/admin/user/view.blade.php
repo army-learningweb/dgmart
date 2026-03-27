@@ -43,11 +43,11 @@
             <x-input-field.field id="password_confirmation" label="Xác nhận mật khẩu" type="password" name="password_confirmation" />
         </div>
 
-        <input type="hidden" name="id" value="">
+        <input type="hidden" name="id" value="{{ old('id') }}">
         <input type="hidden" name="modal" value="edit">
     </x-modal-dial.modal-edit>
 
-    <div class="dark:bg-[#18181b] py-4 h-[500px] border-t border-gray-500/10">
+    <div class="dark:bg-[#18181b] py-4 h-[500px] border-t border-gray-500/50 border-dashed">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between">
 
             {{-- title --}}

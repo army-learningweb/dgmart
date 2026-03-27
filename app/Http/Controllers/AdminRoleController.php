@@ -24,7 +24,7 @@ class AdminRoleController extends Controller
     // thêm
     function store(Request $request){
         $request->validate([
-            'name' => 'required|max:255|unique:roles',
+            'name' => 'required|max:255|unique:roles,name',
             'desc' => 'required',
         ]);
 

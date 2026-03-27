@@ -34,9 +34,9 @@ export default function editModal() {
                 if ((module == 'posts' || module == 'products') && type == 'categories'){
                     inputs.name.val(data.name)
                     inputs.slug.val(data.slug)
-                    inputs.id.val(data.id)    
+                    inputs.id.val(data.id)
                     modal.find(`option[value=${data.parent_id}]`).prop('selected',true)
-                    modal.find('.select-box').toggleClass('hidden',data.parent_id == 0)
+                    modal.find('.select-parent-category').prop('disabled',data.parent_id == 0)
                     modal.find('input[name=is_parent]').val(data.parent_id)
                 }        
                 

@@ -20,7 +20,7 @@
                 $num = 1;
             @endphp
             @foreach ($users as $user)
-                <tr class="dark:text-gray-300 border-b border-gray-500/40 dark:hover:bg-[#292929] hover:bg-[#f5f5f5]">
+                <tr class="dark:text-gray-300 border-b border-gray-500/20 dark:hover:bg-[#292929] hover:bg-[#f5f5f5]">
                     <td class="px-3 py-4">
                             <input type="checkbox" name="user_id[]" value="{{ $user->id }}" {{ in_array($user->id,(array)old('user_id')) ? 'checked' : ''}} 
                             class="check_single rounded-[3px] mb-[2px]">
@@ -36,7 +36,7 @@
                     <td class="px-3 status-users-{{ $user->id }}">{!! user_status($user->status) !!}</td>
                     <td class="px-3">
                         <x-table.select module="users"
-                            class="select-status py-[3px] shadow-none text-[12px]" data-id="{{ $user->id }}">
+                            class="select-status" data-id="{{ $user->id }}">
                             <option value="active" {{ $user->status == 'active' ? 'selected' : '' }}>Hoạt động
                             </option>
                             <option value="unactive" {{ $user->status == 'unactive' ? 'selected' : '' }}>Vô hiệu hóa

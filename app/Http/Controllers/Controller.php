@@ -10,9 +10,5 @@ abstract class Controller
     {
         $request->session()->put('module_active', $request->segment(2));
         $request->session()->put('sub_module_active', $request->segment(3));
-
-        $request->session()->forget('is_parent');
-        $request->session()->forget('category_id');
-        $request->session()->forget('user_id');
     }
 }

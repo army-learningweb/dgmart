@@ -19,9 +19,10 @@ class AdminPermissionController extends Controller
 
     // thêm
     function store(Request $request){
+
         $request->validate([
-            'name' => 'required|min:8|regex:/^[a-zA-Z0-9\s]+$/u|unique:permissions',
-            'slug' => 'required|regex:/^[a-zA-Z0-9\-\.]+$/',
+            'name' => 'required|min:8|regex:/^[a-zA-Z0-9\s]+$/u|unique:permissions,name',
+            'slug' => 'required|regex:/^[a-zA-Z0-9\-\.]+$/|unique:permissions,slug',
             'desc' => 'required|min:8|regex:/^[\p{L}\s]+$/u'
         ]);
 
@@ -53,7 +54,7 @@ class AdminPermissionController extends Controller
 
         $request->validate([
             'name' => 'required|min:8|regex:/^[a-zA-Z0-9\s]+$/u|unique:permissions,name,'.$request->id,
-            'slug' => 'required|regex:/^[a-zA-Z0-9\-\.]+$/',
+            'slug' => 'required|regex:/^[a-zA-Z0-9\-\.]+$/|unique:permissions,slug,'.$request->id,
             'desc' => 'required|min:8|regex:/^[\p{L}\s]+$/u'
         ]);
 

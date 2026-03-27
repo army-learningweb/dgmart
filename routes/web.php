@@ -59,8 +59,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/posts/categories/edit',[ AdminCategoryController::class,'edit']);
     Route::post('/admin/post/categories/update',[AdminCategoryController::class,'update'])->name('admin.posts.categories.update');
     Route::get('/admin/posts/categories/destroy/{category}',[AdminCategoryController::class,'destroy'])->name('admin.posts.categories.destroy');
-    Route::post('/admin/posts/categories/action',[AdminCategoryController::class,'action'])->name('admin.post.categories.action');
-    
+    Route::post('/admin/posts/categories/action',[AdminCategoryController::class,'action'])->name('admin.posts.categories.action');
     
     Route::get('/admin/posts',[AdminPostController::class,'view'])->name('admin.posts');
 

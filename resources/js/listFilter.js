@@ -1,6 +1,6 @@
 export default function listFilter(){
 
-    // select
+    // status
     $('.select-filter').on('input',function(){
         let module = $(this).data('module');
         let filter_value = $(this).val()

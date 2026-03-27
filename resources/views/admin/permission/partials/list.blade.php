@@ -40,6 +40,9 @@
                         </td>
                     </tr>
                 @endforeach
+                <tr>
+                    <td class="py-2" colspan="6"></td>
+                </tr>
             @endforeach
 
         </table>

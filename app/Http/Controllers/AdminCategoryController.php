@@ -20,15 +20,20 @@ class AdminCategoryController extends Controller
         $total = Category::where('type', $type)->count();
         $active = Category::where('type', $type)->where('status', 'active')->count();
         $unactive = Category::where('type', $type)->where('status', 'unactive')->count();
-        return view('admin.'.$type.'.view-categories', compact('parent_categories', 'categories', 'total', 'active', 'unactive'));
+
+        return view('admin.category.view-categories', compact('parent_categories', 'categories', 'total', 'active', 'unactive','type'));
     }
 
     // thêm
     function store(Request $request)
     {
+        $request->merge([
+            'slug' => Str::slug($request->input('slug'))
+        ]);
+
         $request->validate([
-            'name' => 'required|min:2|regex:/^[\p{L}\s]+$/u|unique:categories',
-            'slug' => 'required',
+            'name' => 'required|min:2|regex:/^[\p{L}\p{N}\s]+$/u|unique:categories,name',
+            'slug' => 'required|unique:categories,slug',
         ]);
 
         $slug = Str::slug($request->input('slug'));
@@ -62,10 +67,12 @@ class AdminCategoryController extends Controller
             'updated_at' => now()
         ]);
 
-        $active = Category::where('type', 'post')->where('status', 'active')->count();
-        $unactive = Category::where('type', 'post')->where('status', 'unactive')->count();
+        $type = session('module_active') == 'posts' ? 'post' : 'product';
 
-        $view = view('admin.post.partials.status', compact('status_value'))->render();
+        $active = Category::where('type', $type)->where('status', 'active')->count();
+        $unactive = Category::where('type', $type)->where('status', 'unactive')->count();
+
+        $view = view('admin.category.partials.status', compact('status_value'))->render();
 
         $data = [
             'active' => $active,
@@ -85,11 +92,9 @@ class AdminCategoryController extends Controller
 
     function update(Request $request)
     {
-        $request->input('is_parent') == 0 ? $request->session()->put('is_parent',true) : '';
-        $request->session()->put('category_id',$request->input('id'));
 
         $request->validate([
-            'name' => 'required|min:2|regex:/^[\p{L}\s]+$/u|unique:categories,name,' . $request->input('id'),
+            'name' => 'required|min:2|regex:/^[\p{L}\p{N}\s]+$/u|unique:categories,name,' . $request->input('id'),
             'slug' => 'required|unique:categories,slug,' . $request->input('id')
         ]);
 
@@ -112,20 +117,19 @@ class AdminCategoryController extends Controller
             'updated_at' => now()
         ]);
 
-        $request->session()->forget('is_parent');
-        $request->session()->forget('category_id');
-
         return back()->with('status','Cập nhật thành công');
     }
 
     // xóa
     function destroy(Category $category){
 
-        if($category->id == 9) return back()->with('status_failed','Bạn không thể xóa danh mục lưu trữ !');
+        if($category->id == 9 || $category->id == 17) return back()->with('status_failed','Bạn không thể xóa danh mục lưu trữ !');
         $child_categories_id = Category::where('parent_id',$category->id)->pluck('id');
         
+        $safe_category_id = session('module_active') == 'posts' ? 9 : 17;
+
         if($child_categories_id){
-            Category::whereIn('id',$child_categories_id)->update(['parent_id' => 9, 'updated_at' => now()]);
+            Category::whereIn('id',$child_categories_id)->update(['parent_id' => $safe_category_id, 'updated_at' => now()]);
         }
         
         Category::find($category->id)->delete();
@@ -141,7 +145,8 @@ class AdminCategoryController extends Controller
         if(!$action) return back()->withInput()->with('status_failed','Thất bại, bạn chưa chọn hành động !');
         if(!$category_id) return back()->withInput()->with('status_failed','Hành động thất bại, bạn chưa chọn danh mục !');
 
-        Category::whereIn('id',$category_id)->whereNot('id',9)->update(['status'=>$action,'updated_at'=>now()]);
+
+        Category::whereIn('id',$category_id)->update(['status'=>$action,'updated_at'=>now()]);
 
         return back()->with('status','Thực hiện hành động thành công');
     }

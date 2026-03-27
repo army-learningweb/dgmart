@@ -14,7 +14,7 @@
                 $num = 1;
             @endphp
             @foreach ($roles as $role)
-                <tr class="dark:text-gray-300 border-b border-gray-500/40 dark:hover:bg-[#292929] hover:bg-[#f5f5f5]">
+                <tr class="dark:text-gray-300 border-b border-gray-500/20 dark:hover:bg-[#292929] hover:bg-[#f5f5f5]">
                     <td class="px-5 py-2"> {{ $num++ }} </td>
                     <td class="px-5 py-2">{{ $role->name }}</td>
                     <td class="px-5 py-2">{{ $role->desc }}</td>
