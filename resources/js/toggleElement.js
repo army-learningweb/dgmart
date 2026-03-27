@@ -16,10 +16,5 @@ export default function toggleElement(){
             $('.user-menu').addClass(hiddenClass)
         }
     })
-
-    // Category
-    $('.parent-category').on('click',function(){
-        $(this).parents('tr').nextUntil('.not-children-category').toggleClass('hidden')
-    })
     
 }

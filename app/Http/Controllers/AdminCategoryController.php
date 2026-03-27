@@ -12,16 +12,15 @@ class AdminCategoryController extends Controller
     // danh sách
     function view()
     {
+        $type = session('module_active') == 'posts' ? 'post' : 'product';
 
-        if (session('module_active') == 'posts') {
-            $parent_categories = Category::where('type', 'post')->where('parent_id', 0)->get();
-            $categories = Category::with('user')->where('type', 'post')->get();
-            $categories = datatree($categories);
-            $total = Category::where('type', 'post')->count();
-            $active = Category::where('type', 'post')->where('status', 'active')->count();
-            $unactive = Category::where('type', 'post')->where('status', 'unactive')->count();
-            return view('admin.post.view-categories', compact('parent_categories', 'categories', 'total', 'active', 'unactive'));
-        }
+        $parent_categories = Category::where('type', $type)->where('parent_id', 0)->get();
+        $categories = Category::with('user')->where('type', $type)->get();
+        $categories = datatree($categories);
+        $total = Category::where('type', $type)->count();
+        $active = Category::where('type', $type)->where('status', 'active')->count();
+        $unactive = Category::where('type', $type)->where('status', 'unactive')->count();
+        return view('admin.'.$type.'.view-categories', compact('parent_categories', 'categories', 'total', 'active', 'unactive'));
     }
 
     // thêm
@@ -35,7 +34,7 @@ class AdminCategoryController extends Controller
         $slug = Str::slug($request->input('slug'));
         $parent_id = $request->parent_category ? $request->parent_category : 0;
 
-        if (session('module_active') == 'posts') $type = 'post';
+        $type = session('module_active') == 'posts' ? 'post' : 'product';
 
         Category::create([
             'name' => $request->input('name'),
@@ -86,21 +85,35 @@ class AdminCategoryController extends Controller
 
     function update(Request $request)
     {
+        $request->input('is_parent') == 0 ? $request->session()->put('is_parent',true) : '';
+        $request->session()->put('category_id',$request->input('id'));
+
         $request->validate([
             'name' => 'required|min:2|regex:/^[\p{L}\s]+$/u|unique:categories,name,' . $request->input('id'),
-            'slug' => 'required'
+            'slug' => 'required|unique:categories,slug,' . $request->input('id')
         ]);
 
-        $current_slug = Category::where('id',$request->input('id'))->pluck('slug');
+        // - Kiểm tra slug
+        $current_slug = Category::where('id',$request->input('id'))->pluck('slug')[0];
         $slug = $current_slug == $request->input('slug') ? $request->input('slug') : Str::slug($request->input('slug'));
+
+        // - Kiểm tra parent_category
         $parent_id = $request->input('parent_category') ? $request->input('parent_category') : 0;
 
+        // - Kiểm tra id chính là id của danh mục
+        $current_id = Category::where('id',$request->input('id'))->pluck('id')[0];
+        if($current_id == $request->input('parent_category')) return back()->with('status_failed','Không thể chọn chính danh mục này');
+
+        
         Category::where('id', $request->input('id'))->update([
             'name' => $request->input('name'),
             'slug' => $slug,
             'parent_id' => $parent_id,
-            'updated_at' => now()    
+            'updated_at' => now()
         ]);
+
+        $request->session()->forget('is_parent');
+        $request->session()->forget('category_id');
 
         return back()->with('status','Cập nhật thành công');
     }

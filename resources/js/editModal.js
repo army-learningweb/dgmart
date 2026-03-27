@@ -6,7 +6,7 @@ export default function editModal() {
         let id = $(this).data("id");
         let data = { id: id };
         let type = $(this).data("type") ?? '';
-       
+    
         let url = ''
         if(type == 'categories'){
             url = `/admin/${module}/${type}/edit`
@@ -30,13 +30,14 @@ export default function editModal() {
                     textarea_desc : modal.find("textarea[name=desc]"),
                 }
                 
-                // post categories
-                if (module == 'posts' && type == 'categories'){
-                    $('.select-box').toggleClass('hidden',data.parent_id == 0)
+                // categories
+                if ((module == 'posts' || module == 'products') && type == 'categories'){
                     inputs.name.val(data.name)
                     inputs.slug.val(data.slug)
                     inputs.id.val(data.id)    
                     modal.find(`option[value=${data.parent_id}]`).prop('selected',true)
+                    modal.find('.select-box').toggleClass('hidden',data.parent_id == 0)
+                    modal.find('input[name=is_parent]').val(data.parent_id)
                 }        
                 
                 // user module

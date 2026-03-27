@@ -5,8 +5,8 @@
     <x-flash-session.failed-flash-session />
 
     {{-- modal create --}}
-    <x-modal-dial.modal-create modal="create-post-category" title="Tạo mới danh mục" button_create="Tạo danh mục"
-        route="{{ route('admin.posts.categories.store') }}">
+    <x-modal-dial.modal-create modal="create-product-category" title="Tạo mới danh mục" button_create="Tạo danh mục"
+        route="{{ route('admin.products.categories.store') }}">
         <div class="mt-2">
             <x-input-field.field id="name" label="Tên danh mục" type="text" name="name" required="*" />
         </div>
@@ -21,8 +21,8 @@
             <label for="parent_category">Chọn danh mục cha</label>
             <x-form-element.select id="parent_category" name="parent_category"
                 class="py-[5px] shadow-none text-[12px] md:w-full my-1">
-                <option value="">- Chọn</option>
-                @include('admin.post.partials.parent_categories')
+                <option value="">( Làm danh mục cha )</option>
+                @include('admin.product.partials.parent_categories')
             </x-form-element.select>
             <span class="text-amber-600 text-xs">Để " trống " nếu bạn muốn đây là danh mục Cha</span>
         </div>
@@ -32,7 +32,7 @@
 
     {{-- modal edit --}}
     <x-modal-dial.modal-edit modal="edit-category" title="Cập nhật thông tin danh mục" button_edit="Cập nhật"
-        route="{{ route('admin.posts.categories.update') }}">
+        route="{{ route('admin.products.categories.update') }}">
         <div class="mt-2">
             <x-input-field.field id="name" label="Tên danh mục" type="text" name="name" required="*" />
         </div>
@@ -42,7 +42,7 @@
             <span class="text-gray-400 text-xs">Ví dụ: cong-nghe-open-ai</span>
             <span class="text-green-600 text-xs">( Dán tên vào Slug hệ thống tự xử lí )</span>
         </div>
-
+        
         @if (!session('is_parent'))
             <div class="mt-2 select-box">
                 <label for="parent_category_post">Chọn danh mục cha</label>
@@ -65,14 +65,14 @@
         <div class="flex flex-col md:flex-row md:items-center md:justify-between">
 
             {{-- title --}}
-            <div class="text-lg"> Danh mục bài viết </div>
+            <div class="text-lg"> Danh mục sản phẩm </div>
 
             {{-- option --}}
             <div class="flex flex-col md:flex-row md:items-center gap-2 mt-3 md:mt-0">
 
                 {{-- create modal --}}
                 <div>
-                    <x-modal-dial.button-open modal="create-post-category">
+                    <x-modal-dial.button-open modal="create-product-category">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-5">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -84,7 +84,7 @@
             </div>
         </div>
 
-        <form action="{{ route('admin.post.categories.action') }}" method="post">
+        <form action="{{ route('admin.products.categories.action') }}" method="post">
             @csrf
 
             {{-- statis & action --}}
@@ -100,20 +100,20 @@
                             </option>
                         </x-form-element.select>
 
-                        <x-button.button-action />
+                        <x-button.button-action/>
                     </div>
 
                     {{-- statis module --}}
                     <div class="hidden md:block">
-                        <x-statis.statis-module module="posts" total="{{ $total }}" active="{{ $active }}"
+                        <x-statis.statis-module module="products" total="{{ $total }}" active="{{ $active }}"
                             unactive="{{ $unactive ? $unactive : 0 }}" />
                     </div>
                 </div>
             </div>
 
             {{-- list --}}
-            <div class="list-posts-categories pb-5">
-                @include('admin.post.partials.list-categories')
+            <div class="list-products-categories pb-5">
+                @include('admin.product.partials.list-categories')
             </div>
 
         </form>
