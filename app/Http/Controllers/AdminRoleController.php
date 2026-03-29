@@ -24,8 +24,8 @@ class AdminRoleController extends Controller
     // thêm
     function store(Request $request){
         $request->validate([
-            'name' => 'required|max:255|unique:roles,name',
-            'desc' => 'required',
+            'name' => 'required|min:2|max:255|unique:roles,name',
+            'desc' => 'required|min:2|max:255|',
         ]);
 
         if(!$request->permission_id) return back()->with('status_failed','Tạo mới thất bại, bạn chưa chọn quyền');
@@ -65,7 +65,7 @@ class AdminRoleController extends Controller
         $request->session()->put('role_id',$request->id);
 
         $request->validate([
-            'name' => 'required|max:255|unique:roles,name,'.$request->id,
+            'name' => 'required|min:2|max:255|unique:roles,name,'.$request->id,
             'desc' => 'required',
         ]);
 

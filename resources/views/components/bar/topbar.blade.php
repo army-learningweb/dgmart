@@ -18,7 +18,7 @@
                     <p>Tìm kiếm đơn hàng</p>
                     <input type="text" name="dashborad-search-order" id=""
                         placeholder="(Mã đơn, Tên khách hàng, Số điện thoại)"
-                        class="dark:bg-[#1e1f20] rounded-md py-1 border-0 w-[290px] focus:border-0 focus:ring-0 text-sm shadow-md placeholder:text-gray-500">
+                        class="rounded-md py-1 border-0 w-[290px] focus:border-0 focus:ring-0 text-sm shadow-md placeholder:text-gray-500">
                 </div>
             </form>
         </div>
@@ -27,14 +27,10 @@
     {{-- icon --}}
     <div class="flex items-center gap-3">
         
-        {{-- swichtmode --}}
-        <div>
-            <x-button.button-switch-mode />
-        </div>
 
         {{-- bell  --}}
         <div
-            class="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 cursor-pointer relative">
+            class="text-gray-600 hover:text-gray-900 cursor-pointer relative">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -57,15 +53,15 @@
 
             {{-- menu --}}
             <div
-                class="user-menu pointer-events-none opacity-0 scale-0 transition-all duration-100 z-10 shadow-md dark:shadow-none rounded-md flex flex-col items-center min-w-[100px] absolute top-11 -left-[65px]">
-                <ul class="text-center w-full bg-white border border-gray-500/80 rounded-md dark:bg-[#1e1f20]">
+                class="user-menu pointer-events-none opacity-0 scale-0 transition-all duration-100 z-10 shadow-md rounded-md flex flex-col items-center min-w-[100px] absolute top-11 -left-[65px]">
+                <ul class="text-center w-full bg-white border border-gray-500/80 rounded-md">
                     <li class="py-1 border-b border-gray-500/80 w-full">
                         <a href="{{ route('profile.edit') }}"
-                            class="inline-block w-full text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-emerald-500">Hồ
+                            class="inline-block w-full text-gray-600 hover:text-gray-900">Hồ
                             sơ</a>
                     </li>
                     <li
-                        class="py-1 w-full text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-emerald-500 cursor-pointer">
+                        class="py-1 w-full text-gray-600 hover:text-gray-900 cursor-pointer">
                         <form action="{{ route('logout') }}" method="post">
                             @csrf
                             <input type="submit" value="Đăng xuất" class="cursor-pointer">

@@ -32,8 +32,8 @@ class AdminCategoryController extends Controller
         ]);
 
         $request->validate([
-            'name' => 'required|min:2|regex:/^[\p{L}\p{N}\s]+$/u|unique:categories,name',
-            'slug' => 'required|unique:categories,slug',
+            'name' => 'required|min:2|max:100|regex:/^[\p{L}\p{N}\s]+$/u|unique:categories,name',
+            'slug' => 'required|min:2|max:255|unique:categories,slug',
         ]);
 
         $slug = Str::slug($request->input('slug'));
@@ -94,8 +94,8 @@ class AdminCategoryController extends Controller
     {
 
         $request->validate([
-            'name' => 'required|min:2|regex:/^[\p{L}\p{N}\s]+$/u|unique:categories,name,' . $request->input('id'),
-            'slug' => 'required|unique:categories,slug,' . $request->input('id')
+            'name' => 'required|min:2|max:255|regex:/^[\p{L}\p{N}\s]+$/u|unique:categories,name,' . $request->input('id'),
+            'slug' => 'required|min:2|max:255|unique:categories,slug,' . $request->input('id')
         ]);
 
         // - Kiểm tra slug
@@ -123,10 +123,10 @@ class AdminCategoryController extends Controller
     // xóa
     function destroy(Category $category){
 
-        if($category->id == 9 || $category->id == 17) return back()->with('status_failed','Bạn không thể xóa danh mục lưu trữ !');
+        if($category->slug == 2 || $category->slug == 1) return back()->with('status_failed','Bạn không thể xóa danh mục lưu trữ !');
         $child_categories_id = Category::where('parent_id',$category->id)->pluck('id');
         
-        $safe_category_id = session('module_active') == 'posts' ? 9 : 17;
+        $safe_category_id = session('module_active') == 'posts' ? 2 : 1;
 
         if($child_categories_id){
             Category::whereIn('id',$child_categories_id)->update(['parent_id' => $safe_category_id, 'updated_at' => now()]);

@@ -2,14 +2,16 @@
     'modal',
     'title',
     'route' => '',
-    'button_edit'
+    'button_edit' => '',
+    'width' => '',
+    'height' => '',
 ])
 
 <div
     class="modal-element modal-{{ $modal }} {{ $errors->any() && old('modal') == 'edit' ? '' : 'pointer-events-none opacity-0 scale-0' }}bg-[#1a1a1a]/30 backdrop-brightness-50 backdrop-blur-sm fixed left-0 top-0 z-50 w-full min-h-screen flex justify-center items-start p-4 md:p-0">
 
     {{-- modal --}}
-    <div class="modal-{{ $modal }}-is-open dark:bg-[#151517] bg-white shadow-md min-w-[300px] md:min-w-[400px] p-5 rounded-lg mt-20">
+    <div class="modal-{{ $modal }}-is-open bg-white shadow-md max-w-[90vw] md:min-w-[400px] {{ $width }} max-h-[90vh] md:max-h-[670px] {{ $height }} overflow-y-auto scrollbar-thumb-rounded-full scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent p-5 rounded-lg md:mt-10 mt-3">
 
         {{-- title --}}
         <div class="flex justify-between text-lg">
@@ -17,7 +19,7 @@
             <div class="modal-{{ $modal }}-title">{{ $title }}</div>
 
             <div>
-                <div class="cancel-modal cancel-modal-{{ $modal }} cursor-pointer dark:text-gray-400 dark:hover:text-gray-100" 
+                <div class="cancel-modal cancel-modal-{{ $modal }} cursor-pointer" 
                 data-modal="{{ $modal }}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-6 select-none">

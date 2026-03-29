@@ -5,15 +5,19 @@ return [
     'email' => ':attribute không hợp lệ',
     'confirmed' => 'Xác nhận mật khẩu không khớp',
     'unique' => ':attribute đã tồn tại',
-    
+    'exists' => ':attreibute không tồn tại',
+    'regex' => ':attribute không hợp lệ',
+    'image' => 'Không đúng định dạng ảnh',
+    'mimes' => 'Không đúng định dạng :mimes',
+
     'min' => [
         'string' => ':attribute ít nhất :min kí tự'
     ],
-    'max' => [
-        'string' => ':attribute tối đa :max kí tự'
-    ],
 
-    'regex' => ':attribute không hợp lệ',
+    'max' => [
+        'string' => ':attribute tối đa :max kí tự',
+        'file' => ':attribute tối đa :max'
+    ],
 
     'attributes' => [
         'email' => 'Email',
@@ -21,6 +25,9 @@ return [
         'name' => 'Tên',
         'current_password' => 'Mật khẩu hiện tại',
         'slug' => 'Slug',
-        'desc' => 'Mô tả'
+        'desc' => 'Mô tả',
+        'title' => 'Tiêu đề',
+        'category_id' => 'Danh mục',
+        'file' => 'File'
     ]
 ];

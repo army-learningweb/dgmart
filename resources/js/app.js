@@ -14,7 +14,6 @@ $.ajaxSetup({
 });
 
 // Import
-import switchMode from './switchMode';
 import loadingState from "./loadingState";
 import toggleElement from "./toggleElement";
 import validation from "./validation";
@@ -24,9 +23,9 @@ import listFilter from "./listFilter";
 import updateStatus from "./updateStatus";
 import checkAll from "./checkAll";
 import sidebar from "./sidebar";
+import fileUpload from "./file";
 
 $(function () {
-    switchMode()
     loadingState()
     toggleElement()
     validation()
@@ -36,4 +35,5 @@ $(function () {
     updateStatus()
     checkAll()
     sidebar()
+    fileUpload()
 });

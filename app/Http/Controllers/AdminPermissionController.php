@@ -21,9 +21,9 @@ class AdminPermissionController extends Controller
     function store(Request $request){
 
         $request->validate([
-            'name' => 'required|min:8|regex:/^[a-zA-Z0-9\s]+$/u|unique:permissions,name',
-            'slug' => 'required|regex:/^[a-zA-Z0-9\-\.]+$/|unique:permissions,slug',
-            'desc' => 'required|min:8|regex:/^[\p{L}\s]+$/u'
+            'name' => 'required|min:8|max:255|regex:/^[a-zA-Z0-9\s]+$/u|unique:permissions,name',
+            'slug' => 'required|min:2|max:255|regex:/^[a-zA-Z0-9\-\.]+$/|unique:permissions,slug',
+            'desc' => 'required|min:8|max:255|regex:/^[\p{L}\s]+$/u'
         ]);
 
         Permission::create([
@@ -53,9 +53,9 @@ class AdminPermissionController extends Controller
         $request->session()->put('user_id',$request->id);
 
         $request->validate([
-            'name' => 'required|min:8|regex:/^[a-zA-Z0-9\s]+$/u|unique:permissions,name,'.$request->id,
-            'slug' => 'required|regex:/^[a-zA-Z0-9\-\.]+$/|unique:permissions,slug,'.$request->id,
-            'desc' => 'required|min:8|regex:/^[\p{L}\s]+$/u'
+            'name' => 'required|min:8|max:255|regex:/^[a-zA-Z0-9\s]+$/u|unique:permissions,name,'.$request->id,
+            'slug' => 'required|min:2|max:255|regex:/^[a-zA-Z0-9\-\.]+$/|unique:permissions,slug,'.$request->id,
+            'desc' => 'required|min:8|max:255|regex:/^[\p{L}\s]+$/u'
         ]);
 
         Permission::where('id',$request->id)->update([

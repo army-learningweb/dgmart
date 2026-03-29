@@ -9,7 +9,7 @@
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-4">
+            <div class="md:grid grid-cols-4">
                 @foreach ($permissions_list as $permisison)
                     <div class="py-3 col-span-1">
                         <div class="flex items-center gap-3">

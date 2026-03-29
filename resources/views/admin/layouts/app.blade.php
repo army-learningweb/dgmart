@@ -3,20 +3,14 @@
 
 <head>
 
-    <script>
-        let dark_mode = localStorage.getItem('dark_mode');
-        if (dark_mode == 'true') {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-    </script>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- MCE config -->
+    <x-head.tinymce-config id="post-content"/>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -26,7 +20,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="overflow-x-hidden overflow-y-scroll font-sans antialiased dark:text-gray-300 dark:bg-[#18181b] bg-[#fafafa] text-sm md:max-w-[1440px] mx-auto px-3 md:px-0">
+<body class="overflow-x-hidden overflow-y-scroll font-sans antialiased bg-[#fafafa] text-sm md:max-w-[1440px] mx-auto px-3 md:px-0">
     
     {{-- modal --}}
     

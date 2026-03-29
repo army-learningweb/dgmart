@@ -25,5 +25,9 @@ export default {
         },
     },
 
-    plugins: [forms],
+    plugins: [
+        forms,
+        require('tailwind-scrollbar')({ nocompatible: true }),
+    ],
+    
 };

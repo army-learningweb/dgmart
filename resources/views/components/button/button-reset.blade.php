@@ -1,6 +1,6 @@
  <div class="">
      <a href=""
-         class="py-[5px] text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 px-2 rounded-[4px] flex justify-center items-center gap-2 w-full md:w-autor">
+         class="py-[5px] text-gray-600 hover:text-gray-900 px-2 rounded-[4px] flex justify-center items-center gap-2 w-full md:w-autor">
          <span>
              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                  stroke="currentColor" class="size-4">

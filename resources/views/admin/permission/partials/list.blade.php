@@ -1,6 +1,6 @@
 @if ($permissions->count() > 0)
     <div
-        class="bg-white dark:bg-[#1e1f20] shadow-md mt-4 py-3 px-5 rounded-md text-sm overflow-x-auto md:overflow-visible">
+        class="bg-white dark:bg-[#1e1f20] shadow-md mt-3 py-3 px-5 rounded-md text-sm overflow-x-auto md:overflow-visible">
         <table class="min-w-[1000px] md:w-full">
 
             <tr class="dark:text-gray-300">

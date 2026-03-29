@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\AdminCategoryController;
 use Illuminate\Support\Facades\Route;
+use UniSharp\LaravelFilemanager\Lfm;
+
+use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminPermissionController;
 use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\AdminRoleController;
@@ -9,6 +11,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ValidationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\AdminFileController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -22,6 +26,15 @@ Route::post('/validation',[ValidationController::class, 'validation']);
 
 Route::get('/admin/dashboard',[DashboardController::class,'view'])->middleware(['auth','verified'])->name('dashboard');
 Route::middleware('auth')->group(function () {
+
+    // File manager
+    Route::group(['prefix' => 'laravel-filemanager'], function () {
+        Lfm::routes();
+    });
+
+    // File
+    Route::post('/admin/file/upload',[AdminFileController::class,'upload']);
+    Route::post('/admin/file/remove',[AdminFileController::class,'remove']);
 
     // Admin Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -62,7 +75,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/posts/categories/action',[AdminCategoryController::class,'action'])->name('admin.posts.categories.action');
     
     Route::get('/admin/posts',[AdminPostController::class,'view'])->name('admin.posts');
-
+    Route::post('/admin/posts/store',[AdminPostController::class,'store'])->name('admin.posts.store');
+    Route::get('/admin/posts/destroy/{post}',[AdminPostController::class,'destroy'])->name('admin.posts.destroy');
+    
     // Product
     Route::get('/admin/products/categories',[AdminCategoryController::class,'view'])->name('admin.products.categories');
     Route::post('/admin/products/categories/store',[AdminCategoryController::class,'store'])->name('admin.products.categories.store');

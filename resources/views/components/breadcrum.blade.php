@@ -1,5 +1,5 @@
 <div>
-    <a href="{{ route('dashboard') }}" class="flex gap-2 items-center text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100">
+    <a href="{{ route('dashboard') }}" class="flex gap-2 items-center text-gray-600 hover:text-gray-900">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
             class="size-5">
             <path stroke-linecap="round" stroke-linejoin="round"

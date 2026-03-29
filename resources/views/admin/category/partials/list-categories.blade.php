@@ -1,5 +1,5 @@
 @if (count($categories) > 0)
-<div class="bg-white dark:bg-[#1e1f20] shadow-md mt-4 py-3 px-5 rounded-md text-sm overflow-x-auto md:overflow-visible">
+<div class="bg-white dark:bg-[#1e1f20] shadow-md mt-3 py-3 px-5 rounded-md text-sm overflow-x-auto md:overflow-visible">
     <table class="min-w-[1000px] md:w-full">
 
         <tr class="dark:text-gray-300">
@@ -19,7 +19,7 @@
             <tr
                 class="dark:text-gray-300 border-b border-gray-500/20 dark:hover:bg-[#292929] hover:bg-[#f5f5f5]">
                 <td class="px-3 py-4">
-                    @if ($item->level != 0 || $item->id != 9 && $item->id !=17)
+                    @if ($item->level != 0 || $item->id != 1 && $item->id != 2)
                         <input type="checkbox" name="category_id[]" value="{{ $item->id }}"
                             class="check_single rounded-[3px] mb-[2px]">
                     @else
@@ -58,7 +58,7 @@
                 <td class="px-3">{{ $item->created_at->format('d/m/Y') }}</td>
                 <td class="px-3">{{ $item->user ? $item->user->name : ' Không xác định !' }}</td>
                 <td>
-                    @if ($item->id != 9 && $item->id != 17)
+                    @if ($item->id != 1 && $item->id != 2)
                         <div class="flex gap-4 justify-center">
                             <x-table.button-edit button="edit-category" module="{{$type}}s" id="{{ $item->id }}" type="categories" />
                             

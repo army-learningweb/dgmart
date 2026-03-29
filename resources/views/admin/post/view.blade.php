@@ -1,30 +1,49 @@
 <x-app-layout>
 
     {{-- flash session --}}
-    <x-flash-session.success-flash-session/>
-    <x-flash-session.failed-flash-session/>
+    <x-flash-session.success-flash-session />
+    <x-flash-session.failed-flash-session />
 
     {{-- modal create --}}
-    {{-- <x-modal-dial.modal-create modal="create-user" title="Tạo mới thành viên" button_create="Tạo thành viên" route="{{ route('admin.users.store') }}">
-        <div class="mt-2">
-            <x-input-field.field id="name" label="Họ tên" type="text" name="name" required="*" />
-        </div>
+    <x-modal-dial.modal-create modal="create-post" title="Tạo mới bài viết" button_create="Tạo mới"
+        route="{{ route('admin.posts.store') }}" width="w-[1100px]" height="h-[600px]">
 
-        <div class="mt-2">
-            <x-input-field.field id="email" label="Email" type="text" name="email" required="*"/>
-        </div>
+        <div class="flex flex-col md:flex-row gap-4">
 
-        <div class="mt-2">
-            <x-input-field.field id="password" label="Mật khẩu" type="password" name="password" required="*" />
-        </div>
+            <div class="flex-1">
+                <div class="mt-2">
+                    <x-form-element.text-area label="Tiêu đề" name="title" id="title" required="*" />
+                </div>
 
-        <div class="mt-2">
-            <x-input-field.field id="password_confirmation" label="Xác nhận mật khẩu" type="password" name="password_confirmation" required="*" />
+                <div class="mt-2">
+                    <x-form-element.text-area label="Mô tả" name="desc" id="desc" required="*" />
+                </div>
+
+                <div class="mt-2">
+                    <x-forms.tinymce-editor id="post-content" name="content" />
+                </div>
+
+            </div>
+
+            <div>
+                <x-form-element.file name="post_file" type="post"/>
+                
+                <div class="mt-2">
+                    <x-form-element.select label="Danh mục bài viết" id="category_id" name="category_id"
+                        class="mt-1 border-gray-500/30 md:w-full">
+                        <option value="">Chọn danh mục</option>
+                        @include('admin.post.partials.parent_categories')
+                    </x-form-element.select>
+                </div>
+
+            </div>
+
         </div>
 
         <input type="hidden" name="modal" value="create">
-    </x-modal-dial.modal-create> --}}
-    
+        <input type="hidden" name="session" value="post_file">
+    </x-modal-dial.modal-create>
+
     {{-- modal edit --}}
     {{-- <x-modal-dial.modal-edit modal="edit-user" title="Cập nhật thông tin thành viên" button_edit="Cập nhật thông tin" route="{{ route('admin.users.update') }}">
         <div class="mt-2">
@@ -47,82 +66,82 @@
         <input type="hidden" name="modal" value="edit">
     </x-modal-dial.modal-edit> --}}
 
+    {{-- ============================== --}}
+    <div class="py-4 h-[500px] border-t border-gray-500/50 border-dashed">
 
-    <div class="dark:bg-[#18181b] py-4 h-[500px] border-t border-gray-500/10">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+        <div class="flex items-center justify-between">
 
-            {{-- title --}}
-            <div class="text-lg"> Danh sách bài viết </div>
+            <div class="flex items-center justify-between gap-2 w-full md:w-auto">
 
-            {{-- option --}}
-            <div class="flex flex-col md:flex-row md:items-center gap-2 mt-3 md:mt-0">
-
-                {{-- search --}}
-                <div>
-                    <x-search placeholder="Tìm kiếm theo tên..." name="search-post" module="posts" class="search"/>
-                </div>
-
-                {{-- filter status --}}
-                <div>
-                   <x-select name="post-filter" module="posts" class="select-filter py-1">
-                        <option value="">Lọc theo trạng thái</option>
-                        <option value="active">Hoạt động</option>
-                        <option value="unactive">Vô hiệu hóa</option>
-                   </x-select>
-                </div>
+                {{-- title --}}
+                <div class="text-lg"> Danh sách bài viết </div>
 
                 {{-- create modal --}}
-                <div>
-                    <x-modal-dial.button-open modal="create-post">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="size-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
-                        </svg>
-                    </x-modal-dial.button-open>
-                </div>
-                
-                {{-- reset --}}
-                <div class="hidden md:block">
-                    <x-button-reset/>
-                </div>
+                <x-modal-dial.button-open modal="create-post">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m3.75 9v6m3-3H9m1.5-12H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                    </svg>
+                </x-modal-dial.button-open>
+            </div>
+
+            {{-- statis module --}}
+            <div class="hidden md:block">
+                <x-statis.statis-module module="posts" total="0" active="0" unactive="0" />
             </div>
         </div>
 
-        <form action="" method="post">
-            @csrf 
+        <div class="mt-2">
+            <form action="" method="post">
+                @csrf
 
-            {{-- statis & action --}}
-            <div class="my-5">
-                <div class="flex items-center justify-between">
+                <div class="flex flex-col md:flex-row justify-between gap-2">
 
                     {{-- action --}}
-                    <div class="flex flex-col md:flex-row gap-2 md:items-center w-full md:w-auto">
-                        <x-select name="action" class="py-[3px]">
-                            <option value="">- Hành động hàng loạt</option>
+                    <div class="flex gap-2 items-center justify-between md:w-auto md:order-1 order-2">
+                        <x-form-element.select name="action" class="flex-1">
+                            <option value="">Hành động hàng loạt</option>
                             <option value="active" {{ old('action') == 'active' ? 'selected' : '' }}>Hoạt động</option>
-                            <option value="unactive" {{ old('action') == 'unactive' ? 'selected' : '' }}>Vô hiệu hóa</option>
-                        </x-select>
+                            <option value="unactive" {{ old('action') == 'unactive' ? 'selected' : '' }}>Vô hiệu hóa
+                            </option>
+                        </x-form-element.select>
 
-                        <x-primary-button style="padding-top:4px;padding-bottom:4px" class="flex justify-center items-center gap-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" />
-                            </svg>
-                            <span>Hành động</span>
-                        </x-primary-button>
+                        <x-button.button-action class="w-[40%]"/>
                     </div>
 
-                    {{-- statis module --}}
-                    <div class="hidden md:block">
-                        <x-statis-module module="posts" total="" active="" unactive=""/>
+                    {{-- filter --}}
+                    <div class="flex flex-col md:flex-row md:items-center gap-2 md:mt-0 order-1 md:order-2">
+
+                        {{-- search --}}
+                        <div>
+                            <x-form-element.search placeholder="Tìm kiếm theo tiêu đề..." name="search-post"
+                                module="posts" class="search" />
+                        </div>
+
+                        {{-- status --}}
+                        <div>
+                            <x-form-element.select name="post-filter" module="posts" class="select-filter py-1">
+                                <option value="">Lọc theo trạng thái</option>
+                                <option value="active">Hoạt động</option>
+                                <option value="unactive">Vô hiệu hóa</option>
+                            </x-form-element.select>
+                        </div>
+
+                        {{-- reset --}}
+                        <div class="hidden md:block">
+                            <x-button.button-reset />
+                        </div>
+
                     </div>
                 </div>
-            </div>
 
-            {{-- list --}}
-            <div class="list-posts pb-5">
-                {{-- @include('admin.user.partials.list') --}}
-            </div>
-
-        </form>
+                {{-- list --}}
+                <div class="list-posts pb-5">
+                    @include('admin.post.partials.list')
+                </div>
+            </form>
+        </div>
 
     </div>
 </x-app-layout>

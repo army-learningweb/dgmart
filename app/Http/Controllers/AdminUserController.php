@@ -23,9 +23,9 @@ class AdminUserController extends Controller
     {
 
         $request->validate([
-            'name' => 'required|min:2|regex:/^[\p{L}\s]+$/u',
+            'name' => 'required|min:2|max:255|regex:/^[\p{L}\s]+$/u',
             'email' => 'required|email',
-            'password' => 'required|min:8|regex:/^[a-zA-Z0-9!@#$%^&*_-]+$/u|confirmed'
+            'password' => 'required|min:8|max:255|regex:/^[a-zA-Z0-9!@#$%^&*_-]+$/u|confirmed'
         ]);
 
         User::create([
@@ -71,8 +71,8 @@ class AdminUserController extends Controller
 
         }else{
             $request->validate([
-                'name' => 'required|min:2|regex:/^[\p{L}\s0-9]+$/u',
-                'password' => 'required|confirmed|min:8|'
+                'name' => 'required|min:2|max:255|regex:/^[\p{L}\s0-9]+$/u',
+                'password' => 'required|confirmed|min:8|max:255|'
             ]);
 
             User::find($request->input('id'))->update([
