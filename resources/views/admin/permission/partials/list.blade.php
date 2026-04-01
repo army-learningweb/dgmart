@@ -11,12 +11,12 @@
                 <td class="px-3 pb-3">Ngày tạo</td>
                 <td class="px-3 pb-3 text-center">Thao tác</td>
             </tr>
-
+            
             @foreach ($permissions as $module => $permissions)
                 <tr class="border-b border-t dark:border-gray-500/10">
                     <td class="py-3" colspan="6">
                         <div
-                            class="bg-teal-500/10 dark:text-emerald-400 text-emerald-600 inline-block px-3 py-1 rounded-md">
+                            class="bg-blue-500/10 text-blue-600 inline-block px-3 py-1 rounded-md">
                             Module {{ ucfirst($module) }}
                         </div>
                     </td>

@@ -1,12 +1,8 @@
-@props([
-    'button',
-    'module',
-    'id',
-    'type' => ''
-])
+@props(['button', 'module', 'id', 'type' => ''])
 
 <div class="open-modal open-modal-edit {{ $button }} flex justify-center p-1 rounded-md text-[#5d82ee] hover:text-[#4049c8] cursor-pointer"
-    data-id="{{ $id }}" data-modal="{{ $button }}" data-module="{{ $module }}" data-type="{{ $type }}">
+    data-id="{{ $id }}" data-modal="{{ $button }}" data-module="{{ $module }}"
+    data-type="{{ $type }}">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
         class="size-5">
         <path stroke-linecap="round" stroke-linejoin="round"

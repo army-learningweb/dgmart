@@ -100,7 +100,7 @@
 
                         {{-- search --}}
                         <div>
-                            <x-form-element.search placeholder="Tìm kiếm theo tiêu đề..." name="search-user"
+                            <x-form-element.search placeholder="Tìm kiếm theo tên..." name="search-user"
                                 module="users" class="search" />
                         </div>
 

@@ -5,7 +5,7 @@
                 <div class="py-2" colspan="4">
                     <div class="flex items-center gap-3">
                         <input type="checkbox" class="check_all_permission rounded-sm">
-                        <span class="text-emerald-500">Module {{ ucfirst($module) }}</span>
+                        <span class="text-blue-600">Module {{ ucfirst($module) }}</span>
                     </div>
                 </div>
             </div>
