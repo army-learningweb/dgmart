@@ -5,7 +5,6 @@
             <tr class="dark:text-gray-300">
                 <td class="px-3 py-2">
                     <input type="checkbox" name="" id="check_all" class="check_all rounded-[3px] mb-[2px]">
-                    <label for="check_all" class="ms-[2px] text-sm"></label>
                 </td>
                 <td class="px-3">#</td>
                 <td class="px-5">Họ tên</td>
@@ -16,17 +15,14 @@
                 <td class="px-3">Ngày tham gia</td>
                 <td class="px-3 text-center">Thao tác</td>
             </tr>
-            @php
-                $num = 1;
-            @endphp
             @foreach ($users as $user)
                 <tr class="dark:text-gray-300 border-b border-gray-500/20 dark:hover:bg-[#292929] hover:bg-[#f5f5f5]">
                     <td class="px-3 py-4">
-                        <input type="checkbox" name="user_id[]" value="{{ $user->id }}"
+                        <input type="checkbox" name="user_id[]" value="{{ $user->id }}" form="form_action_users"
                             {{ in_array($user->id, (array) old('user_id')) ? 'checked' : '' }}
                             class="check_single rounded-[3px] mb-[2px]">
                     </td>
-                    <td class="px-3">{{ $num++ }}</td>
+                    <td class="px-3">{{ $loop->iteration }}</td>
                     <td class="px-5">
                         <div class="w-[70px] line-clamp-1">
                             {{ $user->name }}

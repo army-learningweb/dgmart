@@ -22,7 +22,7 @@
 
             <x-form-element.select label="Chọn danh mục cha" id="parent_category" name="parent_category"
                 class="text-[12px] w-full my-1">
-                <option value="">- Chọn</option>
+                <option value="">Chọn</option>
                 @include('admin.category.partials.parent_categories')
             </x-form-element.select>
             <span class="text-amber-600 text-xs">Để " trống " nếu bạn muốn đây là danh mục Cha</span>
@@ -48,7 +48,7 @@
             <label for="parent_category_{{ $type }}">Chọn danh mục cha</label>
             <select id="parent_category_{{ $type }}" name="parent_category"
                 {{ old('is_parent') == 0 ? 'disabled' : '' }}
-                class="select-parent-category py-[5px] shadow-sm text-[12px] md:w-auto my-1 rounded-md md:py-[3px] text-sm border-gray-500/30 focus:border-emerald-500 focus:ring-emerald-500 w-full">
+                class="select-parent-category py-[5px] shadow-sm text-[12px] md:w-auto my-1 rounded-md md:py-[3px] text-sm border-gray-500/30 w-full">
                 <option value="0">( Trống )</option>
                 @include('admin.category.partials.parent_categories')
             </select>
@@ -87,6 +87,42 @@
 
         {{-- action --}}
         <div class="mt-2">
+            <form action="{{ route("admin.{$type}s.categories.action") }}" method="POST" id="form_action_categories">
+                @csrf</form>
+
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center">
+                <div class="flex items-center justify-between md:justify-normal gap-2">
+                    <x-form-element.select name="action" form="form_action_categories">
+                        <option value="">Hành động hàng loạt</option>
+                        <option value="active" {{ old('action') == 'active' ? 'selected' : '' }}>Hoạt động</option>
+                        <option value="unactive" {{ old('action') == 'unactive' ? 'selected' : '' }}>Vô hiệu hóa
+                        </option>
+                    </x-form-element.select>
+
+                    <x-button.button-action class="w-[60%] md:w-auto" form="form_action_categories" />
+                </div>
+
+                <div class="hidden md:block">
+                    <div class="flex gap-3">
+                        <div class="flex gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="size-5 text-amber-500 shrink-0">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
+                        </svg>
+                        <span>Danh mục cha</span>
+                    </div>
+                    <div class="flex gap-2">
+                        <span class="shrink-0 ml-1 mr-2">└</span>
+                        <span>
+                            Danh mục con
+                        </span>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+
             {{-- list --}}
             <div class="list-{{ $type . 's' }}-categories pb-5">
                 @include('admin.category.partials.list-categories')

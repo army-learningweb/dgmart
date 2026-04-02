@@ -8,7 +8,7 @@ return [
     'exists' => ':attreibute không tồn tại',
     'regex' => ':attribute không hợp lệ',
     'image' => 'Không đúng định dạng ảnh',
-    'mimes' => 'Không đúng định dạng :mimes',
+    'mimes' => 'Ảnh không đúng định dạng :mimes',
 
     'min' => [
         'string' => ':attribute ít nhất :min kí tự'
@@ -28,6 +28,6 @@ return [
         'desc' => 'Mô tả',
         'title' => 'Tiêu đề',
         'category_id' => 'Danh mục',
-        'file' => 'File'
+        'file' => 'File',
     ]
 ];

@@ -77,52 +77,51 @@
         </div>
 
         <div class="mt-2">
-            <form action="{{ route('admin.users.action') }}" method="POST">
-                @csrf
-                <div class="flex flex-col md:flex-row justify-between gap-2">
-                    {{-- action --}}
-                    <div class="flex gap-2 items-center justify-between w-full md:w-auto md:order-1 order-2">
-                        <x-form-element.select name="action" class="flex-1">
-                            <option value="">Hành động hàng loạt</option>
-                            <option value="active" {{ old('action') == 'active' ? 'selected' : '' }}>Hoạt động</option>
-                            <option value="unactive" {{ old('action') == 'unactive' ? 'selected' : '' }}>Vô hiệu hóa
-                            </option>
+            <form action="{{ route('admin.users.action') }}" method="POST" id="form_action_users">@csrf</form>
+            <div class="flex flex-col md:flex-row justify-between gap-2">
+                {{-- action --}}
+                <div class="flex gap-2 items-center justify-between w-full md:w-auto md:order-1 order-2">
+                    <x-form-element.select name="action" class="flex-1" form="form_action_users">
+                        <option value="">Hành động hàng loạt</option>
+                        <option value="active" {{ old('action') == 'active' ? 'selected' : '' }}>Hoạt động</option>
+                        <option value="unactive" {{ old('action') == 'unactive' ? 'selected' : '' }}>Vô hiệu hóa
+                        </option>
+                    </x-form-element.select>
+
+                    <x-button.button-action class="w-[40%]" form="form_action_users"/>
+                </div>
+
+                {{-- filter --}}
+                <div class="flex flex-col md:flex-row md:items-center gap-2 md:mt-0 order-1 md:order-2">
+
+                    {{-- search --}}
+                    <div>
+                        <x-form-element.search placeholder="Tìm kiếm theo tên..." name="search-user" module="users"
+                            class="search" />
+                    </div>
+
+                    {{-- status --}}
+                    <div>
+                        <x-form-element.select name="user-filter" module="users" class="select-filter py-1">
+                            <option value="">Lọc theo trạng thái</option>
+                            <option value="active">Hoạt động</option>
+                            <option value="unactive">Vô hiệu hóa</option>
                         </x-form-element.select>
-
-                        <x-button.button-action class="w-[40%]" />
                     </div>
 
-                    {{-- filter --}}
-                    <div class="flex flex-col md:flex-row md:items-center gap-2 md:mt-0 order-1 md:order-2">
-
-                        {{-- search --}}
-                        <div>
-                            <x-form-element.search placeholder="Tìm kiếm theo tên..." name="search-user" module="users"
-                                class="search" />
-                        </div>
-
-                        {{-- status --}}
-                        <div>
-                            <x-form-element.select name="user-filter" module="users" class="select-filter py-1">
-                                <option value="">Lọc theo trạng thái</option>
-                                <option value="active">Hoạt động</option>
-                                <option value="unactive">Vô hiệu hóa</option>
-                            </x-form-element.select>
-                        </div>
-
-                        {{-- reset --}}
-                        <div class="hidden md:block">
-                            <x-button.button-reset />
-                        </div>
-
+                    {{-- reset --}}
+                    <div class="hidden md:block">
+                        <x-button.button-reset />
                     </div>
-                </div>
 
-                {{-- list --}}
-                <div class="list-users pb-5">
-                    @include('admin.user.partials.list')
                 </div>
-            </form>
+            </div>
+
+            {{-- list --}}
+            <div class="list-users pb-5">
+                @include('admin.user.partials.list')
+            </div>
+
         </div>
 
     </div>

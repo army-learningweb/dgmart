@@ -23,7 +23,7 @@ import listFilter from "./listFilter";
 import updateStatus from "./updateStatus";
 import checkAll from "./checkAll";
 import sidebar from "./sidebar";
-import fileUpload from "./file";
+import file from "./file";
 
 $(function () {
     loadingState()
@@ -35,5 +35,5 @@ $(function () {
     updateStatus()
     checkAll()
     sidebar()
-    fileUpload()
+    file()
 });

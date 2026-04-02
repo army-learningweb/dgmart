@@ -10,12 +10,9 @@
                 <td class="px-3 pb-3">Ngày tạo</td>
                 <td class="px-3 pb-3 text-center">Thao tác</td>
             </tr>
-            @php
-                $num = 1;
-            @endphp
             @foreach ($roles as $role)
                 <tr class="dark:text-gray-300 border-b border-gray-500/20 dark:hover:bg-[#292929] hover:bg-[#f5f5f5]">
-                    <td class="px-5 py-2"> {{ $num++ }} </td>
+                    <td class="px-5 py-2"> {{ $loop->iteration }} </td>
                     <td class="px-5 py-2">
                         <div class="w-[120px] truncate">
                             {{ $role->name }}

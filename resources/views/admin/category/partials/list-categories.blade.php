@@ -1,10 +1,13 @@
 @if (count($categories) > 0)
     <div
-        class="bg-white dark:bg-[#1e1f20] shadow-md mt-3 py-3 px-5 rounded-md text-sm overflow-x-auto md:overflow-visible">
+        class="bg-white dark:bg-[#1e1f20] shadow-md mt-3 py-3 px-5 rounded-md text-sm overflow-auto scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent md:max-h-[540px]">
         <table class="min-w-[1000px] md:w-full">
             <tr class="dark:text-gray-300">
+                <td class="px-3 py-2">
+                    <input type="checkbox" name="" id="check_all" class="check_all rounded-[3px] mb-[2px]">
+                </td>
                 <td class="px-3 py-2">#</td>
-                <td class="px-5">Danh mục</td>
+                <td class="px-3">Danh mục</td>
                 <td class="px-5">Slug</td>
                 <td class="px-3 text-center">Trạng thái</td>
                 <td class="px-3">Cập nhật trạng thái</td>
@@ -14,8 +17,18 @@
             </tr>
             @foreach ($categories as $item)
                 <tr class="dark:text-gray-300 border-b border-gray-500/20 dark:hover:bg-[#292929] hover:bg-[#f5f5f5]">
+                    <td class="px-3 py-4">
+                        @if (!in_array($item->id,[1,2]))
+                            <input type="checkbox" name="categories_id[]" value="{{ $item->id }}" form="form_action_categories"
+                            {{ in_array($item->id, (array) old('categories')) ? 'checked' : '' }}
+                            class="check_single rounded-[3px] mb-[2px]">
+                        @else
+                            ---
+                        @endif
+                        
+                    </td>
                     <td class="px-3"> {{ $loop->iteration }}</td>
-                    <td class="px-5 py-4">
+                    <td class="px-3 py-4">
                         @if ($item->level == 0)
                             <div class="w-[150px] flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -29,7 +42,7 @@
                             </div>
                         @else
                             <div class="w-[150px] flex items-center">
-                                <span class="shrink-0 mr-2">└</span>
+                                <span class="shrink-0 ml-1 mr-2">└</span>
                                 <div class="flex-1 min-w-0 truncate">
                                     {{ $item->name }}
                                 </div>
@@ -55,7 +68,15 @@
                         </x-table.select>
                     </td>
                     <td class="px-3">{{ $item->created_at->format('d/m/Y') }}</td>
-                    <td class="px-3">{{ $item->user ? $item->user->name : ' Không xác định !' }}</td>
+                    <td class="px-3">
+                        @if ($item->user)
+                            <div class="w-[70px] line-clamp-1">
+                                {{ $item->user->name }}
+                            </div>
+                        @else
+                            <x-table.unknow/>
+                        @endif
+                    </td>
                     <td>
                         @if (!in_array($item->id,[1,2]))
                             <div class="flex gap-4 justify-center">
@@ -63,7 +84,7 @@
                                     id="{{ $item->id }}" type="categories" />
                                 <x-table.button-delete
                                     route="{{ route('admin.' . $type . 's.categories.destroy', $item->id) }}"
-                                    confirm="Bạn có chắc muốn xóa danh mục ({{ $item->name }}), Lưu ý Cấp danh mục trước khi xóa" />
+                                    confirm="Bạn có chắc muốn xóa danh mục ({{ $item->name }}), Lưu ý Cấp danh mục trước khi xóa, nếu có danh mục con, tất cả sẽ được dời sang danh mục (Lưu trữ)" />
                             </div>
                         @else
                             <div class="text-center">----------</div>

@@ -1,5 +1,7 @@
+@props(['form' => '']) 
  <button
-     {{ $attributes->merge(['type' => 'submit', 'class' => 'flex justify-center items-center gap-1 md:py-1 text-gray-900 bg-gray-300 hover:bg-gray-400/70 rounded-md shadow-sm text-sm px-3 py-[7px]']) }}>
+     {{ $attributes->merge(['type' => 'submit', 'class' => 'flex justify-center items-center gap-1 md:py-1 text-gray-900 bg-gray-300 hover:bg-gray-400/70 rounded-md shadow-sm text-sm px-3 py-[7px]']) }}
+     form="{{ $form != '' ? $form : '' }}">
      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
          class="size-5">
          <path stroke-linecap="round" stroke-linejoin="round"

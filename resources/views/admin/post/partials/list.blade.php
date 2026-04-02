@@ -1,7 +1,7 @@
 @if ($posts->count() > 0)
     <div
         class="bg-white dark:bg-[#1e1f20] shadow-md mt-3 py-3 px-5 rounded-md text-sm overflow-x-auto md:overflow-visible">
-        <table class="min-w-[1000px] md:w-full">
+        <table class="min-w-[1200px] md:w-full">
 
             <tr class="dark:text-gray-300">
                 <td class="px-3 py-2">
@@ -77,7 +77,7 @@
                         <div class="flex justify-center items-center gap-2 h-full">
                             <x-table.button-edit button="edit-post" module="posts" id="{{ $post->id }}" />
                             <x-table.button-delete route="{{ route('admin.posts.destroy',$post->id) }}"
-                                confirm="Bạn có chắc muốn xóa bài viết này ra khỏi hệ thống ?" />
+                                confirm="Bạn có chắc muốn xóa bài viết ({{ $post->title }}) ra khỏi hệ thống ?" />
                         </div>
                     </td>
                 </tr>

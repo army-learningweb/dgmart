@@ -10,7 +10,7 @@ class ValidationController extends Controller
         $request->validate([
             'email' => 'nullable|email|max:255',
             'password' => 'nullable|min:8|max:255|regex:/^[a-zA-Z0-9!@#$%^&*_-]+$/',
-            'name' => 'nullable|min:2|max:255|regex:/^[\p{L}\p{N}\s]+$/u',
+            'name' => 'nullable|min:2|max:255|regex:/^[\p{L}\p{N}\p{P}\s]+$/u',
             'desc' => 'nullable|min:2|max:255|regex:/^[\p{L}\p{N}\p{P}\p{S}\s]+$/u',
             'title' => 'nullable|min:8|max:255|regex:/^[\p{L}\p{N}\p{P}\p{S}\s]+$/u',
         ]);

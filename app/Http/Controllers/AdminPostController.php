@@ -22,35 +22,42 @@ class AdminPostController extends Controller
     // thêm
     function store(Request $request)
     {  
+
         $request->validate([
             'title' => 'required|min:8|max:255|regex:/^[\p{P}\p{L}\p{S}\p{N}\s]+$/u',
             'desc' => 'required|min:2|max:255|regex:/^[\p{P}\p{L}\p{S}\p{N}\s]+$/u',
             'category_id' => 'required|exists:categories,id',
+            'file' => 'required'
         ]);
+        
+        // $new_post = Post::create([
+        //     'title' => $request->input('title'),
+        //     'desc' => $request->input('desc'),
+        //     'content' => $request->input('content'),
+        //     'category_id' => $request->input('category_id'),
+        //     'user_id' => Auth::user()->id
+        // ]);
 
-        $new_post = Post::create([
-            'title' => $request->input('title'),
-            'desc' => $request->input('desc'),
-            'content' => $request->input('content'),
-            'category_id' => $request->input('category_id'),
-            'user_id' => Auth::user()->id
-        ]);
+        // Media::where('id', $request->input('post_file_id'))->update(['object_id' => $new_post->id]);
 
-        Media::where('id', $request->post_file_id)->update(['object_id' => $new_post->id]);
-        session()->forget($request->session);
-        session()->forget("{$request->session}_id");
+        // session()->forget($request->input('session'));
+        // session()->forget("{$request->input('session')}_id");
 
-        return back()->with('status', 'Tạo mới thành công');
+        // return back()->with('status', 'Tạo mới thành công');
     }
 
     // xóa
     function destroy(Post $post)
     {
         $file_path = Media::where('object_id', $post->id)->first();
-        if (file_exists($file_path->url)) File::delete($file_path->url);
-        Media::where('object_id', $post->id)->delete();
-        $post->delete();
+        
+        if(isset($file_path->url)){
+            if (file_exists($file_path->url)) File::delete($file_path->url);
+            Media::where('object_id', $post->id)->delete();
+        }
 
+        $post->delete();
+        
         return back()->with('status', 'Xóa thành công');
     }
 }

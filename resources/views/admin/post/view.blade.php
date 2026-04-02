@@ -6,11 +6,10 @@
 
     {{-- modal create --}}
     <x-modal-dial.modal-create modal="create-post" title="Tạo mới bài viết" button_create="Tạo mới"
-        route="{{ route('admin.posts.store') }}" width="w-[1100px]" height="h-[600px]">
+        route="{{ route('admin.posts.store') }}" width="w-[1100px]" variant="md:h-[500px] p-2">
 
-        <div class="flex flex-col md:flex-row gap-4">
-
-            <div class="flex-1">
+        <div class="flex gap-2">
+            <div class="md:w-[70%]">
                 <div class="mt-2">
                     <x-form-element.text-area label="Tiêu đề" name="title" id="title" required="*" />
                 </div>
@@ -18,30 +17,24 @@
                 <div class="mt-2">
                     <x-form-element.text-area label="Mô tả" name="desc" id="desc" required="*" />
                 </div>
-
-                <div class="mt-2">
-                    <x-forms.tinymce-editor id="post-content" name="content" />
-                </div>
-
             </div>
-
-            <div>
-                <x-form-element.file name="post_file" type="post"/>
-                
-                <div class="mt-2">
+            <div class="md:flex-1">
+                <x-form-element.file name="post-file" type="post"/>
+                <div class="mt-1">
                     <x-form-element.select label="Danh mục bài viết" id="category_id" name="category_id"
                         class="mt-1 border-gray-500/30 md:w-full">
                         <option value="">Chọn danh mục</option>
                         @include('admin.post.partials.parent_categories')
                     </x-form-element.select>
                 </div>
-
             </div>
+        </div>
 
+        <div class="mt-2">
+            {{-- <x-forms.tinymce-editor id="post-content" name="content" /> --}}
         </div>
 
         <input type="hidden" name="modal" value="create">
-        <input type="hidden" name="session" value="post_file">
     </x-modal-dial.modal-create>
 
     {{-- modal edit --}}
@@ -68,9 +61,7 @@
 
     {{-- ============================== --}}
     <div class="py-4 h-[500px] border-t border-gray-500/50 border-dashed">
-
         <div class="flex items-center justify-between">
-
             <div class="flex items-center justify-between gap-2 w-full md:w-auto">
 
                 {{-- title --}}
@@ -107,7 +98,7 @@
                             </option>
                         </x-form-element.select>
 
-                        <x-button.button-action class="w-[40%]"/>
+                        <x-button.button-action class="w-[40%]" />
                     </div>
 
                     {{-- filter --}}
@@ -142,6 +133,5 @@
                 </div>
             </form>
         </div>
-
     </div>
 </x-app-layout>

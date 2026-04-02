@@ -24,12 +24,9 @@
                 <tr>
                     <td class="py-2" colspan="6"></td>
                 </tr>
-                @php
-                    $num = 1;
-                @endphp
                 @foreach ($permissions as $permission)
                    <tr class="dark:text-gray-300 dark:hover:bg-[#292929] hover:bg-[#f5f5f5]">
-                        <td class="px-5 py-1">{{ $num++ }}</td>
+                        <td class="px-5 py-1">{{ $loop->iteration }}</td>
                         <td class="px-5 py-1">
                             <div class="w-[100px] truncate">
                                  {{ $permission->name }}

@@ -32,7 +32,7 @@ class AdminCategoryController extends Controller
         ]);
 
         $request->validate([
-            'name' => 'required|min:2|max:255|regex:/^[\p{L}\p{N}\s]+$/u|unique:categories,name',
+            'name' => 'required|min:2|max:255|regex:/^[\p{L}\p{N}\p{P}\s]+$/u|unique:categories,name',
             'slug' => 'required|min:2|max:255|unique:categories,slug',
         ]);
 
@@ -94,7 +94,7 @@ class AdminCategoryController extends Controller
     {
 
         $request->validate([
-            'name' => 'required|min:2|max:255|regex:/^[\p{L}\p{N}\s]+$/u|unique:categories,name,' . $request->input('id'),
+            'name' => 'required|min:2|max:255|regex:/^[\p{L}\p{N}\p{P}\s]+$/u|unique:categories,name,' . $request->input('id'),
             'slug' => 'required|min:2|max:255|unique:categories,slug,' . $request->input('id')
         ]);
 
@@ -133,5 +133,20 @@ class AdminCategoryController extends Controller
         
         $category->delete();
         return back()->with('status','Xóa thành công');
+    }
+
+    // hành động
+    function action(Request $request){
+        
+        $action = $request->input('action');
+        $category_id = $request->input('categories_id');
+
+        if(!$action) return back()->withInput()->with('status_failed','Thất bại, bạn chưa chọn hành động !');
+        if(!$category_id) return back()->withInput()->with('status_failed','Hành động thất bại, bạn chưa chọn danh mục !');
+
+
+        Category::whereIn('id',$category_id)->update(['status'=>$action,'updated_at'=>now()]);
+
+        return back()->with('status','Thực hiện hành động thành công');
     }
 }
