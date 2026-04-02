@@ -42,8 +42,8 @@ class AdminFileController extends Controller
                 'user_id' => Auth::user()->id
             ]);
 
-            $request->session()->put($request->name,asset("$uploads_path/ $fullname"));
-            $request->session()->put("{$request->name}_id",$new_img->id);
+            $request->session()->put($request->name,asset("$uploads_path/$fullname"));
+            $request->session()->put("{$request->name}-id",$new_img->id);
             
             $data = [
                 'id' => $new_img->id,
@@ -56,14 +56,17 @@ class AdminFileController extends Controller
 
     // xóa
     function remove(Request $request){
-        // $id = $request->id;
-        // $name = $request->name;
+        $id = $request->id;
+        $name = $request->name;
 
-        // $path = Media::find($id)->pluck('url')[0];
-        // File::delete($path);
-        // Media::find($id)->delete();
+        $path = Media::where('id',$id)->value('url');
+        if(isset($path)){
+            File::delete($path);
+        }
 
-        // session()->forget($request->name);
-        // session()->forget("{$request->name}_id");
+        Media::find($id)->delete();
+
+        session()->forget($name);
+        session()->forget("{$name}-id");
     }
 }

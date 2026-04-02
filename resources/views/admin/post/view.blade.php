@@ -6,7 +6,7 @@
 
     {{-- modal create --}}
     <x-modal-dial.modal-create modal="create-post" title="Tạo mới bài viết" button_create="Tạo mới"
-        route="{{ route('admin.posts.store') }}" width="w-[1100px]" variant="md:h-[500px] p-2">
+        route="{{ route('admin.posts.store') }}" width="w-[1100px]" variant="md:h-[500px] p-2 overflow-y-auto ">
 
         <div class="flex gap-2">
             <div class="md:w-[70%]">
@@ -20,12 +20,14 @@
             </div>
             <div class="md:flex-1">
                 <x-form-element.file name="post-file" type="post"/>
+
                 <div class="mt-1">
-                    <x-form-element.select label="Danh mục bài viết" id="category_id" name="category_id"
-                        class="mt-1 border-gray-500/30 md:w-full">
+                    <label for="category_id">Danh mục bài viết <span class="text-red-500">*</span></label>
+                    <select name="category_id" id="category_id" class="mt-1 rounded-md py-[7px] md:py-[3px] text-sm shadow-sm border-gray-500/30 w-full">
                         <option value="">Chọn danh mục</option>
                         @include('admin.post.partials.parent_categories')
-                    </x-form-element.select>
+                    </select>
+                    <x-input-field.error_php name="category_id" />
                 </div>
             </div>
         </div>

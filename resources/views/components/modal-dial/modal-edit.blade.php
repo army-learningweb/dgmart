@@ -27,7 +27,7 @@
         <form action="{{ $route }}" method="post">
             @csrf
             <div
-                class="overflow-y-auto scrollbar-thumb-rounded-full scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent {{ $variant }}">
+                class="scrollbar-thumb-rounded-full scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent {{ $variant }}">
                 {{ $slot }}
             </div>
             <div class="mt-2 flex flex-col md:flex-row items-center justify-end gap-2">

@@ -29,5 +29,6 @@ return [
         'title' => 'Tiêu đề',
         'category_id' => 'Danh mục',
         'file' => 'File',
+        'post-file-id' => 'Ảnh bài viết'
     ]
 ];
