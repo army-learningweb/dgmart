@@ -24,7 +24,7 @@ class AdminUserController extends Controller
 
         $request->validate([
             'name' => 'required|min:2|max:255|regex:/^[\p{L}\s]+$/u',
-            'email' => 'required|email',
+            'email' => 'required|email|max:255',
             'password' => 'required|min:8|max:255|regex:/^[a-zA-Z0-9!@#$%^&*_-]+$/u|confirmed'
         ]);
 
@@ -41,8 +41,8 @@ class AdminUserController extends Controller
     function destroy(User $user)
     {
         if($user->id == Auth::user()->id) return back()->with('status_failed','Xóa thành viên thất bại');
-        User::find($user->id)->delete();
-        return back()->with('status', 'Xóa thành viên thành công');
+        $user->delete();
+        return back()->with('status', 'Xóa thành công');
     }
 
     // cập nhật
@@ -61,7 +61,7 @@ class AdminUserController extends Controller
             if($request->id == Auth::user()->id) return back()->with('status_failed','Cập nhật thông tin thất bại');
 
             $request->validate([
-                'name' => 'required|min:2|regex:/^[\p{L}\s0-9]+$/u'
+                'name' => 'required|min:2|max:255|regex:/^[\p{L}\s0-9]+$/u'
             ]);
 
             User::find($request->input('id'))->update([
@@ -82,7 +82,7 @@ class AdminUserController extends Controller
             ]);
         }
 
-        return back()->with('status','Cập nhật thông tin thành công');
+        return back()->with('status','Cập nhật thành công');
     }
 
     // Lọc + tìm kiếm
@@ -105,7 +105,6 @@ class AdminUserController extends Controller
             $users = User::where('status',$filter_value)->where('name','like','%'.$search_value.'%')->get();
         }
 
-       
         $view = view('admin.user.partials.list',compact('users'))->render();
         return response()->json($view);
     }
@@ -137,8 +136,8 @@ class AdminUserController extends Controller
     function action(Request $request){
 
         $action = $request->input('action');
-        $user_id = $request->user_id;
-
+        $user_id = $request->input('user_id');
+        
         if(!$action) return back()->withInput()->with('status_failed','Thất bại, bạn chưa chọn hành động !');
         if(!$user_id) return back()->withInput()->with('status_failed','Hành động thất bại, bạn chưa chọn User !');
 

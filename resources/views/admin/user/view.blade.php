@@ -8,19 +8,19 @@
     <x-modal-dial.modal-create modal="create-user" title="Tạo mới thành viên" button_create="Tạo mới"
         route="{{ route('admin.users.store') }}">
         <div class="mt-2">
-            <x-input-field.field id="name" label="Họ tên" type="text" name="name" required="*" />
+            <x-input-field.field id="create_name" label="Họ tên" type="text" name="name" required="*" />
         </div>
 
         <div class="mt-2">
-            <x-input-field.field id="email" label="Email" type="text" name="email" required="*" />
+            <x-input-field.field id="create_email" label="Email" type="text" name="email" required="*" />
         </div>
 
         <div class="mt-2">
-            <x-input-field.field id="password" label="Mật khẩu" type="password" name="password" required="*" />
+            <x-input-field.field id="create_password" label="Mật khẩu" type="password" name="password" required="*" />
         </div>
 
         <div class="mt-2">
-            <x-input-field.field id="password_confirmation" label="Xác nhận mật khẩu" type="password"
+            <x-input-field.field id="create_password_confirmation" label="Xác nhận mật khẩu" type="password"
                 name="password_confirmation" required="*" />
         </div>
 
@@ -31,20 +31,20 @@
     <x-modal-dial.modal-edit modal="edit-user" title="Cập nhật thông tin thành viên" button_edit="Cập nhật"
         route="{{ route('admin.users.update') }}">
         <div class="mt-2">
-            <x-input-field.field id="name" label="Họ tên" type="text" name="name" required="*" />
+            <x-input-field.field id="edit_name" label="Họ tên" type="text" name="name" required="*" />
         </div>
 
         <div class="mt-2">
-            <x-input-field.field id="email" label="Email" type="text" name="email" required="*"
+            <x-input-field.field id="edit_email" label="Email" type="text" name="email" required="*"
                 readonly="readonly" class="dark:bg-red-400" />
         </div>
 
         <div class="mt-2">
-            <x-input-field.field id="password" label="Mật khẩu mới" type="password" name="password" />
+            <x-input-field.field id="edit_password" label="Mật khẩu mới" type="password" name="password" />
         </div>
 
         <div class="mt-2">
-            <x-input-field.field id="password_confirmation" label="Xác nhận mật khẩu" type="password"
+            <x-input-field.field id="edit_password_confirmation" label="Xác nhận mật khẩu" type="password"
                 name="password_confirmation" />
         </div>
 
@@ -53,11 +53,9 @@
     </x-modal-dial.modal-edit>
 
     <div class="py-4 h-[500px] border-t border-gray-500/50 border-dashed">
-
         <div class="flex items-center justify-between">
-
             <div class="flex items-center justify-between gap-2 w-full md:w-auto">
-                
+
                 {{-- title --}}
                 <div class="text-lg"> Danh sách thành viên </div>
 
@@ -73,16 +71,15 @@
 
             {{-- statis module --}}
             <div class="hidden md:block">
-                <x-statis.statis-module module="users" total="0" active="0" unactive="0" />
+                <x-statis.statis-module module="users" total="{{ $total }}" active="{{ $active }}"
+                    unactive="{{ $unactive }}" />
             </div>
         </div>
 
         <div class="mt-2">
-            <form action="{{ route('admin.users.action') }}" method="post">
+            <form action="{{ route('admin.users.action') }}" method="POST">
                 @csrf
-
                 <div class="flex flex-col md:flex-row justify-between gap-2">
-
                     {{-- action --}}
                     <div class="flex gap-2 items-center justify-between w-full md:w-auto md:order-1 order-2">
                         <x-form-element.select name="action" class="flex-1">
@@ -92,7 +89,7 @@
                             </option>
                         </x-form-element.select>
 
-                        <x-button.button-action class="w-[40%]"/>
+                        <x-button.button-action class="w-[40%]" />
                     </div>
 
                     {{-- filter --}}
@@ -100,23 +97,23 @@
 
                         {{-- search --}}
                         <div>
-                            <x-form-element.search placeholder="Tìm kiếm theo tên..." name="search-user"
-                                module="users" class="search" />
+                            <x-form-element.search placeholder="Tìm kiếm theo tên..." name="search-user" module="users"
+                                class="search" />
                         </div>
 
-                            {{-- status --}}
-                            <div>
-                                <x-form-element.select name="user-filter" module="users" class="select-filter py-1">
-                                    <option value="">Lọc theo trạng thái</option>
-                                    <option value="active">Hoạt động</option>
-                                    <option value="unactive">Vô hiệu hóa</option>
-                                </x-form-element.select>
-                            </div>
+                        {{-- status --}}
+                        <div>
+                            <x-form-element.select name="user-filter" module="users" class="select-filter py-1">
+                                <option value="">Lọc theo trạng thái</option>
+                                <option value="active">Hoạt động</option>
+                                <option value="unactive">Vô hiệu hóa</option>
+                            </x-form-element.select>
+                        </div>
 
-                            {{-- reset --}}
-                            <div class="hidden md:block">
-                                <x-button.button-reset />
-                            </div>
+                        {{-- reset --}}
+                        <div class="hidden md:block">
+                            <x-button.button-reset />
+                        </div>
 
                     </div>
                 </div>

@@ -5,6 +5,7 @@
     'button_create', 
     'width' => '',
     'height' => '',
+    'enctype' => '',
 ])
 
 <div
@@ -34,7 +35,7 @@
         {{-- form --}}
         <div>
 
-            <form action="{{ $route }}" method="post" enctype="multipart/form-data">
+            <form action="{{ $route }}" method="post" enctype="{{$enctype}}">
                 @csrf
 
                 {{ $slot }}

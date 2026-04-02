@@ -16,6 +16,7 @@ export default function modal(){
             $(this).find('input').not('[name="_token"], [type="hidden"], [type="checkbox"]').val('').attr('value','');
             $(this).find('input[type=checkbox]').prop('checked',false); 
             $(this).find('select[name=parent_category]').val('');
+            $(this).find('textarea').val('');
             $(this).find('.error').html(``);
         })
         $('div.error').html(``); 

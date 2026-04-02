@@ -24,8 +24,8 @@ class AdminRoleController extends Controller
     // thêm
     function store(Request $request){
         $request->validate([
-            'name' => 'required|min:2|max:255|unique:roles,name',
-            'desc' => 'required|min:2|max:255|',
+            'name' => 'required|min:2|max:255|regex:/^[a-zA-Z\s]+$/|unique:roles,name',
+            'desc' => 'required|min:2|max:255|regex:/^[\p{L}\s]+$/u',
         ]);
 
         if(!$request->permission_id) return back()->with('status_failed','Tạo mới thất bại, bạn chưa chọn quyền');
@@ -37,13 +37,13 @@ class AdminRoleController extends Controller
 
         $role->permissions()->attach($request->permission_id);
 
-        return back()->with('status','Tạo vai trò thành công');
+        return back()->with('status','Tạo mới thành công');
     }
 
     // xóa
     function destroy(Role $role){
-        Role::where('id',$role->id)->delete();
-        return back()->with('status','Xóa vai trò thành công');
+        $role->delete();
+        return back()->with('status','Xóa thành công');
     }
 
     // Cập nhật
@@ -65,8 +65,8 @@ class AdminRoleController extends Controller
         $request->session()->put('role_id',$request->id);
 
         $request->validate([
-            'name' => 'required|min:2|max:255|unique:roles,name,'.$request->id,
-            'desc' => 'required',
+            'name' => 'required|min:2|max:255|regex:/^[a-zA-Z\s]+$/|unique:roles,name,'.$request->id,
+            'desc' => 'required|min:2|max:255|regex:/^[\p{L}\s]+$/u',
         ]);
 
         if(!$request->permission_id) return back()->with('status_failed','Cập nhật thất bại, bạn chưa chọn quyền');
@@ -80,6 +80,6 @@ class AdminRoleController extends Controller
 
         $role->permissions()->sync($request->permission_id);
 
-        return back()->with('status','Cập nhật thông tin thành công');
+        return back()->with('status','Cập nhật thành công');
     }
 }

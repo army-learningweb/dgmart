@@ -6,7 +6,7 @@
 
     {{-- modal create --}}
     <x-modal-dial.modal-create modal="create-{{ $type }}-category" title="Tạo mới danh mục" button_create="Tạo mới"
-        route="{{ route('admin.' . $type . 's.categories.store') }}">
+        route="{{ route('admin.' . $type . 's.categories.store') }}" width="w-[400px]">
 
         <div class="mt-2">
             <x-input-field.field id="name" label="Tên danh mục" type="text" name="name" required="*" />
@@ -33,7 +33,7 @@
 
     {{-- modal edit --}}
     <x-modal-dial.modal-edit modal="edit-category" title="Cập nhật thông tin danh mục" button_edit="Cập nhật"
-        route="{{ route('admin.' . $type . 's.categories.update') }}">
+        route="{{ route('admin.' . $type . 's.categories.update') }}" width="w-[400px]">
         <div class="mt-2">
             <x-input-field.field id="name" label="Tên danh mục" type="text" name="name" required="*" />
         </div>
@@ -64,6 +64,7 @@
     <div class="dark:bg-[#18181b] py-4 h-[500px] border-t border-gray-500/50 border-dashed">
         <div class="flex flex-col md:flex-row gap-2 md:items-center md:justify-between">
             <div class="flex items-center justify-between gap-2">
+
                 {{-- title --}}
                 <div class="text-lg"> {{ $type == 'post' ? 'Danh mục bài viết' : 'Danh mục sản phẩm' }}</div>
 
@@ -86,27 +87,11 @@
 
         {{-- action --}}
         <div class="mt-2">
-            <form action="{{ route("admin.{$type}s.categories.action") }}" method="post">
-                @csrf
-               
-
-                    <div class="flex items-center justify-between md:justify-normal gap-2">
-                        <x-form-element.select name="action" class="">
-                            <option value="">Hành động hàng loạt</option>
-                            <option value="active" {{ old('action') == 'active' ? 'selected' : '' }}>Hoạt động</option>
-                            <option value="unactive" {{ old('action') == 'unactive' ? 'selected' : '' }}>Vô hiệu hóa
-                            </option>
-                        </x-form-element.select>
-
-                        <x-button.button-action class="w-[60%] md:w-auto" />
-                    </div>
-               
-
-                {{-- list --}}
-                <div class="list-{{ $type . 's' }}-categories pb-5">
-                    @include('admin.category.partials.list-categories')
-                </div>
-            </form>
+            {{-- list --}}
+            <div class="list-{{ $type . 's' }}-categories pb-5">
+                @include('admin.category.partials.list-categories')
+            </div>
         </div>
+
     </div>
 </x-app-layout>

@@ -40,7 +40,7 @@ class AdminPostController extends Controller
         session()->forget($request->session);
         session()->forget("{$request->session}_id");
 
-        return back()->with('status', 'Tạo mới bài viết thành công');
+        return back()->with('status', 'Tạo mới thành công');
     }
 
     // xóa
@@ -51,6 +51,6 @@ class AdminPostController extends Controller
         Media::where('object_id', $post->id)->delete();
         $post->delete();
 
-        return back()->with('status', 'Xóa bài viết thành công');
+        return back()->with('status', 'Xóa thành công');
     }
 }

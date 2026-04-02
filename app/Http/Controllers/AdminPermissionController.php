@@ -32,13 +32,13 @@ class AdminPermissionController extends Controller
             'desc' => $request->input('desc')
         ]);
 
-        return back()->with('status','Thêm quyền thành công');
+        return back()->with('status','Tạo mới thành công');
     }
 
     // xóa
     function destroy(Permission $permission){
-        Permission::find($permission->id)->delete();
-        return back()->with('status','Xóa quyền thành công');
+        $permission->delete();
+        return back()->with('status','Xóa thành công');
     }
 
     // Cập nhật
@@ -65,6 +65,6 @@ class AdminPermissionController extends Controller
         ]);
 
         $request->session()->forget('user_id');
-        return back()->with('status','Cập nhật thông tin thành công');
+        return back()->with('status','Cập nhật thành công');
     }
 }

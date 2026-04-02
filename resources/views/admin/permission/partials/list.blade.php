@@ -30,9 +30,21 @@
                 @foreach ($permissions as $permission)
                    <tr class="dark:text-gray-300 dark:hover:bg-[#292929] hover:bg-[#f5f5f5]">
                         <td class="px-5 py-1">{{ $num++ }}</td>
-                        <td class="px-5 py-1">{{ $permission->name }}</td>
-                        <td class="px-5 py-1">{{ $permission->desc }}</td>
-                        <td class="px-5 py-1">{{ $permission->slug }}</td>
+                        <td class="px-5 py-1">
+                            <div class="w-[100px] truncate">
+                                 {{ $permission->name }}
+                            </div>
+                        </td>
+                        <td class="px-5 py-1">
+                            <div class="w-[150px] truncate">
+                                {{ $permission->desc }}
+                            </div>
+                        </td>
+                        <td class="px-5 py-1">
+                            <div class="w-[100px] truncate">
+                                {{ $permission->slug }}
+                            </div>
+                        </td>
                         <td class="px-3 py-1">{{ $permission->created_at->format('d/m/Y') }}</td>
                         <td class="px-3 py-1 text-center flex justify-center items-center gap-2">
                             <x-table.button-edit button="edit-permission" module="permissions" id="{{ $permission->id }}" />

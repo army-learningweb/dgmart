@@ -32,7 +32,7 @@ class AdminCategoryController extends Controller
         ]);
 
         $request->validate([
-            'name' => 'required|min:2|max:100|regex:/^[\p{L}\p{N}\s]+$/u|unique:categories,name',
+            'name' => 'required|min:2|max:255|regex:/^[\p{L}\p{N}\s]+$/u|unique:categories,name',
             'slug' => 'required|min:2|max:255|unique:categories,slug',
         ]);
 
@@ -109,7 +109,6 @@ class AdminCategoryController extends Controller
         $current_id = Category::where('id',$request->input('id'))->pluck('id')[0];
         if($current_id == $request->input('parent_category')) return back()->with('status_failed','Không thể chọn chính danh mục này');
 
-        
         Category::where('id', $request->input('id'))->update([
             'name' => $request->input('name'),
             'slug' => $slug,
@@ -132,22 +131,7 @@ class AdminCategoryController extends Controller
             Category::whereIn('id',$child_categories_id)->update(['parent_id' => $safe_category_id, 'updated_at' => now()]);
         }
         
-        Category::find($category->id)->delete();
-        return back()->with('status','Xóa danh mục thành công');
-    }
-
-    // hành động
-    function action(Request $request){
-
-        $action = $request->input('action');
-        $category_id = $request->category_id;
-
-        if(!$action) return back()->withInput()->with('status_failed','Thất bại, bạn chưa chọn hành động !');
-        if(!$category_id) return back()->withInput()->with('status_failed','Hành động thất bại, bạn chưa chọn danh mục !');
-
-
-        Category::whereIn('id',$category_id)->update(['status'=>$action,'updated_at'=>now()]);
-
-        return back()->with('status','Thực hiện hành động thành công');
+        $category->delete();
+        return back()->with('status','Xóa thành công');
     }
 }
