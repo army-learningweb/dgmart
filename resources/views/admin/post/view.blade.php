@@ -6,9 +6,9 @@
 
     {{-- modal create --}}
     <x-modal-dial.modal-create modal="create-post" title="Tạo mới bài viết" button_create="Tạo mới"
-        route="{{ route('admin.posts.store') }}" width="w-[1100px]" variant="md:h-[500px] p-2 overflow-y-auto ">
+        route="{{ route('admin.posts.store') }}" width="md:w-[1100px]" variant="h-90vh md:max-h-[500px] p-2 overflow-y-auto">
 
-        <div class="flex gap-2">
+        <div class="md:flex gap-2">
             <div class="md:w-[70%]">
                 <div class="mt-2">
                     <x-form-element.text-area label="Tiêu đề" name="title" id="title" required="*" />
@@ -19,11 +19,15 @@
                 </div>
             </div>
             <div class="md:flex-1">
-                <x-form-element.file name="post-file" type="post"/>
+                <div>
+                    <x-form-element.file name="post-file" type="post" />
+                </div>
+                
 
                 <div class="mt-1">
                     <label for="category_id">Danh mục bài viết <span class="text-red-500">*</span></label>
-                    <select name="category_id" id="category_id" class="mt-1 rounded-md py-[7px] md:py-[3px] text-sm shadow-sm border-gray-500/30 w-full">
+                    <select name="category_id" id="category_id"
+                        class="mt-1 rounded-md py-[7px] md:py-[3px] text-sm shadow-sm border-gray-500/30 w-full">
                         <option value="">Chọn danh mục</option>
                         @include('admin.post.partials.parent_categories')
                     </select>
@@ -40,26 +44,41 @@
     </x-modal-dial.modal-create>
 
     {{-- modal edit --}}
-    {{-- <x-modal-dial.modal-edit modal="edit-user" title="Cập nhật thông tin thành viên" button_edit="Cập nhật thông tin" route="{{ route('admin.users.update') }}">
-        <div class="mt-2">
-            <x-input-field.field id="name" label="Họ tên" type="text" name="name" required="*"/>
+    <x-modal-dial.modal-edit modal="edit-post" title="Cập nhật thông tin bài viết" button_edit="Cập nhật"
+        route="{{ route('admin.posts.update') }}" width="w-[1100px]" variant="md:h-[500px] p-2 overflow-y-auto ">
+
+        <div class="flex gap-2">
+            <div class="md:w-[70%]">
+                <div class="mt-2">
+                    <x-form-element.text-area label="Tiêu đề" name="title" id="title" required="*" />
+                </div>
+
+                <div class="mt-2">
+                    <x-form-element.text-area label="Mô tả" name="desc" id="desc" required="*" />
+                </div>
+            </div>
+            <div class="md:flex-1">
+                <x-form-element.file name="post-file" type="post" />
+                
+                <div class="mt-1">
+                    <label for="category_id">Danh mục bài viết <span class="text-red-500">*</span></label>
+                    <select name="category_id" id="category_id"
+                        class="mt-1 rounded-md py-[7px] md:py-[3px] text-sm shadow-sm border-gray-500/30 w-full">
+                        <option value="">Chọn danh mục</option>
+                        @include('admin.post.partials.parent_categories')
+                    </select>
+                    <x-input-field.error_php name="category_id" />
+                </div>
+            </div>
         </div>
 
         <div class="mt-2">
-            <x-input-field.field id="email" label="Email" type="text" name="email" required="*" readonly="readonly" class="dark:bg-red-400"/>
+            {{-- <x-forms.tinymce-editor id="post-content" name="content" /> --}}
         </div>
 
-        <div class="mt-2">
-            <x-input-field.field id="password" label="Mật khẩu mới" type="password" name="password" />
-        </div>
-
-        <div class="mt-2">
-            <x-input-field.field id="password_confirmation" label="Xác nhận mật khẩu" type="password" name="password_confirmation" />
-        </div>
-
-        <input type="hidden" name="user_id" value="">
+        <input type="hidden" name="id" value="{{ old('id') }}">
         <input type="hidden" name="modal" value="edit">
-    </x-modal-dial.modal-edit> --}}
+    </x-modal-dial.modal-edit>
 
     {{-- ============================== --}}
     <div class="py-4 h-[500px] border-t border-gray-500/50 border-dashed">
@@ -81,26 +100,25 @@
 
             {{-- statis module --}}
             <div class="hidden md:block">
-                <x-statis.statis-module module="posts" total="0" active="0" unactive="0" />
+                <x-statis.statis-module module="posts" total="{{ $total }}" publish="{{ $publish }}" unpublish="{{ $unpublish }}" draft="{{ $draft }}" />
             </div>
         </div>
 
         <div class="mt-2">
-            <form action="" method="post">
-                @csrf
-
+            <form action="{{ route('admin.posts.action') }}" method="post" id="form-post-action">@csrf</form>
                 <div class="flex flex-col md:flex-row justify-between gap-2">
 
                     {{-- action --}}
                     <div class="flex gap-2 items-center justify-between md:w-auto md:order-1 order-2">
-                        <x-form-element.select name="action" class="flex-1">
+                        <x-form-element.select name="action" class="flex-1" form="form-post-action">
                             <option value="">Hành động hàng loạt</option>
-                            <option value="active" {{ old('action') == 'active' ? 'selected' : '' }}>Hoạt động</option>
-                            <option value="unactive" {{ old('action') == 'unactive' ? 'selected' : '' }}>Vô hiệu hóa
+                            <option value="publish" {{ old('action') == 'publish' ? 'selected' : '' }}>Công khai</option>
+                            <option value="unpublish" {{ old('action') == 'unpublish' ? 'selected' : '' }}>Tạm ngưng
+                            <option value="destroy" {{ old('action') == 'destroy' ? 'selected' : '' }}>Xóa vĩnh viễn
                             </option>
                         </x-form-element.select>
 
-                        <x-button.button-action class="w-[40%]" />
+                        <x-button.button-action class="w-[40%]" form="form-post-action"/>
                     </div>
 
                     {{-- filter --}}
@@ -112,12 +130,21 @@
                                 module="posts" class="search" />
                         </div>
 
+                        {{-- category --}}
+                        <div>
+                            <x-form-element.select name="post-filter" module="posts" class="select-category py-1">
+                                <option value="">Lọc theo danh mục</option>
+                                @include('admin.post.partials.parent_categories')
+                            </x-form-element.select>
+                        </div>
+
                         {{-- status --}}
                         <div>
                             <x-form-element.select name="post-filter" module="posts" class="select-filter py-1">
                                 <option value="">Lọc theo trạng thái</option>
-                                <option value="active">Hoạt động</option>
-                                <option value="unactive">Vô hiệu hóa</option>
+                                <option value="publish">Công khai</option>
+                                <option value="unpublish">Tạm ngưng</option>
+                                <option value="draft">Bản nháp</option>
                             </x-form-element.select>
                         </div>
 
@@ -133,7 +160,6 @@
                 <div class="list-posts pb-5">
                     @include('admin.post.partials.list')
                 </div>
-            </form>
         </div>
     </div>
 </x-app-layout>

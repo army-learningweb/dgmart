@@ -43,5 +43,12 @@ export default function file() {
             data: data,
             dataType: "json"
         });
-    })
+    });
+
+    $(document).on("click",".fake-remove-file",function(){
+        let name = $(this).data('name')  
+        $(`.${name}-img`).attr('src','').addClass('hidden');
+        $(`input[name=old-${name}-id]`).val('')
+        $(this).addClass('hidden')
+    });
 }

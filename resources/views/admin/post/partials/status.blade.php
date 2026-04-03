@@ -1,0 +1,1 @@
+{!! post_status($status_value) !!}

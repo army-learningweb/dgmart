@@ -6,7 +6,7 @@ export default function editModal() {
         let id = $(this).data("id");
         let data = { id: id };
         let type = $(this).data("type") ?? '';
-    
+        
         let url = ''
         if(type == 'categories'){
             url = `/admin/${module}/${type}/edit`
@@ -20,7 +20,7 @@ export default function editModal() {
             data: data,
             dataType: "json",
             success: function (data) {
-
+                
                 const modal = $(".modal-" + modal_name);
                 const inputs = {
                     name: modal.find("input[name=name]"),
@@ -28,38 +28,50 @@ export default function editModal() {
                     slug: modal.find("input[name=slug]"),
                     id : modal.find("input[name=id]"),
                     textarea_desc : modal.find("textarea[name=desc]"),
+                    textarea_title : modal.find("textarea[name=title]")
+                }
+
+                // post module
+                if(module == 'posts' && !type){
+                    inputs.textarea_title.val(data.post_info.title);
+                    inputs.textarea_desc.val(data.post_info.desc);
+                    inputs.id.val(data.post_info.id);
+                    modal.find('img').attr('src',data.img_url).removeClass('hidden');
+                    modal.find('input[name=old-post-file-id]').val(data.old_post_file_id);
+                    modal.find(`option[value=${data.post_info.category_id}]`).prop('selected',true);
+                    modal.find('.fake-remove-file').removeClass('hidden');
                 }
                 
                 // categories
                 if ((module == 'posts' || module == 'products') && type == 'categories'){
-                    inputs.name.val(data.name)
-                    inputs.slug.val(data.slug)
-                    inputs.id.val(data.id)
-                    modal.find(`option[value=${data.parent_id}]`).prop('selected',true)
-                    modal.find('.select-parent-category').prop('disabled',data.parent_id == 0)
-                    modal.find('input[name=is_parent]').val(data.parent_id)
+                    inputs.name.val(data.name);
+                    inputs.slug.val(data.slug);
+                    inputs.id.val(data.id);
+                    modal.find(`option[value=${data.parent_id}]`).prop('selected',true);
+                    modal.find('.select-parent-category').prop('disabled',data.parent_id == 0);
+                    modal.find('input[name=is_parent]').val(data.parent_id);
                 }        
                 
                 // user module
                 if (module == "users") {
-                    inputs.name.val(data.name)
-                    inputs.email.val(data.email)
-                    inputs.id.val(data.id)
+                    inputs.name.val(data.name);
+                    inputs.email.val(data.email);
+                    inputs.id.val(data.id);
                 }
 
                 // permission module
                 if (module == 'permissions'){
-                    inputs.name.val(data.name)
-                    inputs.slug.val(data.slug)
-                    inputs.textarea_desc.val(data.desc)
-                    inputs.id.val(data.id)
+                    inputs.name.val(data.name);
+                    inputs.slug.val(data.slug);
+                    inputs.textarea_desc.val(data.desc);
+                    inputs.id.val(data.id);
                 }
 
                 // role module
                 if (module == 'roles'){
-                    inputs.name.val(data.role.name)
-                    inputs.textarea_desc.val(data.role.desc)
-                    inputs.id.val(data.role.id)
+                    inputs.name.val(data.role.name);
+                    inputs.textarea_desc.val(data.role.desc);
+                    inputs.id.val(data.role.id);
                     data.permissions.forEach(permission_id => {
                         modal.find(`input[value=${permission_id}]`).prop('checked',true);
                     });

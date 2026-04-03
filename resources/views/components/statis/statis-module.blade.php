@@ -5,6 +5,7 @@
     'unactive' => '',
     'draft' => '',
     'publish' => '',
+    'unpublish' => '',
     'draft' => '',
     'pending' => '',
     'processing' => '',
@@ -51,11 +52,21 @@
         </div>
     @endif
 
+    @if ($unpublish != '')
+        <div class="flex items-center gap-2">
+            <div class="w-[8.5px] h-[8px] rounded-full bg-red-500"></div>
+            <div>
+                <span>Tạm ngưng</span>
+                <span class="unpublish-{{ $module }}">({{ $unpublish }})</span>
+            </div>
+        </div>
+    @endif
+
     @if ($draft != '')
         <div class="flex items-center gap-2">
             <div class="w-[8.5px] h-[8px] rounded-full bg-gray-500"></div>
             <div>
-                <span>Nháp</span>
+                <span>Bản nháp</span>
                 <span class="draft-{{ $module }}">({{ $draft }})</span>
             </div>
         </div>

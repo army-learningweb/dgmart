@@ -20,7 +20,7 @@ export default function updateStatus() {
             data: data,
             dataType: "json",
             success: function (data) {
-                console.log(data);
+               
                 /// Xử lí cho danh mục sản phẩm, bài viết
                 if(type == 'categories'){
                     $(".status-categories-" + module + "-" + id).html(data.view);
@@ -35,6 +35,18 @@ export default function updateStatus() {
 
                 if(data.unactive != 'undefined'){
                     $('.unactive-'+ module).html('(' + data.unactive + ')');
+                }
+
+                if(data.publish != 'undefined'){
+                    $('.publish-'+ module).html('(' + data.publish + ')');
+                }
+
+                if(data.unpublish != 'undefined'){
+                    $('.unpublish-'+ module).html('(' + data.unpublish + ')');
+                }
+
+                if(data.draft != 'undefined'){
+                    $('.draft-'+ module).html('(' + data.draft + ')');
                 }
 
             },

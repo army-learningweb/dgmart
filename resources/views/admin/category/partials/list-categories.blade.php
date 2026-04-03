@@ -1,6 +1,6 @@
 @if (count($categories) > 0)
     <div
-        class="bg-white dark:bg-[#1e1f20] shadow-md mt-3 py-3 px-5 rounded-md text-sm overflow-auto scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent md:max-h-[540px]">
+        class="bg-white dark:bg-[#1e1f20] shadow-md mt-3 px-5 py-3 rounded-md text-sm overflow-auto scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent md:max-h-[490px]">
         <table class="min-w-[1000px] md:w-full">
             <tr class="dark:text-gray-300">
                 <td class="px-3 py-2">

@@ -77,6 +77,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/posts',[AdminPostController::class,'view'])->name('admin.posts');
     Route::post('/admin/posts/store',[AdminPostController::class,'store'])->name('admin.posts.store');
     Route::post('/admin/posts/destroy/{post}',[AdminPostController::class,'destroy'])->name('admin.posts.destroy');
+    Route::get('admin/posts/edit',[AdminPostController::class,'edit']);
+    Route::post('/admin/posts/update',[AdminPostController::class,'update'])->name('admin.posts.update');
+    Route::post('/admin/posts/action',[AdminPostController::class,'action'])->name('admin.posts.action');
+    Route::post('/admin/posts/updateStatus', [AdminPostController::class,'updateStatus']);
+    Route::get('/admin/posts/filter',[AdminPostController::class,'list_filter']);
     
     // Product
     Route::get('/admin/products/categories',[AdminCategoryController::class,'view'])->name('admin.products.categories');

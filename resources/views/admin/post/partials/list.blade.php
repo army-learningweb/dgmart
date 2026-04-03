@@ -1,6 +1,6 @@
 @if ($posts->count() > 0)
     <div
-        class="bg-white dark:bg-[#1e1f20] shadow-md mt-3 py-3 px-5 rounded-md text-sm overflow-x-auto md:overflow-visible">
+        class="bg-white dark:bg-[#1e1f20] shadow-md mt-3 py-3 px-5 rounded-md text-sm overflow-x-auto md:overflow-visible md:min-h-[450px]">
         <table class="min-w-[1200px] md:w-full">
 
             <tr class="dark:text-gray-300">
@@ -18,27 +18,24 @@
                 <td class="px-3">Người tạo</td>
                 <td class="px-3 text-center">Thao tác</td>
             </tr>
-            @php
-                $num = 1;
-            @endphp
             @foreach ($posts as $post)
                 <tr class="dark:text-gray-300 border-b border-gray-500/20 dark:hover:bg-[#292929] hover:bg-[#f5f5f5]">
                     <td class="px-3 py-4">
-                        <input type="checkbox" name="post_id[]" value="{{ $post->id }}"
-                            {{ in_array($post->id, (array) old('post_id')) ? 'checked' : '' }}
+                        <input type="checkbox" name="posts_id[]" value="{{ $post->id }}" form="form-post-action"
+                            {{ in_array($post->id, (array) old('posts_id')) ? 'checked' : '' }}
                             class="check_single rounded-[3px] mb-[2px]">
                     </td>
-                    <td class="px-2">{{ $num++ }}</td>
+                    <td class="px-2">{{ $posts->firstItem() + $loop->index }}</td>
                     <td class="px-5 py-2 text-center">
                         @if ($post->media)
                             <div class="flex justify-center items-center">
                                 <img src="{{ asset($post->media->url) }}" alt=""
-                                    class="w-[100px] h-[60px] object-cover rounded-md">
+                                    class="w-[100px] h-[60px] object-cover rounded-md shadow-sm">
                             </div>
                         @else
-                            <x-table.unknow/>
+                            <x-table.unknow />
                         @endif
-                        
+
                     </td>
                     <td class="px-5">
                         <div class="w-[150px] line-clamp-2">
@@ -51,17 +48,21 @@
                                 {{ $post->category->name }}
                             </div>
                         @else
-                            <x-table.unknow/>
+                            <x-table.unknow />
                         @endif
                     </td>
                     <td class="px-3 status-posts-{{ $post->id }}">
-                        {!! post_status($post->status) !!}
+                        <div class="w-[100px]">
+                            {!! post_status($post->status) !!}
+                        </div>
                     </td>
                     <td class="px-3">
                         <x-table.select module="posts" class="select-status" data-id="{{ $post->id }}">
-                            <option value="active" {{ $post->status == 'active' ? 'selected' : '' }}>Hoạt động
+                            <option value="publish" {{ $post->status == 'publish' ? 'selected' : '' }}>Công khai
                             </option>
-                            <option value="unactive" {{ $post->status == 'unactive' ? 'selected' : '' }}>Vô hiệu hóa
+                            <option value="unpublish" {{ $post->status == 'unpublish' ? 'selected' : '' }}>Tạm ngưng
+                            </option>
+                            <option value="draft" {{ $post->status == 'draft' ? 'selected' : '' }}>Nháp
                             </option>
                         </x-table.select>
                     </td>
@@ -70,20 +71,59 @@
                         @if ($post->user)
                             {{ $post->user->name }}
                         @else
-                            <x-table.unknow/>
+                            <x-table.unknow />
                         @endif
                     </td>
                     <td class="px-3">
                         <div class="flex justify-center items-center gap-2 h-full">
                             <x-table.button-edit button="edit-post" module="posts" id="{{ $post->id }}" />
-                            <x-table.button-delete route="{{ route('admin.posts.destroy',$post->id) }}"
+                            <x-table.button-delete route="{{ route('admin.posts.destroy', $post->id) }}"
                                 confirm="Bạn có chắc muốn xóa bài viết ({{ $post->title }}) ra khỏi hệ thống ?" />
                         </div>
                     </td>
                 </tr>
             @endforeach
-
+            @php
+                $row_per_page = $posts->perPage();
+                $current_row = $posts->count();
+            @endphp
+            @for ($i = $current_row + 1; $i <= $row_per_page; $i++)
+                <tr class="">
+                    <td class="px-3">
+                        <div class="w-4 h-4 bg-gray-200 rounded-sm"></div>
+                    </td>
+                    <td class="px-2">#</td>
+                    <td class="px-5 py-2 text-center flex justify-center items-center">
+                        <div class="w-[100px] h-[60px] bg-gray-200 rounded-md"></div>
+                    </td>
+                    <td class="px-5 space-y-2">
+                        <div class="w-[130px] h-[10px] bg-gray-200 rounded-sm"></div>
+                        <div class="w-[130px] h-[10px] bg-gray-200 rounded-sm"></div>
+                    </td>
+                    <td class="px-5"> 
+                        <div class="w-[100px] h-[10px] bg-gray-200 rounded-sm"></div>
+                    </td>
+                    <td class="px-3">
+                        <div class="w-[100px] h-[10px] bg-gray-200 rounded-sm"></div>
+                    </td>
+                    <td class="px-3">
+                        <div class="w-[100px] h-[10px] bg-gray-200 rounded-sm"></div>
+                    </td>
+                    <td class="px-3">
+                        <div class="w-[100px] h-[10px] bg-gray-200 rounded-sm"></div>
+                    </td>
+                    <td class="px-3">
+                        <div class="w-[50px] h-[10px] bg-gray-200 rounded-sm"></div>
+                    </td>
+                    <td class="px-3 text-center">
+                        <div class="w-[70px] h-[10px] bg-gray-200 rounded-sm"></div>
+                    </td>
+                </tr>
+            @endfor
         </table>
+    </div>
+    <div class="mt-2">
+        {{ $posts->links('pagination::tailwind', ['class' => 'list-paginate']) }}
     </div>
 @else
     <x-list-not-found />
