@@ -61,7 +61,7 @@
     </x-modal-dial.modal-edit>
 
     {{-- =================================== --}}
-    <div class="dark:bg-[#18181b] py-4 h-[500px] border-t border-gray-500/50 border-dashed">
+    <div class="py-4 h-[500px] border-t border-gray-500/50 border-dashed">
         <div class="flex flex-col md:flex-row gap-2 md:items-center md:justify-between">
             <div class="flex items-center justify-between gap-2">
 

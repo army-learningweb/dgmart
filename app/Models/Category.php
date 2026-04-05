@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class Category extends Model
 {
@@ -17,7 +18,7 @@ class Category extends Model
     ];
 
     function user() {
-        return $this->belongsTo('\App\Models\User');
+        return $this->belongsTo(User::class);
     }
 }
 

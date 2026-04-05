@@ -1,9 +1,9 @@
 @if ($posts->count() > 0)
     <div
-        class="bg-white dark:bg-[#1e1f20] shadow-md mt-3 py-3 px-5 rounded-md text-sm overflow-x-auto md:overflow-visible md:min-h-[450px]">
+        class="bg-white shadow-md mt-3 py-3 px-5 rounded-md text-sm overflow-x-auto md:overflow-visible md:min-h-[450px]">
         <table class="min-w-[1200px] md:w-full">
 
-            <tr class="dark:text-gray-300">
+            <tr>
                 <td class="px-3 py-2">
                     <input type="checkbox" name="" id="check_all" class="check_all rounded-[3px] mb-[2px]">
                     <label for="check_all" class="ms-[2px] text-sm"></label>
@@ -19,7 +19,7 @@
                 <td class="px-3 text-center">Thao tác</td>
             </tr>
             @foreach ($posts as $post)
-                <tr class="dark:text-gray-300 border-b border-gray-500/20 dark:hover:bg-[#292929] hover:bg-[#f5f5f5]">
+                <tr class="border-b border-gray-500/20 hover:bg-[#f5f5f5]">
                     <td class="px-3 py-4">
                         <input type="checkbox" name="posts_id[]" value="{{ $post->id }}" form="form-post-action"
                             {{ in_array($post->id, (array) old('posts_id')) ? 'checked' : '' }}

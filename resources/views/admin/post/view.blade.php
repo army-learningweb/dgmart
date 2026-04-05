@@ -6,7 +6,7 @@
 
     {{-- modal create --}}
     <x-modal-dial.modal-create modal="create-post" title="Tạo mới bài viết" button_create="Tạo mới"
-        route="{{ route('admin.posts.store') }}" width="md:w-[1100px]" variant="h-90vh md:max-h-[500px] p-2 overflow-y-auto">
+        route="{{ route('admin.posts.store') }}" width="md:max-w-[1100px]" variant="h-90vh md:max-h-[500px] pl-1 pr-2 overflow-y-auto">
 
         <div class="md:flex gap-2">
             <div class="md:w-[70%]">
@@ -45,9 +45,9 @@
 
     {{-- modal edit --}}
     <x-modal-dial.modal-edit modal="edit-post" title="Cập nhật thông tin bài viết" button_edit="Cập nhật"
-        route="{{ route('admin.posts.update') }}" width="w-[1100px]" variant="md:h-[500px] p-2 overflow-y-auto ">
+        route="{{ route('admin.posts.update') }}" width="md:max-w-[1100px]" variant="h-90vh md:max-h-[500px] pl-1 pr-2 overflow-y-auto">
 
-        <div class="flex gap-2">
+        <div class="md:flex gap-2">
             <div class="md:w-[70%]">
                 <div class="mt-2">
                     <x-form-element.text-area label="Tiêu đề" name="title" id="title" required="*" />
@@ -58,8 +58,11 @@
                 </div>
             </div>
             <div class="md:flex-1">
-                <x-form-element.file name="post-file" type="post" />
+                <div>
+                    <x-form-element.file name="post-file" type="post" />
+                </div>
                 
+
                 <div class="mt-1">
                     <label for="category_id">Danh mục bài viết <span class="text-red-500">*</span></label>
                     <select name="category_id" id="category_id"

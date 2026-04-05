@@ -28,7 +28,7 @@
     </x-modal-dial.modal-create>
 
     {{-- modal edit --}}
-    <x-modal-dial.modal-edit modal="edit-user" title="Cập nhật thông tin thành viên" button_edit="Cập nhật"
+    <x-modal-dial.modal-edit modal="edit-user" title="Cập nhật thông tin" button_edit="Cập nhật"
         route="{{ route('admin.users.update') }}">
         <div class="mt-2">
             <x-input-field.field id="edit_name" label="Họ tên" type="text" name="name" required="*" />
@@ -36,7 +36,7 @@
 
         <div class="mt-2">
             <x-input-field.field id="edit_email" label="Email" type="text" name="email" required="*"
-                readonly="readonly" class="dark:bg-red-400" />
+                readonly="readonly"/>
         </div>
 
         <div class="mt-2">

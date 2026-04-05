@@ -6,7 +6,7 @@
 
     {{-- modal create --}}
     <x-modal-dial.modal-create modal="create-permission" title="Tạo quyền mới" button_create="Tạo mới"
-        route="{{ route('admin.permissions.store') }}">
+        route="{{ route('admin.permissions.store') }}" variant="md:min-w-[350px]">
         <div class="mt-2">
             <x-input-field.field id="name" label="Tên quyền" type="text" name="name" required="*" />
             <span class="text-gray-400 text-xs">Ví dụ: Edit Post</span>
@@ -28,7 +28,7 @@
 
     {{-- modal-edit --}}
     <x-modal-dial.modal-edit modal="edit-permission" title="Cập nhật thông tin quyền" button_edit="Cập nhật"
-        route="{{ route('admin.permissions.update') }}">
+        route="{{ route('admin.permissions.update') }}" variant="md:min-w-[350px]">
         <div class="mt-2">
             <x-input-field.field id="name" label="Tên quyền" type="text" name="name" required="*" />
             <span class="text-gray-400 text-xs">Ví dụ: Edit Post</span>
@@ -50,7 +50,7 @@
 
     </x-modal-dial.modal-edit>
 
-    <div class="dark:bg-[#18181b] py-4 h-[500px] border-t border-gray-500/50 border-dashed">
+    <div class="py-4 h-[500px] border-t border-gray-500/50 border-dashed">
         <div class="flex items-center justify-between md:justify-normal gap-2">
             {{-- title --}}
             <div class="text-lg"> Danh sách quyền </div>

@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Category;
+use App\Models\User;
+use App\Models\Media;
 
 class Post extends Model
 {
@@ -17,14 +20,14 @@ class Post extends Model
     ];
 
     function media(){
-        return $this->hasOne('App\Models\Media','object_id');
+        return $this->hasOne(Media::class,'object_id');
     }
 
     function category(){
-        return $this->belongsTo('App\Models\Category','category_id');
+        return $this->belongsTo(Category::class);
     }
 
     function user(){
-        return $this->belongsTo('App\Models\User','user_id');
+        return $this->belongsTo(User::class);
     }
 }

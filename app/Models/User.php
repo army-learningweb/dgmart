@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Permission;
+use App\Models\Category;
 
 class User extends Authenticatable
 {
@@ -49,6 +50,6 @@ class User extends Authenticatable
     }
 
     function posts(){
-        return $this->hasMany('\App\Models\Category');
+        return $this->hasMany(Post::class);
     }
 }

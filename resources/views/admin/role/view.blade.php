@@ -6,7 +6,7 @@
 
     {{-- modal create --}}
     <x-modal-dial.modal-create modal="create-role" title="Tạo vai trò mới" button_create="Tạo mới"
-        route="{{ route('admin.roles.store') }}">
+        route="{{ route('admin.roles.store') }}" width="md:max-w-[700px]" variant="md:max-h-[700px]">
         <div class="mt-2">
             <x-input-field.field id="name" label="Tên vai trò" type="text" name="name" required="*" />
             <span class="text-gray-400 text-xs">Ví dụ: Post Manager</span>
@@ -31,7 +31,7 @@
 
     {{-- modal-edit --}}
     <x-modal-dial.modal-edit modal="edit-role" title="Cập nhật thông tin vai trò" button_edit="Cập nhật"
-        route="{{ route('admin.roles.update') }}">
+        route="{{ route('admin.roles.update') }}" width="md:max-w-[700px]" variant="md:max-h-[700px]">
         <div class="mt-2">
             <x-input-field.field id="name" label="Tên vai trò" type="text" name="name" required="*" />
             <span class="text-gray-400 text-xs">Ví dụ: Post Manager</span>
@@ -51,12 +51,13 @@
             @include('admin.role.partials.permissions')
         </div>
 
+
         <input type="hidden" name="id" value="">
         <input type="hidden" name="modal" value="edit">
     </x-modal-dial.modal-edit>
 
     {{-- ============================== --}}
-    <div class="dark:bg-[#18181b] py-4 border-t border-gray-500/50 border-dashed">
+    <div class="py-4 border-t border-gray-500/50 border-dashed">
         <div class="flex items-center justify-between md:justify-normal gap-2">
             {{-- title --}}
             <div class="text-lg"> Danh sách vai trò </div>
@@ -71,15 +72,10 @@
             </x-modal-dial.button-open>
         </div>
 
-        <form action="" method="post">
-            @csrf
-
-            {{-- list --}}
-            <div class="list-roles pb-5">
-                @include('admin.role.partials.list')
-            </div>
-
-        </form>
+        {{-- list --}}
+        <div class="list-roles pb-5">
+            @include('admin.role.partials.list')
+        </div>
 
     </div>
 </x-app-layout>

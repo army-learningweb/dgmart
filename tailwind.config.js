@@ -16,7 +16,6 @@ export default {
         'text-green-400',
         'text-green-600',
     ],
-    darkMode: 'selector',
     theme: {
         extend: {
             fontFamily: {
