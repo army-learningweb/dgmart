@@ -1,6 +1,6 @@
 @if ($posts->count() > 0)
     <div
-        class="bg-white shadow-md mt-3 py-3 px-5 rounded-md text-sm overflow-x-auto md:overflow-visible md:min-h-[450px]">
+        class="bg-white shadow-md mt-3 py-3 px-5 rounded-md text-sm overflow-x-auto md:overflow-visible md:min-h-[450px] scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent">
         <table class="min-w-[1200px] md:w-full">
 
             <tr>
@@ -123,7 +123,7 @@
         </table>
     </div>
     <div class="mt-2">
-        {{ $posts->links('pagination::tailwind', ['class' => 'list-paginate']) }}
+        {{ $posts->links('pagination::tailwind', ['module' => 'posts']) }}
     </div>
 @else
     <x-list-not-found />

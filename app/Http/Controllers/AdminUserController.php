@@ -5,17 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Role;
+use App\Models\user_role;
 
 class AdminUserController extends Controller
 {
     // danh sách
     function list()
     {
-        $users = User::all();
+        $users = User::with('roles:id,name')->get();
         $total = User::all()->count();
         $active = User::where('status','active')->count();
         $unactive = User::where('status','unactive')->count();
-        return view('admin.user.view', compact('users','total','active','unactive'));
+        $roles = Role::all();
+        return view('admin.user.view', compact('users','total','active','unactive','roles'));
     }
 
     // thêm
@@ -50,24 +53,34 @@ class AdminUserController extends Controller
     {
         $id = $request->id;
         $user_info = User::find($id);
+        $roles = user_role::where('user_id',$id)->pluck('role_id');
 
-        return response()->json($user_info);
+        $data = [
+            'user_info' => $user_info,
+            'roles' => $roles
+        ];
+
+        return response()->json($data);
     }
 
     function update(Request $request)
     {
+        // return $request->all();
         if ($request->input('password') == '' || $request->input('password_confirmation') == '') {
 
-            if($request->id == Auth::user()->id) return back()->with('status_failed','Cập nhật thông tin thất bại');
+            // if($request->id == Auth::user()->id) return back()->with('status_failed','Cập nhật thông tin thất bại');
 
             $request->validate([
-                'name' => 'required|min:2|max:255|regex:/^[\p{L}\s0-9]+$/u'
+                'name' => 'required|min:2|max:255|regex:/^[\p{L}\s0-9]+$/u',
             ]);
 
-            User::find($request->input('id'))->update([
+            $user = User::find($request->input('id'));
+            $user->update([
                 'name' => $request->input('name'),
                 'updated_at' => now()
             ]);
+
+            $user->roles()->sync($request->input('roles'));
 
         }else{
             $request->validate([
@@ -75,11 +88,14 @@ class AdminUserController extends Controller
                 'password' => 'required|confirmed|min:8|max:255|'
             ]);
 
-            User::find($request->input('id'))->update([
+            $user = User::find($request->input('id'));
+            $user->update([
                 'name' => $request->input('name'),
                 'password' => $request->input('password'),
                 'updated_at' => now()
             ]);
+
+            $user->roles()->sync($request->input('roles'));
         }
 
         return back()->with('status','Cập nhật thành công');

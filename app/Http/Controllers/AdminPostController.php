@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use App\Models\Category;
 use App\Models\Media;
 use App\Models\Post;
@@ -23,7 +24,7 @@ class AdminPostController extends Controller
         return view('admin.post.view', compact('parent_categories', 'posts', 'total', 'publish', 'unpublish', 'draft'));
     }
 
-    // Lọc + tìm kiếm
+    // phân trang - Lọc - tìm kiếm
     function list_filter(Request $request)
     {
         $filter_value = $request->input('filter_value');
@@ -49,30 +50,31 @@ class AdminPostController extends Controller
     // thêm
     function store(Request $request)
     {
-
-        session()->forget('old-post-file-img');
-
         $request->validate([
             'title' => 'required|min:8|max:255|regex:/^[\p{P}\p{L}\p{S}\p{N}\s]+$/u',
             'desc' => 'required|min:2|max:255|regex:/^[\p{P}\p{L}\p{S}\p{N}\s]+$/u',
             'category_id' => 'required|exists:categories,id',
-            'post-file-id' => 'required'
+            'post-file-id' => 'required',
+            'slug' => 'required'
         ]);
 
         $new_post = Post::create([
             'title' => $request->input('title'),
             'desc' => $request->input('desc'),
             'content' => $request->input('content'),
+            'slug' => Str::slug($request->input('slug')),
             'category_id' => $request->input('category_id'),
             'user_id' => Auth::user()->id
         ]);
 
-        Media::where('id', $request->input('post-file-id'))->update(['object_id' => $new_post->id]);
+        Media::where('id', $request->input('post-file-id'))->where('type','post')->update(['object_id' => $new_post->id]);
 
         session()->forget('post-file');
         session()->forget('post-file-id');
         session()->forget($request->input('destroy-session'));
         session()->forget("{$request->input('destroy-session')}-id");
+        session()->forget('old-post-file-img');
+        session()->forget('old-post-file-id');
 
         return back()->with('status', 'Tạo mới thành công');
     }
@@ -80,11 +82,11 @@ class AdminPostController extends Controller
     // xóa
     function destroy(Post $post)
     {
-        $file_path = Media::where('object_id', $post->id)->first();
+        $file_path = Media::where('object_id', $post->id)->where('type','post')->first();
 
         if (isset($file_path->url)) {
             if (file_exists($file_path->url)) File::delete($file_path->url);
-            Media::where('object_id', $post->id)->delete();
+            Media::where('object_id', $post->id)->where('type','post')->delete();
         }
 
         $post->delete();
@@ -97,7 +99,7 @@ class AdminPostController extends Controller
     {
         $id = $request->id;
         $post_info = Post::find($id);
-        $img = Media::where('object_id', $post_info->id)->first();
+        $img = Media::where('object_id', $post_info->id)->where('type','post')->first();
         $data = [
             'post_info' => $post_info,
             'img_url' => asset($img->url),
@@ -108,8 +110,8 @@ class AdminPostController extends Controller
 
     function update(Request $request)
     {
-        $old_post_file_img = asset(Media::where('object_id', $request->input('id'))->value('url'));
-        $old_post_file_id = asset(Media::where('object_id', $request->input('id'))->value('id'));
+        $old_post_file_img = asset(Media::where('object_id', $request->input('id'))->where('type','post')->value('url'));
+        $old_post_file_id = Media::where('object_id', $request->input('id'))->where('type','post')->value('id');
         $request->session()->put('old-post-file-img', $old_post_file_img);
         $request->session()->put('old-post-file-id', $old_post_file_id);
 
@@ -117,23 +119,29 @@ class AdminPostController extends Controller
             'title' => 'required|min:8|max:255|regex:/^[\p{P}\p{L}\p{S}\p{N}\s]+$/u',
             'desc' => 'required|min:2|max:255|regex:/^[\p{P}\p{L}\p{S}\p{N}\s]+$/u',
             'category_id' => 'required|exists:categories,id',
-            'old-post-file-id' => 'required'
+            'old-post-file-id' => 'required',
+            'slug' => 'required'
         ]);
+
+        $slug = Post::where('id',$request->input('id'))->value('slug');
+        $slug = $request->input('slug') == $slug ? $request->input('slug') : Str::slug($request->input('slug'));
 
         Post::where('id', $request->input('id'))->update([
             'title' => $request->input('title'),
             'desc' => $request->input('desc'),
+            'content' => $request->input('content'),
             'category_id' => $request->input('category_id'),
+            'slug' => $slug
         ]);
 
         if ($request->input('post-file-id') != null) {
-            $path = Media::where('object_id', $request->input('id'))->value('url');
+            $path = Media::where('object_id', $request->input('id'))->where('type','post')->value('url');
             if (isset($path)) {
                 if (file_exists($path)) File::delete($path);
             }
-            Media::where('object_id', $request->input('id'))->delete();
+            Media::where('object_id', $request->input('id'))->where('type','post')->delete();
 
-            Media::where('id', $request->input('post-file-id'))->update([
+            Media::where('id', $request->input('post-file-id'))->where('type','post')->update([
                 'object_id' => $request->input('id')
             ]);
         }
@@ -155,13 +163,13 @@ class AdminPostController extends Controller
         if (!$request->posts_id) return back()->withInput()->with('status_failed', 'Hành động thất bại, chưa chọn bài viết');
 
         if ($request->action == 'destroy') {
-            $imgs_path = Media::whereIn('object_id', $request->posts_id)->pluck('url');
+            $imgs_path = Media::whereIn('object_id', $request->posts_id)->where('type','post')->pluck('url');
             foreach ($imgs_path as $path) {
                 if (file_exists($path)) {
                     File::delete($path);
                 }
             }
-            Media::whereIn('object_id', $request->posts_id)->delete();
+            Media::whereIn('object_id', $request->posts_id)->where('type','post')->delete();
             Post::destroy($request->posts_id);
         }
 

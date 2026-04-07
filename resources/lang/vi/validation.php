@@ -30,6 +30,10 @@ return [
         'category_id' => 'Danh mục',
         'file' => 'File',
         'post-file-id' => 'Ảnh bài viết',
-        'old-post-file-id' => 'Ảnh bài viết'
+        'product-file-id' => 'Ảnh sản phẩm',
+        'old-post-file-id' => 'Ảnh bài viết',
+        'old-product-file-id' => 'Ảnh sản phẩm',
+        'code' => 'Mã',
+        'price' => 'Giá'
     ]
 ];

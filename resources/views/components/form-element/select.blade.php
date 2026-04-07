@@ -9,7 +9,7 @@
 ])
 
 @if ($label)
-    <label for="{{ $id }}"> {{ $label }} <span class="text-red-600">*</span></label>
+    <label for="{{ $id }}" class="block"> {{ $label }} <span class="text-red-600">*</span></label>
 @endif
 
 <select name="{{ $name }}" id="{{ $id }}"

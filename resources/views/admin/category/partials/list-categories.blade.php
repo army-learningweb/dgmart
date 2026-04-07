@@ -1,12 +1,12 @@
 @if (count($categories) > 0)
     <div
-        class="bg-white shadow-md mt-3 px-5 py-3 rounded-md text-sm overflow-auto scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent md:max-h-[490px]">
+        class="bg-white shadow-md mt-3 px-5 pb-3 rounded-md text-sm overflow-auto scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent md:max-h-[490px]">
         <table class="min-w-[1000px] md:w-full">
-            <tr>
-                <td class="px-3 py-2">
+            <tr class="sticky top-0 bg-white">
+                <td class="px-3 py-4">
                     <input type="checkbox" name="" id="check_all" class="check_all rounded-[3px] mb-[2px]">
                 </td>
-                <td class="px-3 py-2">#</td>
+                <td class="px-3">#</td>
                 <td class="px-3">Danh mục</td>
                 <td class="px-5">Slug</td>
                 <td class="px-3 text-center">Trạng thái</td>
@@ -79,7 +79,7 @@
                     </td>
                     <td>
                         @if (!in_array($item->id,[1,2]))
-                            <div class="flex gap-4 justify-center">
+                            <div class="flex gap-2 justify-center">
                                 <x-table.button-edit button="edit-category" module="{{ $type }}s"
                                     id="{{ $item->id }}" type="categories" />
                                 <x-table.button-delete

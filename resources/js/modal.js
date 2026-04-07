@@ -17,9 +17,10 @@ export default function modal(){
         const modal = $('.modal-'+modal_name);
         $('.modal-element').each(function(){
             $(this).find('input').not('[name="_token"], [type="hidden"], [type="checkbox"]').val('').attr('value','');
-            $(this).find('input[type=checkbox]').prop('checked',false); 
+            $(this).find('input[type=checkbox]').prop('checked',false);  
             $(this).find('select[name=parent_category]').val('');
             $(this).find('select[name=category_id]').val('');
+            $(this).find('select#roles').val([]);
             $(this).find('textarea').val('');
             $(this).find('.error').html(``);
             $(this).find('img').attr('src','').addClass('hidden');

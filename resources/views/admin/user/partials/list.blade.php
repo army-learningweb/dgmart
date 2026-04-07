@@ -1,6 +1,6 @@
 @if ($users->count() > 0)
     <div
-        class="bg-white shadow-md mt-3 py-3 px-5 rounded-md text-sm overflow-x-auto md:overflow-visible">
+        class="bg-white shadow-md mt-3 py-3 px-5 rounded-md text-sm overflow-x-auto md:overflow-visible scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent">
         <table class="min-w-[1000px] md:w-full">
             <tr>
                 <td class="px-3 py-2">
@@ -29,8 +29,12 @@
                         </div>
                     </td>
                     <td class="px-5">
-                        <div class="min-w-[70px]">
-                            Chưa có quyền
+                        <div class="w-[120px]">
+                            @forelse ($user->roles as $role)
+                                {{ admin_role($role->name) }}
+                            @empty
+                                <span class="text-xs text-gray-500 italic">Chưa phân quyền !</span>
+                            @endforelse
                         </div>
                     </td>
                     <td class="px-5">

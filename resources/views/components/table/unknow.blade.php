@@ -1,1 +1,1 @@
-<span class="text-gray-500 italic">Không xác định !</span>
+<span class="text-gray-500 italic text-xs">Không xác định !</span>

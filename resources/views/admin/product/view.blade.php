@@ -1,128 +1,261 @@
 <x-app-layout>
 
     {{-- flash session --}}
-    <x-flash-session.success-flash-session/>
-    <x-flash-session.failed-flash-session/>
-
-    {{-- modal create --}}
-    {{-- <x-modal-dial.modal-create modal="create-user" title="Tạo mới thành viên" button_create="Tạo thành viên" route="{{ route('admin.users.store') }}">
-        <div class="mt-2">
-            <x-input-field.field id="name" label="Họ tên" type="text" name="name" required="*" />
-        </div>
-
-        <div class="mt-2">
-            <x-input-field.field id="email" label="Email" type="text" name="email" required="*"/>
-        </div>
-
-        <div class="mt-2">
-            <x-input-field.field id="password" label="Mật khẩu" type="password" name="password" required="*" />
-        </div>
-
-        <div class="mt-2">
-            <x-input-field.field id="password_confirmation" label="Xác nhận mật khẩu" type="password" name="password_confirmation" required="*" />
-        </div>
-
-        <input type="hidden" name="modal" value="create">
-    </x-modal-dial.modal-create> --}}
+    <x-flash-session.success-flash-session />
+    <x-flash-session.failed-flash-session />
     
-    {{-- modal edit --}}
-    {{-- <x-modal-dial.modal-edit modal="edit-user" title="Cập nhật thông tin thành viên" button_edit="Cập nhật thông tin" route="{{ route('admin.users.update') }}">
-        <div class="mt-2">
-            <x-input-field.field id="name" label="Họ tên" type="text" name="name" required="*"/>
-        </div>
+    {{-- modal create --}}
+    <x-modal-dial.modal-create modal="create-product" title="Tạo mới sản phẩm" button_create="Tạo mới"
+        route="{{ route('admin.products.store') }}" width="md:min-w-[1000px]"
+        variant="h-90vh md:max-h-[500px] pl-1 pr-2 overflow-y-auto">
 
-        <div class="mt-2">
-            <x-input-field.field id="email" label="Email" type="text" name="email" required="*" readonly="readonly" class="dark:bg-red-400"/>
-        </div>
-
-        <div class="mt-2">
-            <x-input-field.field id="password" label="Mật khẩu mới" type="password" name="password" />
-        </div>
-
-        <div class="mt-2">
-            <x-input-field.field id="password_confirmation" label="Xác nhận mật khẩu" type="password" name="password_confirmation" />
-        </div>
-
-        <input type="hidden" name="user_id" value="">
-        <input type="hidden" name="modal" value="edit">
-    </x-modal-dial.modal-edit> --}}
-
-
-    <div class="dark:bg-[#18181b] py-4 h-[500px] border-t border-gray-500/10">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-
-            {{-- title --}}
-            <div class="text-lg"> Danh sách bài viết </div>
-
-            {{-- option --}}
-            <div class="flex flex-col md:flex-row md:items-center gap-2 mt-3 md:mt-0">
-
-                {{-- search --}}
-                <div>
-                    <x-search placeholder="Tìm kiếm theo tên..." name="search-post" module="posts" class="search"/>
+        <div class="md:flex gap-2">
+            <div class="md:w-[70%]">
+                <div class="mt-2">
+                    <x-input-field.field label="Mã sản phẩm" type="text" name="code" id="code"
+                        required="*" />
                 </div>
 
-                {{-- filter status --}}
-                <div>
-                   <x-select name="post-filter" module="posts" class="select-filter py-1">
-                        <option value="">Lọc theo trạng thái</option>
-                        <option value="active">Hoạt động</option>
-                        <option value="unactive">Vô hiệu hóa</option>
-                   </x-select>
+                <div class="mt-2">
+                    <x-input-field.field label="Tên sản phẩm" type="text" name="name" id="name"
+                        required="*" />
                 </div>
 
-                {{-- create modal --}}
-                <div>
-                    <x-modal-dial.button-open modal="create-post">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="size-5"> <path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
-                        </svg>
-                    </x-modal-dial.button-open>
+                <div class="mt-2">
+                    <x-form-element.text-area id="desc" label="Mô tả" name="desc" required="*"
+                        class="h-[117px]" />
                 </div>
-                
-                {{-- reset --}}
-                <div class="hidden md:block">
-                    <x-button-reset/>
+
+                <div class="mt-2">
+                    <x-input-field.field label="Giá" type="number" name="price" id="price" required="*" />
+                </div>
+
+                <div class="mt-2">
+                    <x-input-field.field label="Giảm giá %" type="number" name="sale_off" id="sale_off" />
+                </div>
+
+                <div class="mt-2">
+                    <x-input-field.field label="Slug" type="text" name="slug" id="slug"
+                        placeholder="vd: ten-san-pham" required="*" />
+                </div>
+            </div>
+            <div class="md:flex-1">
+                <div class="mt-2">
+                    <label for="" class="mb-1 inline-block">Ảnh sản phẩm <span
+                            class="text-red-500">*</span></label>
+                    <x-form-element.file name="product-file" type="product" class="h-[250px]" />
+                </div>
+
+                <div class="mt-[11px]">
+                    <label for="" class="mb-1 inline-block">Ảnh chi tiết <span
+                            class="text-gray-500 text-xs">(Không bắt
+                            buộc)</span></label>
+                    <div class="mt-2px grid grid-cols-4 gap-1">
+                        <x-form-element.file name="product-subfile-1" main="1" type="product" remove_size="size-4"
+                            class="h-[65px] text-xs" none_upload_icon="true" none_mimes_required="true" />
+                        <x-form-element.file name="product-subfile-2" main="1" type="product" remove_size="size-4"
+                            class="h-[65px] text-xs" none_upload_icon="true" none_mimes_required="true" />
+                        <x-form-element.file name="product-subfile-3" main="1" type="product" remove_size="size-4"
+                            class="h-[65px] text-xs" none_upload_icon="true" none_mimes_required="true" />
+                        <x-form-element.file name="product-subfile-4" main="1" type="product" remove_size="size-4"
+                            class="h-[65px] text-xs" none_upload_icon="true" none_mimes_required="true" />
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <label for="category_id">Danh mục sản phẩm <span class="text-red-500">*</span></label>
+                    <select name="category_id" id="category_id"
+                        class="mt-1 rounded-md py-[7px] md:py-[3px] text-sm shadow-sm border-gray-500/30 w-full">
+                        <option value="">Chọn danh mục</option>
+                        @include('admin.product.partials.parent_categories')
+                    </select>
+                    <x-input-field.error_php name="category_id" />
+                </div>
+
+                <div class="mt-2">
+                    <label for="category_id">Up sales</label>
+                    <select name="up_sales" id="up_sales"
+                        class="mt-1 rounded-md py-[7px] md:py-[3px] text-sm shadow-sm border-gray-500/30 w-full">
+                        <option value="no">Mặc định</option>
+                        <option value="yes">Đẩy bán trước</option>
+                    </select>
                 </div>
             </div>
         </div>
 
-        <form action="" method="post">
-            @csrf 
+        <div class="mt-2">
+            {{-- <x-forms.tinymce-editor id="product-content" name="content" /> --}}
+        </div>
 
-            {{-- statis & action --}}
-            <div class="my-5">
-                <div class="flex items-center justify-between">
+        <input type="hidden" name="modal" value="create">
+    </x-modal-dial.modal-create>
 
-                    {{-- action --}}
-                    <div class="flex flex-col md:flex-row gap-2 md:items-center w-full md:w-auto">
-                        <x-select name="action" class="py-[3px]">
-                            <option value="">- Hành động hàng loạt</option>
-                            <option value="active" {{ old('action') == 'active' ? 'selected' : '' }}>Hoạt động</option>
-                            <option value="unactive" {{ old('action') == 'unactive' ? 'selected' : '' }}>Vô hiệu hóa</option>
-                        </x-select>
+    {{-- modal edit --}}
+    <x-modal-dial.modal-edit modal="edit-product" title="Cập nhật thông tin" button_edit="Cập nhật"
+        route="{{ route('admin.products.update') }}" width="md:min-w-[1000px]"
+        variant="h-90vh md:max-h-[500px] pl-1 pr-2 overflow-y-auto">
 
-                        <x-primary-button style="padding-top:4px;padding-bottom:4px" class="flex justify-center items-center gap-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" />
-                            </svg>
-                            <span>Hành động</span>
-                        </x-primary-button>
+        <div class="md:flex gap-2">
+            <div class="md:w-[70%]">
+                <div class="mt-2">
+                    <x-input-field.field label="Mã sản phẩm" type="text" name="code" id="code"
+                        required="*" />
+                </div>
+
+                <div class="mt-2">
+                    <x-input-field.field label="Tên sản phẩm" type="text" name="name" id="name"
+                        required="*" />
+                </div>
+
+                <div class="mt-2">
+                    <x-form-element.text-area id="desc" label="Mô tả" name="desc" required="*"
+                        class="h-[117px]" />
+                </div>
+
+                <div class="mt-2">
+                    <x-input-field.field label="Giá" type="number" name="price" id="price" required="*" />
+                </div>
+
+                <div class="mt-2">
+                    <x-input-field.field label="Giảm giá %" type="number" name="sale_off" id="sale_off" />
+                </div>
+
+                <div class="mt-2">
+                    <x-input-field.field label="Slug" type="text" name="slug" id="slug"
+                        placeholder="vd: ten-san-pham" required="*" />
+                </div>
+            </div>
+            <div class="md:flex-1">
+                <div class="mt-2">
+                    <label for="" class="mb-1 inline-block">Ảnh sản phẩm <span
+                            class="text-red-500">*</span></label>
+                    <x-form-element.file name="product-file" type="product" class="h-[250px]" />
+                </div>
+
+                <div class="mt-[11px]">
+                    <label for="" class="mb-1 inline-block">Ảnh chi tiết <span
+                            class="text-gray-500 text-xs">(Không bắt
+                            buộc)</span></label>
+                    <div class="mt-2px grid grid-cols-4 gap-1">
+                        <x-form-element.file name="product-subfile-1" main="1" type="product" remove_size="size-4"
+                            class="h-[65px] text-xs" none_upload_icon="true" none_mimes_required="true" />
+                        <x-form-element.file name="product-subfile-2" main="1" type="product" remove_size="size-4"
+                            class="h-[65px] text-xs" none_upload_icon="true" none_mimes_required="true" />
+                        <x-form-element.file name="product-subfile-3" main="1" type="product" remove_size="size-4"
+                            class="h-[65px] text-xs" none_upload_icon="true" none_mimes_required="true" />
+                        <x-form-element.file name="product-subfile-4" main="1" type="product" remove_size="size-4"
+                            class="h-[65px] text-xs" none_upload_icon="true" none_mimes_required="true" />
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <label for="category_id">Danh mục sản phẩm <span class="text-red-500">*</span></label>
+                    <select name="category_id" id="category_id"
+                        class="mt-1 rounded-md py-[7px] md:py-[3px] text-sm shadow-sm border-gray-500/30 w-full">
+                        <option value="">Chọn danh mục</option>
+                        @include('admin.product.partials.parent_categories')
+                    </select>
+                    <x-input-field.error_php name="category_id" />
+                </div>
+
+                <div class="mt-2">
+                    <label for="category_id">Up sales</label>
+                    <select name="up_sales" id="up_sales"
+                        class="mt-1 rounded-md py-[7px] md:py-[3px] text-sm shadow-sm border-gray-500/30 w-full">
+                        <option value="no">Mặc định</option>
+                        <option value="yes">Đẩy bán trước</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-2">
+            {{-- <x-forms.tinymce-editor id="product-content" name="content" /> --}}
+        </div>
+
+        <input type="hidden" name="id" value="{{ old('id') }}">
+        <input type="hidden" name="modal" value="edit">
+    </x-modal-dial.modal-edit>
+
+    {{-- ============================== --}}
+    <div class="py-4 h-[500px] border-t border-gray-500/50 border-dashed">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between gap-2 w-full md:w-auto">
+
+                {{-- title --}}
+                <div class="text-lg"> Danh sách sản phẩm </div>
+
+                {{-- create modal --}}
+                <x-modal-dial.button-open modal="create-product">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0-3-3m3 3 3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
+                    </svg>
+                </x-modal-dial.button-open>
+            </div>
+
+            {{-- statis module --}}
+            <div class="hidden md:block">
+                <x-statis.statis-module module="products" total="{{ $total }}" active="{{ $active }}"
+                    unactive="{{ $unactive }}" />
+            </div>
+        </div>
+
+        <div class="mt-2">
+            <form action="{{ route('admin.products.action') }}" method="post" id="form-product-action">@csrf</form>
+            <div class="flex flex-col md:flex-row justify-between gap-2">
+
+                {{-- action --}}
+                <div class="flex gap-2 items-center justify-between md:w-auto md:order-1 order-2">
+                    <x-form-element.select name="action" class="flex-1" form="form-product-action">
+                        <option value="">Hành động hàng loạt</option>
+                        <option value="active" {{ old('action') == 'active' ? 'selected' : '' }}>Công khai</option>
+                        <option value="unactive" {{ old('action') == 'unactive' ? 'selected' : '' }}>Tạm ngưng</option>
+                    </x-form-element.select>
+
+                    <x-button.button-action class="w-[40%]" form="form-product-action" />
+                </div>
+
+                {{-- filter --}}
+                <div class="flex flex-col md:flex-row md:items-center gap-2 md:mt-0 order-1 md:order-2">
+
+                    {{-- search --}}
+                    <div>
+                        <x-form-element.search placeholder="Tìm kiếm theo tên..." name="search-product"
+                            module="products" class="search" />
                     </div>
 
-                    {{-- statis module --}}
+                    {{-- category --}}
+                    <div>
+                        <x-form-element.select name="product-filter" module="products" class="select-category py-1">
+                            <option value="">Lọc theo danh mục</option>
+                            @include('admin.product.partials.parent_categories')
+                        </x-form-element.select>
+                    </div>
+
+                    {{-- status --}}
+                    <div>
+                        <x-form-element.select name="product-filter" module="products" class="select-filter py-1">
+                            <option value="">Lọc theo trạng thái</option>
+                            <option value="publish">Công khai</option>
+                            <option value="unpublish">Tạm ngưng</option>
+                            <option value="draft">Bản nháp</option>
+                        </x-form-element.select>
+                    </div>
+
+                    {{-- reset --}}
                     <div class="hidden md:block">
-                        <x-statis-module module="posts" total="" active="" unactive=""/>
+                        <x-button.button-reset />
                     </div>
+
                 </div>
             </div>
 
             {{-- list --}}
-            <div class="list-posts pb-5">
-                {{-- @include('admin.user.partials.list') --}}
+            <div class="list-products pb-5">
+                @include('admin.product.partials.list')
             </div>
-
-        </form>
-
+        </div>
     </div>
 </x-app-layout>

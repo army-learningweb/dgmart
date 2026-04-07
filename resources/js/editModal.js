@@ -24,18 +24,41 @@ export default function editModal() {
                 const modal = $(".modal-" + modal_name);
                 const inputs = {
                     name: modal.find("input[name=name]"),
+                    code: modal.find("input[name=code]"),
                     email: modal.find("input[name=email]"),
+                    price: modal.find("input[name=price]"),
+                    sale_off: modal.find("input[name=sale_off]"),
                     slug: modal.find("input[name=slug]"),
                     id : modal.find("input[name=id]"),
                     textarea_desc : modal.find("textarea[name=desc]"),
                     textarea_title : modal.find("textarea[name=title]")
                 }
 
-                // post module
+                // product
+                if(module == 'products' && !type){
+                    inputs.id.val(data.product_info.id);
+                    inputs.name.val(data.product_info.name);
+                    inputs.code.val(data.product_info.code);
+                    inputs.textarea_desc.val(data.product_info.desc);
+                    inputs.price.val(data.product_info.price);
+                    inputs.sale_off.val(data.product_info.sale_off);
+                    inputs.slug.val(data.product_info.slug);
+                    modal.find('img.product-file-img').attr('src',data.img_url).removeClass('hidden').parents('div.relative').find('.fake-remove-file').removeClass('hidden');
+                    modal.find('input[name=old-product-file-id]').val(data.old_product_file_id);
+                    modal.find(`select#category_id option[value=${data.product_info.category_id}]`).prop('selected',true);
+                    modal.find(`select#up_sales option[value=${data.product_info.up_sales}]`).prop('selected',true);
+                    data.detail_imgs.forEach((element ,index) => {
+                        modal.find(`img.product-subfile-${index + 1}-img`).attr('src',element.url).removeClass('hidden').parents('div.relative').find('.fake-remove-file').removeClass('hidden');
+                        modal.find(`input[name=old-product-subfile-${index + 1}-id]`).val(element.id);
+                    });
+                }
+
+                // post
                 if(module == 'posts' && !type){
                     inputs.textarea_title.val(data.post_info.title);
                     inputs.textarea_desc.val(data.post_info.desc);
                     inputs.id.val(data.post_info.id);
+                    inputs.slug.val(data.post_info.slug);
                     modal.find('img').attr('src',data.img_url).removeClass('hidden');
                     modal.find('input[name=old-post-file-id]').val(data.old_post_file_id);
                     modal.find(`option[value=${data.post_info.category_id}]`).prop('selected',true);
@@ -52,14 +75,17 @@ export default function editModal() {
                     modal.find('input[name=is_parent]').val(data.parent_id);
                 }        
                 
-                // user module
+                // user
                 if (module == "users") {
-                    inputs.name.val(data.name);
-                    inputs.email.val(data.email);
-                    inputs.id.val(data.id);
+                    inputs.name.val(data.user_info.name);
+                    inputs.email.val(data.user_info.email);
+                    inputs.id.val(data.user_info.id);
+                    data.roles.forEach(id => {
+                        modal.find(`option[value=${id}]`).prop('selected',true);
+                    });
                 }
 
-                // permission module
+                // permission
                 if (module == 'permissions'){
                     inputs.name.val(data.name);
                     inputs.slug.val(data.slug);
@@ -67,7 +93,7 @@ export default function editModal() {
                     inputs.id.val(data.id);
                 }
 
-                // role module
+                // role
                 if (module == 'roles'){
                     inputs.name.val(data.role.name);
                     inputs.textarea_desc.val(data.role.desc);

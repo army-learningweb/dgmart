@@ -27,6 +27,7 @@ class AdminCategoryController extends Controller
     // thêm
     function store(Request $request)
     {
+
         $request->merge([
             'slug' => Str::slug($request->input('slug'))
         ]);

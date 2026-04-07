@@ -13,8 +13,7 @@ abstract class Controller
 {
     function __construct(Request $request)
     {
-        // $request->session()->forget('post-file');
-        // $request->session()->forget('post-file-id');
+        // $request->session()->flush();
         $request->session()->put('module_active', $request->segment(2));
         $request->session()->put('sub_module_active', $request->segment(3));
     }

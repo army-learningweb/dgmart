@@ -14,6 +14,7 @@ class Media extends Model
         'type',
         'object_id',
         'user_id',
-        'updated_at'
+        'updated_at',
+        'is_main'
     ];
 }

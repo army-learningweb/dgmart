@@ -19,12 +19,11 @@
         </div>
 
         <div class="mt-2 flex flex-col">
-
-            <x-form-element.select label="Chọn danh mục cha" id="parent_category" name="parent_category"
-                class="text-[12px] w-full my-1">
-                <option value="">Chọn</option>
+            <label for="parent_category">Danh mục</label>
+            <select id="parent_category" name="parent_category" class="rounded-md md:py-[3px] text-sm shadow-sm border-gray-500/30 w-full md:w-automd:w-full my-1 py-2 scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent">
+                <option value="">(Trống)</option>
                 @include('admin.category.partials.parent_categories')
-            </x-form-element.select>
+            </select>
             <span class="text-amber-600 text-xs">Để " trống " nếu bạn muốn đây là danh mục Cha</span>
         </div>
 

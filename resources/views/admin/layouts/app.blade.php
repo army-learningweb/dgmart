@@ -10,7 +10,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- MCE config -->
-    <x-head.tinymce-config id="post-content"/>
+    {{-- <x-head.tinymce-config id="post-content"/> --}}
+    {{-- <x-head.tinymce-config id="product-content"/> --}}
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">

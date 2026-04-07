@@ -67,3 +67,11 @@ function post_status($status)
 
     return $arr_status[$status];
 }
+
+function admin_role($role)
+{
+    echo "<div class='inline-flex items-center gap-1 rounded-md bg-amber-400/10  px-2 py-1 text-xs font-medium text-amber-600'>
+                <span>$role</span>
+            </div>";
+}
+

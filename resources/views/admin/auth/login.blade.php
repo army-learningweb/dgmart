@@ -12,17 +12,17 @@
 
         <!-- Password -->
         <div class="mt-2">
-            <x-input-field.field label="Mật khẩu" type="password" name="password" id="password" required="*"/>
+            <x-input-field.field label="Mật khẩu" type="password" name="password" id="password" required="*" autocomplete="curren-password"/>
         </div>
         
         <!-- Remember Me -->
-        <div class="flex items-center justify-between mt-4">
+        <div class="flex items-center justify-between mt-3">
             <label for="remember_me">
-                <input id="remember_me" type="checkbox" class="border-gray-300 rounded dark:bg-[#1e1f20] text-teal-600 shadow-sm focus:ring-0 dark:border-0 focus:outline-0" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">Ghi nhớ đăng nhập</span>
+                <input id="remember_me" type="checkbox" class="border-gray-300 rounded shadow-sm focus:ring-0 focus:outline-0" name="remember">
+                <span class="ms-1 text-sm text-gray-600">Ghi nhớ đăng nhập</span>
             </label>
              @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
+                <a class="text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none inline-block" href="{{ route('password.request') }}">
                     Quên mật khẩu ?
                 </a>
             @endif

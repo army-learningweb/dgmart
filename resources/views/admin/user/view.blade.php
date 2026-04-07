@@ -12,16 +12,18 @@
         </div>
 
         <div class="mt-2">
-            <x-input-field.field id="create_email" label="Email" type="text" name="email" required="*" />
+            <x-input-field.field id="create_email" label="Email" type="text" name="email" required="*"
+                autocomplete="username" />
         </div>
 
         <div class="mt-2">
-            <x-input-field.field id="create_password" label="Mật khẩu" type="password" name="password" required="*" />
+            <x-input-field.field id="create_password" label="Mật khẩu" type="password" name="password" required="*"
+                autocomplete="new-password" />
         </div>
 
         <div class="mt-2">
             <x-input-field.field id="create_password_confirmation" label="Xác nhận mật khẩu" type="password"
-                name="password_confirmation" required="*" />
+                name="password_confirmation" required="*" autocomplete="new-password" />
         </div>
 
         <input type="hidden" name="modal" value="create">
@@ -36,16 +38,25 @@
 
         <div class="mt-2">
             <x-input-field.field id="edit_email" label="Email" type="text" name="email" required="*"
-                readonly="readonly"/>
+                readonly="readonly" autocomplete="username" />
         </div>
 
         <div class="mt-2">
-            <x-input-field.field id="edit_password" label="Mật khẩu mới" type="password" name="password" />
+            <x-input-field.field id="edit_password" label="Mật khẩu mới" type="password" name="password"
+                autocomplete="new-password" />
         </div>
 
         <div class="mt-2">
             <x-input-field.field id="edit_password_confirmation" label="Xác nhận mật khẩu" type="password"
-                name="password_confirmation" />
+                name="password_confirmation" autocomplete="new-password" />
+        </div>
+
+        <div class="mt-2">
+            <label for="roles">Quyền<span class="text-red-500">*</span></label>
+            <select multiple name="roles[]" id="roles" class="rounded-md md:py-[3px] text-sm shadow-sm border-gray-500/30 w-full md:w-automd:w-full mt-1 py-2 scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent">
+                <option value="">Chọn quyền</option>
+                @include('admin.user.partials.roles')
+            </select>
         </div>
 
         <input type="hidden" name="id" value="{{ old('id') }}">
@@ -88,7 +99,7 @@
                         </option>
                     </x-form-element.select>
 
-                    <x-button.button-action class="w-[40%]" form="form_action_users"/>
+                    <x-button.button-action class="w-[40%]" form="form_action_users" />
                 </div>
 
                 {{-- filter --}}

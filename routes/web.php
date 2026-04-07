@@ -12,6 +12,7 @@ use App\Http\Controllers\ValidationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\AdminFileController;
+use App\Http\Controllers\AdminProductController;
 
 
 Route::get('/', function () {
@@ -43,7 +44,8 @@ Route::middleware('auth')->group(function () {
 
     // User
     Route::get('/admin/users',[AdminUserController::class,'list'])->name('admin.users');
-    Route::get('/admin/users/filter',[AdminUserController::class,'list_filter']);
+    Route::post('/admin/users',[AdminUserController::class,'list_filter']);
+    
     Route::post('/admin/users/store',[AdminUserController::class,'store'])->name('admin.users.store');
     Route::post('/admin/users/destroy/{user}',[AdminUserController::class,'destroy'])->name('admin.users.destroy');
     Route::get('/admin/users/edit',[AdminUserController::class,'edit'])->name('admin.users.edit');
@@ -75,13 +77,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/posts/categories/action',[AdminCategoryController::class,'action'])->name('admin.posts.categories.action');
     
     Route::get('/admin/posts',[AdminPostController::class,'view'])->name('admin.posts');
+    Route::post('/admin/posts',[AdminPostController::class,'list_filter']);
     Route::post('/admin/posts/store',[AdminPostController::class,'store'])->name('admin.posts.store');
     Route::post('/admin/posts/destroy/{post}',[AdminPostController::class,'destroy'])->name('admin.posts.destroy');
     Route::get('admin/posts/edit',[AdminPostController::class,'edit']);
     Route::post('/admin/posts/update',[AdminPostController::class,'update'])->name('admin.posts.update');
     Route::post('/admin/posts/action',[AdminPostController::class,'action'])->name('admin.posts.action');
     Route::post('/admin/posts/updateStatus', [AdminPostController::class,'updateStatus']);
-    Route::get('/admin/posts/filter',[AdminPostController::class,'list_filter']);
+    
     
     // Product
     Route::get('/admin/products/categories',[AdminCategoryController::class,'view'])->name('admin.products.categories');
@@ -92,7 +95,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/products/categories/destroy/{category}',[AdminCategoryController::class,'destroy'])->name('admin.products.categories.destroy');
     Route::post('/admin/products/categories/action',[AdminCategoryController::class,'action'])->name('admin.products.categories.action');
 
-    Route::get('/admin/products',[AdminPostController::class,'view'])->name('admin.products');
+    Route::get('/admin/products',[AdminProductController::class,'view'])->name('admin.products');
+    Route::post('/admin/products',[AdminProductController::class,'list_filter']);
+    Route::post('/admin/products/store',[AdminProductController::class,'store'])->name('admin.products.store');
+    Route::post('/admin/products/destroy/{product}',[AdminProductController::class,'destroy'])->name('admin.products.destroy');
+    Route::get('admin/products/edit',[AdminProductController::class,'edit']);
+    Route::post('/admin/products/update',[AdminProductController::class,'update'])->name('admin.products.update');
+    Route::post('/admin/products/action',[AdminProductController::class,'action'])->name('admin.products.action');
+    Route::post('/admin/products/updateStatus', [AdminProductController::class,'updateStatus']);
     
    
 

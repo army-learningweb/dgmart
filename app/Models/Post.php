@@ -13,6 +13,7 @@ class Post extends Model
         'title',
         'desc',
         'content',
+        'slug',
         'status',
         'user_id',
         'category_id',

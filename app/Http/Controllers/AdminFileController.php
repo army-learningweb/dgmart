@@ -39,7 +39,8 @@ class AdminFileController extends Controller
                 'extension' => $extension,
                 'size' => $size,
                 'type' => $type,
-                'user_id' => Auth::user()->id
+                'user_id' => Auth::user()->id,
+                'is_main' => $request->is_main
             ]);
 
             $request->session()->put($request->name,asset("$uploads_path/$fullname"));
@@ -58,13 +59,14 @@ class AdminFileController extends Controller
     function remove(Request $request){
         $id = $request->id;
         $name = $request->name;
+        $type = $request->type;
 
-        $path = Media::where('id',$id)->value('url');
+        $path = Media::where('id',$id)->where('type',$type)->value('url');
         if(isset($path)){
             File::delete($path);
         }
 
-        Media::find($id)->delete();
+        Media::where('id',$id)->where('type',$type)->delete();
 
         session()->forget($name);
         session()->forget("{$name}-id");

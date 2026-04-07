@@ -1,14 +1,14 @@
 @if ($permissions->count() > 0)
     <div
-        class="bg-white shadow-md mt-3 py-3 px-5 rounded-md text-sm overflow-x-auto md:overflow-visible">
+        class="bg-white shadow-md mt-3 pb-3 px-5 rounded-md text-sm md:max-h-[530px] md:overflow-y-auto overflow-x-auto md:overflow-visible scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent">
         <table class="min-w-[1000px] md:w-full">
-            <tr>
-                <td class="px-5 pr-10 pb-3">#</td>
-                <td class="px-5 pb-3">Tên quyền</td>
-                <td class="px-5 pb-3">Mô tả</td>
-                <td class="px-5 pb-3">Slug</td>
-                <td class="px-3 pb-3">Ngày tạo</td>
-                <td class="px-3 pb-3 text-center">Thao tác</td>
+            <tr class="sticky top-0 bg-white">
+                <td class="px-5 py-5">#</td>
+                <td class="px-5">Tên quyền</td>
+                <td class="px-5">Mô tả</td>
+                <td class="px-5">Slug</td>
+                <td class="px-3">Ngày tạo</td>
+                <td class="px-3 text-center">Thao tác</td>
             </tr>
             
             @foreach ($permissions as $module => $permissions)
@@ -16,7 +16,7 @@
                     <td class="py-3" colspan="6">
                         <div
                             class="bg-blue-500/10 text-blue-600 inline-block px-3 py-1 rounded-md">
-                            Module {{ ucfirst($module) }}
+                            {{ ucfirst($module) }}
                         </div>
                     </td>
                 </tr>
