@@ -16,7 +16,10 @@ return [
 
     'max' => [
         'string' => ':attribute tối đa :max kí tự',
-        'file' => ':attribute tối đa :max'
+        'file' => ':attribute tối đa :max',
+    ],
+    'between' => [
+        'numeric' => ':attribute phải nằm trong khoảng từ :min đến :max %'
     ],
 
     'attributes' => [
@@ -34,6 +37,7 @@ return [
         'old-post-file-id' => 'Ảnh bài viết',
         'old-product-file-id' => 'Ảnh sản phẩm',
         'code' => 'Mã',
-        'price' => 'Giá'
+        'price' => 'Giá',
+        'sale_off' => 'Giảm giá'
     ]
 ];

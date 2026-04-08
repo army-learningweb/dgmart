@@ -21,7 +21,10 @@ class AdminCategoryController extends Controller
         $active = Category::where('type', $type)->where('status', 'active')->count();
         $unactive = Category::where('type', $type)->where('status', 'unactive')->count();
 
-        return view('admin.category.view-categories', compact('parent_categories', 'categories', 'total', 'active', 'unactive','type'));
+        $total_parent_categories = Category::where('type',$type)->where('parent_id',0)->count();
+        $total_child_categories = Category::where('type',$type)->where('parent_id','>',0)->count();
+
+        return view('admin.category.view-categories', compact('parent_categories', 'categories', 'total', 'active', 'unactive','type','total_parent_categories','total_child_categories'));
     }
 
     // thêm

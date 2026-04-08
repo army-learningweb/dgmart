@@ -4,7 +4,8 @@
     'none_upload_icon' => '',
     'none_mimes_required' => '',
     'remove_size' => 'size-6',
-    'main' => "0"
+    'main' => "0",
+    'is_edit' => ''
 ])
 
 <div class="relative">
@@ -23,12 +24,20 @@
             <span class="text-xs text-gray-500">Định dạng JPG,PNG,JPEG</span>
         @endif
         
-        <img src="{{ session($name) ? session($name) : session("old-$name-img") }}" alt=""
-            class="{{ $name }}-img w-full h-full object-contain absolute {{ session($name) || session("old-$name-img") ? '' : 'hidden' }}">
-    </label>
+        {{-- img --}}
 
+        @if ($is_edit == '')
+            <img src="{{ session($name) ? session($name) : '' }} " alt=""
+            class="{{ $name }}-img w-full h-full object-contain absolute {{ session($name) && $is_edit == '' ? '' : 'hidden' }}">
+        @else
+            <img src="{{ session("old-$name-img") ? session("old-$name-img") : '' }}" alt=""
+            class="{{ $name }}-img w-full h-full object-contain absolute {{ session("old-$name-img") && $is_edit == 'true' ? '' : 'hidden' }}">
+        @endif
+
+    </label>
+    
     {{-- remove img --}}
-    <div class="remove-file absolute z-50 top-0 right-0 p-2 cursor-pointer {{ session($name) ? '' : 'hidden' }}"
+    <div class="remove-file absolute z-50 top-0 right-0 p-2 cursor-pointer {{ session($name) && $is_edit == '' ? '' : 'hidden' }}"
         data-name="{{ $name }}" data-type = {{ $type }}>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
             stroke="currentColor" class="{{ $remove_size }} text-red-500 hover:brightness-150">
@@ -38,7 +47,7 @@
     </div>
 
     {{-- fake remove img --}}
-    <div class="fake-remove-file absolute z-50 top-0 right-0 p-2 cursor-pointer {{ session("old-$name-img") ? '' : 'hidden' }}"
+    <div class="fake-remove-file absolute z-50 top-0 right-0 p-2 cursor-pointer {{ session("old-$name-img") && $is_edit == 'true' ? '' : 'hidden' }}"
         data-name="{{ $name }}">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
             stroke="currentColor" class="{{ $remove_size }} text-red-500 hover:brightness-150">
@@ -47,13 +56,18 @@
         </svg>
     </div>
 
+    {{-- value --}}
     <input type="file" id="{{ $name }}" name="file" class="upload-file hidden" data-type="{{ $type }}" data-main="{{ $main }}"
         data-name="{{ $name }}">
     <input type="hidden" name="{{ $name }}-id" value="{{ session("$name-id") ? session("$name-id") : '' }}">
     <input type="hidden" name="old-{{ $name }}-id" value="{{ session("old-$name-id") }}">
     <input type="hidden" name="destroy-session" value="{{ $name }}">
+
+
+    <x-input-field.error_ajax :name="$name" />
+
+    <x-input-field.error_php name="{{ $name }}-id" />
+    <x-input-field.error_php name="old-{{ $name }}-id" />
 </div>
 
-{{-- <x-input-field.error_ajax :name="$name" /> --}}
-<x-input-field.error_php name="{{ $name }}-id" />
-<x-input-field.error_php name="old-{{ $name }}-id" />
+

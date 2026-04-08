@@ -51,10 +51,11 @@ class AdminProductController extends Controller
     function store(Request $request)
     {
         $request->validate([
-            'code' => 'required|min:2|max:255|regex:/^[a-zA-Z0-9\-]+$/',
-            'name' => 'required|min:2|max:255|regex:/^[\p{P}\p{L}\p{S}\p{N}\s]+$/u',
-            'desc' => 'required|min:2|max:255|regex:/^[\p{P}\p{L}\p{S}\p{N}\s]+$/u',
+            'code' => 'required|min:2|max:255|regex:/^[a-zA-Z0-9\-\p{P}]+$/',
+            'name' => 'required|min:2|max:255|regex:/^[\p{P}\p{L}\p{N}\s]+$/u',
+            'desc' => 'required|min:2|max:255|regex:/^[\p{P}\p{L}\p{N}\s]+$/u',
             'slug' => 'required|min:2|',
+            'sale_off' => 'nullable|numeric|between:0,100',
             'product-file-id' => 'required',
             'price' => 'required|min:5|max:10',
             'category_id' => 'required|exists:categories,id'
@@ -64,6 +65,8 @@ class AdminProductController extends Controller
             $price = $request->input('price');
             $sale_off = $request->input('sale_off');
             $price_sale_off = $price - ($price * ($sale_off / 100));
+        }else{
+            $price_sale_off = null;
         }
 
         $slug = Str::slug($request->input('slug'));
@@ -136,54 +139,121 @@ class AdminProductController extends Controller
         $old_product_file_id = asset(Media::where('object_id', $request->input('id'))->where('type','product')->value('id'));
         $request->session()->put('old-product-file-img', $old_product_file_img);
         $request->session()->put('old-product-file-id', $old_product_file_id);
-
-        $detail_imgs = Media::where('object_id',$request->input('id'))->where('type','product')->where('is_main',"1")->get(['url','id']);
         
-        foreach($detail_imgs as $key => $img){
-            $request->session()->put("old-product-subfile-". $key + 1 ."-img", asset($img->url));
-            $request->session()->put("old-product-subfile-". $key + 1 . "-id", $img->id);
+        $detail_imgs = Media::where('object_id',$request->input('id'))->where('type','product')->where('is_main',"1")->get(['url','id']);
+        if($detail_imgs->count() > 0){
+            foreach($detail_imgs as $key => $img){
+                $request->session()->put("old-product-subfile-". $key + 1 ."-img", asset($img->url));
+                $request->session()->put("old-product-subfile-". $key + 1 . "-id", $img->id);
+            }
+        }else{
+            for($i = 1; $i <= 4; $i++){
+                if($request->input("old-product-subfile-". $i ."-id") != null){
+                    $detail_img = Media::where('id',$request->input("old-product-subfile-". $i ."-id"))->where('type','product')->where('is_main',"1")->get(['url','id']);
+                    foreach($detail_img as $img){
+                        $request->session()->put("old-product-subfile-$i-img", asset($img->url));
+                        $request->session()->put("old-product-subfile-$i-id", $img->id);
+                    }
+                }
+            }
         }
-
+        
         $request->validate([
             'code' => 'required|min:2|max:255|regex:/^[a-zA-Z0-9\-\p{P}]+$/',
             'name' => 'required|min:2|max:255|regex:/^[\p{P}\p{L}\p{S}\p{N}\s]+$/u',
             'desc' => 'required|min:2|max:255|regex:/^[\p{P}\p{L}\p{S}\p{N}\s]+$/u',
             'slug' => 'required|min:2|',
+            'sale_off' => 'nullable|numeric|between:0,100',
             'old-product-file-id' => 'required',
             'price' => 'required|min:5|max:10',
             'category_id' => 'required|exists:categories,id'
         ]);
 
-        // Post::where('id', $request->input('id'))->update([
-        //     'title' => $request->input('title'),
-        //     'desc' => $request->input('desc'),
-        //     'category_id' => $request->input('category_id'),
-        // ]);
+        $slug = Product::where('id',$request->input('id'))->value('slug');
+        $slug = !isset($slug) ? $slug : Str::slug($request->input('slug'));
 
-        // if ($request->input('post-file-id') != null) {
-        //     $path = Media::where('object_id', $request->input('id'))->value('url');
-        //     if (isset($path)) {
-        //         if (file_exists($path)) File::delete($path);
-        //     }
-        //     Media::where('object_id', $request->input('id'))->delete();
+        if($request->input('sale_off') > 0){
+            $price = $request->input('price');
+            $sale_off = $request->input('sale_off');
+            $price_sale_off = $price - ($price * ($sale_off / 100));
+        }else{
+            $price_sale_off = null;
+        }
+        
+        Product::where('id', $request->input('id'))->update([
+            'code' => $request->input('code'),
+            'name' => $request->input('name'),
+            'desc' => $request->input('desc'),
+            'price' => $request->input('price'),
+            'slug' => $slug,
+            'sale_off' => $request->input('sale_off'),
+            'price_sale_off' => $price_sale_off,
+            'category_id' => $request->input('category_id'),
+            'user_id' => Auth::user()->id,
+            'details' => $request->input('details')
+        ]);
 
-        //     Media::where('id', $request->input('post-file-id'))->update([
-        //         'object_id' => $request->input('id')
-        //     ]);
-        // }
+        // file phụ
+        $old_sub_files_id = Media::where('object_id',$request->input('id'))->where('type','product')->where('is_main',"1")->pluck('id');
+
+        for($i = 1; $i <= 4; $i++){
+            $new_sub_files_id[] = $request->integer("old-product-subfile-$i-id");
+        }
+
+        foreach($new_sub_files_id as $index => $new_id){
+
+            // Nếu thêm ảnh mới
+            if($new_sub_files_id[$index] != 0){
+                Media::where('id',$new_sub_files_id[$index])->where('type','product')->update(['object_id' => $request->input('id')]);
+            }
+
+            // Nếu xóa ảnh cũ
+            if(!empty($old_sub_files_id[$index]) && ($new_sub_files_id[$index] == 0)){
+                $old_path = Media::where('id',$old_sub_files_id[$index])->where('type','product')->value('url');
+                if($old_path){
+                    if(File::exists(public_path($old_path))) File::delete($old_path);
+                    Media::where('id',$old_sub_files_id[$index])->where('type','product')->delete();
+                }
+            }
+
+            // Nếu mới khác cũ
+            if( !empty($old_sub_files_id[$index]) && ($new_sub_files_id[$index] != $old_sub_files_id[$index])){
+                $old_path = Media::where('id',$old_sub_files_id[$index])->where('type','product')->value('url');
+                if($old_path){
+                    if(File::exists(public_path($old_path))) File::delete($old_path);
+                    Media::where('id',$old_sub_files_id[$index])->where('type','product')->delete();
+                }
+            }
+
+        }
+        
+        // file chính
+        if ($request->input('product-file-id') != null) {
+            $path = Media::where('object_id', $request->input('id'))->where('type','product')->value('url');
+            if (isset($path)) {
+                if (file_exists($path)) File::delete($path);
+            }
+            Media::where('object_id', $request->input('id'))->where('type','product')->delete();
+
+            Media::where('id', $request->input('post-file-id'))->where('type','product')->update([
+                'object_id' => $request->input('id')
+            ]);
+        }
 
         session()->forget('product-file');
         session()->forget('product-file-id');
-        session()->forget($request->input('destroy-session'));
-        session()->forget("{$request->input('destroy-session')}-id");
         session()->forget('old-product-file-img');
         session()->forget('old-product-file-id');
+        session()->forget($request->input('destroy-session'));
+        session()->forget("{$request->input('destroy-session')}-id");
 
-        foreach($detail_imgs as $key => $img){
-            $request->session()->forget("old-product-subfile-". $key + 1 ."-img");
-            $request->session()->forget("old-product-subfile-". $key + 1 . "-id");
+        for($i = 1; $i <= 4; $i++){
+            session()->forget("product-subfile-$i");
+            session()->forget("product-subfile-$i-id");
+            session()->forget("old-product-subfile-$i-img");
+            session()->forget("old-product-subfile-$i-id");
         }
-
+    
         return back()->with('status', 'Cập nhật thành công');
     }
 

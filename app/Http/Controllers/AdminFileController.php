@@ -14,9 +14,9 @@ class AdminFileController extends Controller
     function upload(Request $request)
     {
 
-            // $request->validate([
-            //     'file' => 'image|mimes:jpg,jpeg,png,avif|max:2048'
-            // ]);
+            $request->validate([
+                'file' => 'image|mimes:jpg,jpeg,png,avif,webp|max:2048'
+            ]);
 
             $file = $request->file('file');
             $size = $file->getSize();

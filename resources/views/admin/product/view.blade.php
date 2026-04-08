@@ -9,8 +9,8 @@
         route="{{ route('admin.products.store') }}" width="md:min-w-[1000px]"
         variant="h-90vh md:max-h-[500px] pl-1 pr-2 overflow-y-auto">
 
-        <div class="md:flex gap-2">
-            <div class="md:w-[70%]">
+        <div class="md:flex gap-3">
+            <div class="md:w-[60%]">
                 <div class="mt-2">
                     <x-input-field.field label="Mã sản phẩm" type="text" name="code" id="code"
                         required="*" />
@@ -23,7 +23,7 @@
 
                 <div class="mt-2">
                     <x-form-element.text-area id="desc" label="Mô tả" name="desc" required="*"
-                        class="h-[117px]" />
+                        class="h-[120px]" />
                 </div>
 
                 <div class="mt-2">
@@ -36,36 +36,13 @@
 
                 <div class="mt-2">
                     <x-input-field.field label="Slug" type="text" name="slug" id="slug"
-                        placeholder="vd: ten-san-pham" required="*" />
-                </div>
-            </div>
-            <div class="md:flex-1">
-                <div class="mt-2">
-                    <label for="" class="mb-1 inline-block">Ảnh sản phẩm <span
-                            class="text-red-500">*</span></label>
-                    <x-form-element.file name="product-file" type="product" class="h-[250px]" />
-                </div>
-
-                <div class="mt-[11px]">
-                    <label for="" class="mb-1 inline-block">Ảnh chi tiết <span
-                            class="text-gray-500 text-xs">(Không bắt
-                            buộc)</span></label>
-                    <div class="mt-2px grid grid-cols-4 gap-1">
-                        <x-form-element.file name="product-subfile-1" main="1" type="product" remove_size="size-4"
-                            class="h-[65px] text-xs" none_upload_icon="true" none_mimes_required="true" />
-                        <x-form-element.file name="product-subfile-2" main="1" type="product" remove_size="size-4"
-                            class="h-[65px] text-xs" none_upload_icon="true" none_mimes_required="true" />
-                        <x-form-element.file name="product-subfile-3" main="1" type="product" remove_size="size-4"
-                            class="h-[65px] text-xs" none_upload_icon="true" none_mimes_required="true" />
-                        <x-form-element.file name="product-subfile-4" main="1" type="product" remove_size="size-4"
-                            class="h-[65px] text-xs" none_upload_icon="true" none_mimes_required="true" />
-                    </div>
+                        placeholder="vd: ten-san-pham" required="*" class="placeholder:text-xs"/>
                 </div>
 
                 <div class="mt-2">
                     <label for="category_id">Danh mục sản phẩm <span class="text-red-500">*</span></label>
                     <select name="category_id" id="category_id"
-                        class="mt-1 rounded-md py-[7px] md:py-[3px] text-sm shadow-sm border-gray-500/30 w-full">
+                        class="mt-1 rounded-md py-[7px] text-sm shadow-sm border-gray-500/30 w-full">
                         <option value="">Chọn danh mục</option>
                         @include('admin.product.partials.parent_categories')
                     </select>
@@ -75,10 +52,37 @@
                 <div class="mt-2">
                     <label for="category_id">Up sales</label>
                     <select name="up_sales" id="up_sales"
-                        class="mt-1 rounded-md py-[7px] md:py-[3px] text-sm shadow-sm border-gray-500/30 w-full">
+                        class="mt-1 rounded-md py-[7px] text-sm shadow-sm border-gray-500/30 w-full">
                         <option value="no">Mặc định</option>
                         <option value="yes">Đẩy bán trước</option>
                     </select>
+                </div>
+            </div>
+
+            <div class="md:flex-1">
+                <div class="mt-2">
+                    <label for="" class="mb-1 inline-block">Ảnh sản phẩm <span
+                            class="text-red-500">*</span></label>
+                    <x-form-element.file name="product-file" type="product" class="h-[300px]" />
+                </div>
+
+                <div class="mt-[11px]">
+                    <label for="" class="mb-1 inline-block">Ảnh chi tiết <span
+                            class="text-gray-500 text-xs">(Không bắt
+                            buộc)</span></label>
+                    <div class="mt-1 grid grid-cols-2 gap-3">
+                        <x-form-element.file name="product-subfile-1" main="1" type="product" remove_size="size-5"
+                            class="h-[130px] text-xs" none_upload_icon="true" none_mimes_required="true" />
+                        <x-form-element.file name="product-subfile-2" main="1" type="product" remove_size="size-5"
+                            class="h-[130px] text-xs" none_upload_icon="true" none_mimes_required="true" />
+                    </div>
+
+                    <div class="mt-2 grid grid-cols-2 gap-3">
+                        <x-form-element.file name="product-subfile-3" main="1" type="product" remove_size="size-5"
+                            class="h-[130px] text-xs" none_upload_icon="true" none_mimes_required="true" />
+                        <x-form-element.file name="product-subfile-4" main="1" type="product" remove_size="size-5"
+                            class="h-[130px] text-xs" none_upload_icon="true" none_mimes_required="true" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -95,8 +99,8 @@
         route="{{ route('admin.products.update') }}" width="md:min-w-[1000px]"
         variant="h-90vh md:max-h-[500px] pl-1 pr-2 overflow-y-auto">
 
-        <div class="md:flex gap-2">
-            <div class="md:w-[70%]">
+        <div class="md:flex gap-3">
+            <div class="md:w-[60%]">
                 <div class="mt-2">
                     <x-input-field.field label="Mã sản phẩm" type="text" name="code" id="code"
                         required="*" />
@@ -109,7 +113,7 @@
 
                 <div class="mt-2">
                     <x-form-element.text-area id="desc" label="Mô tả" name="desc" required="*"
-                        class="h-[117px]" />
+                        class="h-[120px]" />
                 </div>
 
                 <div class="mt-2">
@@ -124,34 +128,11 @@
                     <x-input-field.field label="Slug" type="text" name="slug" id="slug"
                         placeholder="vd: ten-san-pham" required="*" />
                 </div>
-            </div>
-            <div class="md:flex-1">
-                <div class="mt-2">
-                    <label for="" class="mb-1 inline-block">Ảnh sản phẩm <span
-                            class="text-red-500">*</span></label>
-                    <x-form-element.file name="product-file" type="product" class="h-[250px]" />
-                </div>
-
-                <div class="mt-[11px]">
-                    <label for="" class="mb-1 inline-block">Ảnh chi tiết <span
-                            class="text-gray-500 text-xs">(Không bắt
-                            buộc)</span></label>
-                    <div class="mt-2px grid grid-cols-4 gap-1">
-                        <x-form-element.file name="product-subfile-1" main="1" type="product" remove_size="size-4"
-                            class="h-[65px] text-xs" none_upload_icon="true" none_mimes_required="true" />
-                        <x-form-element.file name="product-subfile-2" main="1" type="product" remove_size="size-4"
-                            class="h-[65px] text-xs" none_upload_icon="true" none_mimes_required="true" />
-                        <x-form-element.file name="product-subfile-3" main="1" type="product" remove_size="size-4"
-                            class="h-[65px] text-xs" none_upload_icon="true" none_mimes_required="true" />
-                        <x-form-element.file name="product-subfile-4" main="1" type="product" remove_size="size-4"
-                            class="h-[65px] text-xs" none_upload_icon="true" none_mimes_required="true" />
-                    </div>
-                </div>
 
                 <div class="mt-2">
                     <label for="category_id">Danh mục sản phẩm <span class="text-red-500">*</span></label>
                     <select name="category_id" id="category_id"
-                        class="mt-1 rounded-md py-[7px] md:py-[3px] text-sm shadow-sm border-gray-500/30 w-full">
+                        class="mt-1 rounded-md py-[7px] text-sm shadow-sm border-gray-500/30 w-full">
                         <option value="">Chọn danh mục</option>
                         @include('admin.product.partials.parent_categories')
                     </select>
@@ -161,10 +142,37 @@
                 <div class="mt-2">
                     <label for="category_id">Up sales</label>
                     <select name="up_sales" id="up_sales"
-                        class="mt-1 rounded-md py-[7px] md:py-[3px] text-sm shadow-sm border-gray-500/30 w-full">
+                        class="mt-1 rounded-md py-[7px] text-sm shadow-sm border-gray-500/30 w-full">
                         <option value="no">Mặc định</option>
                         <option value="yes">Đẩy bán trước</option>
                     </select>
+                </div>
+            </div>
+
+            <div class="md:flex-1">
+                <div class="mt-2">
+                    <label for="" class="mb-1 inline-block">Ảnh sản phẩm <span
+                            class="text-red-500">*</span></label>
+                    <x-form-element.file name="product-file" type="product" class="h-[300px]" is_edit="true"/>
+                </div>
+
+                <div class="mt-[11px]">
+                    <label for="" class="mb-1 inline-block">Ảnh chi tiết <span
+                            class="text-gray-500 text-xs">(Không bắt
+                            buộc)</span></label>
+
+                    <div class="mt-1 grid grid-cols-2 gap-3"> 
+                         <x-form-element.file name="product-subfile-1" main="1" type="product" remove_size="size-5"
+                            class="h-[130px] text-xs" none_upload_icon="true" none_mimes_required="true" is_edit="true"/>
+                        <x-form-element.file name="product-subfile-2" main="1" type="product" remove_size="size-5"
+                            class="h-[130px] text-xs" none_upload_icon="true" none_mimes_required="true" is_edit="true"/>
+                    </div>
+                    <div class="mt-2 grid grid-cols-2 gap-3">
+                        <x-form-element.file name="product-subfile-3" main="1" type="product" remove_size="size-5"
+                            class="h-[130px] text-xs" none_upload_icon="true" none_mimes_required="true" is_edit="true"/>
+                        <x-form-element.file name="product-subfile-4" main="1" type="product" remove_size="size-5"
+                            class="h-[130px] text-xs" none_upload_icon="true" none_mimes_required="true" is_edit="true"/>
+                    </div>
                 </div>
             </div>
         </div>

@@ -20,7 +20,7 @@
 
         <div class="mt-2 flex flex-col">
             <label for="parent_category">Danh mục</label>
-            <select id="parent_category" name="parent_category" class="rounded-md md:py-[3px] text-sm shadow-sm border-gray-500/30 w-full md:w-automd:w-full my-1 py-2 scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent">
+            <select id="parent_category" name="parent_category" class="rounded-md py-[7px] text-sm shadow-sm border-gray-500/30 w-full md:w-automd:w-full my-1 scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent">
                 <option value="">(Trống)</option>
                 @include('admin.category.partials.parent_categories')
             </select>
@@ -47,7 +47,7 @@
             <label for="parent_category_{{ $type }}">Chọn danh mục cha</label>
             <select id="parent_category_{{ $type }}" name="parent_category"
                 {{ old('is_parent') == 0 ? 'disabled' : '' }}
-                class="select-parent-category py-[5px] shadow-sm text-[12px] md:w-auto my-1 rounded-md md:py-[3px] text-sm border-gray-500/30 w-full">
+                class="select-parent-category shadow-sm text-sm md:w-auto my-1 rounded-md py-[7px] border-gray-500/30 w-full">
                 <option value="0">( Trống )</option>
                 @include('admin.category.partials.parent_categories')
             </select>
@@ -109,12 +109,12 @@
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
                         </svg>
-                        <span>Danh mục cha</span>
+                        <span>Danh mục cha ({{ $total_parent_categories }})</span>
                     </div>
                     <div class="flex gap-2">
-                        <span class="shrink-0 ml-1 mr-2">└</span>
+                        <span class="shrink-0 mx-1">└</span>
                         <span>
-                            Danh mục con
+                            Danh mục con ({{ $total_child_categories }})
                         </span>
                     </div>
                     </div>

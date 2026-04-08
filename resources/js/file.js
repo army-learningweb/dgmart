@@ -10,7 +10,7 @@ export default function file() {
         data.append('type',type);
         data.append('name',name);
         data.append('is_main',is_main);
-        
+
         $.ajax({
             type: "post",
             url: "/admin/file/upload",
@@ -25,9 +25,15 @@ export default function file() {
                 $(`input[name=${name}-id]`).val(data.id);
                 $(`input[name=old-${name}-id]`).val(data.id);
                 $(`.old-${name}-id_php_error`).html('');
+                $(`.${name}-id_php_error`).html('');
+                $(`.${name}_ajax_error`).html('');
             },
             error: function(xhr){
-               
+               if(xhr.status == 422){
+                    let errors = xhr.responseJSON.errors;
+                    $(`.${name}_ajax_error`).html(errors['file'][0]);
+                    $(`.${name}-id_php_error`).html('');
+               }
             }
         });
     });

@@ -13,6 +13,8 @@ class ValidationController extends Controller
             'name' => 'nullable|min:2|max:255|regex:/^[\p{L}\p{N}\p{P}\s]+$/u',
             'desc' => 'nullable|min:2|max:255|regex:/^[\p{L}\p{N}\p{P}\p{S}\s]+$/u',
             'title' => 'nullable|min:8|max:255|regex:/^[\p{L}\p{N}\p{P}\p{S}\s]+$/u',
+            'code' => 'nullable|min:2|max:50|regex:/^[a-zA-Z0-9\p{P}]+$/',
+            'slug' => 'nullable|min:2'
         ]);
 
         return response()->json();
