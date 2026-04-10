@@ -24,6 +24,7 @@ import updateStatus from "./updateStatus";
 import checkAll from "./checkAll";
 import sidebar from "./sidebar";
 import file from "./file";
+import updateOrder from "./updateOrder";
 
 $(function () {
     loadingState()
@@ -36,4 +37,5 @@ $(function () {
     checkAll()
     sidebar()
     file()
+    updateOrder()
 });

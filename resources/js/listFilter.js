@@ -1,18 +1,18 @@
 export default function listFilter() {
     // lọc danh sách
-    $(document).on("input",".select-filter, .search, .select-category",function(){
+    $(document).on("input",".select-filter, .search, .select-category, .select-order",function(){
         let module = $(this).data("module");
         let search_value = $('.search').val();
         let filter_value = $('.select-filter').val();
         let category_value = $('.select-category').val();
+        let order_value = $('.select-order').val();
 
         let data = { 
             search_value: search_value,
             filter_value: filter_value,
-            category_value: category_value
+            category_value: category_value,
+            order_value: order_value
         };
-
-        // 1. Cập nhật URL để "ghi nhớ" ngữ cảnh
         
         $.ajax({
             type: "post",
@@ -34,14 +34,16 @@ export default function listFilter() {
         let search_value = $('.search').val();
         let filter_value = $('.select-filter').val();
         let category_value = $('.select-category').val();
+        let order_value = $('.select-order').val();
 
         let data = { 
             search_value: search_value,
             filter_value: filter_value,
             category_value: category_value,
+            order_value: order_value,
             url : url
         };
-
+        
         $.ajax({
             type: "post",
             url: url,

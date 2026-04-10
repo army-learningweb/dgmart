@@ -35,7 +35,7 @@
 
             <div class="md:flex-1">
                 <div>
-                    <label for="" class="mt-2 inline-block">Ảnh bìa bài viết <span class="text-red-500">*</span></label>
+                    <div class="mt-2 inline-block">Ảnh bìa bài viết <span class="text-red-500">*</span></div>
                     <x-form-element.file name="post-file" type="post" class="h-[200px] md:h-[370px] mt-1"/>
                 </div>
             </div>
@@ -80,7 +80,7 @@
 
             <div class="md:flex-1">
                 <div>
-                    <label for="" class="mt-2 inline-block">Ảnh bìa bài viết <span class="text-red-500">*</span></label>
+                    <div class="mt-2 inline-block">Ảnh bìa bài viết <span class="text-red-500">*</span></div>
                     <x-form-element.file name="post-file" type="post" class="h-[200px] md:h-[370px] mt-1" is_edit="true"/>
                 </div>
             </div>

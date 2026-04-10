@@ -27,7 +27,7 @@ class AdminFileController extends Controller
 
             $uploads_path = "uploads/{$type}";
             $i = 1;
-            while(File::exists("$uploads_path/$fullname")){
+            while(file_exists(public_path("$uploads_path/$fullname"))){
                 $fullname = "{$name}-copy-{$i}.{$extension}";
                 $i++;
             }
@@ -63,6 +63,7 @@ class AdminFileController extends Controller
 
         $path = Media::where('id',$id)->where('type',$type)->value('url');
         if(isset($path)){
+            if(file_exists(public_path($path)));
             File::delete($path);
         }
 

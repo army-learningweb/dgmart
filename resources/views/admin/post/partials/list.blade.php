@@ -1,6 +1,6 @@
 @if ($posts->count() > 0)
     <div
-        class="bg-white shadow-md mt-3 py-3 px-5 rounded-md text-sm overflow-x-auto md:overflow-visible md:min-h-[450px] scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent">
+        class="bg-white shadow-md mt-3 py-3 px-5 rounded-md text-sm overflow-x-auto md:overflow-visible scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent">
         <table class="min-w-[1200px] md:w-full">
 
             <tr>
@@ -26,16 +26,15 @@
                             class="check_single rounded-[3px] mb-[2px]">
                     </td>
                     <td class="px-2">{{ $posts->firstItem() + $loop->index }}</td>
-                    <td class="px-5 py-2 text-center">
-                        @if ($post->media)
+                    <td class="px-5 py-[10px] text-center">
+                        @if (!empty($post->media->where('object_id',$post->id)->where('type','post')->value('url')))
                             <div class="flex justify-center items-center">
-                                <img src="{{ asset($post->media->url) }}" alt=""
+                                <img src="{{ asset($post->media->where('object_id',$post->id)->where('type','post')->value('url')) }}" alt=""
                                     class="w-[100px] h-[60px] object-cover rounded-md shadow-sm">
                             </div>
                         @else
                             <x-table.unknow />
                         @endif
-
                     </td>
                     <td class="px-5">
                         <div class="w-[150px] line-clamp-2">
@@ -57,7 +56,7 @@
                         </div>
                     </td>
                     <td class="px-3">
-                        <x-table.select module="posts" class="select-status" data-id="{{ $post->id }}">
+                        <x-table.select name="select-status" module="posts" class="select-status" data-id="{{ $post->id }}">
                             <option value="publish" {{ $post->status == 'publish' ? 'selected' : '' }}>Công khai
                             </option>
                             <option value="unpublish" {{ $post->status == 'unpublish' ? 'selected' : '' }}>Tạm ngưng
@@ -69,7 +68,7 @@
                     <td class="px-3">{{ $post->created_at->format('d/m/Y') }}</td>
                     <td class="px-3">
                         @if ($post->user)
-                            {{ $post->user->name }}
+                            <div class="w-[70px] truncate">{{ $post->user->name }}</div>
                         @else
                             <x-table.unknow />
                         @endif
@@ -83,43 +82,6 @@
                     </td>
                 </tr>
             @endforeach
-            @php
-                $row_per_page = $posts->perPage();
-                $current_row = $posts->count();
-            @endphp
-            @for ($i = $current_row + 1; $i <= $row_per_page; $i++)
-                <tr class="">
-                    <td class="px-3">
-                        <div class="w-4 h-4 bg-gray-200 rounded-sm"></div>
-                    </td>
-                    <td class="px-2">#</td>
-                    <td class="px-5 py-2 text-center flex justify-center items-center">
-                        <div class="w-[100px] h-[60px] bg-gray-200 rounded-md"></div>
-                    </td>
-                    <td class="px-5 space-y-2">
-                        <div class="w-[130px] h-[10px] bg-gray-200 rounded-sm"></div>
-                        <div class="w-[130px] h-[10px] bg-gray-200 rounded-sm"></div>
-                    </td>
-                    <td class="px-5"> 
-                        <div class="w-[100px] h-[10px] bg-gray-200 rounded-sm"></div>
-                    </td>
-                    <td class="px-3">
-                        <div class="w-[100px] h-[10px] bg-gray-200 rounded-sm"></div>
-                    </td>
-                    <td class="px-3">
-                        <div class="w-[100px] h-[10px] bg-gray-200 rounded-sm"></div>
-                    </td>
-                    <td class="px-3">
-                        <div class="w-[100px] h-[10px] bg-gray-200 rounded-sm"></div>
-                    </td>
-                    <td class="px-3">
-                        <div class="w-[50px] h-[10px] bg-gray-200 rounded-sm"></div>
-                    </td>
-                    <td class="px-3 text-center">
-                        <div class="w-[70px] h-[10px] bg-gray-200 rounded-sm"></div>
-                    </td>
-                </tr>
-            @endfor
         </table>
     </div>
     <div class="mt-2">

@@ -18,7 +18,7 @@
 
                 <div class="mt-2">
                     <x-input-field.field label="Tên sản phẩm" type="text" name="name" id="name"
-                        required="*" />
+                        required="*" autocomplete="on"/>
                 </div>
 
                 <div class="mt-2">
@@ -61,15 +61,15 @@
 
             <div class="md:flex-1">
                 <div class="mt-2">
-                    <label for="" class="mb-1 inline-block">Ảnh sản phẩm <span
-                            class="text-red-500">*</span></label>
+                    <div class="mb-1 inline-block">Ảnh sản phẩm <span
+                            class="text-red-500">*</span></div>
                     <x-form-element.file name="product-file" type="product" class="h-[300px]" />
                 </div>
 
                 <div class="mt-[11px]">
-                    <label for="" class="mb-1 inline-block">Ảnh chi tiết <span
+                    <div class="mb-1 inline-block">Ảnh chi tiết <span
                             class="text-gray-500 text-xs">(Không bắt
-                            buộc)</span></label>
+                            buộc)</span></div>
                     <div class="mt-1 grid grid-cols-2 gap-3">
                         <x-form-element.file name="product-subfile-1" main="1" type="product" remove_size="size-5"
                             class="h-[130px] text-xs" none_upload_icon="true" none_mimes_required="true" />
@@ -108,7 +108,7 @@
 
                 <div class="mt-2">
                     <x-input-field.field label="Tên sản phẩm" type="text" name="name" id="name"
-                        required="*" />
+                        required="*" autocomplete="on"/>
                 </div>
 
                 <div class="mt-2">
@@ -151,15 +151,15 @@
 
             <div class="md:flex-1">
                 <div class="mt-2">
-                    <label for="" class="mb-1 inline-block">Ảnh sản phẩm <span
-                            class="text-red-500">*</span></label>
+                    <div class="mb-1 inline-block">Ảnh sản phẩm <span
+                            class="text-red-500">*</span></div>
                     <x-form-element.file name="product-file" type="product" class="h-[300px]" is_edit="true"/>
                 </div>
 
                 <div class="mt-[11px]">
-                    <label for="" class="mb-1 inline-block">Ảnh chi tiết <span
+                    <div class="mb-1 inline-block">Ảnh chi tiết <span
                             class="text-gray-500 text-xs">(Không bắt
-                            buộc)</span></label>
+                            buộc)</span></div>
 
                     <div class="mt-1 grid grid-cols-2 gap-3"> 
                          <x-form-element.file name="product-subfile-1" main="1" type="product" remove_size="size-5"
@@ -218,8 +218,9 @@
                 <div class="flex gap-2 items-center justify-between md:w-auto md:order-1 order-2">
                     <x-form-element.select name="action" class="flex-1" form="form-product-action">
                         <option value="">Hành động hàng loạt</option>
-                        <option value="active" {{ old('action') == 'active' ? 'selected' : '' }}>Công khai</option>
-                        <option value="unactive" {{ old('action') == 'unactive' ? 'selected' : '' }}>Tạm ngưng</option>
+                        <option value="active" {{ old('action') == 'active' ? 'selected' : '' }}>Hoạt động</option>
+                        <option value="unactive" {{ old('action') == 'unactive' ? 'selected' : '' }}>Vô hiệu hóa</option>
+                        <option value="destroy" {{ old('action') == 'destroy' ? 'selected' : '' }}>Xóa vĩnh viễn</option>
                     </x-form-element.select>
 
                     <x-button.button-action class="w-[40%]" form="form-product-action" />
@@ -234,6 +235,15 @@
                             module="products" class="search" />
                     </div>
 
+                    {{-- orderby price --}}
+                    <div>
+                        <x-form-element.select name="product-filter" module="products" class="select-order py-1">
+                            <option value="">Sắp xếp theo giá</option>
+                            <option value="asc">Giá tăng dần</option>
+                            <option value="desc">Giá giảm dần</option>
+                        </x-form-element.select>
+                    </div>
+
                     {{-- category --}}
                     <div>
                         <x-form-element.select name="product-filter" module="products" class="select-category py-1">
@@ -246,9 +256,8 @@
                     <div>
                         <x-form-element.select name="product-filter" module="products" class="select-filter py-1">
                             <option value="">Lọc theo trạng thái</option>
-                            <option value="publish">Công khai</option>
-                            <option value="unpublish">Tạm ngưng</option>
-                            <option value="draft">Bản nháp</option>
+                            <option value="active">Công khai</option>
+                            <option value="unactive">Tạm ngưng</option>
                         </x-form-element.select>
                     </div>
 

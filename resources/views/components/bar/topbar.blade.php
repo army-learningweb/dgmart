@@ -1,7 +1,7 @@
 <div class="flex justify-between items-center gap-3">
 
     {{-- title page --}}
-    <div>
+    <div class="">
         @if (session('module_active') == 'dashboard')
            <div class="text-xl">Dashboard</div>
         @else
@@ -11,7 +11,7 @@
 
     @if (session('module_active') == 'dashboard')
         {{-- search --}}
-        <div class="hidden md:block">
+        {{-- <div class="hidden md:block">
             <form action="">
                 @csrf
                 <div class="flex items-center gap-2">
@@ -21,7 +21,7 @@
                         class="rounded-md py-1 border-0 w-[290px] focus:border-0 focus:ring-0 text-sm shadow-md placeholder:text-gray-500">
                 </div>
             </form>
-        </div>
+        </div> --}}
     @endif
     
     {{-- icon --}}

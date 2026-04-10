@@ -10,7 +10,7 @@ use App\Models\role_permission;
 class AdminRoleController extends Controller
 {
    // danh sách
-    function view(){
+    function list(){
 
         $permissions = Permission::all()->groupBy(function($permission){
             return explode('.',$permission->slug)[1];
@@ -24,15 +24,15 @@ class AdminRoleController extends Controller
     // thêm
     function store(Request $request){
         $request->validate([
-            'name' => 'required|min:2|max:255|regex:/^[a-zA-Z\s]+$/|unique:roles,name',
+            'name' => 'required|min:2|max:255|regex:/^[a-zA-Z\s]+$/|unique:roles',
             'desc' => 'required|min:2|max:255|regex:/^[\p{L}\s]+$/u',
         ]);
 
         if(!$request->permission_id) return back()->with('status_failed','Tạo mới thất bại, bạn chưa chọn quyền');
 
         $role = Role::create([
-            'name' => $request->input('name'),
-            'desc' => $request->input('desc')
+            'name' => trim($request->input('name')),
+            'desc' => trim($request->input('desc'))
         ]);
 
         $role->permissions()->attach($request->permission_id);
@@ -74,8 +74,8 @@ class AdminRoleController extends Controller
         $role = Role::find($request->id);
 
         $role->update([
-            'name' => $request->input('name'),
-            'desc' => $request->input('desc')
+            'name' => trim($request->input('name')),
+            'desc' => trim($request->input('desc'))
         ]);
 
         $role->permissions()->sync($request->permission_id);

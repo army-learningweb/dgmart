@@ -8,7 +8,7 @@
     <x-modal-dial.modal-create modal="create-user" title="Tạo mới thành viên" button_create="Tạo mới"
         route="{{ route('admin.users.store') }}">
         <div class="mt-2">
-            <x-input-field.field id="create_name" label="Họ tên" type="text" name="name" required="*" />
+            <x-input-field.field id="create_name" label="Họ tên" type="text" name="name" required="*" autocomplete="on" />
         </div>
 
         <div class="mt-2">
@@ -33,7 +33,7 @@
     <x-modal-dial.modal-edit modal="edit-user" title="Cập nhật thông tin" button_edit="Cập nhật"
         route="{{ route('admin.users.update') }}">
         <div class="mt-2">
-            <x-input-field.field id="edit_name" label="Họ tên" type="text" name="name" required="*" />
+            <x-input-field.field id="edit_name" label="Họ tên" type="text" name="name" required="*" autocomplete="on" />
         </div>
 
         <div class="mt-2">

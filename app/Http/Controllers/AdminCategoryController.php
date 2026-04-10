@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class AdminCategoryController extends Controller
 {
     // danh sách
-    function view()
+    function list()
     {
         $type = session('module_active') == 'posts' ? 'post' : 'product';
 
@@ -37,7 +37,7 @@ class AdminCategoryController extends Controller
 
         $request->validate([
             'name' => 'required|min:2|max:255|regex:/^[\p{L}\p{N}\p{P}\s]+$/u|unique:categories,name',
-            'slug' => 'required|min:2|max:255|unique:categories,slug',
+            'slug' => 'required|min:2|max:255|unique:categories',
         ]);
 
         $slug = Str::slug($request->input('slug'));
@@ -46,7 +46,7 @@ class AdminCategoryController extends Controller
         $type = session('module_active') == 'posts' ? 'post' : 'product';
 
         Category::create([
-            'name' => $request->input('name'),
+            'name' => trim($request->input('name')),
             'type' => $type,
             'slug' => $slug,
             'parent_id' => $parent_id,
@@ -114,7 +114,7 @@ class AdminCategoryController extends Controller
         if($current_id == $request->input('parent_category')) return back()->with('status_failed','Không thể chọn chính danh mục này');
 
         Category::where('id', $request->input('id'))->update([
-            'name' => $request->input('name'),
+            'name' => trim($request->input('name')),
             'slug' => $slug,
             'parent_id' => $parent_id,
             'updated_at' => now()

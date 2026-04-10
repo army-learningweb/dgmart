@@ -24,16 +24,15 @@ class AdminUserController extends Controller
     // thêm
     function store(Request $request)
     {
-
         $request->validate([
             'name' => 'required|min:2|max:255|regex:/^[\p{L}\s]+$/u',
-            'email' => 'required|email|max:255',
+            'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:8|max:255|regex:/^[a-zA-Z0-9!@#$%^&*_-]+$/u|confirmed'
         ]);
 
         User::create([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
+            'name' => trim($request->input('name')),
+            'email' => trim($request->input('email')),
             'password' => $request->input('password')
         ]);
 
@@ -68,7 +67,7 @@ class AdminUserController extends Controller
         // return $request->all();
         if ($request->input('password') == '' || $request->input('password_confirmation') == '') {
 
-            // if($request->id == Auth::user()->id) return back()->with('status_failed','Cập nhật thông tin thất bại');
+            if($request->id == Auth::user()->id) return back()->with('status_failed','Cập nhật thông tin thất bại');
 
             $request->validate([
                 'name' => 'required|min:2|max:255|regex:/^[\p{L}\s0-9]+$/u',
@@ -76,7 +75,7 @@ class AdminUserController extends Controller
 
             $user = User::find($request->input('id'));
             $user->update([
-                'name' => $request->input('name'),
+                'name' => trim($request->input('name')),
                 'updated_at' => now()
             ]);
 
@@ -90,7 +89,7 @@ class AdminUserController extends Controller
 
             $user = User::find($request->input('id'));
             $user->update([
-                'name' => $request->input('name'),
+                'name' => trim($request->input('name')),
                 'password' => $request->input('password'),
                 'updated_at' => now()
             ]);

@@ -6,12 +6,12 @@
                 <td class="px-3 py-4">
                     <input type="checkbox" name="" id="check_all" class="check_all rounded-[3px] mb-[2px]">
                 </td>
-                <td class="px-3">#</td>
-                <td class="px-3">Danh mục</td>
-                <td class="px-5">Slug</td>
-                <td class="px-3 text-center">Trạng thái</td>
-                <td class="px-3">Cập nhật trạng thái</td>
-                <td class="px-3">Ngày tạo</td>
+                <td class="px-4">#</td>
+                <td class="px-2">Danh mục</td>
+                <td class="px-2">Slug</td>
+                <td class="px-5">Trạng thái</td>
+                <td class="px-2">Cập nhật trạng thái</td>
+                <td class="px-4">Ngày tạo</td>
                 <td class="px-3">Người tạo</td>
                 <td class="px-3 text-center">Thao tác</td>
             </tr>
@@ -27,8 +27,8 @@
                         @endif
                         
                     </td>
-                    <td class="px-3"> {{ $loop->iteration }}</td>
-                    <td class="px-3 py-4">
+                    <td class="px-4"> {{ $loop->iteration }}</td>
+                    <td class="px-2 py-4">
                         @if ($item->level == 0)
                             <div class="w-[150px] flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -49,28 +49,28 @@
                             </div>
                         @endif
                     </td>
-                    <td class="px-5">
+                    <td class="px-2">
                         <div class="w-[120px] truncate">
                             {{ $item->slug }}
                         </div>
                     </td>
-                    <td class="px-5">
-                        <div class="flex justify-center status-categories-{{ $type }}s-{{ $item->id }}">
+                    <td class="px-5 status-categories-{{ $type }}s-{{ $item->id }}">
+                        <div class="w-[100px]">
                             {!! user_status($item->status) !!}
                         </div>
                     </td>
                     <td class="px-3">
-                        <x-table.select module="{{ $type }}s" type="categories"
+                        <x-table.select name="select-status" module="{{ $type }}s" type="categories"
                             class="select-status shadow-none" data-id="{{ $item->id }}">
                             <option value="active" {{ $item->status == 'active' ? 'selected' : '' }}>Hoạt động</option>
                             <option value="unactive" {{ $item->status == 'unactive' ? 'selected' : '' }}>Vô hiệu hóa
                             </option>
                         </x-table.select>
                     </td>
-                    <td class="px-3">{{ $item->created_at->format('d/m/Y') }}</td>
-                    <td class="px-3">
+                    <td class="px-4">{{ $item->created_at->format('d/m/Y') }}</td>
+                    <td class="">
                         @if ($item->user)
-                            <div class="w-[70px] line-clamp-1">
+                            <div class="w-[70px] truncate text-center">
                                 {{ $item->user->name }}
                             </div>
                         @else

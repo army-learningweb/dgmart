@@ -17,4 +17,8 @@ class Media extends Model
         'updated_at',
         'is_main'
     ];
+
+    function user(){
+        return $this->belongsTo(User::class);
+    }
 }

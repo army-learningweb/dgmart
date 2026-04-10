@@ -44,7 +44,7 @@
                     </td>
                     <td class="px-3 status-users-{{ $user->id }}">{!! user_status($user->status) !!}</td>
                     <td class="px-3">
-                        <x-table.select module="users" class="select-status" data-id="{{ $user->id }}">
+                        <x-table.select name="select-status" module="users" class="select-status" data-id="{{ $user->id }}">
                             <option value="active" {{ $user->status == 'active' ? 'selected' : '' }}>Hoạt động
                             </option>
                             <option value="unactive" {{ $user->status == 'unactive' ? 'selected' : '' }}>Vô hiệu hóa

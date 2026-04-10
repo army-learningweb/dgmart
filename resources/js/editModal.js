@@ -34,6 +34,18 @@ export default function editModal() {
                     textarea_title : modal.find("textarea[name=title]")
                 }
 
+                // slider
+                if(module == 'sliders'){
+                    console.log(data);
+                    inputs.textarea_title.val(data.slider_info.title);
+                    inputs.textarea_desc.val(data.slider_info.desc);
+                    inputs.id.val(data.slider_info.id);
+                    modal.find('input[name=order]').val(data.slider_info.order);
+                    modal.find('img').attr('src',data.img_url).removeClass('hidden');
+                    modal.find('input[name=old-slider-file-id]').val(data.old_slider_file_id);
+                    modal.find('.fake-remove-file').removeClass('hidden');
+                }
+
                 // product
                 if(module == 'products' && !type){
                     inputs.id.val(data.product_info.id);

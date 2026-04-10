@@ -19,7 +19,8 @@ return [
         'file' => ':attribute tối đa :max',
     ],
     'between' => [
-        'numeric' => ':attribute phải nằm trong khoảng từ :min đến :max %'
+        'numeric' => ':attribute phải nằm trong khoảng từ :min đến :max',
+        'integer' => ':attribute phải nằm trong khoảng từ :min đến :max'
     ],
 
     'attributes' => [
@@ -33,11 +34,14 @@ return [
         'category_id' => 'Danh mục',
         'file' => 'File',
         'post-file-id' => 'Ảnh bài viết',
-        'product-file-id' => 'Ảnh sản phẩm',
         'old-post-file-id' => 'Ảnh bài viết',
+        'product-file-id' => 'Ảnh sản phẩm',
         'old-product-file-id' => 'Ảnh sản phẩm',
+        'slider-file-id' => 'Ảnh banner',
+        'old-slider-file-id' => 'Ảnh banner',
         'code' => 'Mã',
         'price' => 'Giá',
-        'sale_off' => 'Giảm giá'
+        'sale_off' => 'Giảm giá',
+        'order' => 'Số thứ tự'
     ]
 ];

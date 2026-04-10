@@ -9,7 +9,7 @@
         route="{{ route('admin.' . $type . 's.categories.store') }}" width="w-[400px]">
 
         <div class="mt-2">
-            <x-input-field.field id="name" label="Tên danh mục" type="text" name="name" required="*" />
+            <x-input-field.field id="name" label="Tên danh mục" type="text" name="name" required="*" autocomplete="on"/>
         </div>
 
         <div class="mt-2">
@@ -34,7 +34,7 @@
     <x-modal-dial.modal-edit modal="edit-category" title="Cập nhật thông tin danh mục" button_edit="Cập nhật"
         route="{{ route('admin.' . $type . 's.categories.update') }}" width="w-[400px]">
         <div class="mt-2">
-            <x-input-field.field id="name" label="Tên danh mục" type="text" name="name" required="*" />
+            <x-input-field.field id="name" label="Tên danh mục" type="text" name="name" required="*" autocomplete="on"/>
         </div>
 
         <div class="mt-2">

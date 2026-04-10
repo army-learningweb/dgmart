@@ -8,7 +8,7 @@
     <x-modal-dial.modal-create modal="create-permission" title="Tạo quyền mới" button_create="Tạo mới"
         route="{{ route('admin.permissions.store') }}" variant="md:min-w-[350px]">
         <div class="mt-2">
-            <x-input-field.field id="name" label="Tên quyền" type="text" name="name" required="*" />
+            <x-input-field.field id="name" label="Tên quyền" type="text" name="name" required="*" autocomplete="on" />
             <span class="text-gray-400 text-xs">Ví dụ: Edit Post</span>
         </div>
 
@@ -30,7 +30,7 @@
     <x-modal-dial.modal-edit modal="edit-permission" title="Cập nhật thông tin quyền" button_edit="Cập nhật"
         route="{{ route('admin.permissions.update') }}" variant="md:min-w-[350px]">
         <div class="mt-2">
-            <x-input-field.field id="name" label="Tên quyền" type="text" name="name" required="*" />
+            <x-input-field.field id="name" label="Tên quyền" type="text" name="name" required="*" autocomplete="on" />
             <span class="text-gray-400 text-xs">Ví dụ: Edit Post</span>
         </div>
 

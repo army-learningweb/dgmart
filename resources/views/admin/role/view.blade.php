@@ -8,7 +8,7 @@
     <x-modal-dial.modal-create modal="create-role" title="Tạo vai trò mới" button_create="Tạo mới"
         route="{{ route('admin.roles.store') }}" width="md:max-w-[700px]" variant="md:max-h-[700px]">
         <div class="mt-2">
-            <x-input-field.field id="name" label="Tên vai trò" type="text" name="name" required="*" />
+            <x-input-field.field id="name" label="Tên vai trò" type="text" name="name" required="*" autocomplete="on"/>
             <span class="text-gray-400 text-xs">Ví dụ: Post Manager</span>
         </div>
 
@@ -33,7 +33,7 @@
     <x-modal-dial.modal-edit modal="edit-role" title="Cập nhật thông tin vai trò" button_edit="Cập nhật"
         route="{{ route('admin.roles.update') }}" width="md:max-w-[700px]" variant="md:max-h-[700px]">
         <div class="mt-2">
-            <x-input-field.field id="name" label="Tên vai trò" type="text" name="name" required="*" />
+            <x-input-field.field id="name" label="Tên vai trò" type="text" name="name" required="*" autocomplete="on"/>
             <span class="text-gray-400 text-xs">Ví dụ: Post Manager</span>
         </div>
 

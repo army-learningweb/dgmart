@@ -1,7 +1,7 @@
     <ul id="main-menu">
         <li>
             <a href="{{ route('dashboard') }}"
-                class="{{ session('module_active') == 'dashboard' ? 'active light-active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-blue-600">
+                class="{{ session('module_active') == 'dashboard' ? 'active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-blue-600">
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-5">
@@ -17,7 +17,7 @@
 
         <li class="mt-1">
             <a href="#"
-                class="{{ session('module_active') == 'products' ? 'active light-active' : '' }} flex items-center justify-between gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-blue-600">
+                class="{{ session('module_active') == 'products' ? 'active' : '' }} flex items-center justify-between gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-blue-600">
                 <div class="flex gap-3">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -40,7 +40,7 @@
             <ul class="sub-menu rounded-md {{ session('module_active') == 'products' ? 'block' : 'hidden' }}">
                 <li class="mt-1">
                     <a href="{{ route('admin.products') }}"
-                        class="{{ session('module_active') == 'products' && session('sub_module_active') == '' ? 'active light-active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-blue-600">
+                        class="{{ session('module_active') == 'products' && session('sub_module_active') == '' ? 'active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-blue-600">
                         <span>
                             └
                         </span>
@@ -51,7 +51,7 @@
                 </li>
                 <li class="mt-1">
                     <a href="{{ route('admin.products.categories') }}"
-                        class="{{ session('module_active') == 'products' && session('sub_module_active') == 'categories' ? 'active light-active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-blue-600">
+                        class="{{ session('module_active') == 'products' && session('sub_module_active') == 'categories' ? 'active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-blue-600">
                         <span>
                             └
                         </span>
@@ -65,7 +65,7 @@
 
         <li class="mt-1">
             <a href="#"
-                class="{{ session('module_active') == 'posts' ? 'active light-active' : '' }} flex items-center justify-between px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-blue-600">
+                class="{{ session('module_active') == 'posts' ? 'active' : '' }} flex items-center justify-between px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-blue-600">
                 <div class="flex gap-3 items-center">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -89,7 +89,7 @@
             <ul class="sub-menu rounded-md {{ session('module_active') == 'posts' ? 'block' : 'hidden' }}">
                 <li class="mt-1">
                     <a href="{{ route('admin.posts') }}"
-                        class="{{ session('module_active') == 'posts' && session('sub_module_active') == '' ? 'active light-active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-blue-600">
+                        class="{{ session('module_active') == 'posts' && session('sub_module_active') == '' ? 'active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-blue-600">
                         <span>
                             └
                         </span>
@@ -100,7 +100,7 @@
                 </li>
                 <li class="mt-1">
                     <a href="{{ route('admin.posts.categories') }}"
-                        class="{{ session('module_active') == 'posts' && session('sub_module_active') == 'categories' ? 'active light-active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-blue-600">
+                        class="{{ session('module_active') == 'posts' && session('sub_module_active') == 'categories' ? 'active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-blue-600">
                         <span>
                             └
                         </span>
@@ -145,8 +145,8 @@
         </li>
 
         <li class="mt-1">
-            <a href=""
-                class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-blue-600">
+            <a href="{{ route('admin.sliders') }}"
+                class="{{ session('module_active') == 'sliders' ? 'active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-blue-600">
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-5">
@@ -178,7 +178,7 @@
         <hr class="my-3 border-dashed border-gray-500/50">
         <li class="mt-1">
             <a href="{{ route('admin.users') }}"
-                class="{{ session('module_active') == 'users' ? 'active light-active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-blue-600">
+                class="{{ session('module_active') == 'users' ? 'active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-blue-600">
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-5">
@@ -194,7 +194,7 @@
 
         <li class="mt-1">
             <a href="{{ route('admin.roles') }}"
-                class="{{ session('module_active') == 'roles' ? 'active light-active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-blue-600">
+                class="{{ session('module_active') == 'roles' ? 'active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-blue-600">
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-5">
@@ -220,6 +220,22 @@
                 </span>
                 <span>
                     Quyền
+                </span>
+            </a>
+        </li>
+        <hr class="my-3 border-dashed border-gray-500/50">
+        <li class="mt-1">
+            <a href="{{ route('admin.trashs') }}"
+                class="{{ session('module_active') == 'trashs' ? 'active' : '' }} flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 hover:bg-white hover:shadow-md hover:text-blue-600">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                    </svg>
+                </span>
+                <span>
+                    File rác
                 </span>
             </a>
         </li>

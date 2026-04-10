@@ -13,10 +13,10 @@ use App\Models\Post;
 class AdminPostController extends Controller
 {
     // danh sách
-    function view()
+    function list()
     {
         $parent_categories = Category::where('type', 'post')->where('status', 'active')->where('parent_id', '>', 0)->get();
-        $posts = Post::with(['user:id,name', 'media:object_id,url', 'category:id,name'])->latest()->paginate(5);
+        $posts = Post::with(['user:id,name', 'media:object_id,type,url', 'category:id,name'])->latest()->paginate(5);
         $total = Post::all()->count();
         $publish = Post::where('status', 'publish')->count();
         $unpublish = Post::where('status', 'unpublish')->count();
@@ -55,12 +55,12 @@ class AdminPostController extends Controller
             'desc' => 'required|min:2|max:255|regex:/^[\p{P}\p{L}\p{S}\p{N}\s]+$/u',
             'category_id' => 'required|exists:categories,id',
             'post-file-id' => 'required',
-            'slug' => 'required'
+            'slug' => 'required|unique:posts'
         ]);
 
         $new_post = Post::create([
-            'title' => $request->input('title'),
-            'desc' => $request->input('desc'),
+            'title' => trim($request->input('title')),
+            'desc' => trim($request->input('desc')),
             'content' => $request->input('content'),
             'slug' => Str::slug($request->input('slug')),
             'category_id' => $request->input('category_id'),
@@ -85,7 +85,7 @@ class AdminPostController extends Controller
         $file_path = Media::where('object_id', $post->id)->where('type','post')->first();
 
         if (isset($file_path->url)) {
-            if (file_exists($file_path->url)) File::delete($file_path->url);
+            if (file_exists(public_path($file_path->url))) File::delete($file_path->url);
             Media::where('object_id', $post->id)->where('type','post')->delete();
         }
 
@@ -120,15 +120,15 @@ class AdminPostController extends Controller
             'desc' => 'required|min:2|max:255|regex:/^[\p{P}\p{L}\p{S}\p{N}\s]+$/u',
             'category_id' => 'required|exists:categories,id',
             'old-post-file-id' => 'required',
-            'slug' => 'required'
+            'slug' => 'required|unique:posts,slug,'.$request->input('id')
         ]);
 
         $slug = Post::where('id',$request->input('id'))->value('slug');
         $slug = $request->input('slug') == $slug ? $request->input('slug') : Str::slug($request->input('slug'));
 
         Post::where('id', $request->input('id'))->update([
-            'title' => $request->input('title'),
-            'desc' => $request->input('desc'),
+            'title' => trim($request->input('title')),
+            'desc' => trim($request->input('desc')),
             'content' => $request->input('content'),
             'category_id' => $request->input('category_id'),
             'slug' => $slug
@@ -137,7 +137,7 @@ class AdminPostController extends Controller
         if ($request->input('post-file-id') != null) {
             $path = Media::where('object_id', $request->input('id'))->where('type','post')->value('url');
             if (isset($path)) {
-                if (file_exists($path)) File::delete($path);
+                if (file_exists(public_path($path))) File::delete($path);
             }
             Media::where('object_id', $request->input('id'))->where('type','post')->delete();
 
@@ -165,20 +165,15 @@ class AdminPostController extends Controller
         if ($request->action == 'destroy') {
             $imgs_path = Media::whereIn('object_id', $request->posts_id)->where('type','post')->pluck('url');
             foreach ($imgs_path as $path) {
-                if (file_exists($path)) {
+                if (file_exists(public_path($path))) {
                     File::delete($path);
                 }
             }
             Media::whereIn('object_id', $request->posts_id)->where('type','post')->delete();
-            Post::destroy($request->posts_id);
+            $num_delete = Post::destroy($request->posts_id);
+            return back()->with('status',"Đã xóa $num_delete bài viết");
         }
-
-        if ($request->action) {
-            foreach ($request->posts_id as $id) {
-                Post::where('id', $id)->update(['status' => $request->action, 'updated_at' => now()]);
-            }
-        }
-
+        Post::whereIn('id',$request->posts_id)->update(['status' => $request->action, 'updated_at' => now()]);
         return back()->with('status', 'Hành động thành công');
     }
 

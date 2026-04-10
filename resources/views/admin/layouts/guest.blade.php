@@ -22,7 +22,7 @@
 
         <div>
             <a href="/">
-                <x-application-logo />
+                <x-application-logo class="text-5xl" />
             </a>
         </div>
 

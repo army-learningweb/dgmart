@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class AdminPermissionController extends Controller
 {
      // danh sách
-    function view(){
+    function list(){
         $permissions = Permission::all()->groupBy(function($permission){
             return explode('.',$permission->slug)[1];
         });
@@ -21,15 +21,15 @@ class AdminPermissionController extends Controller
     function store(Request $request){
 
         $request->validate([
-            'name' => 'required|min:8|max:255|regex:/^[a-zA-Z0-9\s]+$/u|unique:permissions,name',
-            'slug' => 'required|min:2|max:255|regex:/^[a-zA-Z0-9\-\.]+$/|unique:permissions,slug',
+            'name' => 'required|min:8|max:255|regex:/^[a-zA-Z0-9\s]+$/u|unique:permissions',
+            'slug' => 'required|min:2|max:255|regex:/^[a-zA-Z0-9\-\.]+$/|unique:permissions',
             'desc' => 'required|min:8|max:255|regex:/^[\p{L}\s]+$/u'
         ]);
 
         Permission::create([
-            'name' => $request->input('name'),
-            'slug' => $request->input('slug'),
-            'desc' => $request->input('desc')
+            'name' => trim($request->input('name')),
+            'slug' => trim($request->input('slug')),
+            'desc' => trim($request->input('desc'))
         ]);
 
         return back()->with('status','Tạo mới thành công');
@@ -59,9 +59,9 @@ class AdminPermissionController extends Controller
         ]);
 
         Permission::where('id',$request->id)->update([
-            'name' => $request->input('name'),
-            'slug' => $request->input('slug'),
-            'desc' => $request->input('desc') 
+            'name' => trim($request->input('name')),
+            'slug' => trim($request->input('slug')),
+            'desc' => trim($request->input('desc')) 
         ]);
 
         $request->session()->forget('user_id');
