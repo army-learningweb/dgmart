@@ -34,6 +34,14 @@ export default function editModal() {
                     textarea_title : modal.find("textarea[name=title]")
                 }
 
+                // menu
+                if(module == 'menus'){
+                    modal.find('input[name=link-name]').val(data.name);
+                    modal.find(`option[value=${data.parent_id}]`).prop('selected',true);
+                    modal.find('input[name=is_parent]').val(data.parent_id);
+                    modal.find('.parent_id').prop('disabled',data.parent_id == 0);
+                }
+
                 // slider
                 if(module == 'sliders'){
                     console.log(data);

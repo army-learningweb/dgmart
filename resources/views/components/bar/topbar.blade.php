@@ -53,12 +53,11 @@
 
             {{-- menu --}}
             <div
-                class="user-menu pointer-events-none opacity-0 scale-0 transition-all duration-100 z-10 shadow-md rounded-md flex flex-col items-center min-w-[100px] absolute top-11 -left-[65px]">
+                class="user-menu pointer-events-none opacity-0 scale-0 transition-all duration-100 z-10 shadow-md rounded-md flex flex-col items-center min-w-[150px] absolute top-12 -left-[110px]">
                 <ul class="text-center w-full bg-white border border-gray-500/80 rounded-md">
                     <li class="py-1 border-b border-gray-500/80 w-full">
                         <a href="{{ route('profile.edit') }}"
-                            class="inline-block w-full text-gray-600 hover:text-gray-900">Hồ
-                            sơ</a>
+                            class="inline-block w-full text-gray-600 hover:text-gray-900">Thay đổi mật khẩu</a>
                     </li>
                     <li
                         class="py-1 w-full text-gray-600 hover:text-gray-900 cursor-pointer">

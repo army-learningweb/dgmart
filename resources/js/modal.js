@@ -20,10 +20,18 @@ export default function modal(){
             $(this).find('input[type=checkbox]').prop('checked',false);  
             $(this).find('select[name=parent_category]').val('');
             $(this).find('select[name=category_id]').val('');
+            $(this).find('select[name=parent_id]').val('');
             $(this).find('select#roles').val([]);
             $(this).find('textarea').val('');
             $(this).find('.error').html(``);
             $(this).find('img').attr('src','').addClass('hidden');
+
+            $(this).find('select[name=categories-product]').val('');
+            $(this).find('select[name=categories-post]').val('');
+            $(this).find('select[name=categories-product]').prop('disabled',false);
+            $(this).find('select[name=categories-post]').prop('disabled',false);
+            $(this).find('input[name=link-name]').removeClass('opacity-50 pointer-events-none');
+
         })
         $('div.error').html(``); 
         modal.addClass('pointer-events-none opacity-0 scale-0');

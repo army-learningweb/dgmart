@@ -12,6 +12,7 @@ use App\Http\Controllers\ValidationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\AdminFileController;
+use App\Http\Controllers\AdminMenuController;
 use App\Http\Controllers\AdminProductController;
 use App\Http\Controllers\AdminSliderController;
 use App\Http\Controllers\AdminTrashController;
@@ -115,6 +116,16 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/sliders/update',[AdminSliderController::class,'update'])->name('admin.sliders.update');
     Route::post('/admin/sliders/updateStatus',[AdminSliderController::class,'updateStatus']);
     Route::post('/admin/sliders/action',[AdminSliderController::class,'action'])->name('admin.sliders.action');
+
+    // Menu
+    Route::get('/admin/menus',[AdminMenuController::class,'list'])->name('admin.menus');
+    Route::post('/admin/menus/store',[AdminMenuController::class,'store'])->name('admin.menus.store');
+    Route::get('/admin/menus/edit',[AdminMenuController::class,'edit'])->name('admin.menus.edit');
+    Route::post('/admin/menus/update',[AdminMenuController::class,'update'])->name('admin.menus.update');
+    Route::post('/admin/menus/action',[AdminMenuController::class,'action'])->name('admin.menus.action');
+    Route::post('admin/menus/destroy/{menu}',[AdminMenuController::class,'destroy'])->name('admin.menus.destroy');
+    Route::post('/admin/menus/updateStatus',[AdminMenuController::class,'updateStatus']);
+    Route::post('/admin/menus/action',[AdminMenuController::class,'action'])->name('admin.menus.action');
 
     // Trash
     Route::get('/admin/trashs',[AdminTrashController::class,'list'])->name('admin.trashs');

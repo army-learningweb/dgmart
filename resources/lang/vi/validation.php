@@ -42,6 +42,7 @@ return [
         'code' => 'Mã',
         'price' => 'Giá',
         'sale_off' => 'Giảm giá',
-        'order' => 'Số thứ tự'
+        'order' => 'Số thứ tự',
+        'link-name' => 'Tên Link'
     ]
 ];
