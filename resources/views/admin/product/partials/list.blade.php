@@ -59,7 +59,7 @@
                         </div>
                     </td>
                      <td class="px-3 status-products-{{ $product->id }}">
-                        <div class="w-[100px]">
+                        <div class="w-[110px]">
                             {!! user_status($product->status) !!}
                         </div>
                     </td>

@@ -55,7 +55,7 @@
                         </div>
                     </td>
                     <td class="px-5 status-categories-{{ $type }}s-{{ $item->id }}">
-                        <div class="w-[100px]">
+                        <div class="w-[110px]">
                             {!! user_status($item->status) !!}
                         </div>
                     </td>

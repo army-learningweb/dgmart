@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Media;
+use Illuminate\Support\Facades\File;
 
 class AdminCategoryController extends Controller
 {
@@ -30,7 +32,6 @@ class AdminCategoryController extends Controller
     // thêm
     function store(Request $request)
     {
-
         $request->merge([
             'slug' => Str::slug($request->input('slug'))
         ]);
@@ -45,13 +46,22 @@ class AdminCategoryController extends Controller
 
         $type = session('module_active') == 'posts' ? 'post' : 'product';
 
-        Category::create([
+        $new_category = Category::create([
             'name' => trim($request->input('name')),
             'type' => $type,
             'slug' => $slug,
             'parent_id' => $parent_id,
             'user_id' => Auth::user()->id
         ]);
+
+        Media::where('id', $request->input('category-file-id'))->where('type','category')->update(['object_id' => $new_category->id]);
+
+        session()->forget('category-file');
+        session()->forget('category-file-id');
+        session()->forget($request->input('destroy-session'));
+        session()->forget("{$request->input('destroy-session')}-id");
+        session()->forget('old-category-file-img');
+        session()->forget('old-category-file-id');
 
         return back()->with('status', 'Tạo mới thành công');
     }
@@ -91,15 +101,32 @@ class AdminCategoryController extends Controller
     {
         $id = $request->id;
         $category_info = Category::find($id);
-        return response()->json($category_info);
+        $img = Media::where('object_id', $category_info->id)->where('type','category')->first();
+        if(isset($img)){
+            $data = [
+                'category_info' => $category_info,
+                'img_url' => asset($img->url),
+                'old_category_file_id' => $img->id
+            ];
+        }else{
+            $data = [
+                'category_info' => $category_info,
+            ];
+        }
+       
+        return response()->json($data);
     }
 
     function update(Request $request)
     {
+        $old_category_file_img = asset(Media::where('object_id', $request->input('id'))->where('type','category')->value('url'));
+        $old_category_file_id = Media::where('object_id', $request->input('id'))->where('type','category')->value('id');
+        $request->session()->put('old-category-file-img', $old_category_file_img);
+        $request->session()->put('old-category-file-id', $old_category_file_id);
 
         $request->validate([
             'name' => 'required|min:2|max:255|regex:/^[\p{L}\p{N}\p{P}\s]+$/u|unique:categories,name,' . $request->input('id'),
-            'slug' => 'required|min:2|max:255|unique:categories,slug,' . $request->input('id')
+            'slug' => 'required|min:2|max:255|unique:categories,slug,' . $request->input('id'),
         ]);
 
         // - Kiểm tra slug
@@ -120,6 +147,33 @@ class AdminCategoryController extends Controller
             'updated_at' => now()
         ]);
 
+        if($request->input('old-category-file-id') == null){
+            $path = Media::where('object_id',$request->input('id'))->where('type','category')->value('url');
+            if (isset($path)){
+                if (file_exists(public_path($path))) File::delete($path);
+            }
+            Media::where('object_id', $request->input('id'))->where('type','category')->delete();
+        }
+
+        if ($request->input('category-file-id') != null) {
+            $path = Media::where('object_id', $request->input('id'))->where('type','category')->value('url');
+            if (isset($path)) {
+                if (file_exists(public_path($path))) File::delete($path);
+            }
+            Media::where('object_id', $request->input('id'))->where('type','category')->delete();
+
+            Media::where('id', $request->input('category-file-id'))->where('type','category')->update([
+                'object_id' => $request->input('id')
+            ]);
+        }
+
+        session()->forget('category-file');
+        session()->forget('category-file-id');
+        session()->forget($request->input('destroy-session'));
+        session()->forget("{$request->input('destroy-session')}-id");
+        session()->forget('old-category-file-img');
+        session()->forget('old-category-file-id');
+
         return back()->with('status','Cập nhật thành công');
     }
 
@@ -129,7 +183,7 @@ class AdminCategoryController extends Controller
         if($category->slug == 2 || $category->slug == 1) return back()->with('status_failed','Bạn không thể xóa danh mục lưu trữ !');
         $child_categories_id = Category::where('parent_id',$category->id)->pluck('id');
         
-        $safe_category_id = session('module_active') == 'posts' ? 2 : 1;
+        $safe_category_id = session('module_active') == 'posts' ? 1 : 2;
 
         if($child_categories_id){
             Category::whereIn('id',$child_categories_id)->update(['parent_id' => $safe_category_id, 'updated_at' => now()]);

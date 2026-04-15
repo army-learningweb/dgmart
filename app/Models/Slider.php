@@ -14,7 +14,8 @@ class Slider extends Model
         'order',
         'status',
         'updated_at',
-        'user_id'
+        'user_id',
+        'redirect'
     ];
 
     function media(){

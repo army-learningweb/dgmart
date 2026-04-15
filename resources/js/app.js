@@ -26,6 +26,8 @@ import sidebar from "./sidebar";
 import file from "./file";
 import updateOrder from "./updateOrder";
 import createMenu from "./createMenu";
+import sliderBanner from "./sliderBanner";
+import sliderProduct from "./sliderProduct";
 
 $(function () {
     loadingState()
@@ -40,4 +42,6 @@ $(function () {
     file()
     updateOrder()
     createMenu()
+    sliderBanner()
+    sliderProduct()
 });

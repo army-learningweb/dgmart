@@ -46,7 +46,8 @@ class AdminSliderController extends Controller
             'title' => trim($request->input('title')),
             'desc' => trim($request->input('desc')),
             'order' => $request->input('order'),
-            'user_id' => Auth::user()->id
+            'user_id' => Auth::user()->id,
+            'redirect' => $request->input('redirect')
         ]);
 
         Media::where('id',$request->input('slider-file-id'))->where('type','slider')->update(['object_id'=> $new_banner->id]);
@@ -90,7 +91,8 @@ class AdminSliderController extends Controller
         Slider::where('id', $request->input('id'))->update([
             'title' => trim($request->input('title')),
             'desc' => trim($request->input('desc')),
-            'order' => $request->input('order')
+            'order' => $request->input('order'),
+            'redirect' => $request->input('redirect')
         ]);
 
         if ($request->input('slider-file-id') != null) {
@@ -175,7 +177,7 @@ class AdminSliderController extends Controller
     function destroy(Slider $slider){
         $file_path = Media::where('object_id', $slider->id)->where('type','slider')->first();
 
-        if (isset($file_path->url)) {
+        if ($file_path) {
             if (file_exists(public_path($file_path->url))) File::delete($file_path->url);
             Media::where('object_id', $slider->id)->where('type','slider')->delete();
         }

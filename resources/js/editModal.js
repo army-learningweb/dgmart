@@ -36,6 +36,7 @@ export default function editModal() {
 
                 // menu
                 if(module == 'menus'){
+                    inputs.id.val(data.id);
                     modal.find('input[name=link-name]').val(data.name);
                     modal.find(`option[value=${data.parent_id}]`).prop('selected',true);
                     modal.find('input[name=is_parent]').val(data.parent_id);
@@ -48,6 +49,7 @@ export default function editModal() {
                     inputs.textarea_title.val(data.slider_info.title);
                     inputs.textarea_desc.val(data.slider_info.desc);
                     inputs.id.val(data.slider_info.id);
+                    modal.find('input[name=redirect]').val(data.slider_info.redirect);
                     modal.find('input[name=order]').val(data.slider_info.order);
                     modal.find('img').attr('src',data.img_url).removeClass('hidden');
                     modal.find('input[name=old-slider-file-id]').val(data.old_slider_file_id);
@@ -87,12 +89,18 @@ export default function editModal() {
                 
                 // categories
                 if ((module == 'posts' || module == 'products') && type == 'categories'){
-                    inputs.name.val(data.name);
-                    inputs.slug.val(data.slug);
-                    inputs.id.val(data.id);
-                    modal.find(`option[value=${data.parent_id}]`).prop('selected',true);
-                    modal.find('.select-parent-category').prop('disabled',data.parent_id == 0);
-                    modal.find('input[name=is_parent]').val(data.parent_id);
+                    inputs.name.val(data.category_info.name);
+                    inputs.slug.val(data.category_info.slug);
+                    inputs.id.val(data.category_info.id);
+                    modal.find(`option[value=${data.category_info.parent_id}]`).prop('selected',true);
+                    modal.find('.select-parent-category').prop('disabled',data.category_info.parent_id == 0);
+                    modal.find('input[name=is_parent]').val(data.category_info.parent_id);
+                    if(data.img_url){
+                        modal.find('img').attr('src',data.img_url).removeClass('hidden');
+                        modal.find('input[name=old-category-file-id]').val(data.old_category_file_id);
+                        modal.find('.fake-remove-file').removeClass('hidden');
+                    }
+                   
                 }        
                 
                 // user

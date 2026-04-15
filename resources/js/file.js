@@ -39,21 +39,28 @@ export default function file() {
     });
 
     $(document).on("click",".remove-file",function(){
-        let name = $(this).data('name')
-        let type = $(this).data('type')
-        let id = $(`input[name=${name}-id]`).val()
-        let data = {id:id,name:name,type:type}
-        
-        $(`.${name}-img`).attr('src','').addClass('hidden');
-        $(`input[name=${name}-id]`).val('')
-        $(this).addClass('hidden')
 
-        $.ajax({
-            type: "post",
-            url: "/admin/file/remove",
-            data: data,
-            dataType: "json"
-        });
+        let request = confirm('Bạn có chắc muốn xóa ảnh này ?');
+        
+        if(request){
+            let name = $(this).data('name')
+            let type = $(this).data('type')
+            let id = $(`input[name=${name}-id]`).val()
+
+            let data = {id:id,name:name,type:type}
+            
+            $(`.${name}-img`).attr('src','').addClass('hidden');
+            $(`input[name=${name}-id]`).val('')
+            $(this).addClass('hidden')
+
+            $.ajax({
+                type: "post",
+                url: "/admin/file/remove",
+                data: data,
+                dataType: "json"
+            });
+        }
+       
     });
 
     $(document).on("click",".fake-remove-file",function(){

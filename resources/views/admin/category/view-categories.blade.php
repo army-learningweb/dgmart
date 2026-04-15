@@ -3,13 +3,20 @@
     {{-- flash session --}}
     <x-flash-session.success-flash-session />
     <x-flash-session.failed-flash-session />
-
+    
     {{-- modal create --}}
     <x-modal-dial.modal-create modal="create-{{ $type }}-category" title="Tạo mới danh mục" button_create="Tạo mới"
-        route="{{ route('admin.' . $type . 's.categories.store') }}" width="w-[400px]">
+        route="{{ route('admin.' . $type . 's.categories.store') }}" width="w-[420px]"
+        variant="h-90vh md:max-h-[450px] pl-1 pr-2 overflow-y-auto">
+
+        <div class="mt-2 inline-block">Ảnh danh mục<span class="text-gray-500 text-xs"> (Không bắt buộc)</span></div>
+        <div>
+            <x-form-element.file name="category-file" type="category" class="h-[200px] md:h-[200px] mt-1" none_mimes_required="true"/>
+        </div>
 
         <div class="mt-2">
-            <x-input-field.field id="name" label="Tên danh mục" type="text" name="name" required="*" autocomplete="on"/>
+            <x-input-field.field id="name" label="Tên danh mục" type="text" name="name" required="*"
+                autocomplete="on" />
         </div>
 
         <div class="mt-2">
@@ -20,11 +27,12 @@
 
         <div class="mt-2 flex flex-col">
             <label for="parent_category">Danh mục</label>
-            <select id="parent_category" name="parent_category" class="rounded-md py-[7px] text-sm shadow-sm border-gray-500/30 w-full md:w-automd:w-full my-1 scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent">
+            <select id="parent_category" name="parent_category"
+                class="rounded-md py-[7px] text-sm shadow-sm border-gray-500/30 w-full md:w-automd:w-full my-1 scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent">
                 <option value="">(Trống)</option>
                 @include('admin.category.partials.parent_categories')
             </select>
-            <span class="text-amber-600 text-xs">Để " trống " nếu bạn muốn đây là danh mục Cha</span>
+            <span class="text-amber-600 text-xs">Để " trống " nếu muốn tạo danh mục Cha</span>
         </div>
 
         <input type="hidden" name="modal" value="create">
@@ -32,9 +40,18 @@
 
     {{-- modal edit --}}
     <x-modal-dial.modal-edit modal="edit-category" title="Cập nhật thông tin danh mục" button_edit="Cập nhật"
-        route="{{ route('admin.' . $type . 's.categories.update') }}" width="w-[400px]">
+        route="{{ route('admin.' . $type . 's.categories.update') }}" width="w-[400px]"
+        variant="h-90vh md:max-h-[450px] pl-1 pr-2 overflow-y-auto">
+
+        <div class="mt-2 inline-block">Ảnh danh mục<span class="text-gray-500 text-xs"> (Không bắt buộc)</span></div>
+        <div>
+            <x-form-element.file name="category-file" type="category" class="h-[200px] md:h-[200px] mt-1"
+                is_edit="true" none_mimes_required="true"/>
+        </div>
+
         <div class="mt-2">
-            <x-input-field.field id="name" label="Tên danh mục" type="text" name="name" required="*" autocomplete="on"/>
+            <x-input-field.field id="name" label="Tên danh mục" type="text" name="name" required="*"
+                autocomplete="on" />
         </div>
 
         <div class="mt-2">
@@ -51,7 +68,7 @@
                 <option value="0">( Trống )</option>
                 @include('admin.category.partials.parent_categories')
             </select>
-            <span class="text-amber-600 text-xs">Để " trống " nếu bạn muốn tạo danh mục Cha</span>
+            <span class="text-amber-600 text-xs">Để " trống " nếu muốn tạo danh mục Cha</span>
         </div>
 
         <input type="hidden" name="id" value="{{ old('id') }}">
@@ -86,7 +103,8 @@
 
         {{-- action --}}
         <div class="mt-2">
-            <form action="{{ route("admin.{$type}s.categories.action") }}" method="POST" id="form_action_categories">
+            <form action="{{ route("admin.{$type}s.categories.action") }}" method="POST"
+                id="form_action_categories">
                 @csrf</form>
 
             <div class="flex flex-col md:flex-row md:justify-between md:items-center">
@@ -104,19 +122,19 @@
                 <div class="hidden md:block">
                     <div class="flex gap-3">
                         <div class="flex gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="size-5 text-amber-500 shrink-0">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
-                        </svg>
-                        <span>Danh mục cha ({{ $total_parent_categories }})</span>
-                    </div>
-                    <div class="flex gap-2">
-                        <span class="shrink-0 mx-1">└</span>
-                        <span>
-                            Danh mục con ({{ $total_child_categories }})
-                        </span>
-                    </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="size-5 text-amber-500 shrink-0">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
+                            </svg>
+                            <span>Danh mục cha ({{ $total_parent_categories }})</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <span class="shrink-0 mx-1">└</span>
+                            <span>
+                                Danh mục con ({{ $total_child_categories }})
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>

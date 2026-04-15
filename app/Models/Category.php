@@ -20,5 +20,9 @@ class Category extends Model
     function user() {
         return $this->belongsTo(User::class);
     }
+
+    function media(){
+        return $this->hasOne(Media::class,'object_id');
+    }
 }
 

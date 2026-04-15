@@ -56,8 +56,8 @@
                             class="change-order border-0 focus:ring-0 focus:outline-0 rounded-md w-[60px] cursor-pointer [&::-webkit-inner-spin-button]:opacity-100 [&::-webkit-inner-spin-button]:block"
                             min="1" max="10">
                     </td>
-                    <td class="px-3 status-sliders-{{ $item->id }}">
-                        <div class="w-[100px]">
+                    <td class="px-3">
+                        <div class="w-[110px] status-sliders-{{ $item->id }}">
                             {!! user_status($item->status) !!}
                         </div>
                     </td>

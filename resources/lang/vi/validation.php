@@ -39,6 +39,8 @@ return [
         'old-product-file-id' => 'Ảnh sản phẩm',
         'slider-file-id' => 'Ảnh banner',
         'old-slider-file-id' => 'Ảnh banner',
+        'category-file-id' => 'Ảnh danh mục',
+        'old-category-file-id' => 'Ảnh danh mục',
         'code' => 'Mã',
         'price' => 'Giá',
         'sale_off' => 'Giảm giá',

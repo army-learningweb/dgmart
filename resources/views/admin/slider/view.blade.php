@@ -19,6 +19,11 @@
         </div>
 
         <div class="mt-2">
+            <x-input-field.field id="redirect" label="Link chuyển hướng" type="text" name="redirect"
+                autocomplete="off" />
+        </div>
+
+        <div class="mt-2">
             <x-form-element.text-area label="Tiêu đề" name="title" id="title" class="h-[80px]" />
         </div>
 
@@ -40,6 +45,11 @@
 
         <div class="mt-2">
             <x-input-field.field id="order" label="Thứ tự xuất hiện" type="number" name="order" required="*"
+                autocomplete="off" />
+        </div>
+
+        <div class="mt-2">
+            <x-input-field.field id="redirect" label="Link chuyển hướng" type="text" name="redirect"
                 autocomplete="off" />
         </div>
 
