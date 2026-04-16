@@ -3,21 +3,27 @@
         <div class="slider-item relative w-full shrink-0">
             <img src="{{ asset($banner->media->where('type', 'slider')->where('object_id', $banner->id)->value('url')) }}"
                 alt="" class="h-full w-full object-cover">
-            <div class="absolute z-50 top-10 left-10 font-bold text-4xl italic text-gray-700">
+            <div class="absolute z-50 top-10 left-7 font-bold text-4xl italic text-gray-700">
                 {{ $banner->title }}
             </div>
-            <div class="absolute z-50 top-24 left-10 w-[350px] text-gray-500">{{ $banner->desc }}</div>
-            <a href="{{ $banner->redirect }}"
-                class="flex gap-2 items-center absolute top-48 left-10 text-white px-4 py-[7px] rounded-3xl shadow-sm bg-gradient-to-r from-blue-500 to-blue-700 hover:brightness-125">
-                <span></span>Xem thêm
-                <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="size-4">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                    </svg>
-                </span>
-            </a>
+            <div class="absolute z-50 top-24 left-7 w-[350px] text-gray-500">{{ $banner->desc }}</div>
+            <x-button.button-redirect link="" name="Tìm hiểu thêm" class="absolute top-48 left-7"/>
         </div>
     @endforeach
 </div>
-{{-- <x-button.button-slider target="slider-banner" class="absolute bottom-10 right-7" /> --}}
+
+<div class = 'inline-flex gap-3 absolute bottom-5 right-5'>
+    <div class="btn-prev-banner shadow-md bg-white rounded-full p-[5px] hover:brightness-110 cursor-pointer group">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+            class="size-6 group-hover:text-blue-600 select-none">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+        </svg>
+    </div>
+    <div class="btn-next-banner shadow-md bg-white rounded-full p-[5px] hover:brightness-110 cursor-pointer group">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="size-6 group-hover:text-blue-600">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+        </svg>
+    </div>
+</div>
+

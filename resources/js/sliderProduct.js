@@ -18,7 +18,7 @@ export default function sliderProduct(){
         let target = $(this).data('target');
         let item_width = $(`.${target}`).find('li:first').outerWidth();
         let item_per_slide = 5;
-         let all_item = $(`.${target}`).find('li').length;
+        let all_item = $(`.${target}`).find('li').length;
          
         index--;
         if(index < 0) index = all_item - item_per_slide;

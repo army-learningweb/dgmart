@@ -8,7 +8,7 @@
 
 @if ($products->count() > 0)
     <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-semibold text-gray-800">{{ $title }}</h1>
+        <h1 class="text-2xl font-semibold text-gray-800">{{ $title }}</h1>
         <x-button.button-slider target="{{ $target }}" />
     </div>
 

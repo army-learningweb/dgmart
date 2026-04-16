@@ -11,16 +11,7 @@
     </div>
     <img src="{{ asset($top_sale_product->medias->where('is_main', 0)->where('type','product')->value('url')) }}" alt=""
         class="w-[85%] h-[85%] object-contain absolute z-30 top-32 left-36">
-    <a href=""
-        class="flex gap-2 items-center absolute top-48 left-7 text-white px-4 py-[7px] rounded-3xl shadow-sm bg-gradient-to-r from-blue-500 to-blue-700 hover:brightness-125">
-        <span></span>Xem chi tiết
-        <span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="size-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-            </svg>
-        </span>
-    </a>
+    <x-button.button-redirect link="" name="Xem chi tiết" class="absolute top-48 left-7"/>
 @else
     <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, ipsum. Illum, molestiae officia amet

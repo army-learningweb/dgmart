@@ -18,9 +18,13 @@ use App\Http\Controllers\AdminSliderController;
 use App\Http\Controllers\AdminTrashController;
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PageController;
 
-
+// =============================
+// CLIENT
+// =============================
 Route::get('/', [HomeController::class, 'view']);
+Route::get('/{slug}.html',[PageController::class,'view']);
 
 
 

@@ -16,7 +16,7 @@ export default {
         'text-green-400',
         'text-green-600',
         'bg-amber-400/10',
-        'text-amber-600'
+        'text-amber-600',
     ],
     theme: {
         extend: {

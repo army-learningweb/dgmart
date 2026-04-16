@@ -29,5 +29,11 @@ class AppServiceProvider extends ServiceProvider
             $view->with(compact('menus'));
         });
 
+        // footet navigation
+        View::composer('components.footer.client-footer',function($view){
+            $menus = Menu::where('status','active')->where('parent_id',0)->get();
+            $view->with(compact('menus'));
+        });
+
     }
 }

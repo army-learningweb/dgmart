@@ -7,7 +7,7 @@
         </div>
 
         {{-- slider banner --}}
-        <div class="flex-1 rounded-3xl shadow-md h-[320px] overflow-hidden">
+        <div class="flex-1 rounded-3xl shadow-md h-[320px] overflow-hidden relative">
             @include('client.home.partials.slider-banner')
         </div>
     </div>
@@ -25,7 +25,7 @@
 
     {{-- sale product --}}
     <div class="mt-3 py-3">
-        <x-slider-product.list :products="$sale_products" target="sale-product" title="Ưu đãi & giảm giá"/>
+        <x-slider-product.list :products="$sale_products" target="sale-product" title="Ưu đãi & giảm giá" />
     </div>
 
     {{-- why us --}}
@@ -35,7 +35,17 @@
 
     {{-- accessories --}}
     <div class="mt-3 py-3">
-        <x-slider-product.list :products="$accesories_product" target="accesories-product" title="Phụ kiện hoàn hảo"/>
+        <x-slider-product.list :products="$accesories_product" target="accesories-product" title="Phụ kiện hoàn hảo" />
+    </div>
+
+    {{-- support --}}
+    <div class="mt-3 py-3">
+        @include('client.home.partials.support')
+    </div>
+
+    {{-- post --}}
+    <div class="mt-3 py-3">
+        @include('client.home.partials.posts')
     </div>
 
 </x-client-layout>

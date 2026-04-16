@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Slider;
 use App\Models\Product;
+use App\Models\Post;
 
 class HomeController extends Controller
 {
@@ -21,6 +22,8 @@ class HomeController extends Controller
         $categories_child = Category::where('parent_id', $category_accesories)->where('type', 'product')->pluck('id');
         $accesories_product = Product::with('medias:object_id,url,is_main,type')->whereIn('category_id', $categories_child)->latest()->get();
 
-        return view('client.home.view', compact('banners', 'top_sale_product', 'categories_product', 'new_products', 'sale_products', 'accesories_product'));
+        $posts = Post::with('media:object_id,url')->where('status','publish')->limit(4)->latest()->get( );
+    
+        return view('client.home.view', compact('posts','banners', 'top_sale_product', 'categories_product', 'new_products', 'sale_products', 'accesories_product'));
     }
 }
