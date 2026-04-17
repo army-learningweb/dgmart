@@ -16,9 +16,9 @@
         <div class="{{ $target }} transition-all duration-300">
             <ul class="flex">
                 @foreach ($products as $item)
-                    <li class="shrink-0 w-[20%] px-2 rounded-2xl">
+                    <li class="shrink-0 w-[20%] px-2 rounded-2xl relative">
                         <a href="{{ $item->slug }}"
-                            class="relative inline-block bg-white rounded-2xl shadow-md pt-4 pb-2 hover:-translate-y-1 transiton-all duration-200">
+                            class="relative inline-block bg-white rounded-2xl shadow-md pt-4 pb-2 transiton-all duration-200 hover:-translate-y-1">
                              @if ($item->sale_off != null || $item->sale_off > 0)
                                 <div class="absolute z-50 top-3 left-3 px-3 py-[1px] rounded-xl font-semibold bg-red-600/10 text-red-600">
                                     Giảm giá {{ $item->sale_off }}%
@@ -28,7 +28,6 @@
                                     {{ $tag }}
                                 </div>
                             @endif
-                            
                             <img src="{{ asset($item->medias->where('is_main', 0)->where('object_id',$item->id)->where('type','product')->value('url')) }}" alt=""
                                 class="w-full object-cover overflow-hidden">
                             <div class="px-5">
@@ -55,7 +54,7 @@
                                     </div>
                                     <div>
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="size-6">
+                                            stroke-width="1.5" stroke="currentColor" class="size-6 hover:text-pink-600">
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
                                         </svg>

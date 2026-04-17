@@ -40,7 +40,7 @@
                                 d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>
                     </span>
-                    <span>Giờ làm việc</span>
+                    <span>Mở cửa từ thứ 2 đến thứ 7 hằng tuần</span>
                 </div>
                 <div class="text-gray-500/50">|</div>
                 <span class="text-gray-500">8:00 - 17:00</span>

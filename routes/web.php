@@ -19,14 +19,14 @@ use App\Http\Controllers\AdminTrashController;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\ProductController;
 
 // =============================
 // CLIENT
 // =============================
 Route::get('/', [HomeController::class, 'view']);
+Route::get('/san-pham.html',[ProductController::class,'view']);
 Route::get('/{slug}.html',[PageController::class,'view']);
-
-
 
 // =============================
 // ADMIN

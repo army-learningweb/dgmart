@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use App\Models\Product;
+use App\Models\Media;
 
 class Category extends Model
 {
@@ -23,6 +25,14 @@ class Category extends Model
 
     function media(){
         return $this->hasOne(Media::class,'object_id');
+    }
+
+    function products(){
+        return $this->hasMany(Product::class);
+    }
+
+    function childs(){
+        return $this->hasMany(Category::class,'parent_id');
     }
 }
 
