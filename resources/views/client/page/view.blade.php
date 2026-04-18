@@ -7,7 +7,7 @@
         @case('gioi-thieu.html')
             @include('client.page.partials.about')
             @break
-        @case('ho-tro-lien-he.html')
+        @case('lien-he-ho-tro.html')
             @include('client.page.partials.contact')
             @break
         @default

@@ -8,7 +8,7 @@
                 </td>
                 <td class="px-4">#</td>
                 <td class="px-2">Danh mục</td>
-                <td class="px-2">Slug</td>
+                <td class="">Slug</td>
                 <td class="px-5">Trạng thái</td>
                 <td class="px-2">Cập nhật trạng thái</td>
                 <td class="px-4">Ngày tạo</td>
@@ -49,8 +49,8 @@
                             </div>
                         @endif
                     </td>
-                    <td class="px-2">
-                        <div class="w-[120px] truncate">
+                    <td class="">
+                        <div class="w-[170px] truncate">
                             {{ $item->slug }}
                         </div>
                     </td>

@@ -39,7 +39,7 @@ class AdminMenuController extends Controller
         if ($request->input('link-name') != null && $request->input('categories-product') == null && $request->input('categories-post') == null) {
             Menu::create([
                 'name' => $request->input('link-name'),
-                'slug' => Str::slug($request->input('link-name')),
+                'slug' => Str::slug($request->input('link-name')).".html",
                 'parent_id' => $parent_id,
                 'type' => 'custom',
                 'user_id' => Auth::user()->id
@@ -52,7 +52,7 @@ class AdminMenuController extends Controller
 
             $id = $request->input('categories-product') ? $request->input('categories-product') : $request->input('categories-post');
             $category_info = Category::find($id);
-            $slug = $request->input('categories-product') ? "sanpham/" . $category_info->slug : "baiviet/" . $category_info->slug;
+            $slug = $request->input('categories-product') ? $category_info->slug : $category_info->slug;
             $type = $category_info->type;
             $name = $category_info->name;
 
@@ -122,7 +122,6 @@ class AdminMenuController extends Controller
 
     function update(Request $request)
     {
-        // return $request->all();
         $request->validate([
             'link-name' => 'required|min:2|max:255|regex:/^[\p{L}\p{N}\p{P}\s]+$/u',
         ]);
@@ -130,7 +129,7 @@ class AdminMenuController extends Controller
         if ($request->input('parent_id')) {
             Menu::where('id', $request->input('id'))->update([
                 'name' => $request->input('link-name'),
-                'slug' => Str::slug($request->input('link-name')),
+                'slug' => Str::slug($request->input('link-name')).".html",
                 'parent_id' => $request->input('parent_id')
             ]);
 
@@ -139,7 +138,7 @@ class AdminMenuController extends Controller
 
         Menu::where('id', $request->input('id'))->update([
             'name' => $request->input('link-name'),
-            'slug' => Str::slug($request->input('link-name'))
+            'slug' => Str::slug($request->input('link-name')).".html"
         ]);
 
         return back()->with('status', 'Cập nhật thành công');

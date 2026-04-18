@@ -3,14 +3,17 @@
 
         {{-- category --}}
         <div class="bg-white shadow-md p-5 rounded-2xl flex-1 sticky top-4">
-            <h1 class="font-semibold text-[16px]">Danh mục sản phẩm</h1>
+            <h1 class="font-semibold text-[16px]">Phân Loại sản phẩm</h1>
             <hr class="my-3">
             <ul>
-                @foreach ($products_categories as $item)
+                @php
+                    $uri = request()->path();
+                @endphp
+                @foreach ($categories as $item)
                     <li class="group">
-                        <a href="{{ url($item->slug) }}" class="group-hover:text-blue-600 py-[7px] flex justify-between items-center">
+                        <a href="{{ url($item->slug) }}" class="group-hover:text-blue-600 py-[7px] flex justify-between {{ $uri == $item->slug ? 'navigation-active' : '' }}">
                             <span>{{ $item->name }}</span>
-                            <div class="group-hover:bg-blue-500 group-hover:border-0 border border-gray-500/50 h-[15px] w-[15px] rounded-full"></div>
+                            <div class="group-hover:bg-blue-500 group-hover:border-0 border border-gray-500/50 h-[15px] w-[15px] rounded-full {{ $uri == $item->slug ? 'bg-blue-500 border-0' : '' }}"></div>
                         </a>
                     </li>
                 @endforeach
