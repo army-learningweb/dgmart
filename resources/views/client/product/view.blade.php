@@ -1,16 +1,19 @@
 <x-client-layout>
     <div class="flex items-start gap-4 mt-4">
-
         {{-- category --}}
         <div class="bg-white shadow-md p-5 rounded-2xl flex-1 sticky top-4">
-            <h1 class="font-semibold text-[16px]">Danh mục sản phẩm</h1>
+            <div><h1 class="font-semibold text-[16px]">Tất cả sản phẩm</h1></div>
             <hr class="my-3">
             <ul>
                 @foreach ($products_categories as $item)
                     <li class="group">
                         <a href="{{ url($item->slug) }}" class="group-hover:text-blue-600 py-[7px] flex justify-between items-center">
                             <span>{{ $item->name }}</span>
-                            <div class="group-hover:bg-blue-500 group-hover:border-0 border border-gray-500/50 h-[15px] w-[15px] rounded-full"></div>
+                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z" />
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z" />
+</svg>
+
                         </a>
                     </li>
                 @endforeach
@@ -22,7 +25,7 @@
         </div>
 
         {{-- product --}}
-        <div class="rounded-xl w-[78%]">
+        <div class="rounded-xl w-[80%] list-products-client">
             @include('client.product.partials.list',['data' => $products])
         </div>
     </div>

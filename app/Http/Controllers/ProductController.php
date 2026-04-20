@@ -10,49 +10,77 @@ use Intervention\Image\Colors\Rgb\Channels\Red;
 class ProductController extends Controller
 {
     // tất cả sản phẩm
-    function view(){
-        $products = Product::with('medias:object_id,url,type,is_main')->where('status','active')->paginate(16);
-        $products_categories = Category::with('childs:parent_id,name')->where('type','product')->where('status','active')->whereNot('id',2)->where('parent_id',0)->get(); 
-        $total = Product::where('status','active')->count();
-        $title = 'Tất cả sản phẩm';
-        return view('client.product.view',compact('products','total','products_categories','title'));
+    function view()
+    {
+        session()->forget('parent_category_id');
+
+        $products = Product::with('medias:object_id,url,type,is_main')->where('status', 'active')->paginate(16);
+        $products_categories = Category::with('childs:parent_id,name')->where('type', 'product')->where('status', 'active')->whereNot('id', 2)->where('parent_id', 0)->get();
+        $total = Product::where('status', 'active')->count();
+        $title = 'Tất cả';
+        return view('client.product.view', compact('products', 'total', 'products_categories', 'title'));
     }
 
     // Sản phẩm theo danh mục
-    function category_view(Request $request){
-        $uri =  $request->segment(2);
-        $slug = explode('.',$uri);
-        $complete_slug = 'san-pham/'.$slug[0].'.html';
-        $id = Category::where('slug',$complete_slug)->value('id');
+    function category_view(Request $request)
+    {
+        $uri =  $request->segments();
+        $complete_slug = $uri[0] . "/" . $uri[1];
+        $parent_category_id = Category::where('slug', $complete_slug)->value('id');
+        $request->session()->put('parent_category_id',$parent_category_id);
 
-        $categories = Category::with('products:category_id,name')->where('parent_id',$id)->where('type','product')->where('status','active')->get(['id','name','slug']);
-        $categories_id = Category::where('parent_id',$id)->where('status','active')->pluck('id');
-        
-        $products = Product::whereIn('category_id',$categories_id)->where('status','active')->paginate(16);
-        $total = Product::whereIn('category_id',$categories_id)->where('status','active')->count();
-        
+        $categories = Category::with('products:category_id,name')->where('parent_id', $parent_category_id)->where('type', 'product')->where('status', 'active')->get(['id', 'name', 'slug']);
+        $categories_id = Category::where('parent_id', $parent_category_id)->where('status', 'active')->pluck('id');
+
+        $products = Product::whereIn('category_id', $categories_id)->where('status', 'active')->paginate(16);
+
         $path = $request->path();
-        $title = Category::where('slug',$path)->value('name');
+        $title = Category::where('slug', $path)->value('name');
 
-        return view('client.product.category-view',compact('categories','products','title','total'));
+        return view('client.product.category-view', compact('categories', 'products', 'title'));
     }
 
-    // Sản phẩm theo loại
-    function type_view(Request $request){
-        $uri = $request->segments(3);
-        $complete_slug = $uri[0].'/'.$uri[1].'/'.$uri[2];
-        $id = Category::where('slug',$complete_slug)->value('id');
-        $products = Product::where('category_id',$id)->where('status','active')->paginate(16);
-        $total = Product::where('category_id',$id)->get()->count();
+    // Bộ lọc
+    function filter(Request $request)
+    {
 
-        $curren_category_slug = $uri[0].'/'.$uri[1].'.html';
-        $current_category_id = Category::where('slug', $curren_category_slug)->value('id');
-        $categories = Category::with('products:category_id,name')->where('parent_id',$current_category_id)->where('type','product')->where('status','active')->get(['id','name','slug']);
+        $filter_value = $request->filter_value;
+        $order_value = $request->order_value;
+
+        if ($filter_value == '' || $filter_value == 'all') {
+            $categories_id = Category::where('parent_id',session('parent_category_id'))->where('status', 'active')->pluck('id');
+            if($order_value != 'base'){
+                 $products = Product::query()->with('medias:object_id,url,type,is_main')
+                ->when($order_value, function ($query, $value) {
+                    $query->orderBy('price', $value);
+                })
+                ->whereIn('category_id',$categories_id)->where('status', 'active')->paginate(16);
+            }else{
+                $products = Product::query()->with('medias:object_id,url,type,is_main')
+                ->whereIn('category_id',$categories_id)->where('status', 'active')->paginate(16);
+            }
+        } else {
+            if($order_value != 'base'){
+                $products = Product::query()->with('medias:object_id,url,type,is_main')
+                ->when($filter_value, function ($query, $value) {
+                    $query->where('category_id', $value);
+                })
+                ->when($order_value, function ($query, $value) {
+                    $query->orderBy('price', $value);
+                })
+                ->where('status', 'active')->paginate(16); 
+            }else{
+                $products = Product::query()->with('medias:object_id,url,type,is_main')
+                ->when($filter_value, function ($query, $value) {
+                    $query->where('category_id', $value);
+                })
+                ->where('status', 'active')->paginate(16); 
+            }
+        }
 
         $path = $request->path();
-        $title = $categories->where('slug',$path)->value('name');
-        $breadcrum_category = Category::where('slug',$curren_category_slug)->first(['name','slug']);
-        
-        return view('client.product.type-view',compact('products','total','categories','title','breadcrum_category'));
+        $title = Category::where('slug', $path)->value('name');
+        $view = view('client.product.partials.list', compact('products', 'title'))->render();
+        return response()->json($view);
     }
 }

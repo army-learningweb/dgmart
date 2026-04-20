@@ -16,7 +16,7 @@
             @endif
 
             @if ($paginator->hasMorePages())
-                <a href="{{ $paginator->nextPageUrl() }}" rel="next"  module={{ $module }}
+                <a href="{{ $paginator->nextPageUrl() }}" rel="next" module={{ $module }}
                     class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-800 leading-5 rounded-md hover:text-gray-700">
                     {!! __('pagination.next') !!}
                 </a>
@@ -33,11 +33,12 @@
 
             <div>
                 <p class="text-sm text-gray-700 leading-5">
-                    Hiển thị từ
                     @if ($paginator->firstItem())
-                        <span class="font-medium">{{ $paginator->firstItem() }}</span>
-                        đến
-                        <span class="font-medium">{{ $paginator->lastItem() }}</span>
+                        <div class="flex gap-2">
+                            {{-- <div>Tổng <span class="font-medium">{{ $paginator->total() }}</span> - </div> --}}
+                            {{-- <div>Hiển thị <span class="font-medium">{{ $paginator->firstItem() }}</span></div> --}}
+                            {{-- <div> -> <span class="font-medium">{{ $paginator->lastItem() }}</span></div> --}}
+                        </div>
                     @else
                         {{ $paginator->count() }}
                     @endif
@@ -56,7 +57,7 @@
                                 << </span>
                             </span>
                         @else
-                            <a href="{{ $paginator->previousPageUrl() }}" rel="prev"  module={{ $module }}
+                            <a href="{{ $paginator->previousPageUrl() }}" rel="prev" module={{ $module }}
                                 class="inline-flex items-center px-2 py-2 text-sm font-medium text-blue-600 hover:underline underline-offset-1 rounded-l-md leading-5"
                                 aria-label="{{ __('pagination.previous') }}">
                                 << </a>
@@ -81,7 +82,7 @@
                                             class="inline-flex items-center px-3 py-2 -ml-px text-sm font-medium text-blue-600 cursor-default leading-5">{{ $page }}</span>
                                     </span>
                                 @else
-                                    <a href="{{ $url }}"  module={{ $module }}
+                                    <a href="{{ $url }}" module={{ $module }}
                                         class="inline-flex items-center px-3 py-2 -ml-px text-sm font-medium text-gray-700 leading-5"
                                         aria-label="{{ __('Go to page :page', ['page' => $page]) }}">
                                         {{ $page }}
@@ -93,7 +94,7 @@
 
                     {{-- Next Page Link --}}
                     @if ($paginator->hasMorePages())
-                        <a href="{{ $paginator->nextPageUrl() }}" rel="next"  module={{ $module }}
+                        <a href="{{ $paginator->nextPageUrl() }}" rel="next" module={{ $module }}
                             class="inline-flex items-center px-2 py-2 -ml-px text-sm font-medium text-blue-600 hover:underline underline-offset-1 rounded-r-md leading-5 "
                             aria-label="{{ __('pagination.next') }}">
                             >>
@@ -104,7 +105,7 @@
                                 class="inline-flex items-center px-2 py-2 -ml-px text-sm font-medium text-gray-500/30 cursor-not-allowed rounded-r-md leading-5"
                                 aria-hidden="true">
                                 >> </span>
-                            </span>
+                        </span>
                     @endif
                 </span>
             </div>

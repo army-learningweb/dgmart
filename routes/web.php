@@ -31,7 +31,7 @@ Route::get('/', [HomeController::class, 'view']);
 // Product
 Route::get('/san-pham.html',[ProductController::class,'view']);
 Route::get('/san-pham/{category}.html',[ProductController::class,'category_view']);
-Route::get('/san-pham/{category}/{type}.html',[ProductController::class,'type_view']);
+Route::post('/san-pham/{category}.html',[ProductController::class,'filter']);
 
 // Page
 Route::get('/{slug}.html',[PageController::class,'view']);

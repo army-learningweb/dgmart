@@ -26,7 +26,7 @@ export default function listFilter() {
     })
 
     // phân trang
-    $(document).on("click","nav[role=navigation] a",function(e){
+    $(document).on("click","nav[role=navigation] a[module=products] a[module=posts]",function(e){
         e.preventDefault();
         let url = $(this).attr('href');
         let module = $(this).attr('module');

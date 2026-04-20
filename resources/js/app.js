@@ -28,6 +28,8 @@ import updateOrder from "./updateOrder";
 import createMenu from "./createMenu";
 import sliderBanner from "./sliderBanner";
 import sliderProduct from "./sliderProduct";
+import listFilterClinet from "./listFilterClient";
+
 
 $(function () {
     loadingState()
@@ -36,6 +38,7 @@ $(function () {
     modal()
     editModal()
     listFilter()
+    listFilterClinet()
     updateStatus()
     checkAll()
     sidebar()
