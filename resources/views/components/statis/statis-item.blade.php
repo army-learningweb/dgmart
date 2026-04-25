@@ -3,7 +3,7 @@
     'statis_name'
 ])
 
-<div class="shadow-md bg-white col-span-1 shrink-0 p-5 rounded-md">
+<div class="shadow-md bg-white col-span-1 shrink-0 p-5 rounded-2xl">
     <div class="flex items-center gap-5">
         <div class="text-blue-600">
             {{ $slot }}

@@ -17,7 +17,7 @@
     <div class="flex-1">
         <h1
             class="text-5xl pb-2 font-bold bg-gradient-to-r from-blue-500 to-blue-800 bg-clip-text text-transparent tracking-tighter">
-            Câu chuyện của chúng tôi
+            Câu chuyện
         </h1>
     </div>
     <div class="w-[65%] py-2">
@@ -33,28 +33,24 @@
 
 {{-- mission --}}
 <div class="flex gap-5 py-14 relative">
-    <div class="w-[65%] order-2">
-        <h1
+    <div class="flex-1">
+        {{-- <h1
             class="text-5xl pb-2 font-bold bg-gradient-to-r from-blue-500 to-blue-800 bg-clip-text text-transparent tracking-tighter">
             Sứ mệnh
-        </h1>
-        <h1
+        </h1> --}}
+    </div>
+    <div class="w-[65%]">
+         <h1
             class="text-5xl pb-5 font-bold  bg-gradient-to-r from-gray-500 to-gray-800 bg-clip-text text-transparent tracking-tighter">
             Chúng tôi không chỉ bán thiết bị
         </h1>
-        <h1 class="text-2xl py-5 text-[16px] leading-6">
+         <h1 class="text-2xl py-5 text-[16px] leading-6">
             "Chúng tôi cung cấp giải pháp nâng tầm cuộc sống số của bạn. Digimart hướng tới mục tiêu trở thành hệ sinh
             thái công nghệ hàng đầu, nơi mọi khách hàng đều có thể tìm thấy sự hiện đại, tiện nghi và giá trị bền vững."
         </h1>
-        <x-button.button-redirect link="" name="Ghé cửa hàng" class="w-fit" />
+        <x-button.button-redirect link="{{ url('san-pham') }}" name="Ghé cửa hàng" class="w-fit" />
     </div>
-    <div class="flex-1 order-1 flex justify-center items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-            stroke="currentColor" class="size-24 text-blue-600">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                d="m16.49 12 3.75 3.75m0 0-3.75 3.75m3.75-3.75H3.74V4.499" />
-        </svg>
-    </div>
+    
 
 </div>
 

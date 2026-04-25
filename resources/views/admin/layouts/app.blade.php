@@ -31,9 +31,9 @@
         <header>
             <div class="w-full pt-4 pb-3 flex items-center justify-between gap-1">
                 {{-- Logo --}}
-                <div class="w-[10%] hidden md:block md:ms-4">
+                <div class="w-[10%] hidden md:block md:ms-3">
                     <a href="{{ url('admin/dashboard') }}">
-                        <x-application-logo class="text-3xl"/>
+                        <x-application-logo class="text-3xl py-1"/>
                     </a>
                 </div>
                 

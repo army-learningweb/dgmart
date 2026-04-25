@@ -25,7 +25,7 @@ class AdminCategoryController extends Controller
 
         $total_parent_categories = Category::where('type', $type)->where('parent_id', 0)->count();
         $total_child_categories = Category::where('type', $type)->where('parent_id', '>', 0)->count();
-
+        
         return view('admin.category.view-categories', compact('parent_categories', 'categories', 'total', 'active', 'unactive', 'type', 'total_parent_categories', 'total_child_categories'));
     }
 
@@ -46,10 +46,9 @@ class AdminCategoryController extends Controller
         if ($parent_id > 0) {
             $slug_parent = Category::where('id', $parent_id)->value('slug');
             $slug_parent = explode('/', $slug_parent);
-            $slug_parent = explode('.', $slug_parent[1]);
-            $slug = session('module_active') == 'posts' ? "bai-viet/" . $slug_parent[0] . "/" . Str::slug($request->input('slug')) . ".html" : "san-pham/" . $slug_parent[0] . "/" . Str::slug($request->input('slug')) . ".html";
-        }else{
-            $slug = session('module_active') == 'posts' ? "bai-viet/" . Str::slug($request->input('slug')) . ".html" : "san-pham/" . Str::slug($request->input('slug')) . ".html";   
+            $slug = session('module_active') == 'posts' ? "bai-viet/" . $slug_parent[1] . "/" . Str::slug($request->input('slug')) : "san-pham/" . $slug_parent[1] . "/" . Str::slug($request->input('slug'));
+        } else {
+            $slug = session('module_active') == 'posts' ? "bai-viet/" . Str::slug($request->input('slug')) : "san-pham/" . Str::slug($request->input('slug'));
         }
 
         $type = session('module_active') == 'posts' ? 'post' : 'product';
@@ -129,9 +128,12 @@ class AdminCategoryController extends Controller
     {
         $old_category_file_img = asset(Media::where('object_id', $request->input('id'))->where('type', 'category')->value('url'));
         $old_category_file_id = Media::where('object_id', $request->input('id'))->where('type', 'category')->value('id');
-        $request->session()->put('old-category-file-img', $old_category_file_img);
-        $request->session()->put('old-category-file-id', $old_category_file_id);
 
+        if($old_category_file_id != null){
+            $request->session()->put('old-category-file-img', $old_category_file_img);
+            $request->session()->put('old-category-file-id', $old_category_file_id);
+        }
+        
         $request->validate([
             'name' => 'required|min:2|max:255|regex:/^[\p{L}\p{N}\p{P}\s]+$/u|unique:categories,name,' . $request->input('id'),
             'slug' => 'required|min:2|max:255|unique:categories,slug,' . $request->input('id'),
@@ -146,10 +148,9 @@ class AdminCategoryController extends Controller
             if ($request->parent_category > 0) {
                 $slug_parent = Category::where('id', $request->parent_category)->value('slug');
                 $slug_parent = explode('/', $slug_parent);
-                $slug_parent = explode('.', $slug_parent[1]);
-                $slug = session('module_active') == 'posts' ? "bai-viet/" . $slug_parent[0] . "/" . Str::slug($request->input('slug')) . ".html" : "san-pham/" . $slug_parent[0] . "/" . Str::slug($request->input('slug')) . ".html";
-            }else{
-                $slug = session('module_active') == 'posts' ? "bai-viet/".Str::slug($request->input('slug')) . ".html" : "san-pham/" . Str::slug($request->input('slug')) . ".html";
+                $slug = session('module_active') == 'post' ? "bai-viet/" . $slug_parent[1] . "/" . Str::slug($request->input('slug')) : "san-pham/" . $slug_parent[1] . "/" . Str::slug($request->input('slug'));
+            } else {
+                $slug = session('module_active') == 'post' ? "bai-viet/" . Str::slug($request->input('slug')) : "san-pham/" . Str::slug($request->input('slug'));
             }
         }
 
@@ -217,16 +218,19 @@ class AdminCategoryController extends Controller
     // hành động
     function action(Request $request)
     {
-
         $action = $request->input('action');
         $category_id = $request->input('categories_id');
 
         if (!$action) return back()->withInput()->with('status_failed', 'Thất bại, bạn chưa chọn hành động !');
         if (!$category_id) return back()->withInput()->with('status_failed', 'Hành động thất bại, bạn chưa chọn danh mục !');
-
-
         Category::whereIn('id', $category_id)->update(['status' => $action, 'updated_at' => now()]);
 
-        return back()->with('status', 'Thực hiện hành động thành công');
+        return back()->with('status', 'Cập nhật thành công');
+    }
+
+    // Xóa session ảnh
+    function clearSession(Request $request){
+        session()->forget('old-category-file-img');
+        session()->forget('old-category-file-id');
     }
 }

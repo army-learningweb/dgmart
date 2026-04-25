@@ -91,16 +91,16 @@ export default function editModal() {
                 if ((module == 'posts' || module == 'products') && type == 'categories'){
                     inputs.name.val(data.category_info.name);
                     inputs.slug.val(data.category_info.slug);
-                    inputs.id.val(data.category_info.id);
-                    modal.find(`option[value=${data.category_info.parent_id}]`).prop('selected',true);
-                    modal.find('.select-parent-category').prop('disabled',data.category_info.parent_id == 0);
+                    inputs.id.val(data.category_info.id);     
                     modal.find('input[name=is_parent]').val(data.category_info.parent_id);
+                    modal.find(`option[value=${data.category_info.parent_id}]`).prop('selected',true);
+                    modal.find('select[name=parent_category]').prop('disabled',data.category_info.parent_id == 0 ? true : '');
+
                     if(data.img_url){
                         modal.find('img').attr('src',data.img_url).removeClass('hidden');
                         modal.find('input[name=old-category-file-id]').val(data.old_category_file_id);
                         modal.find('.fake-remove-file').removeClass('hidden');
-                    }
-                   
+                    }        
                 }        
                 
                 // user

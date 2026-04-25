@@ -1,8 +1,8 @@
 @if ($trashs->count() > 0)
     <div
-        class="bg-white shadow-md mt-3 px-5 pb-3 rounded-md text-sm overflow-auto scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent md:max-h-[490px]">
+        class="bg-white shadow-md mt-3 px-5 pb-3 rounded-2xl text-sm overflow-auto scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent md:max-h-[490px]">
         <table class="min-w-[1000px] md:w-full">
-            <tr class="sticky top-0 bg-white">
+            <tr class="sticky top-0 bg-white font-semibold">
                 <td class="pl-7 py-3">#</td>
                 <td class="px-5 text-center">Ảnh</td>
                 <td class="px-10">Loại ảnh</td>

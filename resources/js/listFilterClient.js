@@ -1,53 +1,97 @@
-export default function listFilterClinet(){
-    // bộ lọc
-    $('.category-filter, .order-filter').on('change',function(){
-        let filter_value = $('.category-filter:checked').val();
-        let order_value = $('.order-filter:checked').val();
-        let parent_category = $(this).data('parent');
+export default function listFilterClinet() {
+    $(".client-search-product, .category-product-filter, .order-price-product").on(
+        "input",
+        function () {
+            let search_value = $('.client-search-product').val();
+            let category_value = $('.category-product-filter:checked').val();
+            let order_value = $('.order-price-product:checked').val();
+            let data = {
+                search_value: search_value,
+                category_value: category_value,
+                order_value:order_value
+            };
+            ajaxAction(data);
+        },
+    );
 
-        let data = {filter_value:filter_value,order_value:order_value,parent_category}
-        let url = $(this).data('url');
+    function ajaxAction(data) {
         $.ajax({
             type: "post",
-            url: "/".url,
+            url: "/san-pham",
             data: data,
             dataType: "json",
             success: function (data) {
-               $('.client-list-products').html(data);
-
-               if(filter_value != 'all' || order_value != 'base'){
-                    $('.reset-filter').removeClass('hidden');
-               }else{
-                    $('.reset-filter').addClass('hidden');
-               }
-               
-               window.scrollTo({
-                    top:80,
-                    behavior:"smooth"
-               });
-            }
+                window.scrollTo({top:135, behavior:"smooth"})
+                $(`.client-list-products`).html(data.view);
+                if(data.view_type){
+                    $(`.type-products`).html(data.view_type);
+                }else{
+                    $(`.type-products`).html('');
+                }
+                
+            },
         });
-    })
+    }
 
-    // Phân trang
-    $(document).on("click","a[module='client-products']",function(e){
+    // Bài viết theo danh mục
+    $(".post-category-item").on("click", function () {
+        let id = $(this).data("category-id");
+        let data = { id: id };
+        $.ajax({
+            type: "post",
+            url: "/bai-viet",
+            data: data,
+            dataType: "json",
+            success: (data) => {
+                $("li.post-category-item").removeClass("post-category-active");
+                $(this).addClass("post-category-active");
+                $(".client-list-posts").html(data.view);
+            },
+        });
+    });
+
+    // Phân trang bài viết
+    $(document).on("click", "a[module='client-list-posts']", function (e) {
         e.preventDefault();
-        let filter_value = $('.category-filter:checked').val();
-        let order_value = $('.order-filter:checked').val();
-        let data = {filter_value:filter_value,order_value:order_value}
-        let url = $(this).attr('href');
+        let url = $(this).attr("href");
+        let module = $(this).attr("module");
+        let data;
+
+        if (module == "client-list-products") {
+            let filter_value = $(".category-filter:checked").val();
+            let order_value = $(".order-filter:checked").val();
+            data = { filter_value: filter_value, order_value: order_value };
+        }
+
+        if (module == "client-list-posts") {
+            let id = $(".post-category-item")
+                .filter(".post-category-active")
+                .data("category-id");
+            data = { id: id };
+        }
+
         $.ajax({
             type: "post",
             url: url,
             data: data,
             dataType: "json",
             success: function (data) {
-               $('.client-list-products').html(data);
-               window.scrollTo({
-                    top:80,
-                    behavior:"smooth"
-               });
-            }
+                $(`.${module}`).html(data.view);
+
+                if (module == "client-list-products") {
+                    window.scrollTo({
+                        top: 80,
+                        behavior: "smooth",
+                    });
+                }
+
+                if (module == "client-list-posts") {
+                    window.scrollTo({
+                        top: 350,
+                        behavior: "smooth",
+                    });
+                }
+            },
         });
-    })
+    });
 }

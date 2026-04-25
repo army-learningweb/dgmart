@@ -1,8 +1,8 @@
 @if (count($list) > 0)
     <div
-        class="bg-white shadow-md mt-3 px-5 pb-3 rounded-md text-sm overflow-auto scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent md:max-h-[490px]">
+        class="bg-white shadow-md mt-2 px-5 pb-3 rounded-2xl text-sm overflow-auto scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent md:max-h-[490px]">
         <table class="min-w-[1000px] md:w-full">
-            <tr class="sticky top-0 bg-white">
+            <tr class="sticky top-0 bg-white font-semibold">
                 <td class="px-3 py-4">
                     <input type="checkbox" name="" id="check_all" class="check_all rounded-[3px] mb-[2px]">
                 </td>

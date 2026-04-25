@@ -1,8 +1,8 @@
 @if ($permissions->count() > 0)
     <div
-        class="bg-white shadow-md mt-3 pb-3 px-5 rounded-md text-sm md:max-h-[530px] md:overflow-y-auto overflow-x-auto md:overflow-visible scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent">
+        class="bg-white shadow-md mt-3 pb-3 px-5 rounded-2xl text-sm md:max-h-[530px] md:overflow-y-auto overflow-x-auto md:overflow-visible scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent">
         <table class="min-w-[1000px] md:w-full">
-            <tr class="sticky top-0 bg-white">
+            <tr class="sticky top-0 bg-white font-semibold">
                 <td class="px-5 py-5">#</td>
                 <td class="px-5">Tên quyền</td>
                 <td class="px-5">Mô tả</td>

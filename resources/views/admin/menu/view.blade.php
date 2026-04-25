@@ -81,7 +81,7 @@
         <input type="hidden" name="is_parent" value="{{ old('is_parent') }}">
     </x-modal-dial.modal-edit>
 
-    <div class="py-4 h-[500px] border-t border-gray-500/50 border-dashed">
+    <div class="pt-4 h-[500px] border-t border-gray-500/50 border-dashed">
         <div class="flex items-center justify-between">
             <div class="flex items-center justify-between gap-2 w-full md:w-auto">
 
@@ -102,7 +102,7 @@
             </div>
         </div>
 
-        <div class="mt-2">
+        <div class="mt-3">
             <form action="{{ route('admin.menus.action') }}" method="POST" id="form_action_menus">@csrf</form>
             <div class="flex flex-col md:flex-row justify-between gap-2">
                 {{-- action --}}

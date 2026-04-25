@@ -1,9 +1,9 @@
 @if ($products->count() > 0)
     <div
-        class="bg-white shadow-md mt-3 py-3 px-5 rounded-md text-sm overflow-x-auto md:overflow-visible scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent">
+        class="bg-white shadow-md mt-2 py-3 px-5 rounded-xl text-sm overflow-x-auto md:overflow-visible scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent">
         <table class="min-w-[1200px] md:w-full">
 
-            <tr>
+            <tr class="font-semibold">
                 <td class="px-3 py-2">
                     <input type="checkbox" name="" id="check_all" class="check_all rounded-[3px] mb-[2px]">
                     <label for="check_all" class="ms-[2px] text-sm"></label>

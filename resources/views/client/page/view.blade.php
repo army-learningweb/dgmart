@@ -4,10 +4,10 @@
     @endphp
 
     @switch($page)
-        @case('gioi-thieu.html')
+        @case('gioi-thieu')
             @include('client.page.partials.about')
             @break
-        @case('lien-he-ho-tro.html')
+        @case('lien-he-ho-tro')
             @include('client.page.partials.contact')
             @break
         @default

@@ -1,13 +1,13 @@
 <x-client-layout>
     <div class="flex items-start gap-4 mt-4">
         <div class="bg-white shadow-md p-5 rounded-2xl flex-1 sticky top-4">
-            <a href="{{ url('san-pham.html') }}"
+            <a href="{{ url('san-pham') }}"
                 class="flex gap-2 items-center text-gray-500 hover:underline hover:text-gray-800 underline-offset-1 py-1">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-4">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
                 </svg>
-                <span>Quay lại sản phẩm</span>
+                <span>Quay lại</span>
             </a>
             <hr class="my-3">
             <div class="flex gap-2 items-center bg-blue-600/10 p-2 rounded-lg text-blue-600">
@@ -20,18 +20,6 @@
                 <h1 class="font-semibold text-[16px]">{{ $title }}</h1>
             </div>
             <hr class="my-3">
-
-            <a href="{{ url(request()->path()) }}" class="reset-filter hidden">
-                <div class="reset-filter bg-gray-300/50 p-2 rounded-lg flex gap-2 items-center justify-center hover:bg-gray-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
-                    </svg>
-                Reset tùy chọn
-                </div>
-
-                <hr class="my-3">
-            </a>
-
 
             {{-- filter --}}
             <div class="flex gap-2">
@@ -127,9 +115,16 @@
                 </ul>
             </div>
             <hr class="my-3">
-            <div class="mt-5">
-                <img src="{{ asset('images/ads.webp') }}" alt="" class="rounded-2xl">
-            </div>
+             <a href="{{ url(request()->path()) }}" class="reset-filter hidden">
+                <div class="reset-filter bg-gray-300/50 p-2 rounded-lg flex gap-2 items-center justify-center hover:bg-gray-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+                    </svg>
+                Reset tùy chọn
+                </div>
+
+                <hr class="my-3">
+            </a>
         </div>
 
         {{-- product --}}

@@ -20,21 +20,7 @@ use App\Http\Controllers\AdminTrashController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
-
-// =============================
-// CLIENT
-// =============================
-
-// Home
-Route::get('/', [HomeController::class, 'view']);
-
-// Product
-Route::get('/san-pham.html',[ProductController::class,'view']);
-Route::get('/san-pham/{category}.html',[ProductController::class,'category_view']);
-Route::post('/san-pham/{category}.html',[ProductController::class,'filter']);
-
-// Page
-Route::get('/{slug}.html',[PageController::class,'view']);
+use App\Http\Controllers\PostController;
 
 // =============================
 // ADMIN
@@ -143,6 +129,32 @@ Route::middleware('auth')->group(function () {
     // Trash
     Route::get('/admin/trashs', [AdminTrashController::class, 'list'])->name('admin.trashs');
     Route::post('/admin/trashs/destroy_all', [AdminTrashController::class, 'destroy_all'])->name('admin.trashs.destroy_all');
+
+    // Clear Session
+    Route::post('/admin/session/clear',[AdminCategoryController::class,'clearSession']);
 });
 
 require __DIR__ . '/auth.php';
+
+
+// =============================
+// CLIENT
+// =============================
+
+// Home
+Route::get('/', [HomeController::class, 'view']);
+
+// Product
+Route::get('/san-pham',[ProductController::class,'view']);
+Route::post('/san-pham',[ProductController::class,'filter']);
+
+// Route::get('/san-pham/{category}',[ProductController::class,'category_view']);
+
+Route::post('/san-pham/{category}',[ProductController::class,'filter']);
+
+// Post
+Route::get('/bai-viet',[PostController::class,'view']);
+Route::post('/bai-viet',[PostController::class,'filter']);
+
+// Page
+Route::get('/{slug}',[PageController::class,'view']);

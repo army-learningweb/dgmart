@@ -1,7 +1,7 @@
 <div class="flex justify-between items-center gap-3">
 
     {{-- title page --}}
-    <div class="">
+    <div class="md:ml-1">
         @if (session('module_active') == 'dashboard')
            <div class="text-xl">Dashboard</div>
         @else

@@ -22,7 +22,7 @@
 
         <div>
             <a href="/">
-                <x-application-logo class="text-5xl" />
+                <x-application-logo class="text-5xl py-2" />
             </a>
         </div>
 

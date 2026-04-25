@@ -1,8 +1,8 @@
 @if ($roles->count() > 0)
     <div
-        class="bg-white shadow-md mt-3 py-3 px-5 rounded-md text-sm overflow-x-auto md:overflow-visible scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent">
+        class="bg-white shadow-md mt-3 py-3 px-5 rounded-2xl text-sm overflow-x-auto md:overflow-visible scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent">
         <table class="min-w-[1000px] md:w-full">
-            <tr>
+            <tr class="font-semibold">
                 <td class="px-5 pb-3">#</td>
                 <td class="px-5 pb-3">Tên vai trò</td>
                 <td class="px-5 pb-3">Mô tả</td>

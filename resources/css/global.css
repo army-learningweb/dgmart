@@ -7,3 +7,7 @@
 .navigation-active{
     color: oklch(54.6% 0.245 262.881) !important;
 }
+
+.post-category-active{
+    outline: 1px solid oklch(54.6% 0.245 262.881);
+}

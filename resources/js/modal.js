@@ -31,10 +31,14 @@ export default function modal(){
             $(this).find('select[name=categories-product]').prop('disabled',false);
             $(this).find('select[name=categories-post]').prop('disabled',false);
             $(this).find('input[name=link-name]').removeClass('opacity-50 pointer-events-none');
-
         })
         $('div.error').html(``); 
         modal.addClass('pointer-events-none opacity-0 scale-0');
         $('.modal-'+modal_name+'-is-open').removeClass('animate_translate_down');
+
+        $.ajax({
+            type: "post",
+            url: "/admin/session/clear",
+        });
     })
 }

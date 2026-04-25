@@ -118,7 +118,7 @@
             </div>
         </div>
 
-        <div class="mt-2">
+        <div class="mt-3">
             <form action="{{ route('admin.posts.action') }}" method="post" id="form-post-action">@csrf</form>
                 <div class="flex flex-col md:flex-row justify-between gap-2">
 

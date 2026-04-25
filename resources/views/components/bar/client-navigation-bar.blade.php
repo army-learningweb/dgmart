@@ -1,10 +1,10 @@
 @if (isset($menus))
     @if ($menus->count() > 0)
-        <div class="bg-white px-3 rounded-xl flex justify-between shadow-sm">
+        <div class="bg-white px-3 rounded-xl flex justify-between items-center shadow-md">
             <ul class="flex gap-7">
                 @foreach ($menus->where('parent_id', 0) as $menu)
                     <li class="relative group">
-                        <a href="{{ url($menu->slug == 'trang-chu.html' ? '/' : $menu->slug) }}"
+                        <a href="{{ url($menu->slug == 'trang-chu' ? '/' : $menu->slug) }}"
                             @php
                                 $slug = explode('.',$menu->slug)[0];
                                 $session_active = explode('.',session('client_module_active'))[0]
