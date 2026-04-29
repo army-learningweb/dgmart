@@ -1,5 +1,8 @@
 <div class="">
-    <div class="py-10 flex items-center gap-5">
+    <div class="flex gap-2 items-center py-3">
+        <x-client-breadcrum/>
+    </div>
+    <div class="py-5 flex items-center gap-5">
         <div class="flex-1">
             <h1
                 class="text-5xl pb-2 font-bold bg-gradient-to-r from-blue-500 to-blue-800 bg-clip-text text-transparent tracking-tighter">

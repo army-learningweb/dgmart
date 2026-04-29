@@ -1,5 +1,9 @@
 {{-- introduce --}}
-<div class="py-14 flex gap-5">
+<div class="flex gap-2 items-center py-3">
+        <x-client-breadcrum/>
+    </div>
+
+<div class="py-3 flex gap-5">
     <div class="flex-1">
         <x-application-logo class="text-8xl py-5" />
         <h1
@@ -8,12 +12,12 @@
         </h1>
     </div>
     <div class="w-[45%]">
-        <img src="{{ asset('images/about.png') }}" alt="" class="w-full h-full object-cover">
+        <img src="{{ asset('images/banner.png') }}" alt="" class="w-full h-full object-cover">
     </div>
 </div>
 
 {{-- story --}}
-<div class="flex gap-5">
+<div class="flex gap-5 py-12">
     <div class="flex-1">
         <h1
             class="text-5xl pb-2 font-bold bg-gradient-to-r from-blue-500 to-blue-800 bg-clip-text text-transparent tracking-tighter">
@@ -32,7 +36,7 @@
 </div>
 
 {{-- mission --}}
-<div class="flex gap-5 py-14 relative">
+<div class="flex gap-5 py-10 relative">
     <div class="flex-1">
         {{-- <h1
             class="text-5xl pb-2 font-bold bg-gradient-to-r from-blue-500 to-blue-800 bg-clip-text text-transparent tracking-tighter">
@@ -55,7 +59,7 @@
 </div>
 
 {{-- number --}}
-<div class="flex gap-5">
+<div class="flex gap-5 py-10">
     <div class="flex-1">
         <h1
             class="text-5xl pb-2 font-bold bg-gradient-to-r from-blue-500 to-blue-800 bg-clip-text text-transparent tracking-tighter">

@@ -32,3 +32,36 @@
 .animate_flash_session{
     animation:  translate_up 2.5s;
 }
+
+
+@keyframes product_translate_up {
+    from{
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate_reveal{
+    opacity: 0;
+    animation: product_translate_up 0.5s forwards;
+}
+
+@keyframes row_translate_left {
+    from{
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.animate_tl{
+    opacity: 0;
+    animation: row_translate_left 0.2s forwards;
+}

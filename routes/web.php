@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use UniSharp\LaravelFilemanager\Lfm;
 
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminPermissionController;
@@ -16,6 +15,7 @@ use App\Http\Controllers\AdminMenuController;
 use App\Http\Controllers\AdminProductController;
 use App\Http\Controllers\AdminSliderController;
 use App\Http\Controllers\AdminTrashController;
+use UniSharp\LaravelFilemanager\Lfm;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
@@ -25,14 +25,13 @@ use App\Http\Controllers\PostController;
 // =============================
 // ADMIN
 // =============================
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
+
 Route::post('/validation', [ValidationController::class, 'validation']);
 Route::get('/admin/dashboard', [DashboardController::class, 'view'])->middleware(['auth', 'verified'])->name('dashboard');
-Route::middleware('auth')->group(function () {
-
-    // File manager
-    Route::group(['prefix' => 'laravel-filemanager'], function () {
-        Lfm::routes();
-    });
+Route::middleware(['web', 'auth'])->group(function () {
 
     // File
     Route::post('/admin/file/upload', [AdminFileController::class, 'upload']);
@@ -131,7 +130,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/trashs/destroy_all', [AdminTrashController::class, 'destroy_all'])->name('admin.trashs.destroy_all');
 
     // Clear Session
-    Route::post('/admin/session/clear',[AdminCategoryController::class,'clearSession']);
+    Route::post('/admin/session/clear', [AdminCategoryController::class, 'clearSession']);
 });
 
 require __DIR__ . '/auth.php';
@@ -145,16 +144,13 @@ require __DIR__ . '/auth.php';
 Route::get('/', [HomeController::class, 'view']);
 
 // Product
-Route::get('/san-pham',[ProductController::class,'view']);
-Route::post('/san-pham',[ProductController::class,'filter']);
-
-// Route::get('/san-pham/{category}',[ProductController::class,'category_view']);
-
-Route::post('/san-pham/{category}',[ProductController::class,'filter']);
+Route::get('/san-pham', [ProductController::class, 'view']);
+Route::post('/san-pham', [ProductController::class, 'filter']);
 
 // Post
-Route::get('/bai-viet',[PostController::class,'view']);
-Route::post('/bai-viet',[PostController::class,'filter']);
+Route::get('/bai-viet', [PostController::class, 'view']);
+Route::post('/bai-viet', [PostController::class, 'filter']);
+Route::get('/bai-viet/{slug}', [PostController::class, 'details']);
 
 // Page
-Route::get('/{slug}',[PageController::class,'view']);
+Route::get('/{slug}', [PageController::class, 'view']);

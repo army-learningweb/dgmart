@@ -9,22 +9,22 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- MCE config -->
-    {{-- <x-head.tinymce-config id="post-content"/> --}}
-    {{-- <x-head.tinymce-config id="product-content"/> --}}
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <!-- Scripts -->
+    {{-- tiny mce --}}
+    <script src="https://cdn.tiny.cloud/1/99c8uy6qg2tkb92zk1z57p4evrix6u0q9mpgxced7w3w12ve/tinymce/7/tinymce.min.js"
+        referrerpolicy="origin" crossorigin="anonymous"></script>
+    <x-tinymce.config id="post-content" />
+    <x-tinymce.config id="edit-post-content" />
+
+    {{-- script --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="overflow-x-hidden overflow-y-scroll font-sans antialiased bg-[#fafafa] text-sm md:max-w-[1440px] mx-auto px-3 md:px-0">
-    
-    {{-- modal --}}
-    
+<body
+    class="overflow-x-hidden overflow-y-scroll font-sans antialiased bg-[#fafafa] text-sm md:max-w-[1440px] mx-auto px-3 md:px-0">
     {{-- Layout --}}
     <div class="min-h-screen">
         <!-- Header -->
@@ -33,10 +33,10 @@
                 {{-- Logo --}}
                 <div class="w-[10%] hidden md:block md:ms-3">
                     <a href="{{ url('admin/dashboard') }}">
-                        <x-application-logo class="text-3xl py-1"/>
+                        <x-application-logo class="text-3xl py-1" />
                     </a>
                 </div>
-                
+
                 {{-- Topbar --}}
                 <div class="flex-1">
                     <x-bar.topbar />
@@ -60,7 +60,6 @@
 
             </div>
         </main>
-
     </div>
 </body>
 

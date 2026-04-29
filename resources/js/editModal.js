@@ -85,6 +85,10 @@ export default function editModal() {
                     modal.find('input[name=old-post-file-id]').val(data.old_post_file_id);
                     modal.find(`option[value=${data.post_info.category_id}]`).prop('selected',true);
                     modal.find('.fake-remove-file').removeClass('hidden');
+                    if (tinymce.get('edit-post-content')) {
+                    tinymce.get('edit-post-content').setContent(data.post_info.content);
+    }
+                    
                 }
                 
                 // categories

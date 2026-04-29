@@ -36,7 +36,7 @@
         <div class="font-semibold text-gray-800 text-[16px]">Liên kết nhanh</div>
         <ul class="mt-4">
             @foreach ($menus as $item)
-                <li><a href="" class="hover:text-blue-700 py-2 inline-block w-full">{{ $item->name }}</a></li>
+                <li><a href="{{ url($item->slug) }}" class="hover:text-blue-700 py-2 inline-block w-full">{{ $item->name }}</a></li>
             @endforeach
         </ul>
     </li>

@@ -1,9 +1,9 @@
 @if ($posts->count() > 0)
-    <h1 class="text-2xl text-gray-800 flex items-end gap-3">
+    <h1 class="text-2xl text-gray-800 flex items-end justify-between gap-3 w-full pr-5">
         <span class="font-semibold">Tin tức nổi bật.</span>
-        <a href="" class="text-blue-600 hover:underline text-sm flex gap-2">
+        <a href="{{ url('bai-viet') }}" class="text-blue-600 hover:underline text-sm flex gap-1 justify-between group">
             <div>Xem tất cả</div>
-            <div>
+            <div class="group-hover:translate-x-1 transition-all duration-150">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />

@@ -61,8 +61,8 @@ class AdminPostController extends Controller
         $new_post = Post::create([
             'title' => trim($request->input('title')),
             'desc' => trim($request->input('desc')),
-            'content' => $request->input('content'),
-            'slug' => Str::slug($request->input('slug')),
+            'content' => $request->input('post-content'),
+            'slug' => 'bai-viet/'.Str::slug($request->input('slug')),
             'user_id' => Auth::user()->id,
             'category_id' => $request->input('category_id')
         ]);
@@ -124,12 +124,12 @@ class AdminPostController extends Controller
         ]);
 
         $slug = Post::where('id',$request->input('id'))->value('slug');
-        $slug = $request->input('slug') == $slug ? $request->input('slug') : Str::slug($request->input('slug'));
+        $slug = $request->input('slug') == $slug ? $request->input('slug') : 'bai-viet/'.Str::slug($request->input('slug'));
 
         Post::where('id', $request->input('id'))->update([
             'title' => trim($request->input('title')),
             'desc' => trim($request->input('desc')),
-            'content' => $request->input('content'),
+            'content' => $request->input('edit-post-content'),
             'slug' => $slug,
             'category_id' => $request->input('category_id')
         ]);

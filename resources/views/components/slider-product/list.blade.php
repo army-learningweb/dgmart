@@ -7,18 +7,18 @@
 ])
 
 @if ($products->count() > 0)
-    <div class="flex items-center justify-between">
+    <div class="box-btn flex items-center justify-between">
         <h1 class="text-2xl font-semibold text-gray-800">{{ $title }}</h1>
         <x-button.button-slider target="{{ $target }}" />
     </div>
 
-    <div class="overflow-hidden rounded-3xl mt-5 py-2">
-        <div class="{{ $target }} transition-all duration-300">
+    <div class="slider-product overflow-hidden rounded-3xl mt-5 py-2">
+        <div class="{{ $target }} transition-all duration-300" data-index="0">
             <ul class="flex">
                 @foreach ($products as $item)
-                    <li class="shrink-0 w-[20%] px-2 rounded-2xl relative">
+                    <li class="shrink-0 w-[20%] px-2 rounded-2xl relative group">
                         <a href="{{ $item->slug }}"
-                            class="relative inline-block bg-white rounded-2xl shadow-md pt-4 pb-2 transiton-all duration-200 hover:-translate-y-1">
+                            class="relative inline-block bg-white rounded-2xl shadow-md pt-4 pb-2 transiton-all duration-200">
                              @if ($item->sale_off != null || $item->sale_off > 0)
                                 <div class="absolute z-50 top-3 left-3 px-3 py-[1px] rounded-xl font-semibold bg-red-600/10 text-red-600">
                                     Giảm giá {{ $item->sale_off }}%
@@ -29,9 +29,9 @@
                                 </div>
                             @endif
                             <img src="{{ asset($item->medias->where('is_main', 0)->where('object_id',$item->id)->where('type','product')->value('url')) }}" alt=""
-                                class="w-full object-cover overflow-hidden">
+                                class="w-full object-cover overflow-hidden group-hover:scale-90 transition-all duration-150">
                             <div class="px-5">
-                                <div class="truncate w-[180px] font-semibold text-[16px] py-1">{{ $item->name }}</div>
+                                <div class="truncate w-[180px] font-semibold text-[16px] py-1 group-hover:underline">{{ $item->name }}</div>
                                 <div class="truncate w-[180px] text-sm text-gray-500">{{ $item->desc }}</div>
                                 @if ($item->price_sale_off != null)
                                     <div class="flex gap-2 my-2">

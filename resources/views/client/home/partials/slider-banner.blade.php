@@ -12,7 +12,7 @@
     @endforeach
 </div>
 
-<div class = 'inline-flex gap-3 absolute bottom-5 right-5'>
+{{-- <div class = 'inline-flex gap-3 absolute bottom-5 right-5'>
     <div class="btn-prev-banner shadow-md bg-white rounded-full p-[5px] hover:brightness-110 cursor-pointer group">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
             class="size-6 group-hover:text-blue-600 select-none">
@@ -25,5 +25,5 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
         </svg>
     </div>
-</div>
+</div> --}}
 

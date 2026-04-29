@@ -36,6 +36,7 @@ export default function modal(){
         modal.addClass('pointer-events-none opacity-0 scale-0');
         $('.modal-'+modal_name+'-is-open').removeClass('animate_translate_down');
 
+        tinymce.get('edit-post-content').setContent('');
         $.ajax({
             type: "post",
             url: "/admin/session/clear",

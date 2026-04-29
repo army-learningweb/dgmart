@@ -12,7 +12,7 @@
             </tr>
             
             @foreach ($permissions as $module => $permissions)
-                <tr class="border-b border-t">
+                <tr class="border-b border-gray-500/10 border-t">
                     <td class="py-3" colspan="6">
                         <div
                             class="bg-blue-500/10 text-blue-600 inline-block px-3 py-1 rounded-md">
@@ -24,7 +24,7 @@
                     <td class="py-2" colspan="6"></td>
                 </tr>
                 @foreach ($permissions as $permission)
-                   <tr class="hover:bg-[#f5f5f5]">
+                   <tr class="hover:bg-[#f5f5f5] animate_tl" style="animation-delay: {{ $loop->index * 0.1 }}s">
                         <td class="px-5 py-1">{{ $loop->iteration }}</td>
                         <td class="px-5 py-1">
                             <div class="w-[100px] truncate">

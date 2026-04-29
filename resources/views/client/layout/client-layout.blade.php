@@ -26,7 +26,6 @@
         <header>
             <div class="md:max-w-7xl mx-auto">
                 <x-bar.client-topbar />
-                <x-bar.client-navigation-bar />
             </div>
         </header>
 

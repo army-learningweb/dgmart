@@ -2,7 +2,7 @@
     <div
         class="bg-white shadow-md mt-1 px-5 pb-3 rounded-2xl text-sm overflow-auto scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent md:max-h-[500px]">
         <table class="min-w-[1000px] md:w-full">
-            <tr class="sticky top-0 bg-white font-semibold">
+            <tr class="sticky top-0 z-50 bg-white font-semibold">
                 <td class="px-3 py-4">
                     <input type="checkbox" name="" id="check_all" class="check_all rounded-[3px] mb-[2px]">
                 </td>
@@ -15,7 +15,7 @@
                 <td class="px-3 text-center">Thao tác</td>
             </tr>
             @foreach ($categories as $item)
-                <tr class="border-b border-gray-500/20 hover:bg-[#f5f5f5]">
+                <tr class="border-b border-gray-500/10 hover:bg-[#f5f5f5] animate_tl" style="animation-delay: {{ $loop->index * 0.1 }}s">
                     <td class="px-3 py-4">
                         @if (!in_array($item->id,[1,2]))
                             <input type="checkbox" name="categories_id[]" value="{{ $item->id }}" form="form_action_categories"

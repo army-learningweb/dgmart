@@ -42,7 +42,7 @@
         </div>
 
         <div class="mt-2">
-            {{-- <x-forms.tinymce-editor id="post-content" name="content" /> --}}
+            <x-tinymce.editor id="post-content" name="post-content"/>
         </div>
 
         <input type="hidden" name="modal" value="create">
@@ -86,8 +86,8 @@
             </div>
         </div>
 
-        <div class="mt-2">
-            {{-- <x-forms.tinymce-editor id="post-content" name="content" /> --}}
+         <div class="mt-2">
+            <x-tinymce.editor id="edit-post-content" name="edit-post-content"/>
         </div>
 
         <input type="hidden" name="id" value="{{ old('id') }}">
@@ -95,7 +95,7 @@
     </x-modal-dial.modal-edit>
 
     {{-- ============================== --}}
-    <div class="py-4 h-[500px] border-t border-gray-500/50 border-dashed">
+    <div class="py-4 min-h-[500px] border-t border-gray-500/50 border-dashed">
         <div class="flex items-center justify-between">
             <div class="flex items-center justify-between gap-2 w-full md:w-auto">
 

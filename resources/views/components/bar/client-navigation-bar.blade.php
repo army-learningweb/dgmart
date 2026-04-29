@@ -1,6 +1,6 @@
 @if (isset($menus))
     @if ($menus->count() > 0)
-        <div class="bg-white px-3 rounded-xl flex justify-between items-center shadow-md">
+        <div class="px-3 rounded-xl flex justify-between items-center">
             <ul class="flex gap-7">
                 @foreach ($menus->where('parent_id', 0) as $menu)
                     <li class="relative group">
@@ -35,20 +35,6 @@
                     </li>
                 @endforeach
             </ul>
-            <div class="flex gap-3 select-none py-4">
-                <div class="flex gap-2">
-                    <span class="text-blue-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="size-5">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                        </svg>
-                    </span>
-                    <span>Mở cửa từ thứ 2 đến thứ 7 hằng tuần</span>
-                </div>
-                <div class="text-gray-500/50">|</div>
-                <span class="text-gray-500">8:00 - 17:00</span>
-            </div>
         </div>
     @endif
 @endif

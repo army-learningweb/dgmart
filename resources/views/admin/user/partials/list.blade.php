@@ -16,7 +16,7 @@
                 <td class="px-3 text-center">Thao tác</td>
             </tr>
             @foreach ($users as $user)
-                <tr class="border-b border-gray-500/20 hover:bg-[#f5f5f5]">
+                <tr class="border-b border-gray-500/10 hover:bg-[#f5f5f5] animate_tl" style="animation-delay: {{ $loop->index * 0.1 }}s">
                     <td class="px-3 py-4">
                         <input type="checkbox" name="user_id[]" value="{{ $user->id }}" form="form_action_users"
                             {{ in_array($user->id, (array) old('user_id')) ? 'checked' : '' }}

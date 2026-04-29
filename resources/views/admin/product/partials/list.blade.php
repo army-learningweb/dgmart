@@ -21,7 +21,7 @@
                 <td class="px-2 text-center">Thao tác</td>
             </tr>
             @foreach ($products as $product)
-                <tr class="border-b border-gray-500/20 hover:bg-[#f5f5f5]">
+                <tr class="border-b border-gray-500/10 hover:bg-[#f5f5f5] animate_tl" style="animation-delay: {{ $loop->index * 0.1 }}s">
                     <td class="px-3 py-4">
                         <input type="checkbox" name="products_id[]" value="{{ $product->id }}" form="form-product-action"
                             {{ in_array($product->id, (array) old('products_id')) ? 'checked' : '' }}

@@ -18,7 +18,7 @@
             </tr>
 
             @foreach ($sliders as $item)
-                <tr class="border-b border-gray-500/20 hover:bg-[#f5f5f5]">
+                <tr class="border-b border-gray-500/10 hover:bg-[#f5f5f5] animate_tl" style="animation-delay: {{ $loop->index * 0.1 }}s">
                     <td class="px-3 py-4">
                         <input type="checkbox" name="banners_id[]" value="{{ $item->id }}"
                             form="form_action_sliders"

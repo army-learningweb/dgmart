@@ -11,3 +11,15 @@
 .post-category-active{
     outline: 1px solid oklch(54.6% 0.245 262.881);
 }
+
+.breadcrum-active{
+    font-weight: 500;
+}
+
+.client-post-content img{
+    border-radius: 24px;
+}
+
+.client-post-content p{
+    line-height: 1.8 !important;
+}

@@ -41,7 +41,7 @@ return [
     // Ex: The private folder of user will be named as the user id.
     'private_folder_name'      => UniSharp\LaravelFilemanager\Handlers\ConfigHandler::class,
 
-    'allow_shared_folder'      => true,
+    'allow_shared_folder'      => false,
 
     'shared_folder_name'       => 'shares',
 
@@ -61,6 +61,7 @@ return [
             'thumb_height' => 80,
             'valid_mime'   => [
                 'image/jpeg',
+                'image/jpg',
                 'image/pjpeg',
                 'image/png',
                 'image/gif',
@@ -76,6 +77,7 @@ return [
             'thumb_width' => 80,
             'thumb_height' => 80,
             'valid_mime'   => [
+                'image/jpeg',
                 'image/jpeg',
                 'image/pjpeg',
                 'image/png',
@@ -104,16 +106,18 @@ return [
 
     'temporary_url_duration'   => 30,
 
+    's3_acls_disabled'         => false,
+
     'rename_file'              => false,
 
-    'rename_duplicates'        => false,
+    'rename_duplicates'        => true,
 
-    'alphanumeric_filename'    => false,
+    'alphanumeric_filename'    => true,
 
     'alphanumeric_directory'   => false,
 
     // When creating folder or renaming folder/file, automatically convert to alphanumeric instead of error
-    'convert_to_alphanumeric'  => false,
+    'convert_to_alphanumeric'  => true,
 
     'should_validate_size'     => false,
 
@@ -190,7 +194,7 @@ return [
     | Please note that the 'upload_max_filesize' & 'post_max_size'
     | directives are not supported.
      */
-    'php_ini_overrides'=> [
+    'php_ini_overrides'        => [
         'memory_limit' => '256M',
     ],
 

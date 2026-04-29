@@ -26,8 +26,6 @@
     
     {{-- icon --}}
     <div class="flex items-center gap-3">
-        
-
         {{-- bell  --}}
         <div
             class="text-gray-600 hover:text-gray-900 cursor-pointer relative">

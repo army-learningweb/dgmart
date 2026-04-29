@@ -1,7 +1,12 @@
 <x-client-layout>
-
+    <div class="flex gap-2 items-center py-3">
+        <x-client-breadcrum/>
+    </div>
+    <div class="py-2">
+        <h1 class="text-4xl font-bold tracking-tight bg-gradient-to-r from-blue-600 to-blue-900 bg-clip-text text-transparent">Sản phẩm</h1>
+    </div>
     <div class="flex items-start gap-4 mt-3">
-        {{-- category --}}
+        {{-- search --}}
         <div class="bg-white shadow-md p-5 rounded-2xl flex-1">
             <div class="mt-3">
                 <h1 class="font-semibold text-[16px]">Tìm kiếm</h1>
@@ -17,6 +22,8 @@
                 </div>
             </div>
             <hr class="my-3">
+
+            {{-- filter cateogry --}}
             <h1 class="font-semibold text-[16px]">Sản phẩm</h1>
             <ul class="mt-3">
                 <li class="group">
@@ -36,17 +43,19 @@
                                 {{ $item->name }}
                             </div>
                             <input type="radio" name="category" id="category-product-{{ $item->id }}"
-                                value="{{ $item->id }}" class="category-product-filter border-gray-500/50"
-                                data-name={{ $item->name }} data-url="{{ request()->path() }}">
+                            value="{{ $item->id }}" class="category-product-filter border-gray-500/50">
                         </label>
                     </li>
                 @endforeach
             </ul>
             <hr class="my-3">
+
+            {{-- filter type --}}
             <div class="type-products">
                
             </div>
 
+            {{-- order price --}}
             <h1 class="font-semibold text-[16px]">Theo giá</h1>
             <ul class="mt-3">
                 <li class="group">

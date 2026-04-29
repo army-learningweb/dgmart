@@ -54,13 +54,22 @@
                             <span
                                 class="inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500/30 cursor-not-allowed rounded-l-md leading-5"
                                 aria-hidden="true">
-                                << </span>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M15.75 19.5 8.25 12l7.5-7.5" />
+                                </svg>
                             </span>
-                        @else
-                            <a href="{{ $paginator->previousPageUrl() }}" rel="prev" module={{ $module }}
-                                class="inline-flex items-center px-2 py-2 text-sm font-medium text-blue-600 hover:underline underline-offset-1 rounded-l-md leading-5"
-                                aria-label="{{ __('pagination.previous') }}">
-                                << </a>
+                        </span>
+                    @else
+                        <a href="{{ $paginator->previousPageUrl() }}" rel="prev" module={{ $module }}
+                            class="inline-flex items-center px-2 py-2 text-sm font-medium text-blue-600 hover:underline underline-offset-1 rounded-l-md leading-5"
+                            aria-label="{{ __('pagination.previous') }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="size-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                            </svg>
+                        </a>
                     @endif
 
                     {{-- Pagination Elements --}}
@@ -97,14 +106,22 @@
                         <a href="{{ $paginator->nextPageUrl() }}" rel="next" module={{ $module }}
                             class="inline-flex items-center px-2 py-2 -ml-px text-sm font-medium text-blue-600 hover:underline underline-offset-1 rounded-r-md leading-5 "
                             aria-label="{{ __('pagination.next') }}">
-                            >>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="size-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                            </svg>
                         </a>
                     @else
                         <span aria-disabled="true" aria-label="{{ __('pagination.next') }}">
                             <span
                                 class="inline-flex items-center px-2 py-2 -ml-px text-sm font-medium text-gray-500/30 cursor-not-allowed rounded-r-md leading-5"
                                 aria-hidden="true">
-                                >> </span>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                                </svg>
+                            </span>
                         </span>
                     @endif
                 </span>
