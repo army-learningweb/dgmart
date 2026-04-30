@@ -32,7 +32,7 @@
                     @endif
                 </div>
                 <div class="my-3 flex justify-between gap-2 px-5">
-                    <a href="" class="w-[40%] py-[6px] rounded-2xl bg-gray-200 text-center">Chi tiết...</a>
+                    <a href="" class="w-[40%] py-[6px] rounded-2xl bg-gray-200 text-center hover:underline underline-offset-1">Chi tiết...</a>
                     <a href="" class="flex-1 bg-gradient-to-r from-blue-600 to-blue-900 py-[6px] text-center rounded-2xl text-white hover:brightness-125">
                         Thêm vào giỏ
                     </a>

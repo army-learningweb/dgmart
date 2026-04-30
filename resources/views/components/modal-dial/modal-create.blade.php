@@ -14,7 +14,7 @@
      <div class="modal-{{ $modal }}-is-open w-[90vw] md:max-w-[400px] {{ $width }} bg-white shadow-md overflow-y-auto scrollbar-thumb-rounded-full scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent p-5 rounded-3xl md:mt-10 mt-3">
         
         <div class="flex justify-between items-center text-lg">
-            <div class="modal-{{ $modal }}-title">{{ $title }}</div>
+            <div class="modal-{{ $modal }}-title pb-3">{{ $title }}</div>
             <div>
                 <div class="cancel-modal cancel-modal-{{ $modal }} cursor-pointer"
                     data-modal="{{ $modal }}">
@@ -32,7 +32,7 @@
                 class="scrollbar-thumb-rounded-full scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent max-h-[450px] {{ $variant }}">
                 {{ $slot }}
             </div>
-            <div class="mt-2 flex flex-col md:flex-row items-center justify-end gap-2">
+            <div class="pt-3 flex flex-col md:flex-row items-center justify-end gap-2">
                 <x-modal-dial.button-cancel modal="{{ $modal }}" />
                 <x-button.primary-button class="py-[5px] md:w-auto">{{ $button_create }}</x-button.primary-button>
             </div>

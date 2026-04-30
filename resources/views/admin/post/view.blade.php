@@ -141,7 +141,7 @@
                         {{-- search --}}
                         <div>
                             <x-form-element.search placeholder="Tìm kiếm theo tiêu đề..." name="search-post"
-                                module="posts" class="search" />
+                                module="posts" class="search" value="{{ request()->input('search') }}"/>
                         </div>
 
                         {{-- category --}}
@@ -164,7 +164,7 @@
 
                         {{-- reset --}}
                         <div class="hidden md:block">
-                            <x-button.button-reset />
+                            <x-button.button-reset link="{{route('admin.posts')}}"/>
                         </div>
 
                     </div>

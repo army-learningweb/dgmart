@@ -24,7 +24,7 @@ class ProductController extends Controller
         $category_value = $request->category_value;
         $order_value = $request->order_value;
         $type_value = $request->type_value;
-
+        $view_type = '';
         if ($category_value == '') {
             $category_childs = '';
             $type_products = '';
@@ -77,5 +77,17 @@ class ProductController extends Controller
             ];
         }
         return response()->json($data);
+    }
+
+    // chi tiết
+    function details(string $slug){
+        $product_info = Product::with(['media' => function($query){
+            $query->where('type','post');
+        }])
+        ->where('status','active')
+        ->where('slug','san-pham/'.$slug)
+        ->first();
+
+        return $product_info;
     }
 }

@@ -8,7 +8,7 @@
                 <td class="px-10">Loại ảnh</td>
                 <td class="px-7">Tên File</td>
                 <td class="px-10">Kích cỡ</td>
-                <td class="">Tình trạng lỗi File</td>
+                <td class="px-5">Tình trạng lỗi File</td>
                 <td class="px-5">Ngày tạo</td>
                 <td class="px-5">Người tạo</td>
             </tr>

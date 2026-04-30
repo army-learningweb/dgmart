@@ -98,7 +98,7 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::post('/admin/products', [AdminProductController::class, 'list_filter']);
     Route::post('/admin/products/store', [AdminProductController::class, 'store'])->name('admin.products.store');
     Route::post('/admin/products/destroy/{product}', [AdminProductController::class, 'destroy'])->name('admin.products.destroy');
-    Route::get('admin/products/edit', [AdminProductController::class, 'edit']);
+    Route::get('/admin/products/edit', [AdminProductController::class, 'edit']);
     Route::post('/admin/products/update', [AdminProductController::class, 'update'])->name('admin.products.update');
     Route::post('/admin/products/action', [AdminProductController::class, 'action'])->name('admin.products.action');
     Route::post('/admin/products/updateStatus', [AdminProductController::class, 'updateStatus']);
@@ -146,6 +146,7 @@ Route::get('/', [HomeController::class, 'view']);
 // Product
 Route::get('/san-pham', [ProductController::class, 'view']);
 Route::post('/san-pham', [ProductController::class, 'filter']);
+Route::get('/san-pham/{slug}', [ProductController::class, 'details']);
 
 // Post
 Route::get('/bai-viet', [PostController::class, 'view']);

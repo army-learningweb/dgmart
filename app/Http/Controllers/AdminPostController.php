@@ -13,10 +13,19 @@ use App\Models\Post;
 class AdminPostController extends Controller
 {
     // danh sách
-    function list()
+    function list(Request $request)
     {
         $parent_categories = Category::where('type', 'post')->where('status', 'active')->where('parent_id', 0)->whereNot('id',1)->get();
-        $posts = Post::with(['user:id,name', 'media:object_id,type,url', 'category:id,name'])->latest()->paginate(5);
+
+        $posts = Post::query()->with(['user:id,name', 'media:object_id,type,url', 'category:id,name'])
+        ->when($request->input('search'),function($query,$value){
+            $query->where('title','like','%'.$value.'%');
+        })
+        ->when($request->input('category'),function($query,$value){
+            $query->where('category_id',$value);
+        })
+        ->latest()->paginate(5);
+
         $total = Post::all()->count();
         $publish = Post::where('status', 'publish')->count();
         $unpublish = Post::where('status', 'unpublish')->count();

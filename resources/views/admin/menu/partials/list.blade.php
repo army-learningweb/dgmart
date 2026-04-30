@@ -8,7 +8,7 @@
                 </td>
                 <td class="px-2">Tên Link</td>
                 <td class="px-2">Slug</td>
-                <td class="px-5">Trạng thái</td>
+                <td class="px-9">Trạng thái</td>
                 <td class="px-2">Cập nhật trạng thái</td>
                 <td class="px-4">Ngày tạo</td>
                 <td class="px-3">Người tạo</td>

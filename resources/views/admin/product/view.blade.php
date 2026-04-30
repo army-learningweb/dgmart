@@ -3,7 +3,7 @@
     {{-- flash session --}}
     <x-flash-session.success-flash-session />
     <x-flash-session.failed-flash-session />
-    
+
     {{-- modal create --}}
     <x-modal-dial.modal-create modal="create-product" title="Tạo mới sản phẩm" button_create="Tạo mới"
         route="{{ route('admin.products.store') }}" width="md:min-w-[1000px]"
@@ -18,7 +18,7 @@
 
                 <div class="mt-2">
                     <x-input-field.field label="Tên sản phẩm" type="text" name="name" id="name"
-                        required="*" autocomplete="on"/>
+                        required="*" autocomplete="on" />
                 </div>
 
                 <div class="mt-2">
@@ -27,7 +27,11 @@
                 </div>
 
                 <div class="mt-2">
-                    <x-input-field.field label="Giá" type="number" name="price" id="price" required="*" />
+                    <x-input-field.field label="Giá" type="number" name="price" id="price" required="*"/>
+                </div>
+
+                <div class="mt-2">
+                    <x-input-field.field label="Số lượng" type="number" name="quantity" id="quantity" required="*"/>
                 </div>
 
                 <div class="mt-2">
@@ -36,7 +40,7 @@
 
                 <div class="mt-2">
                     <x-input-field.field label="Slug" type="text" name="slug" id="slug"
-                        placeholder="vd: ten-san-pham" required="*" class="placeholder:text-xs"/>
+                        placeholder="vd: ten-san-pham" required="*" class="placeholder:text-xs" />
                 </div>
 
                 <div class="mt-2">
@@ -60,30 +64,35 @@
             </div>
 
             <div class="md:flex-1">
-                <div class="mt-2">
-                    <div class="mb-1 inline-block">Ảnh sản phẩm <span
-                            class="text-red-500">*</span></div>
-                    <x-form-element.file name="product-file" type="product" class="h-[300px]" />
-                </div>
-
-                <div class="mt-[11px]">
-                    <div class="mb-1 inline-block">Ảnh chi tiết <span
-                            class="text-gray-500 text-xs">(Không bắt
-                            buộc)</span></div>
-                    <div class="mt-1 grid grid-cols-2 gap-3">
-                        <x-form-element.file name="product-subfile-1" main="1" type="product" remove_size="size-5"
-                            class="h-[130px] text-xs" none_upload_icon="true" none_mimes_required="true" />
-                        <x-form-element.file name="product-subfile-2" main="1" type="product" remove_size="size-5"
-                            class="h-[130px] text-xs" none_upload_icon="true" none_mimes_required="true" />
+                <div class="sticky top-0">
+                    <div class="mt-2">
+                        <div class="mb-1 inline-block">Ảnh sản phẩm <span class="text-red-500">*</span></div>
+                        <x-form-element.file name="product-file" type="product" class="h-[360px]" />
                     </div>
 
-                    <div class="mt-2 grid grid-cols-2 gap-3">
-                        <x-form-element.file name="product-subfile-3" main="1" type="product" remove_size="size-5"
-                            class="h-[130px] text-xs" none_upload_icon="true" none_mimes_required="true" />
-                        <x-form-element.file name="product-subfile-4" main="1" type="product" remove_size="size-5"
-                            class="h-[130px] text-xs" none_upload_icon="true" none_mimes_required="true" />
+                    <div class="mt-[15px]">
+                        <div class="mb-1 inline-block">Ảnh chi tiết <span class="text-gray-500 text-xs">(Không bắt
+                                buộc)</span></div>
+                        <div class="mt-1 grid grid-cols-2 gap-3">
+                            <x-form-element.file name="product-subfile-1" main="1" type="product"
+                                remove_size="size-5" class="h-[130px] text-xs" none_upload_icon="true"
+                                none_mimes_required="true" />
+                            <x-form-element.file name="product-subfile-2" main="1" type="product"
+                                remove_size="size-5" class="h-[130px] text-xs" none_upload_icon="true"
+                                none_mimes_required="true" />
+                        </div>
+
+                        <div class="mt-2 grid grid-cols-2 gap-3">
+                            <x-form-element.file name="product-subfile-3" main="1" type="product"
+                                remove_size="size-5" class="h-[130px] text-xs" none_upload_icon="true"
+                                none_mimes_required="true" />
+                            <x-form-element.file name="product-subfile-4" main="1" type="product"
+                                remove_size="size-5" class="h-[130px] text-xs" none_upload_icon="true"
+                                none_mimes_required="true" />
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -108,7 +117,7 @@
 
                 <div class="mt-2">
                     <x-input-field.field label="Tên sản phẩm" type="text" name="name" id="name"
-                        required="*" autocomplete="on"/>
+                        required="*" autocomplete="on" />
                 </div>
 
                 <div class="mt-2">
@@ -117,7 +126,13 @@
                 </div>
 
                 <div class="mt-2">
-                    <x-input-field.field label="Giá" type="number" name="price" id="price" required="*" />
+                    <x-input-field.field label="Giá" type="number" name="price" id="price"
+                        required="*" />
+                </div>
+
+                <div class="mt-2">
+                    <x-input-field.field label="Số lượng" type="number" name="quantity" id="quantity"
+                        required="*" />
                 </div>
 
                 <div class="mt-2">
@@ -150,30 +165,35 @@
             </div>
 
             <div class="md:flex-1">
-                <div class="mt-2">
-                    <div class="mb-1 inline-block">Ảnh sản phẩm <span
-                            class="text-red-500">*</span></div>
-                    <x-form-element.file name="product-file" type="product" class="h-[300px]" is_edit="true"/>
+                <div class="sticky top-0">
+                    <div class="mt-2">
+                        <div class="mb-1 inline-block">Ảnh sản phẩm <span class="text-red-500">*</span></div>
+                        <x-form-element.file name="product-file" type="product" class="h-[360px]" is_edit="true" />
+                    </div>
+
+                    <div class="mt-[15px]">
+                        <div class="mb-1 inline-block">Ảnh chi tiết <span class="text-gray-500 text-xs">(Không bắt
+                                buộc)</span></div>
+
+                        <div class="mt-1 grid grid-cols-2 gap-3">
+                            <x-form-element.file name="product-subfile-1" main="1" type="product"
+                                remove_size="size-5" class="h-[130px] text-xs" none_upload_icon="true"
+                                none_mimes_required="true" is_edit="true" />
+                            <x-form-element.file name="product-subfile-2" main="1" type="product"
+                                remove_size="size-5" class="h-[130px] text-xs" none_upload_icon="true"
+                                none_mimes_required="true" is_edit="true" />
+                        </div>
+                        <div class="mt-2 grid grid-cols-2 gap-3">
+                            <x-form-element.file name="product-subfile-3" main="1" type="product"
+                                remove_size="size-5" class="h-[130px] text-xs" none_upload_icon="true"
+                                none_mimes_required="true" is_edit="true" />
+                            <x-form-element.file name="product-subfile-4" main="1" type="product"
+                                remove_size="size-5" class="h-[130px] text-xs" none_upload_icon="true"
+                                none_mimes_required="true" is_edit="true" />
+                        </div>
+                    </div>
                 </div>
 
-                <div class="mt-[11px]">
-                    <div class="mb-1 inline-block">Ảnh chi tiết <span
-                            class="text-gray-500 text-xs">(Không bắt
-                            buộc)</span></div>
-
-                    <div class="mt-1 grid grid-cols-2 gap-3"> 
-                         <x-form-element.file name="product-subfile-1" main="1" type="product" remove_size="size-5"
-                            class="h-[130px] text-xs" none_upload_icon="true" none_mimes_required="true" is_edit="true"/>
-                        <x-form-element.file name="product-subfile-2" main="1" type="product" remove_size="size-5"
-                            class="h-[130px] text-xs" none_upload_icon="true" none_mimes_required="true" is_edit="true"/>
-                    </div>
-                    <div class="mt-2 grid grid-cols-2 gap-3">
-                        <x-form-element.file name="product-subfile-3" main="1" type="product" remove_size="size-5"
-                            class="h-[130px] text-xs" none_upload_icon="true" none_mimes_required="true" is_edit="true"/>
-                        <x-form-element.file name="product-subfile-4" main="1" type="product" remove_size="size-5"
-                            class="h-[130px] text-xs" none_upload_icon="true" none_mimes_required="true" is_edit="true"/>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -219,8 +239,10 @@
                     <x-form-element.select name="action" class="flex-1" form="form-product-action">
                         <option value="">Hành động hàng loạt</option>
                         <option value="active" {{ old('action') == 'active' ? 'selected' : '' }}>Hoạt động</option>
-                        <option value="unactive" {{ old('action') == 'unactive' ? 'selected' : '' }}>Vô hiệu hóa</option>
-                        <option value="destroy" {{ old('action') == 'destroy' ? 'selected' : '' }}>Xóa vĩnh viễn</option>
+                        <option value="unactive" {{ old('action') == 'unactive' ? 'selected' : '' }}>Vô hiệu hóa
+                        </option>
+                        <option value="destroy" {{ old('action') == 'destroy' ? 'selected' : '' }}>Xóa vĩnh viễn
+                        </option>
                     </x-form-element.select>
 
                     <x-button.button-action class="w-[40%]" form="form-product-action" />
@@ -232,15 +254,17 @@
                     {{-- search --}}
                     <div>
                         <x-form-element.search placeholder="Tìm kiếm theo tên..." name="search-product"
-                            module="products" class="search" />
+                            module="products" class="search" value="{{ request()->input('search') }}" />
                     </div>
 
                     {{-- orderby price --}}
                     <div>
                         <x-form-element.select name="product-filter" module="products" class="select-order py-1">
                             <option value="">Sắp xếp theo giá</option>
-                            <option value="asc">Giá tăng dần</option>
-                            <option value="desc">Giá giảm dần</option>
+                            <option value="asc" {{ request()->input('order') == 'asc' ? 'selected' : '' }}>Giá tăng
+                                dần</option>
+                            <option value="desc" {{ request()->input('order') == 'desc' ? 'selected' : '' }}>Giá
+                                giảm dần</option>
                         </x-form-element.select>
                     </div>
 
@@ -256,14 +280,16 @@
                     <div>
                         <x-form-element.select name="product-filter" module="products" class="select-filter py-1">
                             <option value="">Lọc theo trạng thái</option>
-                            <option value="active">Công khai</option>
-                            <option value="unactive">Tạm ngưng</option>
+                            <option value="active" {{ request()->input('filter') == 'active' ? 'selected' : '' }}>Hoạt
+                                động</option>
+                            <option value="unactive"{{ request()->input('filter') == 'unactive' ? 'selected' : '' }}>
+                                Tạm ngưng</option>
                         </x-form-element.select>
                     </div>
 
                     {{-- reset --}}
                     <div class="hidden md:block">
-                        <x-button.button-reset />
+                        <x-button.button-reset link="{{ route('admin.products') }}" />
                     </div>
 
                 </div>

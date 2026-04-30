@@ -11,7 +11,7 @@
                 <td class="px-5 text-center">Ảnh</td>
                 <td class="px-5">Tiêu đề</td>
                 <td class="px-5">Danh mục</td>
-                <td class="px-3">Trạng thái</td>
+                <td class="px-6">Trạng thái</td>
                 <td class="px-3">Cập nhật trạng thái</td>
                 <td class="px-3">Ngày tạo</td>
                 <td class="px-3">Người tạo</td>

@@ -14,11 +14,30 @@ use App\Models\Product;
 class AdminProductController extends Controller
 {
     // danh sách
-    function list()
+    function list(Request $request)
     {
         $parent_categories = Category::where('type', 'product')->where('status', 'active')->where('parent_id', '>', 0)->get();
-        $products = Product::with(['user:id,name', 'medias:object_id,url,type,is_main', 'category:id,name'])->latest()->paginate(5);
-        $total = Product::all()->count();
+
+        $products = Product::query()->with(['user:id,name','category:id,name','medias' => function($query){
+            $query->where('type','product')->where('is_main',1)->select('object_id','url');
+        }])
+        ->when($request->input('category'),function($query,$value){
+            $query->where('category_id',$value);
+        })
+        ->when($request->input('order'),function($query,$value){
+            $query->orderBy('price',$value);
+        })
+        ->when($request->input('filter'),function($query,$value){
+            $query->where('status',$value);
+        })
+        ->when($request->input('search'),function($query,$value){
+            $query->where('name','like','%'.$value.'%');
+        })
+        ->latest()
+        ->paginate(5)
+        ->onEachSide(1);
+
+        $total = Product::count();
         $active = Product::where('status', 'active')->count();
         $unactive = Product::where('status', 'unactive')->count();
         return view('admin.product.view', compact('parent_categories', 'products', 'total', 'active', 'unactive'));
@@ -45,7 +64,9 @@ class AdminProductController extends Controller
             ->when($order_value,function($query,$value){
                 $query->orderBy('price',$value);
             })
-            ->latest()->paginate(5);
+            ->latest()
+            ->paginate(5)
+            ->onEachSide(1);
 
         $view = view('admin.product.partials.list', compact('products'))->render();
         return response()->json($view);
@@ -61,8 +82,9 @@ class AdminProductController extends Controller
             'slug' => 'required|min:2|unique:products',
             'sale_off' => 'nullable|numeric|between:0,100',
             'product-file-id' => 'required',
-            'price' => 'required|min:5|max:10',
-            'category_id' => 'required|exists:categories,id'
+            'category_id' => 'required|exists:categories,id',
+            'price' => 'required|integer|between:1,1000000000',
+            'quantity' => 'required|integer|between:0,999'
         ]);
 
         if ($request->input('sale_off') > 0) {
@@ -80,7 +102,8 @@ class AdminProductController extends Controller
             'name' => trim($request->input('name')),
             'desc' => trim($request->input('desc')),
             'price' => $request->input('price'),
-            'slug' => $slug,
+            'quantity' => $request->input('quantity'),
+            'slug' => 'san-pham/'.$slug,
             'sale_off' => $request->input('sale_off'),
             'price_sale_off' => $price_sale_off,
             'category_id' => $request->input('category_id'),
@@ -169,12 +192,17 @@ class AdminProductController extends Controller
             'slug' => 'required|min:2|unique:products,slug,' . $request->input('id'),
             'sale_off' => 'nullable|numeric|between:0,100',
             'old-product-file-id' => 'required',
-            'price' => 'required|min:5|max:10',
-            'category_id' => 'required|exists:categories,id'
+            'category_id' => 'required|exists:categories,id',
+            'price' => 'required|integer|between:1,1000000000',
+            'quantity' => 'required|integer|between:0,999'
         ]);
 
         $slug = Product::where('id', $request->input('id'))->value('slug');
-        $slug = !isset($slug) ? $slug : Str::slug($request->input('slug'));
+        if($request->input('slug') == $slug){
+            $slug = $slug;
+        }else{
+            $slug = 'san-pham/'.Str::slug($request->input('slug'));
+        }
 
         if ($request->input('sale_off') > 0) {
             $price = $request->input('price');
@@ -189,6 +217,7 @@ class AdminProductController extends Controller
             'name' => trim($request->input('name')),
             'desc' => trim($request->input('desc')),
             'price' => $request->input('price'),
+            'quantity' => $request->input('quantity'),
             'slug' => $slug,
             'sale_off' => $request->input('sale_off'),
             'price_sale_off' => $price_sale_off,
@@ -199,6 +228,7 @@ class AdminProductController extends Controller
 
         // file phụ
         $old_sub_files_id = Media::where('object_id', $request->input('id'))->where('type', 'product')->where('is_main', "1")->pluck('id');
+        $new_sub_files_id = [];
 
         for ($i = 1; $i <= 4; $i++) {
             $new_sub_files_id[] = $request->integer("old-product-subfile-$i-id");
@@ -256,7 +286,6 @@ class AdminProductController extends Controller
             session()->forget("old-product-subfile-$i-img");
             session()->forget("old-product-subfile-$i-id");
         }
-
         return back()->with('status', 'Cập nhật thành công');
     }
 

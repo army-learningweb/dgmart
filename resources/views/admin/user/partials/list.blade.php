@@ -10,7 +10,7 @@
                 <td class="px-5">Họ tên</td>
                 <td class="px-5">Quyền</td>
                 <td class="px-5">Email</td>
-                <td class="px-3">Trạng thái</td>
+                <td class="px-7">Trạng thái</td>
                 <td class="px-3">Cập nhật trạng thái</td>
                 <td class="px-3">Ngày tham gia</td>
                 <td class="px-3 text-center">Thao tác</td>
