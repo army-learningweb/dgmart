@@ -1,13 +1,7 @@
 <x-client-layout>
-    <a href="{{ url('bai-viet') }}" class="group flex items-center gap-1 w-fit py-1">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
-            class="size-4 group-hover:text-blue-600">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
-        </svg>
-        <span class="group-hover:text-blue-600">
-            Quay lại
-        </span>
-    </a>
+    <div class="flex gap-2 items-center py-3">
+        <x-client-breadcrum segment_2="{!! $post_info->title !!}" segment_2_slug="{{ url($post_info->slug) }}"/>
+    </div>
     
     <div class="flex bg-white rounded-3xl shadow-md p-5 mt-5">
         <div class="flex-1 border-r border-gray-500/20 p-5 pt-0 pl-0">

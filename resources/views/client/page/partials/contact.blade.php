@@ -1,16 +1,9 @@
 <div class="">
-    <div class="flex gap-2 items-center py-3">
-        <x-client-breadcrum/>
-    </div>
     <div class="py-5 flex items-center gap-5">
         <div class="flex-1">
             <h1
                 class="text-5xl pb-2 font-bold bg-gradient-to-r from-blue-500 to-blue-800 bg-clip-text text-transparent tracking-tighter">
                 Hỗ trợ & liên hệ
-            </h1>
-            <h1
-                class="text-3xl font-bold bg-gradient-to-r from-gray-600 to-gray-800 bg-clip-text text-transparent py-1 mt-2">
-                Bộ phận chăm sóc khách hàng
             </h1>
             <p class="md:w-[70%] leading-6 mt-3">"Chúng tôi luôn luôn ở đây, để tiếp nhận phản hồi và hỗ trợ cho
                 bạn, thắc mắc của bạn sẽ được giải đáp, Để lại thông tin bên dưới, bộ phận CSKH sẽ liên hệ với bạn trong

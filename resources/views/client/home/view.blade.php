@@ -1,20 +1,18 @@
 <x-client-layout>
 
-    <div class="flex gap-4 relative py-3">
-        {{-- max_sale_off --}}
-        <div class="w-[30%] bg-white rounded-3xl shadow-md h-[320px] overflow-hidden relative">
-            @include('client.home.partials.max-sale-off')
-        </div>
+    <div class="py-3 mt-5">
+        <h1
+            class="text-6xl font-bold tracking-tight bg-gradient-to-r from-blue-600 to-blue-900 bg-clip-text text-transparent py-3">
+            Cửa hàng</h1>
+    </div>
 
-        {{-- slider banner --}}
-        <div class="flex-1 rounded-3xl shadow-md h-[320px] overflow-hidden relative">
-            @include('client.home.partials.slider-banner')
-        </div>
+    <div class="py-5">
+        @include('client.home.partials.product-categories')
     </div>
 
     {{-- new product --}}
     <div class="mt-5 py-3">
-        <x-slider-product.list :products="$new_products" target="new-product" title="Mới tại cửa hàng" tag="Mới"
+        <x-slider-product.list :products="$new_products" target="new-product" title="Mới nhất" tag="Mới"
             tag_variant="bg-blue-600/10 text-blue-600" />
     </div>
 
@@ -25,7 +23,7 @@
 
     {{-- why us --}}
     <div class="mt-1 py-3">
-        @include('client.home.partials.why-us')
+        <x-why-us/>
     </div>
 
     {{-- accessories --}}
@@ -35,7 +33,7 @@
 
     {{-- support --}}
     <div class="mt-1 py-3">
-        @include('client.home.partials.support')
+        <x-support/>
     </div>
 
     {{-- post --}}

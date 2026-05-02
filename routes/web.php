@@ -144,9 +144,15 @@ require __DIR__ . '/auth.php';
 Route::get('/', [HomeController::class, 'view']);
 
 // Product
-Route::get('/san-pham', [ProductController::class, 'view']);
-Route::post('/san-pham', [ProductController::class, 'filter']);
-Route::get('/san-pham/{slug}', [ProductController::class, 'details']);
+Route::get('/cua-hang/{category}/{slug}', [ProductController::class,'details']);
+
+Route::get('/cua-hang/{category}', [ProductController::class, 'view']);
+Route::post('/cua-hang/{category}', [ProductController::class,'filter']);
+
+
+
+// Route::post('/san-pham', [ProductController::class, 'filter']);
+// Route::get('/san-pham/{slug}', [ProductController::class, 'details']);
 
 // Post
 Route::get('/bai-viet', [PostController::class, 'view']);

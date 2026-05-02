@@ -97,7 +97,7 @@
         </div>
 
         <div class="mt-2">
-            {{-- <x-forms.tinymce-editor id="product-content" name="content" /> --}}
+            <x-tinymce.editor id="product-content" name="product-content"/>
         </div>
 
         <input type="hidden" name="modal" value="create">
@@ -198,7 +198,7 @@
         </div>
 
         <div class="mt-2">
-            {{-- <x-forms.tinymce-editor id="product-content" name="content" /> --}}
+            <x-tinymce.editor id="edit-product-content" name="edit-product-content"/>
         </div>
 
         <input type="hidden" name="id" value="{{ old('id') }}">

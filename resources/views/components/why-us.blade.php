@@ -1,4 +1,4 @@
-<h1 class="text-2xl font-semibold text-gray-800">
+<h1 class="text-3xl font-semibold text-gray-900">
     <span>Tạo nên sự khác biệt.</span>
     <span class="text-gray-500">Lí do để bạn mua sắm cùng chúng tôi</span>
 </h1>

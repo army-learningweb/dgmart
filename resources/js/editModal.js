@@ -30,6 +30,7 @@ export default function editModal() {
                     sale_off: modal.find("input[name=sale_off]"),
                     slug: modal.find("input[name=slug]"),
                     id : modal.find("input[name=id]"),
+                    quantity : modal.find("input[name=quantity]"),
                     textarea_desc : modal.find("textarea[name=desc]"),
                     textarea_title : modal.find("textarea[name=title]")
                 }
@@ -65,6 +66,7 @@ export default function editModal() {
                     inputs.price.val(data.product_info.price);
                     inputs.sale_off.val(data.product_info.sale_off);
                     inputs.slug.val(data.product_info.slug);
+                    inputs.quantity.val(data.product_info.quantity);
                     modal.find('img.product-file-img').attr('src',data.img_url).removeClass('hidden').parents('div.relative').find('.fake-remove-file').removeClass('hidden');
                     modal.find('input[name=old-product-file-id]').val(data.old_product_file_id);
                     modal.find(`select#category_id option[value=${data.product_info.category_id}]`).prop('selected',true);
@@ -73,6 +75,9 @@ export default function editModal() {
                         modal.find(`img.product-subfile-${index + 1}-img`).attr('src',element.url).removeClass('hidden').parents('div.relative').find('.fake-remove-file').removeClass('hidden');
                         modal.find(`input[name=old-product-subfile-${index + 1}-id]`).val(element.id);
                     });
+                    if (data.product_info.details) {
+                        tinymce.get('edit-product-content').setContent(data.product_info.details);
+                    }
                 }
 
                 // post
@@ -85,7 +90,7 @@ export default function editModal() {
                     modal.find('input[name=old-post-file-id]').val(data.old_post_file_id);
                     modal.find(`option[value=${data.post_info.category_id}]`).prop('selected',true);
                     modal.find('.fake-remove-file').removeClass('hidden');
-                    if (tinymce.get('edit-post-content')) {
+                    if (data.post_info.content) {
                     tinymce.get('edit-post-content').setContent(data.post_info.content);
     }
                     

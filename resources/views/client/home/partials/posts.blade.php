@@ -1,6 +1,6 @@
 @if ($posts->count() > 0)
-    <h1 class="text-2xl text-gray-800 flex items-end justify-between gap-3 w-full pr-5">
-        <span class="font-semibold">Tin tức nổi bật.</span>
+    <h1 class="text-3xl text-gray-800 flex items-end justify-between gap-3 w-full pr-5">
+        <span class="font-semibold">Tin tức nổi bật</span>
         <a href="{{ url('bai-viet') }}" class="text-blue-600 hover:underline text-sm flex gap-1 justify-between group">
             <div>Xem tất cả</div>
             <div class="group-hover:translate-x-1 transition-all duration-150">

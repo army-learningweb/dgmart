@@ -27,10 +27,12 @@
                     <td class="px-2">{{ $posts->firstItem() + $loop->index }}</td>
                     <td class="px-5 py-[10px] text-center">
                         @if (!empty($post->media->where('object_id',$post->id)->where('type','post')->value('url')))
-                            <div class="flex justify-center items-center">
-                                <img src="{{ asset($post->media->where('object_id',$post->id)->where('type','post')->value('url')) }}" alt=""
-                                    class="w-[100px] h-[60px] object-cover rounded-md shadow-sm">
+                            <a href="{{ url($post->media->url) }}" target="blank">
+                                <div class="flex justify-center items-center">
+                                <img src="{{ asset($post->media->url) }}" alt="{{ $post->media->name }}"
+                                    class="w-[100px] h-[60px] object-cover rounded-lg shadow-sm">
                             </div>
+                            </a>
                         @else
                             <x-table.unknow />
                         @endif

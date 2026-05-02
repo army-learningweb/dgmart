@@ -1,8 +1,8 @@
-<div class="w-full flex justify-between items-center py-5 pb-2">
+<div class="w-full flex justify-between items-center py-5">
 
     <div class="flex gap-7 items-center">
         <a href="{{ url('/') }}">
-            <x-application-logo class="text-3xl py-1" />
+            <x-application-logo class="text-3xl py-1 mb-2" />
         </a>
 
         <div>

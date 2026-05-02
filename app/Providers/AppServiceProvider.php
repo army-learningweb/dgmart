@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\Menu;
@@ -29,11 +30,17 @@ class AppServiceProvider extends ServiceProvider
             $view->with(compact('menus'));
         });
 
-        // footet navigation
+        // footer navigation
         View::composer('components.footer.client-footer',function($view){
             $menus = Menu::where('status','active')->where('parent_id',0)->get();
             $view->with(compact('menus'));
         });
 
+        // breadcrum
+        View::composer('components.client-breadcrum',function($view){
+            $menus = Menu::where('status','active')->where('parent_id',0)->get(['name','slug']);
+            $categories = Category::where('status','active')->get(['name','slug']);
+            $view->with(compact('menus','categories'));
+        });
     }
 }

@@ -8,7 +8,11 @@
 
 @if ($products->count() > 0)
     <div class="box-btn flex items-center justify-between">
-        <h1 class="text-2xl font-semibold text-gray-800">{{ $title }}</h1>
+        <div class="space-y-2">
+            <h1 class="text-3xl font-semibold text-gray-900">{{ $title }}</h1>
+            <div class="h-1 w-[100px] bg-blue-600 rounded-md"></div>
+        </div>
+        
         <x-button.button-slider target="{{ $target }}" />
     </div>
 
@@ -16,7 +20,7 @@
         <div class="{{ $target }} transition-all duration-300" data-index="0">
             <ul class="flex">
                 @foreach ($products as $item)
-                    <li class="shrink-0 w-[20%] px-2 rounded-2xl relative group">
+                    <li class="shrink-0 w-[20%] px-2 rounded-2xl relative group animate_reveal" style="animation-delay: {{$loop->index * 0.1}}s">
                         <div
                             class="relative inline-block bg-white rounded-2xl shadow-md pt-4 pb-2 transiton-all duration-200">
                             @if ($item->sale_off != null || $item->sale_off > 0)

@@ -1,4 +1,4 @@
-<h1 class="font-semibold text-[16px]">Theo loại</h1>
+<h1 class="font-semibold text-[16px]">Lọc theo loại</h1>
 <ul class="mt-3">
     @foreach ($type_products as $item)
          <li class="group">

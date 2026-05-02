@@ -1,4 +1,4 @@
-<h1 class="text-2xl font-semibold text-gray-800">
+<h1 class="text-3xl font-semibold text-gray-900">
     <span>Hỗ trợ & giải đáp.</span>
     <span class="text-gray-500">Ngay khi bạn cần</span>
 </h1>

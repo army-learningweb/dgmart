@@ -1,112 +1,110 @@
 <x-client-layout>
-    <div class="flex gap-2 items-center py-3">
-        <x-client-breadcrum/>
-    </div>
-    <div class="py-2">
-        <h1 class="text-4xl font-bold tracking-tight bg-gradient-to-r from-blue-600 to-blue-900 bg-clip-text text-transparent">Sản phẩm</h1>
-    </div>
-    <div class="flex items-start gap-4 mt-3">
-        {{-- search --}}
-        <div class="bg-white shadow-md p-5 rounded-2xl flex-1">
-            <div class="mt-3">
-                <h1 class="font-semibold text-[16px]">Tìm kiếm</h1>
-                <div class="flex items-center gap-2 border-gray-500/30 rounded-md border px-2 mt-2">
-                    <input type="search" name="client-search-product" id="client-search-product"
-                        placeholder="Bạn tìm sản phẩm gì ?"
-                        class="client-search-product border-none py-[7px] px-0 text-sm w-full focus:border-0 focus:outline-0 focus:ring-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="text-gray-500/50 size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                    </svg>
+    <div class="pt-3 pb-10">
+        <div class="flex justify-between items-end">
+            <div class="flex flex-col">
+                <div>
+                    <x-client-breadcrum />
                 </div>
-            </div>
-            <hr class="my-3">
 
-            {{-- filter cateogry --}}
-            <h1 class="font-semibold text-[16px]">Sản phẩm</h1>
-            <ul class="mt-3">
-                <li class="group">
-                    <label for="category-product-all" class="flex items-center justify-between py-2 cursor-pointer">
-                        <div class="group-hover:text-blue-600">
-                            Tất cả
-                        </div>
-                        <input type="radio" name="category" id="category-product-all" value=""
-                            class="category-product-filter border-gray-500/50" checked>
-                    </label>
+                <a href="{{ url(request()->path()) }}"
+                    class="animate_reveal text-6xl font-bold tracking-tight bg-gradient-to-r from-blue-600 to-blue-900 bg-clip-text text-transparent py-3">
+                    {{ $title }}
+                </a>
+            </div>
+
+            @if ($top_sale)
+                <div class="flex flex-col gap-2 items-end animate_reveal">
+                    <h1 class="font-[500] client-total-products text-3xl flex gap-2 items-center tracking-tight">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                            class="size-7 text-amber-500">
+                            <path fill-rule="evenodd"
+                                d="M12.963 2.286a.75.75 0 0 0-1.071-.136 9.742 9.742 0 0 0-3.539 6.176 7.547 7.547 0 0 1-1.705-1.715.75.75 0 0 0-1.152-.082A9 9 0 1 0 15.68 4.534a7.46 7.46 0 0 1-2.717-2.248ZM15.75 14.25a3.75 3.75 0 1 1-7.313-1.172c.628.465 1.35.81 2.133 1a5.99 5.99 0 0 1 1.925-3.546 3.75 3.75 0 0 1 3.255 3.718Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <span class="bg-gradient-to-r from-amber-500 to-red-600 bg-clip-text text-transparent">Giảm sâu
+                            nhất
+                            - lên đến {{ $top_sale->sale_off }}%</span>
+                    </h1>
+                    <div class="flex gap-5 items-end">
+                        <span class="font-semibold text-xl">{{ $top_sale->name }}</span>
+                        <a href="{{ url($top_sale->slug) }}"
+                            class="inline-flex mb-[2px] items-center gap-1 text-blue-600 group">
+                            <span>Xem ngay</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="size-5 mt-1 group-hover:translate-x-1 transition-all duration-150">
+                                <path fill-rule="evenodd"
+                                    d="M12.97 3.97a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 1 1-1.06-1.06l6.22-6.22H3a.75.75 0 0 1 0-1.5h16.19l-6.22-6.22a.75.75 0 0 1 0-1.06Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            @endif
+
+        </div>
+    </div>
+
+    <div class="py-5 flex justify-between">
+        <div class="flex gap-3 items-center">
+            <span class="font-semibold animate_reveal" style="">Lọc theo loại:</span>
+            <ul class="flex gap-2">
+                <li class="product-category-item animate_reveal product-category-item px-5 bg-white py-1 rounded-md outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('category') ? '' : 'category-active' }}"
+                    data-category-id="" data-url="{{ request()->path() }}">
+                    Tất cả
                 </li>
-                @foreach ($products_categories as $item)
-                    <li class="group">
-                        <label for="category-product-{{ $item->id }}"
-                            class="flex items-center justify-between py-2 cursor-pointer">
-                            <div class="group-hover:text-blue-600">
-                                {{ $item->name }}
-                            </div>
-                            <input type="radio" name="category" id="category-product-{{ $item->id }}"
-                            value="{{ $item->id }}" class="category-product-filter border-gray-500/50">
-                        </label>
+                @foreach ($types as $key => $value)
+                    <li class="product-category-item animate_reveal product-category-item px-5 bg-white py-1 rounded-md outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('category') == $value ? 'category-active' : '' }}"
+                        data-category-id="{{ $value }}" data-url="{{ request()->path() }}"
+                        style="animation-delay: {{ $loop->index * 0.1 }}s">
+                        {{ $key }}
                     </li>
                 @endforeach
             </ul>
-            <hr class="my-3">
-
-            {{-- filter type --}}
-            <div class="type-products">
-               
-            </div>
-
-            {{-- order price --}}
-            <h1 class="font-semibold text-[16px]">Theo giá</h1>
-            <ul class="mt-3">
-                <li class="group">
-                    <label for="order-base" class="flex items-center justify-between py-2 cursor-pointer">
-                        <div class="flex gap-2 items-center group-hover:text-blue-600">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="size-5">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                            </svg>
-                            <span>Mặc định</span>
-                        </div>
-                        <input type="radio" name="order-price" id="order-base" value="" checked
-                            class="order-price-product border-gray-500/50" data-parent="">
-                    </label>
-                </li>
-                <li class="group">
-                    <label for="order-desc" class="flex items-center justify-between py-2 cursor-pointer">
-                        <div class="flex gap-2 items-center group-hover:text-blue-600">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="size-5">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M3 4.5h14.25M3 9h9.75M3 13.5h9.75m4.5-4.5v12m0 0-3.75-3.75M17.25 21 21 17.25" />
-                            </svg>
-                            <span>Từ cao đến thấp</span>
-                        </div>
-                        <input type="radio" name="order-price" id="order-desc" value="desc"
-                            class="order-price-product border-gray-500/50" data-parent="">
-                    </label>
-                </li>
-                <li class="group">
-                    <label for="order-asc" class="flex items-center justify-between py-2 cursor-pointer">
-                        <div class="flex gap-2 items-center group-hover:text-blue-600">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="size-5">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12" />
-                            </svg>
-                            <span>Từ thấp đến cao</span>
-                        </div>
-                        <input type="radio" name="order-price" id="order-asc" value="asc"
-                            class="order-price-product border-gray-500/50">
-                    </label>
-                </li>
-            </ul>
         </div>
 
+        <div>
+
+        </div>
+        <div class="animate_reveal">
+            <div class="flex gap-2 items-center">
+                <span class="font-semibold">Sắp xếp theo giá:</span>
+                <ul class="flex gap-3">
+                    <li class="product-order-item animate_reveal product-order-item px-5 bg-white py-1 rounded-md outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('order') ? '' : 'category-active' }}"
+                        data-order="" data-url="{{ request()->path() }}"
+                        style="animation-delay: {{ 0 * 0.1 }}s">
+                        Mặc định
+                    </li>
+                    <li class="product-order-item animate_reveal product-order-item px-5 bg-white py-1 rounded-md outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('order') == 'asc' ? 'category-active' : '' }}"
+                        data-order="asc" data-url="{{ request()->path() }}"
+                        style="animation-delay: {{ 1 * 0.1 }}s">
+                        Từ thấp đến cao
+                    </li>
+                    <li class="product-order-item animate_reveal product-order-item px-5 bg-white py-1 rounded-md outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('order') == 'desc' ? 'category-active' : '' }}"
+                        data-order="desc" data-url="{{ request()->path() }}"
+                        style="animation-delay: {{ 2 * 0.1 }}s">
+                        Từ cao đến thấp
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="flex gap-4 mt-2">
         {{-- product --}}
-        <div class="rounded-xl w-[77%] client-list-products">
+        <div class="rounded-xl client-list-products">
             @include('client.product.partials.list')
         </div>
+    </div>
+
+    {{-- why us --}}
+    <div class="mt-1 py-3">
+        <x-why-us />
+    </div>
+
+    {{-- support --}}
+    <div class="mt-1 py-3">
+        <x-support />
     </div>
 
 </x-client-layout>

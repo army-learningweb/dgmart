@@ -1,8 +1,4 @@
 {{-- introduce --}}
-<div class="flex gap-2 items-center py-3">
-        <x-client-breadcrum/>
-    </div>
-
 <div class="py-3 flex gap-5">
     <div class="flex-1">
         <x-application-logo class="text-8xl py-5" />

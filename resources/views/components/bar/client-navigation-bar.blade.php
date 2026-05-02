@@ -4,12 +4,12 @@
             <ul class="flex gap-7">
                 @foreach ($menus->where('parent_id', 0) as $menu)
                     <li class="relative group">
-                        <a href="{{ url($menu->slug == 'trang-chu' ? '/' : $menu->slug) }}"
+                        <a href="{{ url($menu->slug == 'cua-hang' ? '/' : $menu->slug) }}"
                             @php
                                 $slug = explode('.',$menu->slug)[0];
                                 $session_active = explode('.',session('client_module_active'))[0]
                             @endphp
-                            class="group-hover:text-blue-600 hover:text-blue-600 flex items-center gap-1 py-5 {{ $slug == $session_active ? "navigation-active" : '' }}{{ session('client_module_active') == '' && $menu->slug == 'trang-chu' ? 'navigation-active' : '' }}">
+                            class="group-hover:text-blue-600 hover:text-blue-600 flex items-center gap-1 py-5 {{ $slug == $session_active ? "navigation-active" : '' }}{{ session('client_module_active') == '' && $menu->slug == 'cua-hang' ? 'navigation-active' : '' }}">
                             <span>{{ $menu->name }}</span>
                             @if ($menus->where('parent_id', $menu->id)->count() > 0)
                                 <span class="group-hover:rotate-90 transition-all duration-150">

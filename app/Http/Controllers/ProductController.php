@@ -8,86 +8,99 @@ use App\Models\Category;
 
 class ProductController extends Controller
 {
-    // tất cả sản phẩm
-    function view()
+    // sản phẩm theo danh mục
+    function view(Request $request)
     {
-        session()->forget('parent_category_id');
-        $products = Product::with('medias:object_id,url,type,is_main')->where('status', 'active')->latest()->paginate(12);
-        $products_categories = Category::with('childs:parent_id,name')->where('type', 'product')->where('status', 'active')->whereNot('id', 2)->where('parent_id', 0)->get();
-        return view('client.product.view', compact('products', 'products_categories'));
+        $fullSlug = $request->path();
+        $title = Category::where('slug', $fullSlug)->value('name');
+        $this_category_id = Category::where('slug', $fullSlug)->value('id');
+        $types = Category::where('parent_id', $this_category_id)->where('status','active')->pluck('id', 'name');
+        $top_sale = Product::whereIn('category_id',$types)->where('status','active')->orderBy('sale_off','desc') ->first();
+
+        // Tất cả
+        if ($request->input('category') == '') {
+            $products = Product::query()->with(['medias' => function ($query) {
+                $query->where('type', 'product')->where('is_main', '0')->select('id', 'object_id', 'url');
+            }])
+                ->when($request->input('order'), function ($query, $value) {
+                    $query->orderBy('price', $value);
+                })
+                ->whereIn('category_id', $types)
+                ->where('status', 'active')
+                ->latest()
+                ->paginate(15);
+
+        // Theo danh mục
+        } else {
+            $products = Product::query()->with(['medias' => function ($query) {
+                $query->where('type', 'product')->where('is_main', '0')->select('id', 'object_id', 'url');
+            }])
+                ->when($request->input('category'), function ($query, $value) {
+                    $query->where('category_id', $value);
+                })
+                ->when($request->input('order'), function ($query, $value) {
+                    $query->orderBy('price', $value);
+                })
+                ->where('status', 'active')
+                ->latest()
+                ->paginate(15);
+        }
+
+        return view('client.product.view', compact('title', 'products', 'types','top_sale'));
     }
 
     // Bộ lọc
     function filter(Request $request)
     {
-        $search_value = $request->search_value;
-        $category_value = $request->category_value;
+        $category_id = $request->category_id;
         $order_value = $request->order_value;
-        $type_value = $request->type_value;
-        $view_type = '';
-        if ($category_value == '') {
-            $category_childs = '';
-            $type_products = '';
-            $type_value = '';
-        } else {
-            $category_childs = Category::where('parent_id', $category_value)->pluck('id');
-            $type_products = Category::where('parent_id', $category_value)->get(['id', 'name']);
-            $view_type = view('client.product.partials.type', compact('type_products','type_value'))->render();
-        }
 
-        if (!$type_value) {
-            $products = Product::query()->with('medias:object_id,url,type,is_main')
-                ->when($search_value, function ($query, $value) {
-                    $query->where('name', 'like', '%' . $value . '%');
-                })
-                ->when($category_childs, function ($query, $value) {
-                    $query->whereIn('category_id', $value);
-                })
+        if ($category_id == '') {
+            $fullSlug = $request->path();
+            $this_category_id = Category::where('slug', $fullSlug)->value('id');
+            $types = Category::where('parent_id', $this_category_id)->pluck('id', 'name');
+            $products = Product::query()->with(['medias' => function ($query) {
+                $query->where('type', 'product')->where('is_main', '0')->select('id', 'object_id', 'url');
+            }])
                 ->when($order_value, function ($query, $value) {
                     $query->orderBy('price', $value);
                 })
+                ->whereIn('category_id', $types)
                 ->where('status', 'active')
-                ->latest()->paginate(12);
+                ->latest()
+                ->paginate(15);
         } else {
-            $products = Product::query()->with('medias:object_id,url,type,is_main')
-                ->when($search_value, function ($query, $value) {
-                    $query->where('name', 'like', '%' . $value . '%');
-                })
-                ->when($type_value, function ($query, $value) {
+            $products = Product::query()->with(['medias' => function ($query) {
+                $query->where('type', 'product')->where('is_main', '0')->select('id', 'object_id', 'url');
+            }])
+                ->when($category_id, function ($query, $value) {
                     $query->where('category_id', $value);
                 })
                 ->when($order_value, function ($query, $value) {
                     $query->orderBy('price', $value);
                 })
                 ->where('status', 'active')
-                ->latest()->paginate(12);
+                ->latest()
+                ->paginate(15);
         }
 
         $view = view('client.product.partials.list', compact('products'))->render();
-        if ($category_value == '') {
-            $data = [
-                'view' => $view,
-                'type_products' => $type_products,
-            ];
-        } else {
-            $data = [
-                'view' => $view,
-                'type_products' => $type_products,
-                'view_type' => $view_type
-            ];
-        }
+        $data = [
+            'view' => $view,
+        ];
+
         return response()->json($data);
     }
 
     // chi tiết
-    function details(string $slug){
-        $product_info = Product::with(['media' => function($query){
-            $query->where('type','post');
+    function details(Request $request)
+    {
+        $product_info = Product::with(['medias' => function ($query) {
+            $query->where('type', 'product')->select('id', 'object_id', 'url', 'name', 'is_main');
         }])
-        ->where('status','active')
-        ->where('slug','san-pham/'.$slug)
-        ->first();
-
-        return $product_info;
+            ->where('status', 'active')
+            ->where('slug',$request->path())
+            ->first();
+        return view('client.product.details', compact('product_info'));
     }
 }

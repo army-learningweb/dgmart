@@ -8,12 +8,14 @@
     color: oklch(54.6% 0.245 262.881) !important;
 }
 
-.post-category-active{
-    outline: 1px solid oklch(54.6% 0.245 262.881);
+.category-active{
+    outline: 2px solid oklch(54.6% 0.245 262.881) !important;
+    background: rgb(37 99 235 / 0.1) !important;
 }
 
 .breadcrum-active{
     font-weight: 500;
+    color: black;
 }
 
 .client-post-content img{
@@ -22,4 +24,25 @@
 
 .client-post-content p{
     line-height: 1.8 !important;
+}
+
+.thumbnail-active{
+    outline: 2px solid oklch(54.6% 0.245 262.881) !important;
+}
+
+.client-product-details{
+    line-height: 1.8 !important;
+}
+
+.client-product-details table {
+    width: 100%;
+    border-collapse: collapse; /* Bắt buộc để hiện lưới đơn sắc nét */
+    border: 1px solid gainsboro;
+}
+
+.client-product-details table td, 
+.client-product-details table th {
+    border: 1px solid gainsboro; /* Hiện lưới cho từng ô */
+    padding: 10px; /* Khoảng cách để nội dung không dính vào lưới */
+    text-align: left;
 }

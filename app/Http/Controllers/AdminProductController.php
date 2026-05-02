@@ -18,24 +18,24 @@ class AdminProductController extends Controller
     {
         $parent_categories = Category::where('type', 'product')->where('status', 'active')->where('parent_id', '>', 0)->get();
 
-        $products = Product::query()->with(['user:id,name','category:id,name','medias' => function($query){
-            $query->where('type','product')->where('is_main',1)->select('object_id','url');
+        $products = Product::query()->with(['user:id,name', 'category:id,name', 'medias' => function ($query) {
+            $query->where('type', 'product')->where('is_main', 1)->select('id', 'object_id', 'url','name');
         }])
-        ->when($request->input('category'),function($query,$value){
-            $query->where('category_id',$value);
-        })
-        ->when($request->input('order'),function($query,$value){
-            $query->orderBy('price',$value);
-        })
-        ->when($request->input('filter'),function($query,$value){
-            $query->where('status',$value);
-        })
-        ->when($request->input('search'),function($query,$value){
-            $query->where('name','like','%'.$value.'%');
-        })
-        ->latest()
-        ->paginate(5)
-        ->onEachSide(1);
+            ->when($request->input('category'), function ($query, $value) {
+                $query->where('category_id', $value);
+            })
+            ->when($request->input('order'), function ($query, $value) {
+                $query->orderBy('price', $value);
+            })
+            ->when($request->input('filter'), function ($query, $value) {
+                $query->where('status', $value);
+            })
+            ->when($request->input('search'), function ($query, $value) {
+                $query->where('name', 'like', '%' . $value . '%');
+            })
+            ->latest()
+            ->paginate(5)
+            ->onEachSide(1);
 
         $total = Product::count();
         $active = Product::where('status', 'active')->count();
@@ -51,7 +51,9 @@ class AdminProductController extends Controller
         $category_value = $request->input('category_value');
         $order_value = $request->input('order_value');
 
-        $products = Product::query()->with(['user:id,name', 'medias:is_main,object_id,type,url', 'category:id,name'])
+        $products = Product::query()->with(['user:id,name', 'category:id,name', 'medias' => function ($query) {
+            $query->where('type', 'product')->where('is_main', 1)->select('id', 'object_id', 'url');
+        }])
             ->when($filter_value, function ($query, $value) {
                 $query->where('status', $value);
             })
@@ -61,8 +63,8 @@ class AdminProductController extends Controller
             ->when($category_value, function ($query, $value) {
                 $query->where('category_id', $value);
             })
-            ->when($order_value,function($query,$value){
-                $query->orderBy('price',$value);
+            ->when($order_value, function ($query, $value) {
+                $query->orderBy('price', $value);
             })
             ->latest()
             ->paginate(5)
@@ -95,7 +97,8 @@ class AdminProductController extends Controller
             $price_sale_off = null;
         }
 
-        $slug = Str::slug($request->input('slug'));
+        $parent_category = Category::find($request->input('category_id'))->parent->slug;
+        $slug = $parent_category . '/' . Str::slug($request->input('slug'));
 
         $new_product = Product::create([
             'code' => trim($request->input('code')),
@@ -103,12 +106,12 @@ class AdminProductController extends Controller
             'desc' => trim($request->input('desc')),
             'price' => $request->input('price'),
             'quantity' => $request->input('quantity'),
-            'slug' => 'san-pham/'.$slug,
+            'slug' => $slug,
             'sale_off' => $request->input('sale_off'),
             'price_sale_off' => $price_sale_off,
             'category_id' => $request->input('category_id'),
             'user_id' => Auth::user()->id,
-            'details' => $request->input('details')
+            'details' => $request->input('product-content')
         ]);
 
         Media::where('id', $request->input('product-file-id'))->where('type', 'product')->update(['object_id' => $new_product->id]);
@@ -198,10 +201,11 @@ class AdminProductController extends Controller
         ]);
 
         $slug = Product::where('id', $request->input('id'))->value('slug');
-        if($request->input('slug') == $slug){
+        if ($request->input('slug') == $slug) {
             $slug = $slug;
-        }else{
-            $slug = 'san-pham/'.Str::slug($request->input('slug'));
+        } else {
+            $parent_category = Category::find($request->input('category_id'))->parent->slug;
+            $slug = $parent_category . '/' . Str::slug($request->input('slug'));
         }
 
         if ($request->input('sale_off') > 0) {
@@ -223,7 +227,7 @@ class AdminProductController extends Controller
             'price_sale_off' => $price_sale_off,
             'category_id' => $request->input('category_id'),
             'user_id' => Auth::user()->id,
-            'details' => $request->input('details')
+            'details' => $request->input('edit-product-content')
         ]);
 
         // file phụ
@@ -296,7 +300,7 @@ class AdminProductController extends Controller
         if (!$request->products_id) return back()->withInput()->with('status_failed', 'Hành động thất bại, chưa chọn sản phẩm');
 
         if ($request->action == 'destroy') {
-            $imgs_path = Media::whereIn('object_id', $request->products_id)->where('type','product')->pluck('url');
+            $imgs_path = Media::whereIn('object_id', $request->products_id)->where('type', 'product')->pluck('url');
             foreach ($imgs_path as $path) {
                 if (file_exists($path)) {
                     File::delete($path);
@@ -306,7 +310,7 @@ class AdminProductController extends Controller
             $num_delete = Product::destroy($request->products_id);
             return back()->with('status', "Đã xóa $num_delete sản phẩm");
         }
-        Product::whereIn('id',$request->products_id)->update(['status' => $request->action, 'updated_at' => now()]);
+        Product::whereIn('id', $request->products_id)->update(['status' => $request->action, 'updated_at' => now()]);
         return back()->with('status', 'Hành động thành công');
     }
 

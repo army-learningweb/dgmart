@@ -1,70 +1,90 @@
 export default function listFilterClinet() {
+
     // Sản phẩm
-    $(document).on(
-        "input",
-        ".client-search-product, .category-product-filter, .order-price-product, .type-product-filter",
-        function () {
-            let search_value = $(".client-search-product").val();
-            let category_value = $(".category-product-filter:checked").val();
-            let order_value = $(".order-price-product:checked").val();
-            let type_value = $(".type-product-filter:checked").val();
-            let data = {
-                search_value: search_value,
-                category_value: category_value,
-                order_value: order_value,
-                type_value: type_value,
-            };
-            ajaxAction(data);
-        },
-    );
+    $(".product-category-item, .product-order-item").on("click", function () {
+
+        if($(this).hasClass('product-category-item')){
+            $('.product-category-item').removeClass('category-active');
+        }
+        if($(this).hasClass('product-order-item')){
+            $('.product-order-item').removeClass('category-active');
+        }
+        $(this).addClass('category-active');
+        
+        let category_id = $('.product-category-item').filter('.category-active').data("category-id");
+        let order_value = $('.product-order-item').filter('.category-active').data("order");
+        let url = $(this).data("url");
+        let data = { 
+            category_id: category_id,
+            order_value: order_value 
+        };
+        saveURL(data);
+        $.ajax({
+            type: "post",
+            url: `/${url}`,
+            data: data,
+            dataType: "json",
+            success: (data) => {
+                $(".client-list-products").html(data.view);
+            },
+        });
+    });
 
     // Phân trang sản phẩm
     $(document).on("click", "a[module='client-list-products']", function (e) {
         e.preventDefault();
-        let search_value = $(".client-search-product").val();
-        let category_value = $(".category-product-filter:checked").val();
-        let order_value = $(".order-price-product:checked").val();
-        let type_value = $(".type-product-filter:checked").val();
-        let data = {
-            search_value: search_value,
-            category_value: category_value,
+
+        let container_height_value = $(".client-list-products").height();
+
+        let category_id = $('.product-category-item').filter('.category-active').data("category-id");
+        let order_value = $('.product-order-item').filter('.category-active').data("order");
+        let url = $(this).attr('href');
+        let data = { 
+            category_id: category_id,
             order_value: order_value,
-            type_value: type_value,
+            url:url
         };
-        let url = $(this).attr("href");
+        saveURL(data);
+
         $.ajax({
             type: "post",
             url: url,
             data: data,
             dataType: "json",
-            success: function (data) {
-                $(`.client-list-products`).html(data.view);
-                if (data.view_type) {
-                    $(`.type-products`).html(data.view_type);
-                } else {
-                    $(`.type-products`).html("");
-                }
-                window.scrollTo({ top: 130, behavior: "smooth" });
+            success: (data) => {
+
+                $(".client-list-products").addClass(`min-h-${container_height_value}`);
+                $(".client-list-products").html(data.view);
+
+                window.scrollTo({
+                    behavior:"smooth",
+                    top: 116
+                })
+
+                setTimeout(() => {
+                    $(".client-list-products").removeClass(`min-h-${container_height_value}`);
+                }, 350);
             },
         });
+
     });
 
-    function ajaxAction(data) {
-        $.ajax({
-            type: "post",
-            url: "/san-pham",
-            data: data,
-            dataType: "json",
-            success: function (data) {
-                $(`.client-list-products`).html(data.view);
-                if (data.view_type) {
-                    $(`.type-products`).html(data.view_type);
-                } else {
-                    $(`.type-products`).html("");
-                }
-                window.scrollTo({ top: 130, behavior: "smooth" });
-            },
-        });
+    // Xử lý URL
+    function saveURL(data){
+        const params = new URLSearchParams();
+        if(data.category_id) params.set('category',data.category_id);
+        if(data.order_value) params.set('order',data.order_value);
+        if(data.url){
+            const urlObj = new URL (data.url);
+            params.set('page',urlObj.searchParams.get('page'));
+        }
+        let newURL;
+        if(params == ''){
+            newURL = `${window.location.pathname}`
+        }else{
+            newURL = `${window.location.pathname}?${params.toString()}`    
+        }
+        window.history.pushState({},'',newURL);
     }
 
     // Bài viết
@@ -77,8 +97,8 @@ export default function listFilterClinet() {
             data: data,
             dataType: "json",
             success: (data) => {
-                $("li.post-category-item").removeClass("post-category-active");
-                $(this).addClass("post-category-active");
+                $("li.post-category-item").removeClass("category-active");
+                $(this).addClass("category-active");
                 $(".client-list-posts").html(data.view);
             },
         });
@@ -87,8 +107,8 @@ export default function listFilterClinet() {
     // Phân trang bài viết
     $(document).on("click", "a[module='client-list-posts']", function (e) {
         e.preventDefault();
-        let id = $(".post-category-item")
-            .filter(".post-category-active")
+        let id = $(".category-item")
+            .filter(".category-active")
             .data("category-id");
         let data = { id: id };
         let url = $(this).attr("href");
@@ -107,4 +127,6 @@ export default function listFilterClinet() {
             },
         });
     });
+
+   
 }

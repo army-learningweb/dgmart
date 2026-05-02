@@ -11,7 +11,7 @@
                 <td class="text-center">Ảnh</td>
                 <td class="px-1">Sản phẩm</td>
                 <td class="">Giá & Ưu đãi</td>
-                <td class="px-2">Hàng kho</td>
+                <td class="px-4">Hàng kho</td>
                 <td class="px-5">Trạng thái</td>
                 <td class="">Cập nhật trạng thái</td>
                 <td class="px-2">Ngày tạo</td>
@@ -35,7 +35,7 @@
                             <div class="flex justify-center items-center">
                                 <a href="{{ asset($product->medias[0]->url) }}" target="blank">
                                     <img src="{{ asset($product->medias[0]->url) }}"
-                                    alt="" class="w-[100px] h-[65px] object-contain">
+                                    alt="{{ $product->medias[0]->name }}" class="w-[100px] h-[65px] object-contain">
                                 </a>
                                 
                             </div>
