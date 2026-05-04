@@ -29,7 +29,7 @@ import createMenu from "./createMenu";
 import sliderBanner from "./sliderBanner";
 import sliderProduct from "./sliderProduct";
 import listFilterClinet from "./listFilterClient";
-import clientProductDetails from "./clientProductDetails";
+import backScroll from "./scroll";
 
 
 $(function () {
@@ -48,5 +48,5 @@ $(function () {
     createMenu()
     sliderBanner()
     sliderProduct()
-    clientProductDetails()
+    backScroll()
 });

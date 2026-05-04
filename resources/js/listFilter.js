@@ -6,6 +6,7 @@ export default function listFilter() {
         ".select-filter, .search, .select-category, .select-order",
         function () {
             let module = $(this).data("module");
+            let type = $(this).data("type");
             let search_value = $(".search").val();
             let filter_value = $(".select-filter").val();
             let category_value = $(".select-category").val();
@@ -17,30 +18,31 @@ export default function listFilter() {
                 order_value: order_value,
             };
             saveUrl(data);
+            let url = type ? `/admin/${module}/${type}` :  `/admin/${module}`
 
             if (search_value != "") {
                 clearTimeout(timeout);
                 timeout = setTimeout(() => {
                     $.ajax({
                         type: "post",
-                        url: `/admin/${module}`,
+                        url: url,
                         data: data,
                         dataType: "json",
                         success: function (data) {
-                            $(".list-" + module).html(data);
+                            type ?  $(".list-" + type).html(data) : $(".list-" + module).html(data) ;
                         },
                     });
                 }, 350);
-            }else{
+            } else {
                 $.ajax({
-                        type: "post",
-                        url: `/admin/${module}`,
-                        data: data,
-                        dataType: "json",
-                        success: function (data) {
-                            $(".list-" + module).html(data);
-                        },
-                    });
+                    type: "post",
+                    url: url,
+                    data: data,
+                    dataType: "json",
+                    success: function (data) {
+                        type ?  $(".list-" + type).html(data) : $(".list-" + module).html(data) ;
+                    },
+                });
             }
         },
     );
@@ -65,7 +67,6 @@ export default function listFilter() {
                 url: url,
             };
             saveUrl(data);
-
             $.ajax({
                 type: "post",
                 url: url,
@@ -90,14 +91,12 @@ export default function listFilter() {
             const urlObj = new URL(data.url);
             params.set("page", urlObj.searchParams.get("page"));
         }
-
         let newUrl;
         if (params == "") {
             newUrl = `${window.location.pathname}`;
         } else {
             newUrl = `${window.location.pathname}?${params.toString()}`;
         }
-
         window.history.pushState({}, "", newUrl);
     }
 }

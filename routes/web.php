@@ -13,6 +13,8 @@ use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\AdminFileController;
 use App\Http\Controllers\AdminMenuController;
 use App\Http\Controllers\AdminProductController;
+use App\Http\Controllers\AdminProductAttributeController;
+use App\Http\Controllers\AdminAttributeVariantController;
 use App\Http\Controllers\AdminSliderController;
 use App\Http\Controllers\AdminTrashController;
 use UniSharp\LaravelFilemanager\Lfm;
@@ -33,16 +35,16 @@ Route::post('/validation', [ValidationController::class, 'validation']);
 Route::get('/admin/dashboard', [DashboardController::class, 'view'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::middleware(['web', 'auth'])->group(function () {
 
-    // File
+    // File ==================================================
     Route::post('/admin/file/upload', [AdminFileController::class, 'upload']);
     Route::post('/admin/file/remove', [AdminFileController::class, 'remove']);
 
-    // Admin Profile
+    // Admin Profile ==================================================
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // User
+    // User ==================================================
     Route::get('/admin/users', [AdminUserController::class, 'list'])->name('admin.users');
     Route::post('/admin/users', [AdminUserController::class, 'list_filter']);
 
@@ -53,21 +55,21 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::post('/admin/users/updateStatus', [AdminUserController::class, 'updateStatus']);
     Route::post('/admin/users/action', [AdminUserController::class, 'action'])->name('admin.users.action');
 
-    // Role
+    // Role ==================================================
     Route::get('/admin/roles', [AdminRoleController::class, 'list'])->name('admin.roles');
     Route::post('/admin/roles/store', [AdminRoleController::class, 'store'])->name('admin.roles.store');
     Route::post('/admin/roles/destroy/{role}', [AdminRoleController::class, 'destroy'])->name('admin.roles.destroy');
     Route::get('/admin/roles/edit', [AdminRoleController::class, 'edit'])->name('admin.roles.edit');
     Route::post('/admin/roles/update', [AdminRoleController::class, 'update'])->name('admin.roles.update');
 
-    // Permission
+    // Permission ==================================================
     Route::get('/admin/permissions', [AdminPermissionController::class, 'list'])->name('admin.permissions');
     Route::post('/admin/permissions/store', [AdminPermissionController::class, 'store'])->name('admin.permissions.store');
     Route::get('/admin/permissions/destroy/{permission}', [AdminPermissionController::class, 'destroy'])->name('admin.permissions.destroy');
     Route::get('/admin/permissions/edit', [AdminPermissionController::class, 'edit']);
     Route::post('admin/permissions/update', [AdminPermissionController::class, 'update'])->name('admin.permissions.update');
 
-    // Post
+    // Post ==================================================
     Route::get('/admin/posts/categories', [AdminCategoryController::class, 'list'])->name('admin.posts.categories');
     Route::post('/admin/posts/categories/store', [AdminCategoryController::class, 'store'])->name('admin.posts.categories.store');
     Route::post('/admin/posts/categories/updateStatus', [AdminCategoryController::class, 'updateStatus']);
@@ -85,7 +87,9 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::post('/admin/posts/action', [AdminPostController::class, 'action'])->name('admin.posts.action');
     Route::post('/admin/posts/updateStatus', [AdminPostController::class, 'updateStatus']);
 
-    // Product
+    // Product ==================================================
+
+    // Category
     Route::get('/admin/products/categories', [AdminCategoryController::class, 'list'])->name('admin.products.categories');
     Route::post('/admin/products/categories/store', [AdminCategoryController::class, 'store'])->name('admin.products.categories.store');
     Route::post('/admin/products/categories/updateStatus', [AdminCategoryController::class, 'updateStatus']);
@@ -93,7 +97,7 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::post('/admin/products/categories/update', [AdminCategoryController::class, 'update'])->name('admin.products.categories.update');
     Route::post('/admin/products/categories/destroy/{category}', [AdminCategoryController::class, 'destroy'])->name('admin.products.categories.destroy');
     Route::post('/admin/products/categories/action', [AdminCategoryController::class, 'action'])->name('admin.products.categories.action');
-
+    // product
     Route::get('/admin/products', [AdminProductController::class, 'list'])->name('admin.products');
     Route::post('/admin/products', [AdminProductController::class, 'list_filter']);
     Route::post('/admin/products/store', [AdminProductController::class, 'store'])->name('admin.products.store');
@@ -102,11 +106,20 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::post('/admin/products/update', [AdminProductController::class, 'update'])->name('admin.products.update');
     Route::post('/admin/products/action', [AdminProductController::class, 'action'])->name('admin.products.action');
     Route::post('/admin/products/updateStatus', [AdminProductController::class, 'updateStatus']);
+    // Attributes
+    Route::get('/admin/products/attributes',[AdminProductAttributeController::class,'list'])->name('admin.products.attributes');
+    // Attributes_variant
+    Route::get('/admin/products/variants',[AdminAttributeVariantController::class,'list'])->name('admin.products.variants');
+    Route::post('/admin/products/variants',[AdminAttributeVariantController::class,'list_filter']);
+    Route::post('/admin/products/variants/store',[AdminAttributeVariantController::class,'store'])->name('admin.products.variants.store');
+    Route::get('/admin/products/variants/edit',[AdminAttributeVariantController::class,'edit']);
+    Route::post('/admin/products/variants/update',[AdminAttributeVariantController::class,'update'])->name('admin.products.variants.update');
+    Route::post('/admin/products/variants/destroy/{variant}',[AdminAttributeVariantController::class,'destroy'])->name('admin.products.variants.destroy');
+    Route::post('/admin/products/variants/action',[AdminAttributeVariantController::class,'action'])->name('admin.products.variants.action');
 
-    // Slider
+    // Slider ==================================================
     Route::get('/admin/sliders', [AdminSliderController::class, 'list'])->name('admin.sliders');
     Route::post('/admin/sliders', [AdminSliderController::class, 'list_filter']);
-
     Route::post('/admin/sliders/updateOrder', [AdminSliderController::class, 'updateOrder']);
     Route::post('/admin/sliders/store', [AdminSliderController::class, 'store'])->name('admin.sliders.store');
     Route::post('/admin/sliders/destroy/{slider}', [AdminSliderController::class, 'destroy'])->name('admin.sliders.destroy');
@@ -115,7 +128,7 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::post('/admin/sliders/updateStatus', [AdminSliderController::class, 'updateStatus']);
     Route::post('/admin/sliders/action', [AdminSliderController::class, 'action'])->name('admin.sliders.action');
 
-    // Menu
+    // Menu ==================================================
     Route::get('/admin/menus', [AdminMenuController::class, 'list'])->name('admin.menus');
     Route::post('/admin/menus/store', [AdminMenuController::class, 'store'])->name('admin.menus.store');
     Route::get('/admin/menus/edit', [AdminMenuController::class, 'edit'])->name('admin.menus.edit');
@@ -125,11 +138,11 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::post('/admin/menus/updateStatus', [AdminMenuController::class, 'updateStatus']);
     Route::post('/admin/menus/action', [AdminMenuController::class, 'action'])->name('admin.menus.action');
 
-    // Trash
+    // Trash ==================================================
     Route::get('/admin/trashs', [AdminTrashController::class, 'list'])->name('admin.trashs');
     Route::post('/admin/trashs/destroy_all', [AdminTrashController::class, 'destroy_all'])->name('admin.trashs.destroy_all');
 
-    // Clear Session
+    // Clear Session ==================================================
     Route::post('/admin/session/clear', [AdminCategoryController::class, 'clearSession']);
 });
 
@@ -140,24 +153,23 @@ require __DIR__ . '/auth.php';
 // CLIENT
 // =============================
 
-// Home
+// Home ==================================================
 Route::get('/', [HomeController::class, 'view']);
 
-// Product
+// Product ==================================================
 Route::get('/cua-hang/{category}/{slug}', [ProductController::class,'details']);
 
 Route::get('/cua-hang/{category}', [ProductController::class, 'view']);
 Route::post('/cua-hang/{category}', [ProductController::class,'filter']);
 
 
-
 // Route::post('/san-pham', [ProductController::class, 'filter']);
 // Route::get('/san-pham/{slug}', [ProductController::class, 'details']);
 
-// Post
+// Post ==================================================
 Route::get('/bai-viet', [PostController::class, 'view']);
 Route::post('/bai-viet', [PostController::class, 'filter']);
 Route::get('/bai-viet/{slug}', [PostController::class, 'details']);
 
-// Page
+// Page ==================================================
 Route::get('/{slug}', [PageController::class, 'view']);

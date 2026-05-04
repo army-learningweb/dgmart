@@ -4,33 +4,48 @@
         <x-client-breadcrum />
     </div>
 
+
+
     <div class="mt-5 max-w-7xl mx-auto flex gap-20 animate_reveal">
         <div class="w-[55%]">
-            <div class="sticky top-8">
-                <div
-                    class="animate_reveal text-5xl font-bold tracking-tight bg-gradient-to-r from-blue-600 to-blue-900 bg-clip-text text-transparent py-3 w-full">
-                    <div class="transition-all duration-500 client-product-name">
-                        {{ $product_info->name }}
-                    </div>
+            <div
+                class="animate_reveal text-5xl font-bold tracking-tight bg-gradient-to-r from-blue-600 to-blue-900 bg-clip-text text-transparent pb-1 w-full">
+                <div class="transition-all duration-500 client-product-name">
+                    {{ $product_info->name }}
                 </div>
-                <div class="mt-2">
-                    <img src="{{ asset($product_info->medias[0]->url) }}" alt=""
-                        class="w-full h-[450px] object-cover">
-                    <div class="absolute w-full top-[50%]">
-                        <x-button.button-slider size="7" class="w-full justify-between" />
-                    </div>
-                </div>
-
             </div>
-
+            <div class="sticky top-5">
+                <div class="mt-2 relative overflow-hidden">
+                    <div class="absolute w-full top-[50%]">
+                        
+                    </div>
+                        <ul class="flex flex-nowrap gap-3 py-5 w-full">
+                            @foreach ($product_info->medias as $item)
+                                @if ($item->is_main != 0)
+                                    <li class="shrink-0 w-full">
+                                        <img src="{{ asset($item->url) }}" alt="" class="w-full h-[450px] object-cover">
+                                    </li>
+                                @endif
+                            @endforeach
+                        </ul>
+                </div>
+                <div class="dot-img flex justify-center gap-2 py-5 w-full">
+                    <div class="cursor-pointer bg-black w-2 h-2 rounded-full"></div>
+                    <div class="cursor-pointer bg-gray-500/30 w-2 h-2 rounded-full"></div>
+                    <div class="cursor-pointer bg-gray-500/30 w-2 h-2 rounded-full"></div>
+                    <div class="cursor-pointer bg-gray-500/30 w-2 h-2 rounded-full"></div>
+                </div>
+            </div>
         </div>
+
         <div class="flex-1 space-y-2">
             @php
-                for ($i = 0; $i<=10; $i++){
+                for ($i = 0; $i <= 10; $i++) {
                     $animate_time[$i] = $i * 0.1;
                 }
             @endphp
-            <div class="flex gap-2 justify-between items-center p-4 bg-gray-100 rounded-xl animate_reveal" style="animation-deplay: {{$animate_time[0]}}s">
+            <div class="flex gap-2 justify-between items-center p-4 bg-gray-50 rounded-xl animate_reveal"
+                style="animation-deplay: {{ $animate_time[0] }}s">
                 @if ($product_info->quantity > 0)
                     <p class="font-semibold">Tình trạng sản phẩm </p>
                     <div class="px-4 py-[5px] bg-green-500/10 text-green-500 font-semibold w-fit rounded-lg">Còn hàng
@@ -41,14 +56,16 @@
                 @endif
             </div>
 
-            <div class="p-4 rounded-xl bg-gray-100 flex justify-between items-center animate_reveal"  style="animation-delay:{{ $animate_time[1]}}s">
+            <div class="p-4 rounded-xl bg-gray-50 flex justify-between items-center animate_reveal"
+                style="animation-delay:{{ $animate_time[1] }}s">
                 <div class="w-[70%] font-semibold">Mô tả ngắn</div>
                 <div class="flex-1">
                     {{ $product_info->desc }}
                 </div>
             </div>
 
-            <div class="flex justify-between items-center p-4 bg-gray-100 rounded-xl animate_reveal" style="animation-delay:{{ $animate_time[2]}}s">
+            <div class="flex justify-between items-center p-4 bg-gray-50 rounded-xl animate_reveal"
+                style="animation-delay:{{ $animate_time[2] }}s">
                 <div class="font-semibold">Đánh giá</div>
                 <div class="flex flex-col gap-1 items-end">
                     <div class="flex gap-1">
@@ -66,7 +83,8 @@
                 </div>
             </div>
 
-            <div class="p-4 border border-gray-300 rounded-xl flex justify-between items-center animate_reveal" style="animation-delay:{{ $animate_time[3]}}s">
+            <div class="p-4 border border-gray-200 rounded-xl flex justify-between items-center animate_reveal"
+                style="animation-delay:{{ $animate_time[3] }}s">
                 <div class="font-semibold text-xl">Giá</div>
                 <div>
                     @if ($product_info->price_sale_off != null)
@@ -81,8 +99,8 @@
                 </div>
             </div>
 
-            <div class="animate_reveal" style="animation-delay:{{ $animate_time[4]}}s">
-                <div class="mt-3 p-4 bg-gray-100 rounded-xl">
+            <div class="animate_reveal" style="animation-delay:{{ $animate_time[4] }}s">
+                <div class="mt-3 p-4 bg-gray-50 rounded-xl">
                     <div class="font-semibold text-[16px]">
                         Chi tiết sản phẩm
                     </div>
@@ -93,17 +111,22 @@
             </div>
 
             <div class="flex justify-end gap-1 py-1 animate_reveal" style="animation-delay: {{ $animate_time[5] }}s">
-                <a href="javascript:history.back()" class="px-3 py-2 bg-gradient-to-r from-gray-500 to-gray-600 rounded-md text-white hover:brightness-125 flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                <a href="javascript:history.back()"
+                    class="px-3 py-2 bg-gradient-to-r from-gray-500 to-gray-600 rounded-md text-white hover:brightness-125 flex items-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-4">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
                     </svg>
                     <span>Quay về</span>
                 </a>
-                <button class="bg-gradient-to-r flex gap-2 items-center from-blue-600 to-blue-800 text-white px-5 py-2 rounded-md hover:brightness-125 cursor-pointer">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                <button
+                    class="bg-gradient-to-r flex gap-2 items-center from-blue-600 to-blue-800 text-white px-5 py-2 rounded-md hover:brightness-125 cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
                     </svg>
-                    <span>Thêm sản phẩm vào giỏ hàng</span>
+                    <span>Thêm vào giỏ</span>
                 </button>
             </div>
 

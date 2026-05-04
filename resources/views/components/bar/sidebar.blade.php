@@ -39,6 +39,28 @@
             </a>
             <ul class="sub-menu rounded-lg {{ session('module_active') == 'products' ? 'block' : 'hidden' }}">
                 <li class="mt-1">
+                    <a href="{{ route('admin.products.variants') }}"
+                        class="{{ session('module_active') == 'products' && session('sub_module_active') == 'variants' ? 'active' : '' }} flex items-center gap-3 px-3 py-2 rounded-lg text-gray-900 hover:bg-white hover:shadow-md hover:text-blue-600">
+                        <span>
+                            └
+                        </span>
+                        <span>
+                            Cấu hình (TT)
+                        </span>
+                    </a>
+                </li>
+                <li class="mt-1">
+                    <a href="{{ route('admin.products.attributes') }}"
+                        class="{{ session('module_active') == 'products' && session('sub_module_active') == 'attributes' ? 'active' : '' }} flex items-center gap-3 px-3 py-2 rounded-lg text-gray-900 hover:bg-white hover:shadow-md hover:text-blue-600">
+                        <span>
+                            └
+                        </span>
+                        <span>
+                            Thuộc tính
+                        </span>
+                    </a>
+                </li>
+                <li class="mt-1">
                     <a href="{{ route('admin.products') }}"
                         class="{{ session('module_active') == 'products' && session('sub_module_active') == '' ? 'active' : '' }} flex items-center gap-3 px-3 py-2 rounded-lg text-gray-900 hover:bg-white hover:shadow-md hover:text-blue-600">
                         <span>

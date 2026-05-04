@@ -8,7 +8,7 @@ export default function editModal() {
         let type = $(this).data("type") ?? '';
         
         let url = ''
-        if(type == 'categories'){
+        if(type == 'categories' || type == 'variants'){
             url = `/admin/${module}/${type}/edit`
         }else{
             url = `/admin/${module}/edit`
@@ -34,6 +34,15 @@ export default function editModal() {
                     textarea_desc : modal.find("textarea[name=desc]"),
                     textarea_title : modal.find("textarea[name=title]")
                 }
+
+                // variant
+                if (module == 'products' && type == 'variants'){
+                    inputs.name.val(data.name);
+                    inputs.slug.val(data.slug);
+                    inputs.price.val(data.price);
+                    inputs.textarea_desc.val(data.desc);
+                    inputs.id.val(data.id);
+                }        
 
                 // menu
                 if(module == 'menus'){
