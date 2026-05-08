@@ -54,23 +54,26 @@ export default function modal() {
                 .find("input[name=link-name]")
                 .removeClass("opacity-50 pointer-events-none");
             $(this)
-                .find(".attribute_variant_check").html(``);
+                .find(".edit_attribute_variant_check").html(``);
+            $(this)
+                .find(".create_attribute_variant_check").html(``);
+            $(this)
+                .find("select[name=attribute]").val("");
         });
         $("div.error").html(``);
-
 
         modal.addClass("pointer-events-none opacity-0 scale-0");
         $(".modal-" + modal_name + "-is-open").removeClass(
             "animate_translate_down",
         );
 
-        if (tinymce.get("edit-post-content")) {
-            tinymce.get("edit-post-content").setContent("");
-        }
+        // if (tinymce.get("edit-post-content")) {
+        //     tinymce.get("edit-post-content").setContent("");
+        // }
 
-        if (tinymce.get("edit-product-content")) {
-            tinymce.get("edit-product-content").setContent("");
-        }
+        // if (tinymce.get("edit-product-content")) {
+        //     tinymce.get("edit-product-content").setContent("");
+        // }
 
         $.ajax({
             type: "post",

@@ -94,14 +94,18 @@ export default function editModal() {
                         modal.find(`img.product-subfile-${index + 1}-img`).attr('src',element.url).removeClass('hidden').parents('div.relative').find('.fake-remove-file').removeClass('hidden');
                         modal.find(`input[name=old-product-subfile-${index + 1}-id]`).val(element.id);
                     });
-                    if (data.product_info.details) {
-                        tinymce.get('edit-product-content').setContent(data.product_info.details);
-                    }
-                   
-                    modal.find(`select option[value=${data.product_info.attribute_id}]`).prop('selected',true);
+                    // if (data.product_info.details) {
+                    //     if(tinymce.get('edit-product-content')){
+                    //         tinymce.get('edit-product-content').setContent(data.product_info.details);
+                    //     }
+                    // }
+
+                    modal.find(`option[value=${data.product_info.attribute_id}]`).prop('selected',true);
                     
-                    let view_variants = modal.find('.attribute_variant_check').html(data.view_variants);
-                    if(view_variants){
+                    if(data.view_variants != ''){
+                        modal.find('.edit_attribute_variant_check').html(data.view_variants);
+                    }
+                    if(data.product_variant_values){
                         data.product_variant_values.forEach(id => {
                             modal.find(`input[value=${id}]`).prop('checked',true);
                         });

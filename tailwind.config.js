@@ -18,6 +18,7 @@ export default {
         'bg-amber-400/10',
         'text-amber-600',
         'animate-spin',
+        '!bg-black'
     ],
     theme: {
         extend: {

@@ -1,6 +1,6 @@
 export default function validation() {
     let timeout;
-    $(document).on("input", "input[type=text], textarea, input[type=checkbox]", function () {
+    $(document).on("input", "input[type=text], textarea", function () {
         let field = $(this).attr("name");
         let value = $(this).val();
         let data = { [field]: value };

@@ -4,8 +4,6 @@
         <x-client-breadcrum />
     </div>
 
-
-
     <div class="mt-5 max-w-7xl mx-auto flex gap-20 animate_reveal">
         <div class="w-[55%]">
             <div
@@ -14,26 +12,39 @@
                     {{ $product_info->name }}
                 </div>
             </div>
-            <div class="sticky top-5">
+            <div class="sticky top-5 flex flex-col items-center">
                 <div class="mt-2 relative overflow-hidden">
-                    <div class="absolute w-full top-[50%]">
-                        
-                    </div>
-                        <ul class="flex flex-nowrap gap-3 py-5 w-full">
-                            @foreach ($product_info->medias as $item)
-                                @if ($item->is_main != 0)
-                                    <li class="shrink-0 w-full">
-                                        <img src="{{ asset($item->url) }}" alt="" class="w-full h-[450px] object-cover">
-                                    </li>
-                                @endif
-                            @endforeach
-                        </ul>
+                    <ul class="container-image flex flex-nowrap gap-3 py-5 w-full transition-all duration-300">
+                        @foreach ($product_info->medias as $item)
+                            @if ($item->is_main != 0)
+                                <li class="shrink-0 w-full">
+                                    <img src="{{ asset($item->url) }}" alt=""
+                                        class="image-detail w-full h-[450px] object-cover">
+                                </li>
+                            @endif
+                        @endforeach
+                    </ul>
                 </div>
-                <div class="dot-img flex justify-center gap-2 py-5 w-full">
-                    <div class="cursor-pointer bg-black w-2 h-2 rounded-full"></div>
-                    <div class="cursor-pointer bg-gray-500/30 w-2 h-2 rounded-full"></div>
-                    <div class="cursor-pointer bg-gray-500/30 w-2 h-2 rounded-full"></div>
-                    <div class="cursor-pointer bg-gray-500/30 w-2 h-2 rounded-full"></div>
+                <div class="relative w-full flex flex-col items-center">
+                    <div class="dot-img flex justify-center gap-2 py-5 w-full">
+                        <div class="flex gap-2 bg-gray-100 p-3 rounded-2xl">
+                            <div class="dot-item cursor-pointer bg-gray-500/30 w-2 h-2 rounded-full transition-all duration-200"></div>
+                            <div class="dot-item cursor-pointer bg-gray-500/30 w-2 h-2 rounded-full transition-all duration-200"></div>
+                            <div class="dot-item cursor-pointer bg-gray-500/30 w-2 h-2 rounded-full transition-all duration-200"></div>
+                            <div class="dot-item cursor-pointer bg-gray-500/30 w-2 h-2 rounded-full transition-all duration-200"></div>
+                        </div>
+                    </div>
+                    <div class="absolute w-[22%] bottom-6 flex justify-between">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="btn-prev-img size-6 text-gray-500/30 hover:text-gray-600 active:text-gray-900 cursor-pointer">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="btn-next-img size-6 text-gray-500/30 hover:text-gray-600 active:text-gray-900 cursor-pointer">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                        </svg>
+                    </div>
                 </div>
             </div>
         </div>
@@ -44,7 +55,7 @@
                     $animate_time[$i] = $i * 0.1;
                 }
             @endphp
-            <div class="flex gap-2 justify-between items-center p-4 bg-gray-50 rounded-xl animate_reveal"
+            <div class="flex gap-2 justify-between items-center p-4 bg-gray-50 rounded-xl animate_reveal select-none"
                 style="animation-deplay: {{ $animate_time[0] }}s">
                 @if ($product_info->quantity > 0)
                     <p class="font-semibold">Tình trạng sản phẩm </p>

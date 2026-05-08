@@ -64,7 +64,7 @@
 
                 <div class="mt-2">
                     <label for="attributes">Tùy chọn cấu hình sản phẩm</label>
-                    <select name="attribute" id="attributes"
+                    <select name="attribute" id="attributes" type="create"
                         class="mt-1 rounded-md py-[7px] text-sm shadow-sm border-gray-500/30 w-full">
                         <option value="">Chọn cấu hình</option>
                         @foreach ($attributes as $item)
@@ -73,7 +73,7 @@
                     </select>
                 </div>
 
-                <div class="mt-2 attribute_variant_check"></div>
+                <div class="mt-2 create_attribute_variant_check"></div>
             </div>
 
             <div class="md:flex-1">
@@ -178,7 +178,7 @@
 
                 <div class="mt-2">
                     <label for="attributes">Tùy chọn cấu hình sản phẩm</label>
-                    <select name="attribute" id="attributes"
+                    <select name="attribute" id="attributes" type="edit"
                         class="mt-1 rounded-md py-[7px] text-sm shadow-sm border-gray-500/30 w-full">
                         <option value="">Chọn cấu hình</option>
                         @foreach ($attributes as $item)
@@ -187,7 +187,7 @@
                     </select>
                 </div>
 
-                <div class="mt-2 attribute_variant_check">
+                <div class="mt-2 edit_attribute_variant_check">
                     
                 </div>
             </div>
