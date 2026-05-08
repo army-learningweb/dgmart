@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Media;
+use Attribute;
 
 class Product extends Model
 {
@@ -21,7 +22,8 @@ class Product extends Model
         'vote',
         'sold',
         'user_id',
-        'category_id'
+        'category_id',
+        'attribute_id'
     ];
 
     function user(){
@@ -34,5 +36,13 @@ class Product extends Model
 
     function medias(){
         return $this->hasMany(Media::class,'object_id');
+    }
+
+    function variants(){
+        return $this->belongsToMany(Variant::class,'product_variants');
+    }
+
+    function attributes(){
+        return $this->belongsTo(Attribute::class,'product_attributes');
     }
 }

@@ -8,7 +8,7 @@
                 </td>
                 <td class="px-3">#</td>
                 <td class="px-5">Họ tên</td>
-                <td class="px-5">Quyền</td>
+                <td class="px-5">Vai trò</td>
                 <td class="px-5">Email</td>
                 <td class="px-7">Trạng thái</td>
                 <td class="px-3">Cập nhật trạng thái</td>

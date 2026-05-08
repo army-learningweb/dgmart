@@ -2,7 +2,6 @@
     <div
         class="bg-white shadow-md mt-2 py-3 px-5 rounded-xl text-sm overflow-x-auto md:overflow-visible scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-400 scrollbar-track-transparent">
         <table class="min-w-[1200px] md:w-full">
-
             <tr class="font-semibold">
                 <td class="px-2 py-2">
                     <input type="checkbox" name="" id="check_all" class="check_all rounded-[3px] mb-[2px]">
@@ -78,7 +77,7 @@
                     <td class="">
                         <x-table.select name="select-status" module="products" class="select-status"
                             data-id="{{ $product->id }}">
-                            <option value="active" {{ $product->status == 'active' ? 'selected' : '' }}>Công khai
+                            <option value="active" {{ $product->status == 'active' ? 'selected' : '' }}>Hoạt động
                             </option>
                             <option value="unactive" {{ $product->status == 'unactive' ? 'selected' : '' }}>Vô hiệu hóa
                             </option>

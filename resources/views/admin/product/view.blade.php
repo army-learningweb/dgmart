@@ -6,11 +6,11 @@
 
     {{-- modal create --}}
     <x-modal-dial.modal-create modal="create-product" title="Tạo mới sản phẩm" button_create="Tạo mới"
-        route="{{ route('admin.products.store') }}" width="md:min-w-[1000px]"
+        route="{{ route('admin.products.store') }}" width="md:min-w-[1200px]"
         variant="h-90vh md:max-h-[500px] pl-1 pr-2 overflow-y-auto">
 
         <div class="md:flex gap-3">
-            <div class="md:w-[60%]">
+            <div class="md:w-[65%]">
                 <div class="mt-2">
                     <x-input-field.field label="Mã sản phẩm" type="text" name="code" id="code"
                         required="*" />
@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="mt-2">
-                    <x-input-field.field label="Giá" type="number" name="price" id="price" required="*"/>
+                    <x-input-field.field label="Giá tham khảo" type="number" name="price" id="price" required="*"/>
                 </div>
 
                 <div class="mt-2">
@@ -54,13 +54,26 @@
                 </div>
 
                 <div class="mt-2">
-                    <label for="category_id">Up sales</label>
+                    <label for="up_sales">Up sales</label>
                     <select name="up_sales" id="up_sales"
                         class="mt-1 rounded-md py-[7px] text-sm shadow-sm border-gray-500/30 w-full">
                         <option value="no">Mặc định</option>
                         <option value="yes">Đẩy bán trước</option>
                     </select>
                 </div>
+
+                <div class="mt-2">
+                    <label for="attributes">Tùy chọn cấu hình sản phẩm</label>
+                    <select name="attribute" id="attributes"
+                        class="mt-1 rounded-md py-[7px] text-sm shadow-sm border-gray-500/30 w-full">
+                        <option value="">Chọn cấu hình</option>
+                        @foreach ($attributes as $item)
+                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="mt-2 attribute_variant_check"></div>
             </div>
 
             <div class="md:flex-1">
@@ -96,20 +109,20 @@
             </div>
         </div>
 
-        <div class="mt-2">
+        {{-- <div class="mt-2">
             <x-tinymce.editor id="product-content" name="product-content"/>
-        </div>
+        </div> --}}
 
         <input type="hidden" name="modal" value="create">
     </x-modal-dial.modal-create>
 
     {{-- modal edit --}}
     <x-modal-dial.modal-edit modal="edit-product" title="Cập nhật thông tin" button_edit="Cập nhật"
-        route="{{ route('admin.products.update') }}" width="md:min-w-[1000px]"
+        route="{{ route('admin.products.update') }}" width="md:min-w-[1200px]"
         variant="h-90vh md:max-h-[500px] pl-1 pr-2 overflow-y-auto">
 
         <div class="md:flex gap-3">
-            <div class="md:w-[60%]">
+            <div class="md:w-[65%]">
                 <div class="mt-2">
                     <x-input-field.field label="Mã sản phẩm" type="text" name="code" id="code"
                         required="*" />
@@ -162,6 +175,21 @@
                         <option value="yes">Đẩy bán trước</option>
                     </select>
                 </div>
+
+                <div class="mt-2">
+                    <label for="attributes">Tùy chọn cấu hình sản phẩm</label>
+                    <select name="attribute" id="attributes"
+                        class="mt-1 rounded-md py-[7px] text-sm shadow-sm border-gray-500/30 w-full">
+                        <option value="">Chọn cấu hình</option>
+                        @foreach ($attributes as $item)
+                            <option value="{{ $item->id }}" {{ old('attribute') == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="mt-2 attribute_variant_check">
+                    
+                </div>
             </div>
 
             <div class="md:flex-1">
@@ -197,9 +225,9 @@
             </div>
         </div>
 
-        <div class="mt-2">
+        {{-- <div class="mt-2">
             <x-tinymce.editor id="edit-product-content" name="edit-product-content"/>
-        </div>
+        </div> --}}
 
         <input type="hidden" name="id" value="{{ old('id') }}">
         <input type="hidden" name="modal" value="edit">

@@ -45,7 +45,7 @@
                             └
                         </span>
                         <span>
-                            Cấu hình (TT)
+                            Thông số
                         </span>
                     </a>
                 </li>
@@ -56,7 +56,7 @@
                             └
                         </span>
                         <span>
-                            Thuộc tính
+                            Cấu hình
                         </span>
                     </a>
                 </li>

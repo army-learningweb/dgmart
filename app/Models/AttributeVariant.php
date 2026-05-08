@@ -7,10 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class AttributeVariant extends Model
 {
     protected $fillable = [
-        'name',
-        'slug',
-        'price',
-        'desc',
+        'attribute_id',
+        'variant_id',
         'updated_at'
     ];
 }

@@ -70,7 +70,7 @@
             <div class="flex items-center justify-between gap-2 w-full md:w-auto">
 
                 {{-- title --}}
-                <div class="text-lg"> Cấu hình thuộc tính </div>
+                <div class="text-lg"> Danh sách thông số </div>
 
                 {{-- create modal --}}
                 <x-modal-dial.button-open modal="create-variant">
@@ -111,7 +111,7 @@
                     <div>
                         <x-form-element.select name="product-filter" module="products" type="variants" class="select-filter py-1">
                             <option value="">Lọc theo nhóm</option>
-                                @foreach ($variants as $slug => $items)
+                                @foreach ($variant_select as $slug => $items)
                                     <option value="{{ $slug }}">{{ ucfirst($slug) }}</option>
                                 @endforeach
                         </x-form-element.select>

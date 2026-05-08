@@ -8,7 +8,7 @@ export default function editModal() {
         let type = $(this).data("type") ?? '';
         
         let url = ''
-        if(type == 'categories' || type == 'variants'){
+        if(type == 'categories' || type == 'variants' || type == 'attributes'){
             url = `/admin/${module}/${type}/edit`
         }else{
             url = `/admin/${module}/edit`
@@ -34,6 +34,16 @@ export default function editModal() {
                     textarea_desc : modal.find("textarea[name=desc]"),
                     textarea_title : modal.find("textarea[name=title]")
                 }
+
+                // attributes
+                if (module == 'products' && type == 'attributes'){
+                    inputs.name.val(data.attribute.name);
+                    inputs.textarea_desc.val(data.attribute.desc);
+                    inputs.id.val(data.attribute.id);
+                    data.variants.forEach(variant_id => {
+                        modal.find(`input[value=${variant_id}]`).prop('checked',true);
+                    });
+                }        
 
                 // variant
                 if (module == 'products' && type == 'variants'){
@@ -86,6 +96,15 @@ export default function editModal() {
                     });
                     if (data.product_info.details) {
                         tinymce.get('edit-product-content').setContent(data.product_info.details);
+                    }
+                   
+                    modal.find(`select option[value=${data.product_info.attribute_id}]`).prop('selected',true);
+                    
+                    let view_variants = modal.find('.attribute_variant_check').html(data.view_variants);
+                    if(view_variants){
+                        data.product_variant_values.forEach(id => {
+                            modal.find(`input[value=${id}]`).prop('checked',true);
+                        });
                     }
                 }
 

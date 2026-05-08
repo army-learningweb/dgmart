@@ -7,7 +7,7 @@
                 <td class="pl-10">Tên</td>
                 <td class="px-2">Giá</td>
                 <td class="px-5">Mô tả</td>
-                <td class="px-2">Slug</td>
+                <td class="px-2">Nhóm</td>
                 <td class="px-3">Ngày tạo</td>
                 <td class="px-3 text-center">Thao tác</td>
             </tr>
@@ -56,8 +56,7 @@
                             <div class="flex justify-center items-center gap-2">
                                 <x-table.button-edit button="edit-variant" module="products" type="variants" id="{{ $variant->id }}" />
                             <x-table.button-delete route="{{ route('admin.products.variants.destroy', $variant->id) }}" confirm="Bạn có chắc muốn thông số này ra khỏi hệ thống ?" />
-                            </div>
-                                   
+                            </div>        
                         </td>
                     </tr>
                 @endforeach

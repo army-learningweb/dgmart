@@ -8,8 +8,10 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use App\Models\Category;
 use App\Models\Media;
-use App\Models\Post;
 use App\Models\Product;
+use App\Models\Attribute;
+use App\Models\product_variant;
+use App\Models\Variant;
 
 class AdminProductController extends Controller
 {
@@ -40,7 +42,8 @@ class AdminProductController extends Controller
         $total = Product::count();
         $active = Product::where('status', 'active')->count();
         $unactive = Product::where('status', 'unactive')->count();
-        return view('admin.product.view', compact('parent_categories', 'products', 'total', 'active', 'unactive'));
+        $attributes = Attribute::all();
+        return view('admin.product.view', compact('parent_categories', 'products', 'total', 'active', 'unactive','attributes'));
     }
 
     // phân trang - Lọc - tìm kiếm
@@ -86,7 +89,7 @@ class AdminProductController extends Controller
             'product-file-id' => 'required',
             'category_id' => 'required|exists:categories,id',
             'price' => 'required|integer|between:1,1000000000',
-            'quantity' => 'required|integer|between:0,999'
+            'quantity' => 'required|integer|between:0,999',
         ]);
 
         if ($request->input('sale_off') > 0) {
@@ -111,9 +114,14 @@ class AdminProductController extends Controller
             'price_sale_off' => $price_sale_off,
             'category_id' => $request->input('category_id'),
             'user_id' => Auth::user()->id,
-            'details' => $request->input('product-content')
+            'details' => $request->input('product-content'),
+            'attribute_id' => $request->input('attribute')
         ]);
-
+        
+        if(!empty($request->input('variants'))){
+            $new_product->variants()->sync($request->input('variants'));
+        }
+        
         Media::where('id', $request->input('product-file-id'))->where('type', 'product')->update(['object_id' => $new_product->id]);
         for ($i = 1; $i <= 4; $i++) {
             Media::where('id', $request->input("product-subfile-$i-id"))->where('type', 'product')->update(['object_id' => $new_product->id]);
@@ -147,19 +155,40 @@ class AdminProductController extends Controller
     // Cập nhật
     function edit(Request $request)
     {
+        $view_variants = '';
+
         $id = $request->id;
         $product_info = Product::find($id);
         $main_img = Media::where('object_id', $product_info->id)->where('type', 'product')->where('is_main', '0')->first();
         $detail_imgs = Media::where('object_id', $product_info->id)->where('type', 'product')->where('is_main', '1')->get(['url', 'id']);
+
         foreach ($detail_imgs as $img) {
             $img->url = asset($img->url);
         }
-        $data = [
-            'product_info' => $product_info,
-            'img_url' => asset($main_img->url),
-            'old_product_file_id' => $main_img->id,
-            'detail_imgs' => $detail_imgs
-        ];
+
+        $attributes = Attribute::with('variants')->where('id',$product_info->attribute_id)->first();
+
+        if($attributes){
+            $variants = $attributes->variants->groupBy('slug');
+            $view_variants = view('admin.product.partials.variants',compact('variants'))->render();
+            $product_variant_values = product_variant::where('product_id',$id)->pluck('variant_id');
+            $data = [
+                'product_info' => $product_info,
+                'img_url' => asset($main_img->url),
+                'old_product_file_id' => $main_img->id,
+                'detail_imgs' => $detail_imgs,
+                'view_variants' => $view_variants,
+                'product_variant_values' => $product_variant_values
+            ];
+        }else{
+            $data = [
+                'product_info' => $product_info,
+                'img_url' => asset($main_img->url),
+                'old_product_file_id' => $main_img->id,
+                'detail_imgs' => $detail_imgs
+            ];
+        }
+    
         return response()->json($data);
     }
 
@@ -216,7 +245,8 @@ class AdminProductController extends Controller
             $price_sale_off = null;
         }
 
-        Product::where('id', $request->input('id'))->update([
+        $product = Product::where('id',$request->input('id'))->first();
+        $product->update([
             'code' => trim($request->input('code')),
             'name' => trim($request->input('name')),
             'desc' => trim($request->input('desc')),
@@ -227,8 +257,13 @@ class AdminProductController extends Controller
             'price_sale_off' => $price_sale_off,
             'category_id' => $request->input('category_id'),
             'user_id' => Auth::user()->id,
-            'details' => $request->input('edit-product-content')
+            'details' => $request->input('edit-product-content'),
+            'attribute_id' => $request->input('attribute')
         ]);
+
+        if(!empty($request->input('variants'))){
+            $product->variants()->sync($request->input('variants'));
+        }
 
         // file phụ
         $old_sub_files_id = Media::where('object_id', $request->input('id'))->where('type', 'product')->where('is_main', "1")->pluck('id');
@@ -335,6 +370,24 @@ class AdminProductController extends Controller
             'unactive' => $unactive,
             'view' => $view
         ];
+        return response()->json($data);
+    }
+
+    // Lấy cấu hình
+    function getAtributeVariant(Request $request){
+        $view = '';
+
+        $attribute = Attribute::with('variants')
+        ->where('id', $request->attribute_value)
+        ->first();
+
+        if ($attribute) {
+            $variants = $attribute->variants->groupBy('slug');
+            $view = view('admin.product.partials.variants',compact('variants'))->render();
+        }
+        
+        $data = ['view' => $view];
+
         return response()->json($data);
     }
 }

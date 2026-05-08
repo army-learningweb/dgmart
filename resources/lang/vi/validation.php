@@ -46,6 +46,7 @@ return [
         'sale_off' => 'Giảm giá',
         'order' => 'Số thứ tự',
         'link-name' => 'Tên Link',
-        'quantity' => 'Số lượng'
+        'quantity' => 'Số lượng',
+        'variants' => 'Thông số'
     ]
 ];

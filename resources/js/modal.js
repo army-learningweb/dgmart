@@ -41,7 +41,7 @@ export default function modal() {
             $(this).find("textarea").val("");
             $(this).find(".error").html(``);
             $(this).find("img").attr("src", "").addClass("hidden");
-
+            $(this).find("span.text-red-500").html(``);
             $(this).find("select[name=categories-product]").val("");
             $(this).find("select[name=categories-post]").val("");
             $(this)
@@ -53,8 +53,12 @@ export default function modal() {
             $(this)
                 .find("input[name=link-name]")
                 .removeClass("opacity-50 pointer-events-none");
+            $(this)
+                .find(".attribute_variant_check").html(``);
         });
         $("div.error").html(``);
+
+
         modal.addClass("pointer-events-none opacity-0 scale-0");
         $(".modal-" + modal_name + "-is-open").removeClass(
             "animate_translate_down",

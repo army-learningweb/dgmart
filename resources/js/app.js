@@ -30,7 +30,7 @@ import sliderBanner from "./sliderBanner";
 import sliderProduct from "./sliderProduct";
 import listFilterClinet from "./listFilterClient";
 import backScroll from "./scroll";
-
+import attribute from "./attribute";
 
 $(function () {
     loadingState()
@@ -49,4 +49,5 @@ $(function () {
     sliderBanner()
     sliderProduct()
     backScroll()
+    attribute()
 });
