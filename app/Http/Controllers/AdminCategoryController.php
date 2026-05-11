@@ -46,7 +46,7 @@ class AdminCategoryController extends Controller
         if ($parent_id > 0) {
             $slug_parent = Category::where('id', $parent_id)->value('slug');
             $slug_parent = explode('/', $slug_parent);
-            $slug = session('module_active') == 'posts' ? "bai-viet/" . $slug_parent[1] . "/" . Str::slug($request->input('slug')) : "cua-hang/" . $slug_parent[1] . "/" . Str::slug($request->input('slug'));
+            $slug = session('module_active') == 'posts' ? "bai-viet/" . $slug_parent[0] . "/" . Str::slug($request->input('slug')) : $slug_parent[0] . "/" . Str::slug($request->input('slug'));
         } else {
             $slug = session('module_active') == 'posts' ? "bai-viet/" . Str::slug($request->input('slug')) : "cua-hang/" . Str::slug($request->input('slug'));
         }
@@ -148,9 +148,9 @@ class AdminCategoryController extends Controller
             if ($request->parent_category > 0) {
                 $slug_parent = Category::where('id', $request->parent_category)->value('slug');
                 $slug_parent = explode('/', $slug_parent);
-                $slug = session('module_active') == 'post' ? "bai-viet/" . $slug_parent[1] . "/" . Str::slug($request->input('slug')) : "cua-hang/" . $slug_parent[1] . "/" . Str::slug($request->input('slug'));
+                $slug = session('module_active') == 'post' ? "bai-viet/" . $slug_parent[0] . "/" . Str::slug($request->input('slug')) : $slug_parent[0] . "/" . Str::slug($request->input('slug'));
             } else {
-                $slug = session('module_active') == 'post' ? "bai-viet/" . Str::slug($request->input('slug')) : "cua-hang/" . Str::slug($request->input('slug'));
+                $slug = session('module_active') == 'post' ? "bai-viet/" . Str::slug($request->input('slug')) : Str::slug($request->input('slug'));
             }
         }
 

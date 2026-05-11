@@ -32,6 +32,7 @@ import listFilterClinet from "./listFilterClient";
 import backScroll from "./scroll";
 import attribute from "./attribute";
 import imageProductDetails from "./imageProductDetails";
+import productDetailTotal from "./productDetailTotal";
 
 $(function () {
     loadingState()
@@ -52,4 +53,5 @@ $(function () {
     backScroll()
     attribute()
     imageProductDetails()
+    productDetailTotal()
 });

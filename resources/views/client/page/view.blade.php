@@ -1,6 +1,6 @@
 <x-client-layout>
     @php
-        $page = session('client_module_active')
+        $page = session('client_sub_module_active')
     @endphp
 
     @switch($page)

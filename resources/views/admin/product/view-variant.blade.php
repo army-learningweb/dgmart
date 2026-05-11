@@ -14,7 +14,7 @@
         </div>
 
         <div class="mt-2">
-            <x-input-field.field id="slug" label="Nhóm" type="text" name="slug" required="*" />
+            <x-input-field.field id="slug" label="Slug" type="text" name="slug" required="*" />
             <span class="text-gray-400 text-xs">Ví dụ: CPU</span>
         </div>
 
@@ -43,7 +43,7 @@
         </div>
 
         <div class="mt-2">
-            <x-input-field.field id="slug" label="Nhóm" type="text" name="slug" required="*" />
+            <x-input-field.field id="slug" label="Slug" type="text" name="slug" required="*" />
             <span class="text-gray-400 text-xs">Ví dụ: CPU</span>
         </div>
 

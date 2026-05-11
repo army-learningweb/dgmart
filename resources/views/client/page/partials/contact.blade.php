@@ -2,7 +2,7 @@
     <div class="py-5 flex items-center gap-5">
         <div class="flex-1">
             <h1
-                class="text-5xl pb-2 font-bold bg-gradient-to-r from-blue-500 to-blue-800 bg-clip-text text-transparent tracking-tighter">
+                class="text-5xl pb-2 font-bold bg-gradient-to-r from-blue-600 to-blue-900 bg-clip-text text-transparent tracking-tighter">
                 Hỗ trợ & liên hệ
             </h1>
             <p class="md:w-[70%] leading-6 mt-3">"Chúng tôi luôn luôn ở đây, để tiếp nhận phản hồi và hỗ trợ cho

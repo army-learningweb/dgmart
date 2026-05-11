@@ -1,14 +1,14 @@
 <x-client-layout>
 
-    <div class="py-3 mt-5">
+    <div class="mt-5">
         <h1
             class="text-6xl font-bold tracking-tight bg-gradient-to-r from-blue-600 to-blue-900 bg-clip-text text-transparent py-3">
             Cửa hàng</h1>
     </div>
 
-    <div class="py-5">
+    {{-- <div class="py-5">
         @include('client.home.partials.product-categories')
-    </div>
+    </div> --}}
 
     {{-- new product --}}
     <div class="mt-5 py-3">

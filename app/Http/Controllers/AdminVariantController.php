@@ -11,25 +11,25 @@ class AdminVariantController extends Controller
     function list(Request $request)
     {
         $variants = Variant::query()
-        ->when($request->input('filter'),function($query,$value){
-            $query->where('slug',$value);
-        })
-        ->get()
-        ->groupBy('slug');
+            ->when($request->input('filter'), function ($query, $value) {
+                $query->where('slug', $value);
+            })
+            ->get()
+            ->groupBy('slug');
 
         $variant_select = Variant::all()
-        ->groupBy('slug');
+            ->groupBy('slug');
         $total = Variant::count();
-        return view('admin.product.view-variant', compact('variants', 'total','variant_select'));
+        return view('admin.product.view-variant', compact('variants', 'total', 'variant_select'));
     }
     // thêm mới
     function store(Request $request)
     {
         $request->validate([
             'name' => 'required|min:2|max:255|regex:/^[\p{L}\p{S}\s\p{P}\p{N}]+$/u|unique:variants',
-            'slug' => 'required|min:2|max:255|regex:/^[a-zA-Z0-9\-\.\s]+$/',
+            'slug' => 'required|min:2|max:255|regex:/^[\p{L}\p{S}\p{P}\p{N}\s]+$/u',
             'desc' => 'required|min:2|regex:/^[\p{L}\p{P}\p{S}\p{N}\s]+$/u',
-            'price' => 'required|integer|between:0,1000000000'
+            'price' => 'nullable|integer|between:0,1000000000'
         ]);
 
         Variant::create([
@@ -53,14 +53,12 @@ class AdminVariantController extends Controller
     function update(Request $request)
     {
         $request->session()->put('variant_id', $request->id);
-
         $request->validate([
             'name' => 'required|min:2|max:255|regex:/^[\p{L}\p{S}\s\p{P}\p{N}]+$/u|unique:variants,name,' . $request->id,
-            'slug' => 'required|min:2|max:255|regex:/^[a-zA-Z0-9\-\.\s]+$/',
+            'slug' => 'required|min:2|max:255|regex:/^[\p{L}\p{S}\p{P}\p{N}\s]+$/u',
             'desc' => 'required|min:2|regex:/^[\p{L}\p{P}\p{S}\p{N}\s]+$/u',
-            'price' => 'required|integer|between:0,1000000000'
+            'price' => 'nullable|integer|between:0,1000000000'
         ]);
-
         Variant::where('id', $request->id)->update([
             'name' => trim($request->input('name')),
             'slug' => trim($request->input('slug')),
@@ -68,7 +66,6 @@ class AdminVariantController extends Controller
             'price' => $request->input('price'),
             'updated_at' => now()
         ]);
-
         $request->session()->forget('variant_id');
         return back()->with('status', 'Cập nhật thành công');
     }
@@ -77,13 +74,11 @@ class AdminVariantController extends Controller
     function list_filter(Request $request)
     {
         $filter_value = $request->filter_value;
-
-        if($filter_value){
+        if ($filter_value) {
             $variants = Variant::where('slug', $filter_value)->get()->groupBy('slug');
-        }else{
+        } else {
             $variants = Variant::all()->groupBy('slug');
         }
-        
         $view = view('admin.product.partials.list-variant', compact('variants'))->render();
         return response()->json($view);
     }
@@ -100,7 +95,6 @@ class AdminVariantController extends Controller
     {
         if (!$request->action) return back()->withInput()->with('status_failed', 'Thất bại, bạn chưa chọn hành động');
         if (!$request->variant_ids) return back()->withInput()->with('status_failed', 'Hành động thất bại, chưa chọn thông số');
-
         $ids = $request->input('variant_ids');
         Variant::whereIn('id', $ids)->delete();
         return back()->with('status', "Xóa thành công");

@@ -39,7 +39,7 @@ class AdminMenuController extends Controller
         if ($request->input('link-name') != null && $request->input('categories-product') == null && $request->input('categories-post') == null) {
             Menu::create([
                 'name' => $request->input('link-name'),
-                'slug' => Str::slug($request->input('link-name')),
+                'slug' => "trang/".Str::slug($request->input('link-name')),
                 'parent_id' => $parent_id,
                 'type' => 'custom',
                 'user_id' => Auth::user()->id
@@ -138,7 +138,7 @@ class AdminMenuController extends Controller
 
         Menu::where('id', $request->input('id'))->update([
             'name' => $request->input('link-name'),
-            'slug' => Str::slug($request->input('link-name'))
+            'slug' => 'trang/'.Str::slug($request->input('link-name'))
         ]);
 
         return back()->with('status', 'Cập nhật thành công');

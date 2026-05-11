@@ -23,6 +23,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CartController;
 
 // =============================
 // ADMIN
@@ -165,20 +166,25 @@ require __DIR__ . '/auth.php';
 // Home ==================================================
 Route::get('/', [HomeController::class, 'view']);
 
-// Product ==================================================
-Route::get('/cua-hang/{category}/{slug}', [ProductController::class,'details']);
-
-Route::get('/cua-hang/{category}', [ProductController::class, 'view']);
-Route::post('/cua-hang/{category}', [ProductController::class,'filter']);
-
-
-// Route::post('/san-pham', [ProductController::class, 'filter']);
-// Route::get('/san-pham/{slug}', [ProductController::class, 'details']);
+// Page ==================================================
+Route::get('trang/{slug}', [PageController::class, 'view']);
 
 // Post ==================================================
 Route::get('/bai-viet', [PostController::class, 'view']);
 Route::post('/bai-viet', [PostController::class, 'filter']);
 Route::get('/bai-viet/{slug}', [PostController::class, 'details']);
 
-// Page ==================================================
-Route::get('/{slug}', [PageController::class, 'view']);
+// Product ==================================================
+Route::get('/{category}', [ProductController::class, 'view']);
+Route::post('/{category}', [ProductController::class,'filter']);
+Route::get('/{category}/{slug}', [ProductController::class,'details']);
+
+// Cart =====================================================
+Route::post('/gio-hang/create',[CartController::class,'create'])->name('gio-hang.create');
+
+
+
+
+
+
+

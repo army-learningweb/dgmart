@@ -18,6 +18,10 @@
     color: black;
 }
 
+.variant-active{
+    outline: 2px solid oklch(54.6% 0.245 262.881) !important;
+}
+
 .client-post-content img{
     border-radius: 24px;
 }

@@ -1,16 +1,12 @@
 <x-client-layout>
     <div class="pt-3 pb-10">
         <div class="flex justify-between items-end">
-            <div class="flex flex-col">
-                <div>
-                    <x-client-breadcrum />
-                </div>
-
+           
                 <a href="{{ url(request()->path()) }}"
                     class="animate_reveal text-6xl font-bold tracking-tight bg-gradient-to-r from-blue-600 to-blue-900 bg-clip-text text-transparent py-3">
                     {{ $title }}
                 </a>
-            </div>
+          
 
             @if ($top_sale)
                 <div class="flex flex-col gap-2 items-end animate_reveal">
@@ -46,14 +42,13 @@
 
     <div class="py-5 flex justify-between">
         <div class="flex gap-3 items-center">
-            <span class="font-semibold animate_reveal" style="">Lọc theo loại:</span>
             <ul class="flex gap-2">
-                <li class="product-category-item animate_reveal product-category-item px-5 bg-white py-1 rounded-md outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('category') ? '' : 'category-active' }}"
+                <li class="product-category-item animate_reveal product-category-item px-5 bg-white py-1 rounded-2xl outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('category') ? '' : 'category-active' }}"
                     data-category-id="" data-url="{{ request()->path() }}">
                     Tất cả
                 </li>
                 @foreach ($types as $key => $value)
-                    <li class="product-category-item animate_reveal product-category-item px-5 bg-white py-1 rounded-md outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('category') == $value ? 'category-active' : '' }}"
+                    <li class="product-category-item animate_reveal product-category-item px-5 bg-white py-1 rounded-2xl outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('category') == $value ? 'category-active' : '' }}"
                         data-category-id="{{ $value }}" data-url="{{ request()->path() }}"
                         style="animation-delay: {{ $loop->index * 0.1 }}s">
                         {{ $key }}
@@ -67,19 +62,19 @@
         </div>
         <div class="animate_reveal">
             <div class="flex gap-2 items-center">
-                <span class="font-semibold">Sắp xếp theo giá:</span>
-                <ul class="flex gap-3">
-                    <li class="product-order-item animate_reveal product-order-item px-5 bg-white py-1 rounded-md outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('order') ? '' : 'category-active' }}"
+                <ul class="flex gap-3 items-center">
+                    <span class="font-semibold">Theo giá:</span>
+                    <li class="product-order-item animate_reveal product-order-item px-5 bg-white py-1 rounded-2xl outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('order') ? '' : 'category-active' }}"
                         data-order="" data-url="{{ request()->path() }}"
                         style="animation-delay: {{ 0 * 0.1 }}s">
                         Mặc định
                     </li>
-                    <li class="product-order-item animate_reveal product-order-item px-5 bg-white py-1 rounded-md outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('order') == 'asc' ? 'category-active' : '' }}"
+                    <li class="product-order-item animate_reveal product-order-item px-5 bg-white py-1 rounded-2xl outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('order') == 'asc' ? 'category-active' : '' }}"
                         data-order="asc" data-url="{{ request()->path() }}"
                         style="animation-delay: {{ 1 * 0.1 }}s">
                         Từ thấp đến cao
                     </li>
-                    <li class="product-order-item animate_reveal product-order-item px-5 bg-white py-1 rounded-md outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('order') == 'desc' ? 'category-active' : '' }}"
+                    <li class="product-order-item animate_reveal product-order-item px-5 bg-white py-1 rounded-2xl outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('order') == 'desc' ? 'category-active' : '' }}"
                         data-order="desc" data-url="{{ request()->path() }}"
                         style="animation-delay: {{ 2 * 0.1 }}s">
                         Từ cao đến thấp

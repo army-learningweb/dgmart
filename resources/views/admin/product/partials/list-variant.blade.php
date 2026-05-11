@@ -38,7 +38,12 @@
                         </td>
                         <td class="px-2">
                             <div class="w-[100px] truncate">
-                                 {{ number_format($variant->price) }}đ
+                                @if ($variant->price > 0)
+                                    {{ number_format($variant->price) }}đ
+                                @else
+                                    <span class="text-gray-500 italic">.....</span>
+                                @endif
+                                 
                             </div>
                         </td>
                         <td class="px-5">

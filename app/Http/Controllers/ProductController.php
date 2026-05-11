@@ -95,12 +95,13 @@ class ProductController extends Controller
     // chi tiết
     function details(Request $request)
     {
-        $product_info = Product::with(['medias' => function ($query) {
+        $product_info = Product::with(['variants','medias' => function ($query) {
             $query->where('type', 'product')->select('id', 'object_id', 'url', 'name', 'is_main');
         }])
             ->where('status', 'active')
             ->where('slug',$request->path())
             ->first();
-        return view('client.product.details', compact('product_info'));
+        $variants = $product_info->variants->sortBy('price')->groupBy('slug');
+        return view('client.product.details', compact('product_info','variants'));
     }
 }
