@@ -9,7 +9,7 @@ return [
     'regex' => ':attribute không hợp lệ',
     'image' => 'Không đúng định dạng ảnh',
     'mimes' => 'Ảnh không đúng định dạng :mimes',
-
+    'iteger' => ':attribute phải là số',
     'min' => [
         'string' => ':attribute ít nhất :min kí tự'
     ],
@@ -47,6 +47,8 @@ return [
         'order' => 'Số thứ tự',
         'link-name' => 'Tên Link',
         'quantity' => 'Số lượng',
-        'variants' => 'Thông số'
+        'variants' => 'Thông số',
+        'tel' => 'Số điện thoại',
+        'order' => 'Số thứ tự'
     ]
 ];

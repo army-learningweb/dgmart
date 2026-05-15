@@ -4,7 +4,7 @@ export default function validation() {
         let field = $(this).attr("name");
         let value = $(this).val();
         let data = { [field]: value };
-        
+        console.log(data);
         clearTimeout(timeout);
 
         timeout = setTimeout(() => {

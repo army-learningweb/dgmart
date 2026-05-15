@@ -28,18 +28,24 @@
         </div>
 
         {{-- cart --}}
-        <a href="" class="hover:text-blue-600 relative">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-</svg>
-
-            <div class="absolute -top-[5px] -right-[4px]">
-                <span class="relative flex size-4">
-                    <span
-                        class="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75"></span>
-                    <span class="relative inline-flex size-4 rounded-full bg-red-500"></span>
-                </span>
-            </div>
+        <a href="{{ route('gio-hang') }}" class="hover:text-blue-600 relative {{ request()->segment(1) == 'gio-hang' ? 'navigation-active' : '' }}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+            </svg>
+            @if ($cart_total > 0)
+                <div class="absolute -top-[7px] -right-[7px]">
+                    <span class="relative flex size-5">
+                        <span
+                            class="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75"></span>
+                        <span
+                            class="cart-icon-qty text-white text-xs relative inline-flex size-5 rounded-full bg-red-500 justify-center items-center border border-white">
+                            {{ $cart_total }}
+                        </span>
+                    </span>
+                </div>
+            @endif
         </a>
 
         {{-- user --}}

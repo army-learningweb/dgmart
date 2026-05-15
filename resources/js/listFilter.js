@@ -50,7 +50,7 @@ export default function listFilter() {
     // phân trang
     $(document).on(
         "click",
-        "a[module=products], a[module=posts]",
+        "a[module=products], a[module=posts], a[module=orders]",
         function (e) {
             e.preventDefault();
             let url = $(this).attr("href");
@@ -66,6 +66,8 @@ export default function listFilter() {
                 order_value: order_value,
                 url: url,
             };
+
+            console.log(data);
             saveUrl(data);
             $.ajax({
                 type: "post",

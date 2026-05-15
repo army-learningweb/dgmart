@@ -1,15 +1,19 @@
 <x-client-layout>
     @php
-        $page = session('client_sub_module_active')
+        $page = session('client_sub_module_active');
     @endphp
+    <div class="animate_reveal">
+        @switch($page)
+            @case('gioi-thieu')
+                @include('client.page.partials.about')
+            @break
 
-    @switch($page)
-        @case('gioi-thieu')
-            @include('client.page.partials.about')
+            @case('lien-he-ho-tro')
+                @include('client.page.partials.contact')
             @break
-        @case('lien-he-ho-tro')
-            @include('client.page.partials.contact')
-            @break
-        @default
-    @endswitch
+
+            @default
+        @endswitch
+    </div>
+
 </x-client-layout>

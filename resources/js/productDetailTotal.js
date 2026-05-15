@@ -1,5 +1,7 @@
 export default function productDetailTotal(){
 
+    $('.next-variant').next('.variant_item').addClass('variant-active'); 
+
     let basePrice = 0;
 
     if($('.price-sale-off').length > 0){

@@ -31,8 +31,20 @@ export default function editModal() {
                     slug: modal.find("input[name=slug]"),
                     id : modal.find("input[name=id]"),
                     quantity : modal.find("input[name=quantity]"),
+                    tel:modal.find("input[name=tel]"),
                     textarea_desc : modal.find("textarea[name=desc]"),
-                    textarea_title : modal.find("textarea[name=title]")
+                    textarea_title : modal.find("textarea[name=title]"),
+                    textarea_note : modal.find("textarea[name=note]"),
+                    textarea_address : modal.find("textarea[name=address]"),
+                }
+
+                // order
+                if(module == 'orders'){
+                    inputs.name.val(data.order.name);
+                    inputs.email.val(data.order.email);
+                    inputs.tel.val(data.order.tel);
+                    inputs.textarea_note.val(data.order.note);
+                    inputs.textarea_address.val(data.order.address);
                 }
 
                 // attributes
@@ -57,6 +69,7 @@ export default function editModal() {
                 // menu
                 if(module == 'menus'){
                     inputs.id.val(data.id);
+                    modal.find('input[name=order]').val(data.order);
                     modal.find('input[name=link-name]').val(data.name);
                     modal.find(`option[value=${data.parent_id}]`).prop('selected',true);
                     modal.find('input[name=is_parent]').val(data.parent_id);

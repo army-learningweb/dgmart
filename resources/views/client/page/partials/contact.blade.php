@@ -1,4 +1,4 @@
-<div class="">
+<div class="animate_reveal">
     <div class="py-5 flex items-center gap-5">
         <div class="flex-1">
             <h1

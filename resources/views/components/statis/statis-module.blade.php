@@ -12,6 +12,7 @@
     'shipped' => '',
     'delivered' => '',
     'refund' => '',
+    'canceled' => ''
 ])
 <div class="flex gap-5">
     <div class="flex items-center gap-2">
@@ -118,6 +119,16 @@
             <div>
                 <span>Hoàn trả</span>
                 <span class="refund-{{ $module }}">({{ $refund }})</span>
+            </div>
+        </div>
+    @endif
+
+     @if ($canceled != '')
+        <div class="flex items-center gap-2">
+            <div class="w-[8.5px] h-[8px] rounded-full bg-red-500"></div>
+            <div>
+                <span>Hủy đơn</span>
+                <span class="canceled-{{ $module }}">({{ $canceled }})</span>
             </div>
         </div>
     @endif

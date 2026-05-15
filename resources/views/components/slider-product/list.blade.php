@@ -7,13 +7,14 @@
 ])
 
 @if ($products->count() > 0)
-    <div class="box-btn flex items-center justify-between">
+    <div class="box-btn flex items-center justify-between animate_reveal">
         <div class="space-y-2">
             <h1 class="text-3xl font-semibold text-gray-900">{{ $title }}</h1>
             <div class="h-1 w-[100px] bg-blue-600 rounded-md"></div>
         </div>
-        
-        <x-button.button-slider target="{{ $target }}" />
+        @if ($products->count() > 5)
+            <x-button.button-slider target="{{ $target }}" />
+        @endif
     </div>
 
     <div class="slider-product overflow-hidden rounded-3xl mt-5 py-2">
@@ -37,9 +38,8 @@
                             <a href="{{url($item->slug)}}">
                                 <img src="{{ asset($item->medias->where('is_main', 0)->where('object_id', $item->id)->where('type', 'product')->value('url')) }}"
                                     alt=""
-                                    class="w-full object-cover overflow-hidden group-hover:scale-90 transition-all duration-150">
+                                    class="w-full object-cover overflow-hidden group-hover:scale-95 transition-all duration-150">
                             </a>
-
                             <div class="px-5">
                                 <div class="truncate w-[180px] font-semibold text-[16px] py-1">
                                     {{ $item->name }}</div>
@@ -54,13 +54,13 @@
                                     <div class="text-lg font-semibold my-2">{{ num_format($item->price) }}</div>
                                 @endif
                             </div>
-                            <div class="my-3 flex justify-between gap-2 px-5">
-                                <a href=""
-                                    class="w-[40%] py-[6px] rounded-2xl bg-gray-200 text-center hover:underline underline-offset-1">Chi
-                                    tiết...</a>
-                                <a href=""
-                                    class="flex-1 bg-gradient-to-r from-blue-600 to-blue-900 py-[6px] text-center rounded-2xl text-white hover:brightness-125">
-                                    Thêm vào giỏ
+                            <div class="my-3 flex justify-end gap-2 px-5">
+                                <a href="{{url($item->slug)}}"
+                                    class="text-blue-600 hover:underline flex items-center gap-1">
+                                    <span>Xem chi tiết</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                                    </svg>
                                 </a>
                             </div>
                         </div>

@@ -17,8 +17,8 @@ class AdminTrashController extends Controller
 
     // Dọn file rác
     function destroy_all(){
-        $path = Media::whereNull('object_id')->pluck('url');
-        if(isset($path)){
+        $path = Media::whereNull('object_id')->value('url');
+        if(File::exists($path)){
             if(file_exists(public_path($path))) File::delete($path);
         }
         $ids = Media::whereNull('object_id')->pluck('id');

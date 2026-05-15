@@ -15,7 +15,7 @@ class Menu extends Model
         'type',
         'status',
         'updated_at',
-        'parent_id'
+        'parent_id',
     ];
 
     function user(){

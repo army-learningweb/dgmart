@@ -4,7 +4,7 @@ export default function updateOrder() {
         let id = $(this).data("id");
         let data = { id: id, order_value: order_value };
         let module = $(this).data("module");
-
+       
         setTimeout(() => {
             $.ajax({
                 type: "post",

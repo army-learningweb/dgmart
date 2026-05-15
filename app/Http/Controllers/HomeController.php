@@ -17,7 +17,7 @@ class HomeController extends Controller
         $top_sale_product = Product::with('medias:object_id,url,is_main,type')->orderBy('sale_off', 'desc')->first();
         $new_products = Product::with('medias:object_id,url,is_main,type')->where('status', 'active')->where('sale_off', null)->orderBy('created_at', 'desc')->limit(10)->get();
         $sale_products = Product::with('medias:object_id,url,is_main,type')->where('status', 'active')->where('sale_off', '>', 0)->orderBy('sale_off', 'desc')->get();
-        $category_accesories = Category::where('slug', 'san-pham/phu-kien-laptop')->value('id');
+        $category_accesories = Category::where('slug', 'phu-kien-laptop')->value('id');
         $categories_child = Category::where('parent_id', $category_accesories)->where('type', 'product')->pluck('id');
         $accesories_product = Product::with('medias:object_id,url,is_main,type')->whereIn('category_id', $categories_child)->latest()->get();
         $posts = Post::with('media:object_id,url')->where('status','publish')->limit(4)->latest()->get( );

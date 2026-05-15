@@ -18,7 +18,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="overflow-x-hidden font-sans antialiased bg-gray-50 {{ count(request()->segments()) > 2 ? 'bg-white' : 'bg-gray-50' }} text-sm px-3 md:px-0 scroll-smooth">
+<body class="overflow-x-hidden font-sans antialiased text-sm px-3 md:px-0 scroll-smooth bg-gray-50">
 
     {{-- Layout --}}
     <div class="min-h-screen flex flex-col">
@@ -31,7 +31,7 @@
 
         <!-- Content -->
         <main class="flex-1">
-            <div class="md:max-w-7xl mx-auto">
+            <div class="md:max-w-7xl mx-auto relative">
                 {{ $slot }}
             </div>
         </main>

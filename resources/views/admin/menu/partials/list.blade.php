@@ -8,6 +8,7 @@
                 </td>
                 <td class="px-2">Tên Link</td>
                 <td class="px-2">Slug</td>
+                <td class="px-4">Thứ tự</td>
                 <td class="px-9">Trạng thái</td>
                 <td class="px-2">Cập nhật trạng thái</td>
                 <td class="px-4">Ngày tạo</td>
@@ -15,7 +16,7 @@
                 <td class="px-3 text-center">Thao tác</td>
             </tr>
             @foreach ($list as $item)
-                <tr class="border-b border-gray-500/10 hover:bg-[#f5f5f5] animate_tl" style="animation-delay: {{ $loop->index * 0.1 }}s">
+                <tr class="border-b border-gray-500/10 hover:bg-[#f5f5f5] {{ session('failed') ? '' : 'animate_tl' }}" style="animation-delay: {{ $loop->index * 0.1 }}s">
                     <td class="px-3 py-4">
                         <input type="checkbox" name="menus_id[]" value="{{ $item->id }}" form="form_action_menus"
                             {{ in_array($item->id, (array) old('menus_id')) ? 'checked' : '' }}
@@ -42,6 +43,12 @@
                         <div class="w-[120px] truncate">
                             {{ $item->slug }}
                         </div>
+                    </td>
+                     <td class="px-3">
+                        <input type="number" name="change-order" value="{{ $item->order }}"
+                            data-id="{{ $item->id }}" data-module="menus"
+                            class="change-order border-0 focus:ring-0 focus:outline-0 rounded-md w-[60px] cursor-pointer [&::-webkit-inner-spin-button]:opacity-100 [&::-webkit-inner-spin-button]:block"
+                            min="1" max="10">
                     </td>
                     <td class="px-5 status-menus-{{ $item->id }}">
                         <div class="w-[110px]">

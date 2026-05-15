@@ -1,11 +1,8 @@
 <x-client-layout>
-    <div class="flex gap-2 items-center py-3">
-        <x-client-breadcrum segment_2="{!! $post_info->title !!}" segment_2_slug="{{ url($post_info->slug) }}"/>
-    </div>
     
-    <div class="flex bg-white rounded-3xl shadow-md p-5 mt-5">
+    <div class="flex bg-white rounded-3xl shadow-md p-5">
         <div class="flex-1 border-r border-gray-500/20 p-5 pt-0 pl-0">
-            <h1 class="font-semibold text-xl">
+            <h1 class="font-semibold text-2xl">
                 <div>{{ $post_info->title }}</div>
                 <div class="bg-blue-600 w-[100px] h-[2px] my-3 inline-block rounded-lg"></div>
             </h1>

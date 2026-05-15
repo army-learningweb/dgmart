@@ -102,6 +102,9 @@ class ProductController extends Controller
             ->where('slug',$request->path())
             ->first();
         $variants = $product_info->variants->sortBy('price')->groupBy('slug');
-        return view('client.product.details', compact('product_info','variants'));
+        $more_products = Product::with('medias:object_id,url,is_main,type')
+        ->where('category_id', $product_info->category_id)
+        ->get();
+        return view('client.product.details', compact('product_info','variants','more_products'));
     }
 }

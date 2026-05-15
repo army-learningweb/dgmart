@@ -48,7 +48,7 @@ class AdminCategoryController extends Controller
             $slug_parent = explode('/', $slug_parent);
             $slug = session('module_active') == 'posts' ? "bai-viet/" . $slug_parent[0] . "/" . Str::slug($request->input('slug')) : $slug_parent[0] . "/" . Str::slug($request->input('slug'));
         } else {
-            $slug = session('module_active') == 'posts' ? "bai-viet/" . Str::slug($request->input('slug')) : "cua-hang/" . Str::slug($request->input('slug'));
+            $slug = session('module_active') == 'posts' ? "bai-viet/" . Str::slug($request->input('slug')) : Str::slug($request->input('slug'));
         }
 
         $type = session('module_active') == 'posts' ? 'post' : 'product';
@@ -203,13 +203,18 @@ class AdminCategoryController extends Controller
     {
 
         if ($category->slug == 2 || $category->slug == 1) return back()->with('status_failed', 'Bạn không thể xóa danh mục lưu trữ !');
-        $child_categories_id = Category::where('parent_id', $category->id)->pluck('id');
-
+        
+        $child_categories = Category::where('parent_id', $category->id)->get(['slug','id','name']);
         $safe_category_id = session('module_active') == 'posts' ? 1 : 2;
-
-        if ($child_categories_id) {
-            Category::whereIn('id', $child_categories_id)->update(['parent_id' => $safe_category_id, 'updated_at' => now()]);
-        }
+        $parent_category = Category::find($safe_category_id);
+       
+        foreach($child_categories as $item){
+            Category::where('id',$item->id)->update([
+                'parent_id' => $safe_category_id,
+                'slug' => $parent_category->slug."/".Str::slug($item->name), 
+                'updated_at' => now()
+            ]);
+        };
 
         $category->delete();
         return back()->with('status', 'Xóa thành công');

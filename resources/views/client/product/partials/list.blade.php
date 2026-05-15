@@ -31,12 +31,15 @@
                         <div class="text-lg font-semibold my-2">{{ num_format($item->price) }}</div>
                     @endif
                 </div>
-                <div class="my-5 flex justify-between gap-2 px-5">
-                    <a href="" class="w-[40%] py-[6px] rounded-2xl bg-gray-100 text-center hover:underline underline-offset-1">Chi tiết...</a>
-                    <a href="" class="flex-1 bg-gradient-to-r from-blue-600 to-blue-900 py-[6px] text-center rounded-2xl text-white hover:brightness-125">
-                        Thêm vào giỏ
-                    </a>
-                </div>
+                <div class="my-3 flex justify-end gap-2 px-5">
+                                <a href="{{url($item->slug)}}"
+                                    class="text-blue-600 hover:underline flex items-center gap-1">
+                                    <span>Xem chi tiết</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                                    </svg>
+                                </a>
+                            </div>
             </div>
         </li>
     @endforeach

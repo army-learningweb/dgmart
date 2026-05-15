@@ -17,7 +17,7 @@ class AdminMenuController extends Controller
         $categories_product = Category::where('type', 'product')->where('parent_id', 0)->whereNot('id', 2)->get();
         $categories_post = Category::where('type', 'post')->where('parent_id', 0)->whereNot('id', 1)->get();
         $menus = Menu::where('parent_id', 0)->get();
-        $list = datatree(Menu::all());
+        $list = datatree(Menu::orderBy('order','asc')->get());
         $total = Menu::all()->count();
         $active = Menu::where('status', 'active')->count();
         $unactive = Menu::where('status', 'unactive')->count();
@@ -36,13 +36,19 @@ class AdminMenuController extends Controller
             }
         }
 
+        $request->validate([
+            'link-name' => 'nullable|regex:/^[\p{L}\p{P}\s]+$/u',
+            'order' => 'required|integer|between:1,100|unique:menus'
+        ]);
+
         if ($request->input('link-name') != null && $request->input('categories-product') == null && $request->input('categories-post') == null) {
             Menu::create([
                 'name' => $request->input('link-name'),
+                'order' => $request->input('order'),
                 'slug' => "trang/".Str::slug($request->input('link-name')),
                 'parent_id' => $parent_id,
                 'type' => 'custom',
-                'user_id' => Auth::user()->id
+                'user_id' => Auth::user()->id,
             ]);
 
             return back()->with('status', 'Tạo mới thành công');
@@ -58,6 +64,7 @@ class AdminMenuController extends Controller
 
             Menu::create([
                 'name' => $name,
+                'order' => $request->input('order'),
                 'slug' => $slug,
                 'type' => $type,
                 'parent_id' => $parent_id,
@@ -123,14 +130,17 @@ class AdminMenuController extends Controller
     function update(Request $request)
     {
         $request->validate([
-            'link-name' => 'required|min:2|max:255|regex:/^[\p{L}\p{N}\p{P}\s]+$/u',
+            'link-name' => 'nullable|regex:/^[\p{L}\p{P}\s]+$/u',
+            'order' => 'required|integer|between:1,100|unique:menus,order,'.$request->input('id')
         ]);
+
 
         if ($request->input('parent_id')) {
             Menu::where('id', $request->input('id'))->update([
                 'name' => $request->input('link-name'),
                 'slug' => Str::slug($request->input('link-name')),
-                'parent_id' => $request->input('parent_id')
+                'parent_id' => $request->input('parent_id'),
+                'order' => $request->input('order')
             ]);
 
             return back()->with('status', 'Cập nhật thành công');
@@ -138,9 +148,20 @@ class AdminMenuController extends Controller
 
         Menu::where('id', $request->input('id'))->update([
             'name' => $request->input('link-name'),
-            'slug' => 'trang/'.Str::slug($request->input('link-name'))
+            'slug' => 'trang/'.Str::slug($request->input('link-name')),
+            'order' => $request->input('order')
         ]);
 
         return back()->with('status', 'Cập nhật thành công');
+    }
+
+    // Cập nhật thứ tự
+    function updateOrder(Request $request){
+        $id = $request->id;
+        $order_value = $request->order_value;
+
+        Menu::where('id',$id)->update([
+            'order' => $order_value
+        ]);
     }
 }

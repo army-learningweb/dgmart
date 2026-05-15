@@ -49,6 +49,11 @@
             </select>
         </div>
 
+        <div class="mt-2">
+            <x-input-field.field id="order" label="Thứ tự hiển thị" type="text" name="order" required="*"
+                autocomplete="on" />
+        </div>
+
         @if (session('failed'))
             <div class="mt-2 text-red-500">{{ session('failed') }}</div>
         @endif
@@ -75,6 +80,12 @@
                 @endforeach
             </select>
         </div>
+
+        <div class="mt-2">
+            <x-input-field.field id="order" label="Thứ tự hiển thị" type="text" name="order" required="*"
+                autocomplete="on" />
+        </div>
+
        
         <input type="hidden" name="id" value="{{ old('id') }}">
         <input type="hidden" name="modal" value="edit">

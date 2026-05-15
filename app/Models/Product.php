@@ -45,4 +45,8 @@ class Product extends Model
     function attributes(){
         return $this->belongsTo(Attribute::class,'product_attributes');
     }
+
+    function order(){
+        return $this->hasOne(order_item::class,'order_id');
+    }
 }

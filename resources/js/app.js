@@ -33,6 +33,8 @@ import backScroll from "./scroll";
 import attribute from "./attribute";
 import imageProductDetails from "./imageProductDetails";
 import productDetailTotal from "./productDetailTotal";
+import cart from "./cart";
+import productDetailConfig from "./productDetailConfig";
 
 $(function () {
     loadingState()
@@ -54,4 +56,6 @@ $(function () {
     attribute()
     imageProductDetails()
     productDetailTotal()
+    productDetailConfig()
+    cart()
 });

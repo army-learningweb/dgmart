@@ -27,6 +27,10 @@ export default function updateStatus() {
                 }else{
                     $(".status-" + module + "-" + id).html(data.view);
                 }
+
+                if(type == 'order'){
+                    $('.revenue').html(data.revenue)
+                }
                 
                 // Truyền data vào statis
                 if(data.active != 'undefined'){
@@ -45,8 +49,28 @@ export default function updateStatus() {
                     $('.unpublish-'+ module).html('(' + data.unpublish + ')');
                 }
 
-                if(data.draft != 'undefined'){
-                    $('.draft-'+ module).html('(' + data.draft + ')');
+                if(data.pending != 'undefined'){
+                    $('.pending-'+ module).html('(' + data.pending + ')');
+                }
+
+                if(data.processing != 'undefined'){
+                    $('.processing-'+ module).html('(' + data.processing + ')');
+                }
+
+                if(data.shipped != 'undefined'){
+                    $('.shipped-'+ module).html('(' + data.shipped + ')');
+                }
+
+                if(data.delivered != 'undefined'){
+                    $('.delivered-'+ module).html('(' + data.delivered + ')');
+                }
+
+                if(data.refund != 'undefined'){
+                    $('.refund-'+ module).html('(' + data.refund + ')');
+                }
+
+                if(data.canceled != 'undefined'){
+                    $('.canceled-'+ module).html('(' + data.canceled + ')');
                 }
 
             },

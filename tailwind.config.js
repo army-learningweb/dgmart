@@ -18,7 +18,10 @@ export default {
         'bg-amber-400/10',
         'text-amber-600',
         'animate-spin',
-        '!bg-black'
+        '!bg-black',
+        'bg-amber-500/10',
+        'bg-pink-500/10',
+        'text-pink-500'
     ],
     theme: {
         extend: {

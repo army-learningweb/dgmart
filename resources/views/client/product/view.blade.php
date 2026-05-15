@@ -49,8 +49,7 @@
                 </li>
                 @foreach ($types as $key => $value)
                     <li class="product-category-item animate_reveal product-category-item px-5 bg-white py-1 rounded-2xl outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('category') == $value ? 'category-active' : '' }}"
-                        data-category-id="{{ $value }}" data-url="{{ request()->path() }}"
-                        style="animation-delay: {{ $loop->index * 0.1 }}s">
+                        data-category-id="{{ $value }}" data-url="{{ request()->path() }}">
                         {{ $key }}
                     </li>
                 @endforeach
@@ -64,19 +63,16 @@
             <div class="flex gap-2 items-center">
                 <ul class="flex gap-3 items-center">
                     <span class="font-semibold">Theo giá:</span>
-                    <li class="product-order-item animate_reveal product-order-item px-5 bg-white py-1 rounded-2xl outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('order') ? '' : 'category-active' }}"
-                        data-order="" data-url="{{ request()->path() }}"
-                        style="animation-delay: {{ 0 * 0.1 }}s">
+                    <li class="product-order-item product-order-item px-5 bg-white py-1 rounded-2xl outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('order') ? '' : 'category-active' }}"
+                        data-order="" data-url="{{ request()->path() }}">
                         Mặc định
                     </li>
-                    <li class="product-order-item animate_reveal product-order-item px-5 bg-white py-1 rounded-2xl outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('order') == 'asc' ? 'category-active' : '' }}"
-                        data-order="asc" data-url="{{ request()->path() }}"
-                        style="animation-delay: {{ 1 * 0.1 }}s">
+                    <li class="product-order-item product-order-item px-5 bg-white py-1 rounded-2xl outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('order') == 'asc' ? 'category-active' : '' }}"
+                        data-order="asc" data-url="{{ request()->path() }}">
                         Từ thấp đến cao
                     </li>
-                    <li class="product-order-item animate_reveal product-order-item px-5 bg-white py-1 rounded-2xl outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('order') == 'desc' ? 'category-active' : '' }}"
-                        data-order="desc" data-url="{{ request()->path() }}"
-                        style="animation-delay: {{ 2 * 0.1 }}s">
+                    <li class="product-order-item product-order-item px-5 bg-white py-1 rounded-2xl outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('order') == 'desc' ? 'category-active' : '' }}"
+                        data-order="desc" data-url="{{ request()->path() }}">
                         Từ cao đến thấp
                     </li>
                 </ul>

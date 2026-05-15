@@ -10,5 +10,5 @@
 <input type="{{ $type }}" name="{{ $name }}" id="{{ $id }}" placeholder="{{ $placeholder }}" value="{{ $value }}" {{ $readonly }}
     {{ $attributes->merge([
         'class' =>
-            'text-sm shadow-sm border-gray-300 rounded-md w-full mt-1',
+            'text-sm border-gray-200 rounded-md w-full mt-1',
     ]) }}>
