@@ -35,6 +35,7 @@ import imageProductDetails from "./imageProductDetails";
 import productDetailTotal from "./productDetailTotal";
 import cart from "./cart";
 import productDetailConfig from "./productDetailConfig";
+import voteStar from "./voteStar";
 
 $(function () {
     loadingState()
@@ -58,4 +59,5 @@ $(function () {
     productDetailTotal()
     productDetailConfig()
     cart()
+    voteStar()
 });

@@ -1,6 +1,5 @@
-<div class="w-full flex justify-between items-center py-5">
+<div class="md:max-w-7xl mx-auto flex justify-between items-center py-1">
 
-    <div class="flex gap-7 items-center">
         <a href="{{ url('/') }}">
             <x-application-logo class="text-3xl py-1 mb-2" />
         </a>
@@ -8,9 +7,9 @@
         <div>
             <x-bar.client-navigation-bar />
         </div>
-    </div>
+    
 
-    <div class="flex items-center gap-2">
+    <div class="flex items-center gap-3">
 
         {{-- hour --}}
         <div class="flex gap-3 select-none py-4 items-center">
@@ -28,7 +27,8 @@
         </div>
 
         {{-- cart --}}
-        <a href="{{ route('gio-hang') }}" class="hover:text-blue-600 relative {{ request()->segment(1) == 'gio-hang' ? 'navigation-active' : '' }}">
+        <a href="{{ route('gio-hang') }}"
+            class="hover:text-blue-600 relative {{ request()->segment(1) == 'gio-hang' ? 'navigation-active' : '' }}">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -46,16 +46,6 @@
                     </span>
                 </div>
             @endif
-        </a>
-
-        {{-- user --}}
-        <div class="text-gray-500/50 select-none">|</div>
-        <a href="" class="hover:text-blue-600">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-            </svg>
         </a>
     </div>
 </div>

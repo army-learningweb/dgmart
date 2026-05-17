@@ -1,5 +1,5 @@
-<hr class="my-3">
-<ul class="flex py-4">
+
+<ul class="flex py-4 md:max-w-7xl mx-auto ">
     <li class="flex-1">
         <x-application-logo class="text-3xl py-2" />
         <div class="mt-2">
@@ -96,6 +96,7 @@
         </ul>
     </li>
 </ul>
+<hr class="my-3">
 <div class="text-center">
     © 2026 Digimart. All Copyright Reserve
 </div>

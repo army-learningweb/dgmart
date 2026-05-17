@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+// ADMIN
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminPermissionController;
 use App\Http\Controllers\AdminPostController;
@@ -15,17 +16,21 @@ use App\Http\Controllers\AdminMenuController;
 use App\Http\Controllers\AdminProductController;
 use App\Http\Controllers\AdminAttributeController;
 use App\Http\Controllers\AdminOrderController;
+use App\Http\Controllers\AdminProductReviewController;
 use App\Http\Controllers\AdminVariantController;
 use App\Http\Controllers\AdminSliderController;
 use App\Http\Controllers\AdminTrashController;
 use UniSharp\LaravelFilemanager\Lfm;
 
+// MEMBER
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\ReviewController;
 
 // Mail
 Route::get('/mail',function(){
@@ -148,7 +153,7 @@ Route::middleware(['web', 'auth'])->group(function () {
 
     // Menu ==================================================
     Route::get('/admin/menus', [AdminMenuController::class, 'list'])->name('admin.menus');
-     Route::post('/admin/menus/updateOrder', [AdminMenuController::class, 'updateOrder']);
+    Route::post('/admin/menus/updateOrder', [AdminMenuController::class, 'updateOrder']);
     Route::post('/admin/menus/store', [AdminMenuController::class, 'store'])->name('admin.menus.store');
     Route::get('/admin/menus/edit', [AdminMenuController::class, 'edit'])->name('admin.menus.edit');
     Route::post('/admin/menus/update', [AdminMenuController::class, 'update'])->name('admin.menus.update');
@@ -167,12 +172,18 @@ Route::middleware(['web', 'auth'])->group(function () {
     // Order ==================================================
     Route::get('/admin/orders', [AdminOrderController::class, 'list'])->name('admin.orders');
     Route::post('/admin/orders', [AdminOrderController::class, 'list_filter']);
-
     Route::get('/admin/orders/details/{order}', [AdminOrderController::class, 'details'])->name('admin.orders.details');
-
     Route::get('/admin/orders/edit', [AdminOrderController::class, 'edit'])->name('admin.orders.edit');
     Route::post('/admin/orders/update/{id}', [AdminOrderController::class, 'update'])->name('admin.orders.update');
     Route::post('/admin/orders/updateStatus', [AdminOrderController::class, 'updateStatus']);
+
+    // Review ================================================
+    Route::get('/admin/reviews', [AdminProductReviewController::class, 'list'])->name('admin.reviews');
+    Route::post('/admin/reviews', [AdminProductReviewController::class, 'list_filter']);
+    Route::post('/admin/reviews/destroy/{id}', [AdminProductReviewController::class, 'destroy'])->name('admin.reviews.destroy');
+    Route::post('/admin/reviews/action', [AdminProductReviewController::class, 'action'])->name('admin.reviews.action');
+    Route::post('/admin/reviews/updateStatus', [AdminProductReviewController::class, 'updateStatus']);
+
 });
 
 require __DIR__ . '/auth.php';
@@ -185,15 +196,21 @@ require __DIR__ . '/auth.php';
 // Home ==================================================
 Route::get('/', [HomeController::class, 'view']);
 
+// Comment
+Route::post('/danh-gia-san-pham/store',[ReviewController::class,'storeProductReview'])->name('danh-gia-san-pham.store');
+
 // Payment
 Route::get('/thanh-toan',[PaymentController::class,'view'])->name('thanh-toan');
 Route::post('/thanh-toan/create',[PaymentController::class,'create'])->name('thanh-toan.create');
+Route::get('/dat-hang-thanh-cong',[PaymentController::class,'success'])->name('dat-hang-thanh-cong');
+Route::get('/thanh-toan-online',[PaymentController::class,'onlinePayment']);
 
 // Cart =====================================================
 Route::get('/gio-hang/remove/{rowID}',[CartController::class,'remove'])->name('gio-hang.remove');
 Route::post('/gio-hang/create',[CartController::class,'create'])->name('gio-hang.create');
 Route::get('/gio-hang',[CartController::class,'view'])->name('gio-hang');
 Route::post('/gio-hang/update',[CartController::class,'update']);
+Route::get('/gio-hang/destroy',[CartController::class,'destroy'])->name('gio-hang.destroy');
 
 // Post ==================================================
 Route::get('/bai-viet', [PostController::class, 'view']);

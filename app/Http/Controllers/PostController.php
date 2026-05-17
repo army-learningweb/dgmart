@@ -9,11 +9,14 @@ use App\Models\Post;
 class PostController extends Controller
 {
     // danh sách
-    function view()
+    function view(Request $request)
     {
-        $posts = Post::with(['media' => function ($query) {
+        $posts = Post::query()->with(['media' => function ($query) {
             $query->where('type', 'post')->select('object_id', 'url');
         }])
+            ->when($request->input('category'), function ($query, $value) {
+                $query->where('category_id', $value);
+            })
             ->with('user:id,name')
             ->where('status', 'publish')
             ->latest()
@@ -25,8 +28,8 @@ class PostController extends Controller
     // Lọc
     function filter(Request $request)
     {
-        $id = $request->id;
-        if ($id == 'all') {
+        $id = $request->category_id;
+        if ($id == '') {
             $posts = Post::with(['media' => function ($query) {
                 $query->where('type', 'post')->select('object_id', 'url');
             }])
@@ -67,10 +70,10 @@ class PostController extends Controller
         }])
             ->with('user:id,name')
             ->where('status', 'publish')
-            ->whereNot('slug','bai-viet/'.$slug)
+            ->whereNot('slug', 'bai-viet/' . $slug)
             ->limit(6)
             ->get();
 
-        return view('client.post.details', compact('post_info','posts'));
+        return view('client.post.details', compact('post_info', 'posts'));
     }
 }

@@ -86,4 +86,10 @@ class CartController extends Controller
         return response()->json($data);
 
     }
+
+    // xóa toàn bộ
+    function destroy(){
+        Cart::destroy();
+        return back();
+    }
 }

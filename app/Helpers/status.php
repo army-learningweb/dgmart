@@ -143,3 +143,31 @@ function order_status($status)
     return $arr_status[$status];
 }
 
+function review_status($status)
+{
+    $arr_status = [
+        'pending' => ' <div
+                        class="inline-flex items-center gap-1 rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-800">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+</svg>
+                        </span>
+                        <span>Chờ xử lý</span>
+                    </div>',
+
+        'publish' => ' <div
+                        class="inline-flex items-center gap-1 rounded-md bg-green-400/10  px-2 py-1 text-xs font-medium text-green-600">
+                        <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+</svg>
+
+
+
+                        </span>
+                        <span>Công khai</span>
+                    </div>'
+    ];
+
+    return $arr_status[$status];
+}
+

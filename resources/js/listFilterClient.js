@@ -89,8 +89,11 @@ export default function listFilterClinet() {
 
     // Bài viết
     $(".post-category-item").on("click", function () {
-        let id = $(this).data("category-id");
-        let data = { id: id };
+        let category_id = $(this).data("category-id");
+        let data = { category_id: category_id };
+
+        saveURL(data);
+
         $.ajax({
             type: "post",
             url: "/bai-viet",

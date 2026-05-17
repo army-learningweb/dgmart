@@ -1,3 +1,5 @@
+@if ($posts->count() > 0)
+
 <ul class="grid grid-cols-4 gap-y-3">
     @foreach ($posts as $item)
         <li class="pr-4 group post-item animate_reveal" style="animation-delay: {{ $loop->index * 0.1 }}s">
@@ -19,3 +21,11 @@
 <div class="p-5 flex justify-center">
     {{ $posts->links('pagination::tailwind',['module'=>'client-list-posts']) }}
 </div>
+@else
+<div class="flex flex-col items-center justify-center gap-10 mt-10">
+    <img src="{{ asset('images/no-post.svg') }}" alt="" class="w-full h-[300px]">
+    <div class="text-gray-500">Không tìm thấy nội dung bài viết nào với mục này!</div>
+</div>
+    
+@endif
+

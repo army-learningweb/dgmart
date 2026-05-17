@@ -24,21 +24,21 @@
     <div class="min-h-screen flex flex-col">
         <!-- Header -->
         <header>
-            <div class="md:max-w-7xl mx-auto">
+            <div class="bg-white shadow-sm">
                 <x-bar.client-topbar />
             </div>
         </header>
 
         <!-- Content -->
         <main class="flex-1">
-            <div class="md:max-w-7xl mx-auto relative">
+            <div class="md:max-w-7xl mx-auto relative pt-5 pb-10">
                 {{ $slot }}
             </div>
         </main>
 
         <!-- Footer -->
         <footer>
-            <div class="md:max-w-7xl mx-auto pt-10 pb-5">
+            <div class="bg-white pt-10 pb-5">
                 <x-footer.client-footer/>
             </div>
         </footer>

@@ -1,10 +1,10 @@
 export default function validation() {
     let timeout;
-    $(document).on("input", "input[type=text], textarea", function () {
+    $(document).on("input", "input[type=text], input[type=password], textarea", function () {
         let field = $(this).attr("name");
         let value = $(this).val();
         let data = { [field]: value };
-        console.log(data);
+        
         clearTimeout(timeout);
 
         timeout = setTimeout(() => {
@@ -19,8 +19,7 @@ export default function validation() {
                 },
                 error: function (xhr) {
                     if (xhr.status == 422) {
-                        let errors = xhr.responseJSON.errors;
-                        
+                        let errors = xhr.responseJSON.errors;    
                         if (errors && errors[field]) {
                             $("." + field + "_ajax_error").html(
                                 `${errors[field][0]}`,

@@ -73,6 +73,24 @@ class PaymentController extends Controller
         Cookie::queue('address',$request->input('address'));
         
         Cart::destroy();
-        return redirect('/');
+        
+        if($request->payment_method == 'cod'){
+            return redirect('/dat-hang-thanh-cong');
+        }
+
+        if($request->payment_method != 'cod'){
+            $request->session()->put('order',$new_order);
+            return redirect('/thanh-toan-online');
+        }
+    }
+
+    // Phương thức thanh toán khác
+    function onlinePayment(){
+        return view('client.payment.orther-payment');
+    }
+
+    // Thanh toán thành công
+    function success(){
+        return view('client.payment.success');
     }
 }

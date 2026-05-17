@@ -13,13 +13,12 @@
     </div>
 
     <div class="flex gap-3 items-center mt-5 animate_reveal">
-        <div class="font-semibold text-xl">Danh mục :</div>
         <ul class="flex gap-2 flex-wrap">
-            <li class="post-category-item px-3 py-[5px] rounded-full bg-blue-600/10 text-blue-600 cursor-pointer hover:outline-blue-600 hover:outline outline-1 category-active" data-category-id="all">Tất cả
+            <li class="post-category-item px-3 py-[5px] rounded-full bg-white border border-gray-200 cursor-pointer hover:outline-blue-600 hover:outline outline-1 {{ request()->input('category') ? '' : 'category-active' }}" data-category-id="">Tất cả
             </li>
             @foreach ($categories as $item)
-                <li class="px-4 py-[5px] rounded-full bg-blue-600/10 text-blue-600 cursor-pointer hover:outline-blue-600 
-                hover:outline outline-2 post-category-item" data-category-id="{{ $item->id }}">{{ $item->name }}
+                <li class="px-4 py-[5px] rounded-full bg-white border border-gray-200 cursor-pointer hover:outline-blue-600 
+                hover:outline outline-2 post-category-item {{ request()->input('category') == $item->id ? 'category-active' : '' }}" data-category-id="{{ $item->id }}">{{ $item->name }}
                 </li>
             @endforeach
         </ul>

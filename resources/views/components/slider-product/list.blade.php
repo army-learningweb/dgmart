@@ -57,7 +57,7 @@
                             <div class="my-3 flex justify-end gap-2 px-5">
                                 <a href="{{url($item->slug)}}"
                                     class="text-blue-600 hover:underline flex items-center gap-1">
-                                    <span>Xem chi tiết</span>
+                                    <span>Mua</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                                     </svg>

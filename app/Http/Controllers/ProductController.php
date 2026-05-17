@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\ProductReview;
 
 class ProductController extends Controller
 {
@@ -105,6 +106,8 @@ class ProductController extends Controller
         $more_products = Product::with('medias:object_id,url,is_main,type')
         ->where('category_id', $product_info->category_id)
         ->get();
-        return view('client.product.details', compact('product_info','variants','more_products'));
+
+        $product_reviews = ProductReview::where('status','publish')->where('product_id',$product_info->id)->get();
+        return view('client.product.details', compact('product_info','variants','more_products','product_reviews'));
     }
 }

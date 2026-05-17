@@ -49,6 +49,10 @@ return [
         'quantity' => 'Số lượng',
         'variants' => 'Thông số',
         'tel' => 'Số điện thoại',
-        'order' => 'Số thứ tự'
+        'order' => 'Số thứ tự',
+        'address' => 'Địa chỉ',
+        'job' => 'Công việc',
+        'comment' => 'Nội dung dánh giá',
+        'vote' => 'Bình chọn'
     ]
 ];

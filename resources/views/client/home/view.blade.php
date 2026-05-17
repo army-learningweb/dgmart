@@ -1,6 +1,6 @@
 <x-client-layout>
 
-    <div class="mt-5 animate_reveal">
+    <div class="animate_reveal">
         <h1
             class="text-6xl font-bold tracking-tight bg-gradient-to-r from-blue-600 to-blue-900 bg-clip-text text-transparent py-3">
             Cửa hàng</h1>

@@ -80,7 +80,7 @@
                         <label for="zalo"
                             class="flex items-center absolute cursor-pointer -right-0 top-0 h-full w-full justify-center">
                             <img src="{{ asset('images/zalopay.png') }}" alt=""
-                                class="w-[40px] mx-3 rounded-lg">
+                                class="w-[30px] mx-3 rounded-lg">
                             ZaloPay
                         </label>
                     </div>

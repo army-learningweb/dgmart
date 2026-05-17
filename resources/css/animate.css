@@ -80,3 +80,18 @@
 .animate_variant_translate_down{
     animation: variant_translate_down 0.1s ease-in-out;
 }
+
+
+@keyframes qr_scan {
+    from{
+        top: 0;
+    }
+
+    to {
+        top: 100%;
+    };
+}
+
+.animate_qr_scan{
+    animation: qr_scan 3s ease-in-out infinite;
+}

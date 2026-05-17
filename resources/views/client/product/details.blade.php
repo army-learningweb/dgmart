@@ -1,14 +1,7 @@
 <x-client-layout>
-    <div
-        class="animate_reveal text-4xl font-bold tracking-tight bg-gradient-to-r from-blue-600 to-blue-900 bg-clip-text text-transparent w-full py-5 mt-3">
-        <div class="transition-all duration-500 client-product-name">
-            {{ $product_info->name }}
-        </div>
-    </div>
-
-    <div class="mt-5 max-w-7xl mx-auto flex gap-5 animate_reveal">
+    <div class="max-w-7xl mx-auto flex gap-5 {{ $errors->any() ? '' : 'animate_reveal' }}">
         <div class="w-[50%]">
-            <div class="sticky top-14 flex flex-col items-center">
+            <div class="sticky top-14 flex flex-col">
                 <div class="relative overflow-hidden border border-gray-200 rounded-3xl bg-white w-full">
                     <ul class="container-image flex flex-nowrap gap-3 py-5 w-full transition-all duration-200">
                         @foreach ($product_info->medias as $item)
@@ -54,11 +47,15 @@
         <form action="{{ route('gio-hang.create') }}" method="post" class="flex-1 ">
             @csrf
             {{-- info --}}
-            <div class="space-y-1 h-full flex flex-col gap-2 bg-white py-4 px-10 rounded-2xl border border-gray-200">
-                <div class="text-2xl py-2 select-none">
-                    <span class="text-gray-500 font-semibold">Thông tin.</span>
-                    <span class="font-semibold tracking-tight">Về sản phẩm</span>
+            <div class="space-y-1 h-fit flex flex-col gap-1 bg-white py-4 px-10 rounded-2xl border border-gray-200">
+
+                {{-- code --}}
+                <div class="flex justify-between py-5 select-none border-b border-gray-200">
+                    <h1
+                        class="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent font-bold text-3xl tracking-tight">
+                        {{ $product_info->name }}</h1>
                 </div>
+
                 <div class="flex gap-2 justify-between items-center py-5 select-none border-b border-gray-200">
                     @if ($product_info->quantity > 0)
                         <p class="font-semibold">Tình trạng</p>
@@ -104,7 +101,7 @@
                     </div>
 
                     <div class="product-details-config hidden">
-                        <div class="flex flex-col gap-3 animate_reveal">
+                        <div class="flex flex-col gap-3 {{ $errors->any() ? '' : 'animate_reveal' }}">
                             @foreach ($variants as $key => $items)
                                 <div
                                     class="next-variant text-[16px] tracking-tight flex gap-2 items-center py-3 select-none">
@@ -135,7 +132,7 @@
                 @endif
 
                 {{-- baseprice --}}
-                <div class="flex justify-between items-center py-5 border-b border-gray-200 select-none">
+                <div class="flex justify-between items-center py-3 border-b border-gray-200 select-none">
                     <div class="font-semibold">Giá gốc</div>
                     <div class="font-semibold text-2xl base-price" data-price="{{ $product_info->price }}">
                         {{ num_format($product_info->price) }}
@@ -145,7 +142,7 @@
 
                 {{-- saleprice --}}
                 @if ($product_info->sale_off > 0)
-                    <div class="flex justify-between items-center py-5 text-red-500 select-none">
+                    <div class="flex justify-between items-center py-3 text-red-500 select-none">
                         <div class="font-semibold">Giảm giá {{ $product_info->sale_off }}%</div>
                         <div class="font-semibold text-2xl price-sale-off"
                             data-price="{{ $product_info->price_sale_off }}">
@@ -157,7 +154,7 @@
 
                 {{-- price-accesories --}}
                 @if ($variants->count() > 0)
-                    <div class="flex justify-between items-center py-5 border-b border-gray-200 select-none">
+                    <div class="flex justify-between items-center py-3 border-b border-gray-200 select-none">
                         <div class="font-semibold">Phí linh kiện nâng cấp</div>
                         <div class="font-semibold text-2xl price-accesories">0đ</div>
                         <input type="hidden" name="price-accesories" value="">
@@ -165,9 +162,9 @@
                 @endif
 
                 {{-- total-price --}}
-                <div class="flex justify-between items-center py-5 select-none">
+                <div class="flex justify-between items-center py-3 select-none">
                     <div class="font-semibold">Tổng cộng</div>
-                    <div class="font-semibold text-2xl total-price">
+                    <div class="font-semibold text-2xl total-price text-green-700">
                         @if ($product_info->sale_off > 0)
                             {{ num_format($product_info->price_sale_off) }}
                         @else
@@ -177,29 +174,120 @@
                     <input type="hidden" name="total-price"
                         value="{{ $product_info->sale_off > 0 ? $product_info->price_sale_off : $product_info->price }}">
                 </div>
-
-                <div class="flex justify-end gap-5 py-1">
-                    <a href="javascript:history.back()"
-                        class="rounded-md text-gray hover:brightness-125 flex items-center gap-1 hover:text-blue-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="size-4">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
-                        </svg>
-                        <span class="select-none">Quay về</span>
-                    </a>
-                    <button
-                        class="bg-gradient-to-r flex gap-2 items-center from-blue-600 to-blue-800 text-white px-5 py-2 rounded-md hover:brightness-125 cursor-pointer">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="size-5">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-                        </svg>
-                        <span>Thêm vào giỏ</span>
-                    </button>
-                </div>
+            </div>
+            <div class="flex justify-end gap-5 py-3 px-1">
+                <a href="{{ url()->previous() }}"
+                    class="rounded-md text-gray hover:brightness-125 flex items-center gap-1 hover:text-blue-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-4">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                    </svg>
+                    <span class="select-none">Quay về</span>
+                </a>
+                <button
+                    class="bg-gradient-to-r flex gap-2 items-center from-blue-600 to-blue-800 text-white px-5 py-2 rounded-lg hover:brightness-125 cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                    </svg>
+                    <span>Thêm vào giỏ</span>
+                </button>
             </div>
         </form>
+    </div>
+
+    {{-- comment --}}
+    <div class="box-btn flex items-center justify-between {{ $errors->any() ? '' : 'animate_reveal' }} py-5">
+        <div class="space-y-2">
+            <h1 class="text-3xl font-semibold text-gray-900">Đánh giá ({{ $product_info->name }})</h1>
+            <div class="h-1 w-[100px] bg-blue-600 rounded-md"></div>
+        </div>
+    </div>
+
+    <div class="flex items-start gap-5">
+        <div class="bg-white p-5 rounded-xl border border-gray-200 w-[50%] sticky top-10">
+            <div class="flex items-center gap-2 py-1">
+                @for ($i = 1; $i <= 5; $i++)
+                    <div class="star-item" data-vote="{{ $i }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="size-8 text-amber-500 cursor-pointer ">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
+                        </svg>
+                    </div>
+                @endfor
+                <div class="vote-text font-semibold ms-2 text-16px">(Chưa có bình chọn)</div>
+            </div>
+            @error('vote')
+                <span class="vote_error text-red-500">{{ $message }}</span>
+            @enderror
+
+
+            <form action="{{ route('danh-gia-san-pham.store') }}" method="post">
+                @csrf
+                <div class="mt-2">
+                    <x-input-field.field label="Họ và tên" type="text" name="name" id="name"
+                        placeholder="Nguyễn Văn A" autocomplete="on" required="*" />
+                </div>
+
+                <div class="mt-2">
+                    <x-input-field.field label="Bạn là (học sinh, sinh viên, người làm tự do....) ?" type="text"
+                        name="job" id="job" placeholder="vd: Lập trình viên" required="*" />
+                </div>
+
+                <div class="mt-2">
+                    <x-form-element.text-area label="Nội dung đánh giá" name="comment" id="comment" required="*"
+                        class="h-[96px]" />
+                </div>
+
+                <input type="hidden" name="vote" value="{{ old('vote') }}">
+                <input type="hidden" name="product_id" value="{{ $product_info->id }}">
+
+                <div class="flex justify-end mt-2 gap-3 items-center">
+                    <div class="text-green-700">{{ session('status') }}</div>
+                    <x-button.primary-button class="py-[5px] md:w-auto send-reviews">Gửi đánh giá</x-button.primary-button>
+                </div>
+
+            </form>
+        </div>
+        <div class="bg-white p-5 rounded-xl border border-gray-200 flex-1">
+            @if ($product_reviews->count() > 0)
+                @foreach ($product_reviews as $item)
+                    <div class="border-b border-gray-200 py-5">
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-10 h-10 flex justify-center items-center text-white rounded-full bg-gradient-to-r from-blue-600 to-blue-800 font-semibold">
+                                {{ Str::substr($item->name,0,1) }}
+                            </div>
+                            <div>
+                                <div class="font-semibold">{{ $item->name }}</div>
+                                <div class="text-sm text-gray-500 italic">{{ $item->job }}</div>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-1 mt-3">
+                            @for ($i = 1; $i <= $item->vote; $i++)
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                        class="size-7 text-amber-500">
+                                        <path fill-rule="evenodd"
+                                            d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                            @endfor
+                        </div>
+                        <div class="mt-3">
+                            {{ $item->comment }}
+                        </div>
+                    </div>
+                @endforeach
+            @else
+                    <div>Hiện chưa có đánh giá nào cho sản phẩm này !</div>
+            @endif
+        </div>
     </div>
 
     {{-- product --}}
