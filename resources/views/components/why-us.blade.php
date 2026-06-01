@@ -1,10 +1,10 @@
-<h1 class="text-3xl font-semibold text-gray-900">
+<h1 class="text-3xl font-semibold text-gray-900 px-6 md:px-0">
     <span>Tạo nên sự khác biệt.</span>
     <span class="text-gray-500">Lí do để bạn mua sắm cùng chúng tôi</span>
 </h1>
 <div class="mt-7">
-    <ul class="grid grid-cols-4">
-        <li class="pr-4">
+    <ul class="grid md:grid-cols-4 gap-y-3 md:gap-y-0">
+        <li class="px-6 md:px-2">
             <div class="bg-white rounded-2xl shadow-md p-5">
                 <div class="bg-blue-600/10 text-blue-600 inline-block p-3 rounded-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -19,7 +19,7 @@
             </div>
         </li>
 
-        <li class="pr-4">
+        <li class="px-6 md:px-2">
             <div class="bg-white rounded-2xl shadow-md p-5">
                 <div class="bg-green-600/10 text-green-600 inline-block p-3 rounded-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -35,7 +35,7 @@
             </div>
         </li>
 
-        <li class="pr-4">
+        <li class="px-6 md:px-2">
             <div class="bg-white rounded-2xl shadow-md p-5">
                 <div class="bg-amber-600/10 text-amber-600 inline-block p-3 rounded-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -51,7 +51,7 @@
             </div>
         </li>
 
-        <li class="pr-4">
+        <li class="px-6 md:px-2">
             <div class="bg-white rounded-2xl shadow-md p-5">
                 <div class="bg-pink-600/10 text-pink-600 inline-block p-3 rounded-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

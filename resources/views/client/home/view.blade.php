@@ -2,7 +2,7 @@
 
     <div class="animate_reveal">
         <h1
-            class="text-6xl font-bold tracking-tight bg-gradient-to-r from-blue-600 to-blue-900 bg-clip-text text-transparent py-3">
+            class="text-6xl font-bold tracking-tight bg-gradient-to-r from-blue-600 to-blue-900 bg-clip-text text-transparent py-3 pl-5 md:pl-0">
             Cửa hàng</h1>
     </div>
 

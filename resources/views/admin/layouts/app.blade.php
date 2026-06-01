@@ -14,13 +14,13 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     {{-- tiny mce --}}
-    {{-- <script src="https://cdn.tiny.cloud/1/99c8uy6qg2tkb92zk1z57p4evrix6u0q9mpgxced7w3w12ve/tinymce/7/tinymce.min.js"
-        referrerpolicy="origin" crossorigin="anonymous"></script> --}}
+    <script src="https://cdn.tiny.cloud/1/99c8uy6qg2tkb92zk1z57p4evrix6u0q9mpgxced7w3w12ve/tinymce/7/tinymce.min.js"
+        referrerpolicy="origin" crossorigin="anonymous"></script>
         
-    {{-- <x-tinymce.config id="post-content" />
+    <x-tinymce.config id="post-content" />
     <x-tinymce.config id="edit-post-content" />
 
-    <x-tinymce.config id="product-content" />
+    {{-- <x-tinymce.config id="product-content" />
     <x-tinymce.config id="edit-product-content" /> --}}
 
     {{-- script --}}

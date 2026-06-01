@@ -75,6 +75,7 @@ class PaymentController extends Controller
         Cart::destroy();
         
         if($request->payment_method == 'cod'){
+            $request->session()->put('order',$new_order);
             return redirect('/dat-hang-thanh-cong');
         }
 

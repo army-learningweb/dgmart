@@ -1,11 +1,11 @@
 @if (isset($menus))
     @if ($menus->count() > 0)
-        <div class="px-3 rounded-xl flex justify-between items-center">
-            <ul class="flex gap-7">
+        <div class="md:px-3 rounded-xl md:flex justify-between items-center absolute md:relative top-10 left-0 md:top-0 z-50 w-full md:w-fit  res-menu hidden">
+            <ul class="md:flex flex-col md:flex-row md:gap-7 bg-white px-5 pb-3 md:pb-0 md:px-0 mt-[20px] md:mt-0 w-full shadow-sm md:shadow-none">
                 @foreach ($menus->where('parent_id', 0) as $menu)
-                    <li class="relative group">
+                    <li class="relative group md:border-0">
                         <a href="{{ url($menu->slug == 'trang/cua-hang' ? '/' : $menu->slug) }}"
-                            class="group-hover:text-blue-600 hover:text-blue-600 flex items-center gap-1 py-5
+                            class="group-hover:text-blue-600 hover:text-blue-600 flex items-center gap-1 md:py-5 py-2
                             {{ $menu->slug == 'trang/cua-hang' && session('client_module_active') == '' ? 'navigation-active' : '' }}
                             {{ session('client_module_active') == $menu->slug && session('client_sub_module_active') == '' ? 'navigation-active' : '' }}
                             {{ request()->path() == $menu->slug ? 'navigation-active' : '' }}">

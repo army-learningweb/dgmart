@@ -1,16 +1,14 @@
 <x-client-layout>
-    <div class="pt-3 pb-10">
-        <div class="flex justify-between items-end">
-           
-                <a href="{{ url(request()->path()) }}"
-                    class="animate_reveal text-6xl font-bold tracking-tight bg-gradient-to-r from-blue-600 to-blue-900 bg-clip-text text-transparent py-3">
-                    {{ $title }}
-                </a>
-          
+    <div class="pt-3 pb-4 md:pb-10">
+        <div class="flex flex-col md:flex-row md:justify-between md:items-end px-4 md:px-0">
+            <a href="{{ url(request()->path()) }}"
+                class="animate_reveal text-6xl font-bold tracking-tight bg-gradient-to-r from-blue-600 to-blue-900 bg-clip-text text-transparent py-3">
+                {{ $title }}
+            </a>
 
             @if ($top_sale)
-                <div class="flex flex-col gap-2 items-end animate_reveal">
-                    <h1 class="font-[500] client-total-products text-3xl flex gap-2 items-center tracking-tight">
+                <div class="flex flex-col gap-2 md:items-end animate_reveal mt-5 md:mt-0">
+                    <h1 class="font-[500] client-total-products text-2xl md:text-3xl flex gap-2 items-center tracking-tight">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                             class="size-7 text-amber-500">
                             <path fill-rule="evenodd"
@@ -21,7 +19,7 @@
                             nhất
                             - lên đến {{ $top_sale->sale_off }}%</span>
                     </h1>
-                    <div class="flex gap-5 items-end">
+                    <div class="flex flex-col md:flex-row gap-3 md:gap-5 md:items-end">
                         <span class="font-semibold text-xl">{{ $top_sale->name }}</span>
                         <a href="{{ url($top_sale->slug) }}"
                             class="inline-flex mb-[2px] items-center gap-1 text-blue-600 group">
@@ -40,40 +38,35 @@
         </div>
     </div>
 
-    <div class="py-5 flex justify-between">
-        <div class="flex gap-3 items-center">
-            <ul class="flex gap-2">
-                <li class="product-category-item animate_reveal product-category-item px-5 bg-white py-1 rounded-2xl outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('category') ? '' : 'category-active' }}"
+    <div class="py-5 flex flex-col gap-y-3 md:gap-y-0 md:flex-row justify-between">
+        <div class="flex gap-3 items-center px-4 overflow-x-auto scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-[#fafafa] scrollbar-track-transparent py-2">
+            <ul class="flex flex-nowrap gap-3">
+                <li class="product-category-item animate_reveal product-category-item px-5 bg-white py-1 rounded-2xl outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('category') ? '' : 'category-active' }} text-nowrap"
                     data-category-id="" data-url="{{ request()->path() }}">
                     Tất cả
                 </li>
                 @foreach ($types as $key => $value)
-                    <li class="product-category-item animate_reveal product-category-item px-5 bg-white py-1 rounded-2xl outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('category') == $value ? 'category-active' : '' }}"
+                    <li class="text-nowrap product-category-item animate_reveal product-category-item px-5 bg-white py-1 rounded-2xl outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('category') == $value ? 'category-active' : '' }}"
                         data-category-id="{{ $value }}" data-url="{{ request()->path() }}">
                         {{ $key }}
                     </li>
                 @endforeach
             </ul>
         </div>
-
-        <div>
-
-        </div>
-        <div class="animate_reveal">
-            <div class="flex gap-2 items-center">
+        <div class="animate_reveal mr-1 px-4 py-2 md:py-0 md:px-0">
+            <div class="flex gap-2 md:items-center">
                 <ul class="flex gap-3 items-center">
-                    <span class="font-semibold">Theo giá:</span>
-                    <li class="product-order-item product-order-item px-5 bg-white py-1 rounded-2xl outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('order') ? '' : 'category-active' }}"
+                    <li class="text-nowrap product-order-item px-5 bg-white py-1 rounded-2xl outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('order') ? '' : 'category-active' }}"
                         data-order="" data-url="{{ request()->path() }}">
-                        Mặc định
+                        Giá mặc định
                     </li>
-                    <li class="product-order-item product-order-item px-5 bg-white py-1 rounded-2xl outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('order') == 'asc' ? 'category-active' : '' }}"
+                    <li class="text-nowrap product-order-item px-5 bg-white py-1 rounded-2xl outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('order') == 'asc' ? 'category-active' : '' }}"
                         data-order="asc" data-url="{{ request()->path() }}">
-                        Từ thấp đến cao
+                        Thấp đến cao
                     </li>
-                    <li class="product-order-item product-order-item px-5 bg-white py-1 rounded-2xl outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('order') == 'desc' ? 'category-active' : '' }}"
+                    <li class="text-nowrap product-order-item px-5 bg-white py-1 rounded-2xl outline outline-1 outline-gray-200 hover:outline-blue-600 hover:outline-2 cursor-pointer {{ request()->input('order') == 'desc' ? 'category-active' : '' }}"
                         data-order="desc" data-url="{{ request()->path() }}">
-                        Từ cao đến thấp
+                        Cao đến thấp
                     </li>
                 </ul>
             </div>

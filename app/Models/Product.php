@@ -23,7 +23,8 @@ class Product extends Model
         'sold',
         'user_id',
         'category_id',
-        'attribute_id'
+        'attribute_id',
+        'quantity'
     ];
 
     function user(){

@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Media;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
-
 use function Pest\Laravel\session;
 
 abstract class Controller

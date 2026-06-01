@@ -12,15 +12,16 @@ class CartController extends Controller
 {
 
     // Thêm
-    function create(Request $request){
+    function create(Request $request)
+    {
         $product_id = $request->input('product_id');
         $image = $request->input('product_img');
 
         $options = '';
         $variants = '';
-        if($request->input('options')){
+        if ($request->input('options')) {
             $options = array_values($request->input('options'));
-            $variants = Variant::whereIn('id',$options)->get(['slug','name','price']);
+            $variants = Variant::whereIn('id', $options)->get(['slug', 'name', 'price']);
         }
 
         $price = $request->input('total-price');
@@ -28,7 +29,7 @@ class CartController extends Controller
         $price_sale_off = $request->input('price-sale-off');
         $price_accesories = $request->input('price-accesories');
         $product = Product::find($product_id);
-       
+
         Cart::add([
             'id' => $product->id,
             'name' => $product->name,
@@ -42,53 +43,56 @@ class CartController extends Controller
                 'price_accesories' => $price_accesories,
                 'image' => $image,
                 'stock' => $product->quantity
-                ]
+            ]
         ]);
 
 
-        return redirect()->route('gio-hang')->with('status','Đã thêm sản phẩm vào giỏ hàng');
+        return redirect()->route('gio-hang')->with('status', 'Đã thêm sản phẩm vào giỏ hàng');
     }
 
     // danh sách
-    function view(){
+    function view()
+    {
 
         $carts = Cart::content();
-        $top_sale = Product::orderBy('sale_off','desc')->first();
+        $top_sale = Product::orderBy('sale_off', 'desc')->first();
         $category_accesories = Category::where('slug', 'phu-kien-laptop')->value('id');
         $categories_child = Category::where('parent_id', $category_accesories)->where('type', 'product')->pluck('id');
         $accesories_product = Product::with('medias:object_id,url,is_main,type')->whereIn('category_id', $categories_child)->latest()->get();
-        
-        return view('client.cart.view',compact('carts','top_sale','accesories_product'));
+
+        return view('client.cart.view', compact('carts', 'top_sale', 'accesories_product'));
     }
 
     // xóa
-    function remove($rowId = ''){
+    function remove($rowId = '')
+    {
         Cart::remove($rowId);
-        return back()->with('status','Xóa thành công');
+        return back()->with('status', 'Xóa thành công');
     }
 
     // cập nhật
-    function update(Request $request){
+    function update(Request $request)
+    {
         $qty = $request->input('qty');
         $rowId = $request->input('rowId');
-        Cart::update($rowId,$qty);
-        $price = num_format(Cart::get($rowId)->price * Cart::get($rowId)->qty);
-        $total_price = Cart::total();
+        Cart::update($rowId, $qty);
+        $carts = Cart::content();
+        if (count($carts) > 0) {
+            $view = view('client.cart.partials.list', compact('carts'))->render();
+        } else {
+            $view = view('client.cart.partials.empty_cart')->render();
+        }
         $cart_count = Cart::count();
-        
         $data = [
-            'price' => $price,
-            'total_price' => $total_price,
-            'cart_count' => $cart_count,
-            'rowId' => $rowId
+            'view' => $view,
+            'cart_count' => $cart_count
         ];
-
         return response()->json($data);
-
     }
 
     // xóa toàn bộ
-    function destroy(){
+    function destroy()
+    {
         Cart::destroy();
         return back();
     }

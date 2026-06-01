@@ -1,5 +1,5 @@
 
-<ul class="flex py-4 md:max-w-7xl mx-auto ">
+<ul class="flex flex-col md:flex-row py-4 md:max-w-7xl mx-auto px-6">
     <li class="flex-1">
         <x-application-logo class="text-3xl py-2" />
         <div class="mt-2">
@@ -32,15 +32,15 @@
             Hotline: 0782199911
         </div>
     </li>
-    <li class="w-[20%] px-10 py-4">
+    <li class="md:w-[20%] md:px-10 py-4 mt-4 md:mt-0">
         <div class="font-semibold text-gray-800 text-[16px]">Liên kết nhanh</div>
         <ul class="mt-4">
             @foreach ($menus as $item)
-                <li><a href="{{ url($item->slug) }}" class="hover:text-blue-700 py-2 inline-block w-full">{{ $item->name }}</a></li>
+                <li class="border-b border-gray-100 md:border-0"><a href="{{ url($item->slug) }}" class="hover:text-blue-700 py-2 inline-block w-full">{{ $item->name }}</a></li>
             @endforeach
         </ul>
     </li>
-    <li class="w-[20%]  px-10 py-4">
+    <li class="md:w-[20%] md:px-10 py-4">
         <div class="font-semibold text-gray-800 text-[16px]">Theo dõi chúng tôi</div>
         <ul class="mt-4">
             <li>
@@ -75,7 +75,7 @@
             </li>
         </ul>
     </li>
-    <li class="flex-1  px-10 py-4">
+    <li class="flex-1  md:px-10 py-4">
         <div class="font-semibold text-gray-800 text-[16px]">Tổng đài hỗ trợ miễn phí</div>
         <div class="mt-6">
             Mua hàng - bảo hành - 1234.5678 (8:00 - 22:00)

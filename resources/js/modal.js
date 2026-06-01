@@ -67,9 +67,9 @@ export default function modal() {
             "animate_translate_down",
         );
 
-        // if (tinymce.get("edit-post-content")) {
-        //     tinymce.get("edit-post-content").setContent("");
-        // }
+        if (tinymce.get("edit-post-content")) {
+            tinymce.get("edit-post-content").setContent("");
+        }
 
         // if (tinymce.get("edit-product-content")) {
         //     tinymce.get("edit-product-content").setContent("");

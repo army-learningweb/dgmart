@@ -18,27 +18,27 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="overflow-x-hidden font-sans antialiased text-sm px-3 md:px-0 scroll-smooth bg-gray-50">
+<body class="overflow-x-hidden font-sans antialiased text-sm scroll-smooth bg-gray-50">
 
     {{-- Layout --}}
     <div class="min-h-screen flex flex-col">
         <!-- Header -->
         <header>
-            <div class="bg-white shadow-sm">
+            <div class="bg-white shadow-sm w-full px-4 md:px-0">
                 <x-bar.client-topbar />
             </div>
         </header>
 
         <!-- Content -->
         <main class="flex-1">
-            <div class="md:max-w-7xl mx-auto relative pt-5 pb-10">
+            <div class="w-full md:max-w-7xl mx-auto relative pt-5 pb-10">
                 {{ $slot }}
             </div>
         </main>
 
         <!-- Footer -->
         <footer>
-            <div class="bg-white pt-10 pb-5">
+            <div class="bg-white md:pt-5 pb-5">
                 <x-footer.client-footer/>
             </div>
         </footer>

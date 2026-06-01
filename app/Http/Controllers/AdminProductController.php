@@ -36,8 +36,7 @@ class AdminProductController extends Controller
                 $query->where('name', 'like', '%' . $value . '%');
             })
             ->latest()
-            ->paginate(5)
-            ->onEachSide(1);
+            ->paginate(5);
 
         $total = Product::count();
         $active = Product::where('status', 'active')->count();

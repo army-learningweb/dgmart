@@ -1,5 +1,5 @@
 @if ($posts->count() > 0)
-    <h1 class="text-3xl text-gray-800 flex items-end justify-between gap-3 w-full pr-5">
+    <h1 class="text-3xl text-gray-800 flex items-end justify-between gap-3 w-full px-6 md:px-0">
         <span class="font-semibold">Tin tức nổi bật</span>
         <a href="{{ url('bai-viet') }}" class="text-blue-600 hover:underline text-sm flex gap-1 justify-between group">
             <div>Xem tất cả</div>
@@ -12,9 +12,9 @@
         </a>
     </h1>
     <div class="mt-7">
-        <ul class="grid grid-cols-4">
+        <ul class="grid md:grid-cols-4 gap-y-2">
             @foreach ($posts as $item)
-                <li class="pr-4 group">
+                <li class="px-6 md:px-2 group">
                     <a href="{{ $item->slug }}"
                         class="inline-block bg-white p-4 rounded-3xl shadow-md transition-all duration-200">
                         <img src="{{ asset($item->media->url) }}" alt=""

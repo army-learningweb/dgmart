@@ -1,27 +1,27 @@
 {{-- introduce --}}
-<div class="py-3 flex gap-5">
-    <div class="flex-1">
+<div class="py-3 flex flex-col md:flex-row gap-5 px-6 md:px-0">
+    <div class="flex-1 text-center md:text-left">
         <x-application-logo class="text-8xl py-5" />
         <h1
-            class="text-8xl py-5 font-bold bg-gradient-to-r from-gray-500 to-gray-800 bg-clip-text text-transparent tracking-tighter">
+            class="text-5xl md:text-8xl py-5 font-bold bg-gradient-to-r from-gray-500 to-gray-800 bg-clip-text text-transparent tracking-tighter">
             Chất lượng thật, giá trị bền lâu
         </h1>
     </div>
-    <div class="w-[45%]">
+    <div class="w-[45%] hidden md:block">
         <img src="{{ asset('images/banner.png') }}" alt="" class="w-full h-full object-cover">
     </div>
 </div>
 
 {{-- story --}}
-<div class="flex gap-5 py-12">
+<div class="flex flex-col md:flex-row items-center gap-5 py-8 md:py-12">
     <div class="flex-1">
         <h1
             class="text-5xl pb-2 font-bold bg-gradient-to-r from-blue-500 to-blue-800 bg-clip-text text-transparent tracking-tighter">
             Câu chuyện
         </h1>
     </div>
-    <div class="w-[65%] py-2">
-        <p class=" leading-7 text-[16px]">
+    <div class="md:w-[65%] py-2 px-6">
+        <p class=" leading-7 text-[16px] text-justify md:text-left">
             "Tại <span class="font-bold">Digimart</span>, chúng tôi không chỉ tạo ra sản phẩm, chúng tôi tạo ra giá
             trị. Khởi đầu từ một niềm
             đam mê nhỏ, chúng tôi luôn nỗ lực mỗi ngày để mang đến những giải pháp đột phá, giúp cuộc sống của bạn
@@ -32,44 +32,41 @@
 </div>
 
 {{-- mission --}}
-<div class="flex gap-5 py-10 relative">
-    <div class="flex-1">
-        {{-- <h1
-            class="text-5xl pb-2 font-bold bg-gradient-to-r from-blue-500 to-blue-800 bg-clip-text text-transparent tracking-tighter">
-            Sứ mệnh
-        </h1> --}}
+<div class="flex gap-5 py-5 md:py-10 relative px-6">
+    <div class="flex-1 hidden md:block">
     </div>
-    <div class="w-[65%]">
-         <h1
-            class="text-5xl pb-5 font-bold  bg-gradient-to-r from-gray-500 to-gray-800 bg-clip-text text-transparent tracking-tighter">
+    <div class="md:w-[65%]">
+         <h1 class="text-center md:text-left text-5xl pb-5 font-bold  bg-gradient-to-r from-gray-500 to-gray-800 bg-clip-text text-transparent tracking-tighter">
             Chúng tôi không chỉ bán thiết bị
         </h1>
-         <h1 class="text-2xl py-5 text-[16px] leading-6">
+         <h1 class="text-2xl py-5 text-[16px] leading-6 text-justify md:text-left">
             "Chúng tôi cung cấp giải pháp nâng tầm cuộc sống số của bạn. Digimart hướng tới mục tiêu trở thành hệ sinh
             thái công nghệ hàng đầu, nơi mọi khách hàng đều có thể tìm thấy sự hiện đại, tiện nghi và giá trị bền vững."
         </h1>
-        <x-button.button-redirect link="{{ url('san-pham') }}" name="Ghé cửa hàng" class="w-fit" />
+        <div class="flex justify-center md:justify-start">
+            <x-button.button-redirect link="{{ url('/laptop') }}" name="Ghé cửa hàng" class="w-fit" />
+        </div>
     </div>
     
 
 </div>
 
 {{-- number --}}
-<div class="flex gap-5 py-10">
+<div class="flex flex-col md:flex-row gap-5 md:py-10 px-6 md:px-0 mt-7 md:mt-0">
     <div class="flex-1">
         <h1
-            class="text-5xl pb-2 font-bold bg-gradient-to-r from-blue-500 to-blue-800 bg-clip-text text-transparent tracking-tighter">
+            class="text-center md:text-left text-5xl pb-2 font-bold bg-gradient-to-r from-blue-500 to-blue-800 bg-clip-text text-transparent tracking-tighter">
             Khách hàng đánh giá thế nào ?
         </h1>
-        <div class="mt-10 text-[16px] leading-6">
+        <div class="mt-7 md:mt-10 text-[16px] leading-6 text-justify md:text-left">
             "Chúng tôi luôn trân trọng mọi ý kiến đóng góp từ phía khách hàng. Những lời khen là động lực, và những
             góp ý chân thành là cơ hội để chúng tôi hoàn thiện mình hơn mỗi ngày."
         </div>
     </div>
-    <div class="w-[65%] py-2">
+    <div class="md:w-[65%] py-2">
         <div>
-            <div class="flex gap-2">
-                <div class="bg-white p-5 shadow-md rounded-2xl w-[35%]">
+            <div class="flex flex-col md:flex-row gap-2">
+                <div class="bg-white p-5 shadow-md rounded-2xl md:w-[35%]">
                     <div class="flex gap-1">
                         @for ($i = 1; $i <= 5; $i++)
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -87,7 +84,7 @@
                         Nguyễn Minh Anh – Sinh viên
                     </div>
                 </div>
-                <div class="bg-white p-5 shadow-md rounded-2xl w-[35%]">
+                <div class="bg-white p-5 shadow-md rounded-2xl md:w-[35%]">
                     <div class="flex gap-1">
                         @for ($i = 1; $i <= 5; $i++)
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -106,8 +103,8 @@
                     </div>
                 </div>
             </div>
-            <div class="flex gap-2 justify-end mt-2">
-                <div class="bg-white p-5 shadow-md rounded-2xl w-[35%]">
+            <div class="flex flex-col md:flex-row gap-2 justify-end mt-2">
+                <div class="bg-white p-5 shadow-md rounded-2xl md:w-[35%]">
                     <div class="flex gap-1">
                         @for ($i = 1; $i <= 5; $i++)
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -125,7 +122,7 @@
                         Lê Hoàng Nam – Freelancer
                     </div>
                 </div>
-                <div class="bg-white p-5 shadow-md rounded-2xl w-[35%]">
+                <div class="bg-white p-5 shadow-md rounded-2xl md:w-[35%]">
                     <div class="flex gap-1">
                         @for ($i = 1; $i <= 5; $i++)
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"

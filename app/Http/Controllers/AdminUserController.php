@@ -11,14 +11,43 @@ use App\Models\user_role;
 class AdminUserController extends Controller
 {
     // danh sách
-    function list()
+    function list(Request $request)
     {
-        $users = User::with('roles:id,name')->get();
+        
+        $users = User::query()->with('roles:id,name')
+            ->when($request->input('filter'), function ($query, $value) {
+                $query->where('status', $value);
+            })
+            ->when($request->input('search'), function ($query, $value) {
+                $query->where('name', 'like', "%$value%");
+            })
+            ->get();
+
         $total = User::all()->count();
-        $active = User::where('status','active')->count();
-        $unactive = User::where('status','unactive')->count();
+        $active = User::where('status', 'active')->count();
+        $unactive = User::where('status', 'unactive')->count();
         $roles = Role::all();
-        return view('admin.user.view', compact('users','total','active','unactive','roles'));
+
+        return view('admin.user.view', compact('users', 'total', 'active', 'unactive', 'roles'));
+    }
+
+    // Lọc + tìm kiếm
+    function list_filter(Request $request)
+    {
+        $filter_value = $request->filter_value;
+        $search_value = $request->search_value;
+
+        $users = User::query()->with('roles:id,name')
+            ->when($filter_value, function ($query, $value) {
+                $query->where('status', $value);
+            })
+            ->when($search_value, function ($query, $value) {
+                $query->where('name', 'like', "%$value%");
+            })
+            ->get();
+
+        $view = view('admin.user.partials.list', compact('users'))->render();
+        return response()->json($view);
     }
 
     // thêm
@@ -42,7 +71,7 @@ class AdminUserController extends Controller
     // xóa
     function destroy(User $user)
     {
-        if($user->id == Auth::user()->id) return back()->with('status_failed','Xóa thành viên thất bại');
+        if ($user->id == Auth::user()->id) return back()->with('status_failed', 'Xóa thành viên thất bại');
         $user->delete();
         return back()->with('status', 'Xóa thành công');
     }
@@ -52,7 +81,7 @@ class AdminUserController extends Controller
     {
         $id = $request->id;
         $user_info = User::find($id);
-        $roles = user_role::where('user_id',$id)->pluck('role_id');
+        $roles = user_role::where('user_id', $id)->pluck('role_id');
 
         $data = [
             'user_info' => $user_info,
@@ -67,7 +96,7 @@ class AdminUserController extends Controller
         // return $request->all();
         if ($request->input('password') == '' || $request->input('password_confirmation') == '') {
 
-            if($request->id == Auth::user()->id) return back()->with('status_failed','Cập nhật thông tin thất bại');
+            if ($request->id == Auth::user()->id) return back()->with('status_failed', 'Cập nhật thông tin thất bại');
 
             $request->validate([
                 'name' => 'required|min:2|max:255|regex:/^[\p{L}\s0-9]+$/u',
@@ -80,8 +109,7 @@ class AdminUserController extends Controller
             ]);
 
             $user->roles()->sync($request->input('roles'));
-
-        }else{
+        } else {
             $request->validate([
                 'name' => 'required|min:2|max:255|regex:/^[\p{L}\s0-9]+$/u',
                 'password' => 'required|confirmed|min:8|max:255|'
@@ -97,47 +125,24 @@ class AdminUserController extends Controller
             $user->roles()->sync($request->input('roles'));
         }
 
-        return back()->with('status','Cập nhật thành công');
-    }
-
-    // Lọc + tìm kiếm
-    function list_filter(Request $request){
-
-        $filter_value = $request->filter_value ?? '';
-        $search_value = $request->search_value ?? '';
-
-        if(!$filter_value && !$search_value){
-            $users = User::all();
-        }
-
-        if($filter_value && !$search_value){
-            $users = User::where('status',$filter_value)->get();
-        }else{
-            $users = User::where('name','like','%'.$search_value.'%')->get();
-        }
-
-        if($filter_value && $search_value){
-            $users = User::where('status',$filter_value)->where('name','like','%'.$search_value.'%')->get();
-        }
-
-        $view = view('admin.user.partials.list',compact('users'))->render();
-        return response()->json($view);
+        return back()->with('status', 'Cập nhật thành công');
     }
 
     // Cập nhật trạng thái
-    function updateStatus(Request $request){
+    function updateStatus(Request $request)
+    {
         $status_value = $request->status_value;
         $id = $request->id;
 
-        User::where('id',$id)->update([
+        User::where('id', $id)->update([
             'status' => $status_value,
             'updated_at' => now()
         ]);
 
-        $active = User::where('status','active')->count();
-        $unactive = User::where('status','unactive')->count();
+        $active = User::where('status', 'active')->count();
+        $unactive = User::where('status', 'unactive')->count();
 
-        $view = view('admin.user.partials.status',compact('status_value'))->render();
+        $view = view('admin.user.partials.status', compact('status_value'))->render();
 
         $data = [
             'active' => $active,
@@ -148,17 +153,18 @@ class AdminUserController extends Controller
     }
 
     // Hành động
-    function action(Request $request){
+    function action(Request $request)
+    {
 
         $action = $request->input('action');
         $user_id = $request->input('user_id');
-        
-        if(!$action) return back()->withInput()->with('status_failed','Thất bại, bạn chưa chọn hành động !');
-        if(!$user_id) return back()->withInput()->with('status_failed','Hành động thất bại, bạn chưa chọn User !');
+
+        if (!$action) return back()->withInput()->with('status_failed', 'Thất bại, bạn chưa chọn hành động !');
+        if (!$user_id) return back()->withInput()->with('status_failed', 'Hành động thất bại, bạn chưa chọn User !');
 
         $current_user_id = Auth::user()->id;
-        User::whereIn('id',$user_id)->whereNot('id',$current_user_id)->update(['status'=>$action,'updated_at'=>now()]);
+        User::whereIn('id', $user_id)->whereNot('id', $current_user_id)->update(['status' => $action, 'updated_at' => now()]);
 
-        return back()->with('status','Thực hiện hành động thành công');
+        return back()->with('status', 'Thực hiện hành động thành công');
     }
 }

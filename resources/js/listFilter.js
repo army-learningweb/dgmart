@@ -29,6 +29,7 @@ export default function listFilter() {
                         data: data,
                         dataType: "json",
                         success: function (data) {
+                            console.log(data);
                             type ?  $(".list-" + type).html(data) : $(".list-" + module).html(data) ;
                         },
                     });

@@ -7,7 +7,7 @@
 ])
 
 @if ($products->count() > 0)
-    <div class="box-btn flex items-center justify-between animate_reveal">
+    <div class="box-btn flex items-center justify-between animate_reveal pl-6 md:pl-0">
         <div class="space-y-2">
             <h1 class="text-3xl font-semibold text-gray-900">{{ $title }}</h1>
             <div class="h-1 w-[100px] bg-blue-600 rounded-md"></div>
@@ -17,13 +17,14 @@
         @endif
     </div>
 
-    <div class="slider-product overflow-hidden rounded-3xl mt-5 py-2">
+    <div class="overflow-x-auto scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-[#fafafa] scrollbar-track-transparent">
+        <div class="slider-product md:overflow-hidden rounded-3xl mt-5 py-2">
         <div class="{{ $target }} transition-all duration-300" data-index="0">
-            <ul class="flex">
+            <ul class="flex pl-4 md:pl-0">
                 @foreach ($products as $item)
-                    <li class="shrink-0 w-[20%] px-2 rounded-2xl relative group animate_reveal" style="animation-delay: {{$loop->index * 0.1}}s">
+                    <li class="md:shrink-0 md:w-[20%] px-2 rounded-2xl relative group animate_reveal" style="animation-delay: {{$loop->index * 0.1}}s">
                         <div
-                            class="relative inline-block bg-white rounded-2xl shadow-md pt-4 pb-2 transiton-all duration-200">
+                            class="relative inline-block bg-white rounded-2xl shadow-md pt-4 pb-2 px-3 md:px-0 transiton-all duration-200">
                             @if ($item->sale_off != null || $item->sale_off > 0)
                                 <div
                                     class="absolute z-50 top-3 left-3 px-3 py-[1px] rounded-xl font-semibold bg-red-600/10 text-red-600">
@@ -69,4 +70,6 @@
             </ul>
         </div>
     </div>
+    </div>
+    
 @endif

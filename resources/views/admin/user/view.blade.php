@@ -122,7 +122,7 @@
 
                     {{-- reset --}}
                     <div class="hidden md:block">
-                        <x-button.button-reset />
+                        <x-button.button-reset link="{{route('admin.users')}}" />
                     </div>
 
                 </div>

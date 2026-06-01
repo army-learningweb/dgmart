@@ -1,14 +1,11 @@
-<div class="md:max-w-7xl mx-auto flex justify-between items-center py-1">
+<div class="md:max-w-7xl mx-auto flex justify-between items-center">
 
         <a href="{{ url('/') }}">
             <x-application-logo class="text-3xl py-1 mb-2" />
         </a>
 
-        <div>
-            <x-bar.client-navigation-bar />
-        </div>
-    
-
+        <x-bar.client-navigation-bar />
+       
     <div class="flex items-center gap-3">
 
         {{-- hour --}}
@@ -47,5 +44,11 @@
                 </div>
             @endif
         </a>
+
+        <div class="flex items-center justify-center mt-[3px] border px-2 py-[3px] rounded-md active:shadow-sm active:border-gray-300 md:hidden toggle-menu">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+        </div>
     </div>
 </div>

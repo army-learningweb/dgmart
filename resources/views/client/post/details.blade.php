@@ -1,15 +1,14 @@
 <x-client-layout>
-    
-    <div class="flex bg-white rounded-3xl shadow-md p-5">
-        <div class="flex-1 border-r border-gray-500/20 p-5 pt-0 pl-0">
+    <div class="flex flex-col md:flex-row bg-white md:rounded-3xl shadow-md p-5">
+        <div class="flex-1 md:border-r border-gray-500/20 md:p-5 md:pt-0 md:pl-0">
             <h1 class="font-semibold text-2xl">
                 <div>{{ $post_info->title }}</div>
                 <div class="bg-blue-600 w-[100px] h-[2px] my-3 inline-block rounded-lg"></div>
             </h1>
-            <h2 class="text-gray-700 text-md">{{ $post_info->desc }}</h2>
+            <h2 class="text-gray-700 text-md text-justify md:text-left">{{ $post_info->desc }}</h2>
             @if ($post_info->media)
                 <img src="{{ asset($post_info->media->url) }}" alt="{{ $post_info->media->slug }}"
-                    class="w-full rounded-3xl my-5">
+                    class="w-full rounded-3xl my-5">  
             @endif
             <div class="client-post-content mt-5">
                 {!! $post_info->content !!}
@@ -20,7 +19,7 @@
 
             </div>
         </div>
-        <div class="w-[35%] p-5 pt-0">
+        <div class="md:w-[35%] mt-5 md:mt-0 md:p-5 md:pt-0">
             <div class="sticky top-3">
                 <div class="flex justify-between">
                     <div>
