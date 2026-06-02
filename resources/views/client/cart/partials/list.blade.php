@@ -1,6 +1,7 @@
 @if (Cart::count() > 0)
-    <div class="md:mt-10 p-4 shadow-md md:rounded-2xl bg-white">
-        <div class="overflow-x-auto">
+    <div class="mt-7 md:mt-10 p-4 shadow-md md:rounded-2xl bg-white">
+        {{-- desktop cart --}}
+        <div class="overflow-x-auto hidden md:block">
             <table class="min-w-[1150px] md:w-full select-none">
                 <tr class="font-semibold rounded-2xl border-b border-gray-200">
                     <td class="px-5 py-4">Sản phẩm</td>
@@ -56,7 +57,7 @@
                             </div>
                         </td>
                         <td class="px-5 text-center">
-                            <div class="flex justify-between items-center select-auto">
+                            <div class="flex gap-2 justify-center items-center select-auto">
                                 <div class="cart-change-qty bg-blue-600/10 p-1 rounded-md" action="decrease"
                                     data-row-id="{{ $items->rowId }}" data-stock={{ $items->options->stock }}>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -80,11 +81,9 @@
                             </div>
                         </td>
                         <td class="px-5 text-center font-semibold price text-green-700">
-                            <div class="w-[100px] price" data-row-id="{{ $items->rowId }}">
+                            <div class="w-full price" data-row-id="{{ $items->rowId }}">
                                 {{ num_format($items->price * $items->qty) }}
                             </div>
-
-
                         </td>
                         <td class="px-10">
                             <a href="{{ route('gio-hang.remove', $items->rowId) }}"
@@ -102,12 +101,63 @@
             </table>
         </div>
 
+        {{-- mobile cart --}}
+        <div class="md:hidden">
+            @foreach ($carts as $items)
+                <div class="border-b border-gray-200 py-4 relative">
+                    <div class="flex items-center gap-2 ">
+                        <div class="w-[28%]">
+                                <img src="{{ $items->options->image }}" alt="" class="w-20 h-20 object-contain">
+                        </div>
+                        <div class="flex flex-col relative w-[40%] mb-2">
+                            @if ($items->options->sale_off > 0)
+                                <div>{{ $items->name }}</div>
+                                <span class="font-semibold">{{ num_format($items->options->price_sale_off) }}</span>
+                            @else
+                                <div>{{ $items->name }}</div>
+                                <span class="font-semibold inline-block mt-2 md:mt-0">{{ num_format($items->options->base_price) }}</span>
+                            @endif
+                        </div>
+                        <div class="flex-1 flex gap-1 h-fit items-center justify-center">
+                            <div class="cart-change-qty bg-blue-600/10 p-1 rounded-md" action="decrease"
+                                data-row-id="{{ $items->rowId }}" data-stock={{ $items->options->stock }}>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor"
+                                    class="size-5 cursor-pointer hover:text-blue-600 active:text-blue-800">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
+                                </svg>
+                            </div>
+                            <div class="text-center w-[60px] border border-gray-200 px-5 py-[3px] rounded-md item-{{ $items->rowId }}"
+                                data-qty="{{ $items->qty }}">{{ $items->qty }}
+                            </div>
+                            <div class="cart-change-qty bg-blue-600/10 p-1 rounded-md" action="increase"
+                                data-row-id="{{ $items->rowId }}" data-stock={{ $items->options->stock }}>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor"
+                                    class="size-5 cursor-pointer hover:text-blue-600 active:text-blue-800">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                </svg>
+                            </div>
+                        </div>
+                        <a href="{{ route('gio-hang.remove', $items->rowId) }}" class="absolute top-1 right-0"
+                                onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này ra khỏi giỏ hàng')">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor"
+                                    class="size-5 text-red-700 hover:text-red-500 cursor-pointer ms-1">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                </svg>
+                            </a>
+                    </div>
+                </div>
+            @endforeach
+        </div>
 
         <div class="flex justify-between items-center gap-7 px-3 mt-5">
             <div class="flex-1 flex flex-col gap-3 mt-3">
             </div>
 
-            <div class="w-[70%] md:w-[20%] flex flex-col justify-end gap-2">
+            <div class="w-[70%] md:w-[20%] flex flex-col justify-end md:gap-2">
                 <div class="flex justify-between items-center">
                     <span class=" text-md">Vận chuyển:</span>
                     <span class="font-semibold text-lg">Miễn phí !</span>

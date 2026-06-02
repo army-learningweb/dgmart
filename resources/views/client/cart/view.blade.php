@@ -3,7 +3,7 @@
     <div class="pt-1 md:pt-3 px-4 md:px-0">
         <div class="flex justify-between items-end">
             <a href="{{ url(request()->path()) }}"
-                class="hidden md:block text-6xl font-bold tracking-tight bg-gradient-to-r from-blue-600 to-blue-900 bg-clip-text text-transparent py-3">
+                class="text-6xl font-bold tracking-tight bg-gradient-to-r from-blue-600 to-blue-900 bg-clip-text text-transparent py-3">
                 Giỏ hàng
             </a>
             @if ($top_sale)

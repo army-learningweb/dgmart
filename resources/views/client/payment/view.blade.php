@@ -13,7 +13,7 @@
 
     <div class="flex flex-col md:flex-row items-start gap-3 mt-5 animate_reveal px-5">
 
-        <div class="bg-white p-5 rounded-xl shadow-md w-full md:w-[45%]">
+        <div class="order-2 md:order-1 bg-white p-5 rounded-xl shadow-md w-full md:w-[45%]">
             <form action="{{ route('thanh-toan.create') }}" method="post">
                 @csrf
 
@@ -95,18 +95,46 @@
                         </label>
                     </div>
                 </div>
+                
+            <h1 class="md:hidden font-semibold text-lg mt-3">Đơn hàng</h1>
+            <hr class="md:hidden my-3">
+            <div class="md:hidden">
+                 @foreach ($carts as $items)
+                    <div class="flex flex-col gap-1">
+                        <div class="flex items-center gap-2 py-2">
+                            <img src="{{ $items->options->image }}" alt=""
+                            class="w-20">
+                            <div class="w-[100px]">{{ $items->name }}</div>
+                            <div>x({{ $items->qty }})</div>
+                            <div class="pl-10 py-2 font-semibold">{{ num_format($items->price * $items->qty) }}</div>
+                        </div>
+                        
+                    </div>
+                    
+                @endforeach
+            </div>
+            
+             <div class="md:hidden flex flex-col md:flex-row gap-y-2 md:gap-y-0 justify-between items-end mt-5 px-2">
+                <div class="flex gap-2 items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+                    </svg>
+                    <span class="font-semibold">Miễn phí vận chuyển !</span>
+                </div>
+                <div class="flex gap-5 items-center">
+                    <span>Tổng thanh toán:</span>
+                    <span class="font-semibold text-xl">{{ Cart::total() }}đ</span>
+                </div>
+            </div>
 
                 <div class="flex justify-end mt-5 items-center gap-5">
                     <a href="/" class="text-blue-600 hover:underline underline-offset-1">Tiếp tục mua sắm</a>
                     <button type="submit"
                         class="confirm-order bg-gradient-to-r flex gap-2 items-center from-blue-600 to-blue-800 text-white px-5 py-2 rounded-md hover:brightness-125 cursor-pointer">
                         <span class="font-semibold">ĐẶT HÀNG</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="size-5">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M9 3.75H6.912a2.25 2.25 0 0 0-2.15 1.588L2.35 13.177a2.25 2.25 0 0 0-.1.661V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 0 0-2.15-1.588H15M2.25 13.5h3.86a2.25 2.25 0 0 1 2.012 1.244l.256.512a2.25 2.25 0 0 0 2.013 1.244h3.218a2.25 2.25 0 0 0 2.013-1.244l.256-.512a2.25 2.25 0 0 1 2.013-1.244h3.859M12 3v8.25m0 0-3-3m3 3 3-3" />
-                        </svg>
-
+                        
                     </button>
                 </div>
 
@@ -116,10 +144,8 @@
             </form>
         </div>
 
-        <div class="w-full md:flex-1 bg-white p-5 rounded-xl shadow-md sticky top-4">
-            <h1 class="font-semibold text-lg">Đơn hàng</h1>
-            <hr class="my-3">
-            <div class="md:w-full overflow-x-auto">
+        <div class="hidden md:block order-1 md:order-2 w-full md:flex-1 bg-white p-5 rounded-xl shadow-md md:sticky md:top-4">
+            <div class="hidden md:block md:w-full overflow-x-auto">
                 <table class="md:w-full min-w-[500px]">
                     @foreach ($carts as $items)
                         <tr class="border-b border-gray-100">

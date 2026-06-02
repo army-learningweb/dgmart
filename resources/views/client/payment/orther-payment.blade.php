@@ -55,14 +55,14 @@
         @if (session('order')['payment_method'] == 'banking' || session('order')['payment_method'] == 'zalo')
             <div class="bg-gradient-to-r from-cyan-500 to-teal-700 flex-1 rounded-2xl flex justify-center items-center order-1 md:order-2">
                 <div class="flex flex-col justify-center items-center gap-5">
-                    <div class="font-semibold text-2xl text-white tracking-tight">Quét mã QR để thanh toán</div>
+                    <div class="font-semibold text-2xl text-white tracking-tight p-3">Quét mã QR để thanh toán</div>
                     <div class="bg-white rounded-2xl overflow-hidden relative p-3">
                         <img src="{{ asset('images/qr_demo.png') }}" alt="" class="w-full h-[230px]">
                         <div
                             class="bg-gradient-to-t from-teal-500/50 to-white/5 h-50 absolute left-0 w-full h-5 animate_qr_scan">
                         </div>
                     </div>
-                    <div class="text-white">
+                    <div class="text-white p-3">
                         <p>Sử dụng <span class="font-bold">App</span> hoặc ứng dụng Camera hỗ trợ QR code để quét mã</p>
                     </div>
                 </div>
