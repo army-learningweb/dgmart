@@ -18,9 +18,13 @@
             @foreach ($users as $user)
                 <tr class="border-b border-gray-500/10 hover:bg-[#f5f5f5] animate_tl" style="animation-delay: {{ $loop->index * 0.1 }}s">
                     <td class="px-3 py-4">
-                        <input type="checkbox" name="user_id[]" value="{{ $user->id }}" form="form_action_users"
+                        @if ($user->id !== 1)
+                            <input type="checkbox" name="user_id[]" value="{{ $user->id }}" form="form_action_users"
                             {{ in_array($user->id, (array) old('user_id')) ? 'checked' : '' }}
                             class="check_single rounded-[3px] mb-[2px]">
+                        @else
+                            .....
+                        @endif
                     </td>
                     <td class="px-3">{{ $loop->iteration }}</td>
                     <td class="px-5">
@@ -53,9 +57,13 @@
                     </td>
                     <td class="px-3">{{ $user->created_at->format('d/m/Y') }}</td>
                     <td class="px-3 py-[10px] text-center flex justify-center items-center gap-2">
-                        <x-table.button-edit button="edit-user" module="users" id="{{ $user->id }}" />
-                        <x-table.button-delete route="{{ route('admin.users.destroy', $user->id) }}"
+                        @if ($user->id != 1)
+                            <x-table.button-edit button="edit-user" module="users" id="{{ $user->id }}" />
+                            <x-table.button-delete route="{{ route('admin.users.destroy', $user->id) }}"
                             confirm="Bạn có chắc muốn xóa thành viên này ra khỏi hệ thống ?" />
+                        @else
+                        .....
+                        @endif
                     </td>
                 </tr>
             @endforeach

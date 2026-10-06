@@ -13,7 +13,7 @@ class AdminRoleController extends Controller
     function list(){
 
         $permissions = Permission::all()->groupBy(function($permission){
-            return explode('.',$permission->slug)[1];
+           return str($permission->slug)->afterLast('.');
         });
 
         $roles = Role::all();

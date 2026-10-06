@@ -3,7 +3,7 @@ export default function attribute(){
         let attribute_value = $(this).val();
         let type = $(this).attr('type');
         let data = {attribute_value:attribute_value}
-        console.log(type);
+        
         $.ajax({
             type: "get",
             url: "/admin/products/getAtributeVariant",

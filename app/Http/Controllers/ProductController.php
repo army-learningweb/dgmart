@@ -108,6 +108,7 @@ class ProductController extends Controller
         ->get();
 
         $product_reviews = ProductReview::where('status','publish')->where('product_id',$product_info->id)->get();
+
         return view('client.product.details', compact('product_info','variants','more_products','product_reviews'));
     }
 }

@@ -15,7 +15,8 @@
             </a>
         </li>
 
-        <li class="mt-1">
+        @canany(['manager.product', 'administrator'])
+            <li class="mt-1">
             <a href="#"
                 class="{{ session('module_active') == 'products' ? 'active' : '' }} flex items-center justify-between gap-3 px-3 py-2 rounded-lg text-gray-900 hover:bg-white hover:shadow-md hover:text-blue-600">
                 <div class="flex gap-3">
@@ -84,8 +85,10 @@
                 </li>
             </ul>
         </li>
-
-        <li class="mt-1">
+        @endcanany
+        
+        @canany(['manager.post', 'administrator'])
+            <li class="mt-1">
             <a href="#"
                 class="{{ session('module_active') == 'posts' ? 'active' : '' }} flex items-center justify-between px-3 py-2 rounded-lg text-gray-900 hover:bg-white hover:shadow-md hover:text-blue-600">
                 <div class="flex gap-3 items-center">
@@ -133,8 +136,10 @@
                 </li>
             </ul>
         </li>
-
-        <li class="mt-1">
+        @endcanany
+        
+        @canany(['administrator'])
+            <li class="mt-1">
             <a href="{{ route('admin.reviews') }}"
                 class="{{ session('module_active') == 'reviews' ? 'active' : '' }} flex items-center justify-between px-3 py-2 rounded-lg text-gray-900 hover:bg-white hover:shadow-md hover:text-blue-600">
                 <div class="flex gap-3 items-center">
@@ -265,4 +270,6 @@
                 </span>
             </a>
         </li>
+        @endcanany
+        
     </ul>

@@ -7,13 +7,13 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Role;
 use App\Models\user_role;
+use Illuminate\Support\Facades\Gate;
 
 class AdminUserController extends Controller
 {
     // danh sách
     function list(Request $request)
     {
-        
         $users = User::query()->with('roles:id,name')
             ->when($request->input('filter'), function ($query, $value) {
                 $query->where('status', $value);

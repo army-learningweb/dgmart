@@ -1,4 +1,3 @@
-
 <ul class="flex flex-col md:flex-row py-4 md:max-w-7xl mx-auto px-6">
     <li class="flex-1">
         <x-application-logo class="text-3xl py-2" />
@@ -36,7 +35,8 @@
         <div class="font-semibold text-gray-800 text-[16px]">Liên kết nhanh</div>
         <ul class="mt-4">
             @foreach ($menus as $item)
-                <li class="border-b border-gray-100 md:border-0"><a href="{{ url($item->slug) }}" class="hover:text-blue-700 py-2 inline-block w-full">{{ $item->name }}</a></li>
+                <li class="border-b border-gray-100 md:border-0"><a href="{{ url($item->slug) }}"
+                        class="hover:text-blue-700 py-2 inline-block w-full">{{ $item->name }}</a></li>
             @endforeach
         </ul>
     </li>

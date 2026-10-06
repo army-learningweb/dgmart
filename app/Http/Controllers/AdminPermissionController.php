@@ -10,7 +10,7 @@ class AdminPermissionController extends Controller
      // danh sách
     function list(){
         $permissions = Permission::all()->groupBy(function($permission){
-            return explode('.',$permission->slug)[1];
+            return str($permission->slug)->afterLast('.');
         });
 
         // return $permissions;

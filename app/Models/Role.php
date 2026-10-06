@@ -13,7 +13,7 @@ class Role extends Model
         'updated_at'
     ];
 
-    function permissions(){
+    public function permissions(){
         return $this->belongsToMany(Permission::class,'role_permissions');
     }
 }

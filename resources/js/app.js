@@ -34,7 +34,6 @@ import attribute from "./attribute";
 import imageProductDetails from "./imageProductDetails";
 import productDetailTotal from "./productDetailTotal";
 import cart from "./cart";
-import productDetailConfig from "./productDetailConfig";
 import voteStar from "./voteStar";
 
 $(function () {
@@ -57,7 +56,6 @@ $(function () {
     attribute()
     imageProductDetails()
     productDetailTotal()
-    productDetailConfig()
     cart()
     voteStar()
 });

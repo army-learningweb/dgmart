@@ -94,30 +94,11 @@
 
                 {{-- customize --}}
                 @if ($variants->count() > 0)
-                    <div
-                        class="pt-5 pb-3 select-none flex flex-col gap-3 md:gap-0 md:flex-row md:items-center justify-between">
-                        <div>
-                            <span class="text-gray-500 font-semibold text-2xl">Tùy chọn.</span>
-                            <span class="font-semibold tracking-tight text-2xl">Cá nhân hóa</span>
-                        </div>
-                        <div>
-                            <div class="flex gap-1 items-end text-blue-600 hover:underline cursor-pointer show-config">
-                                <span>Tùy chọn thêm tại đây</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="size-4">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="product-details-config hidden">
+                    <div class="product-details-config">
                         <div class="flex flex-col gap-3 {{ $errors->any() ? '' : 'animate_reveal' }}">
                             @foreach ($variants as $key => $items)
                                 <div
                                     class="next-variant text-[16px] tracking-tight flex gap-2 items-center py-3 select-none">
-                                    <div class="text-gray-400">Chọn.</div>
                                     <div class="text-lg font-semibold">{{ $key }}</div>
                                 </div>
                                 @foreach ($items as $item)
@@ -127,9 +108,12 @@
                                         data-price="{{ $item->price }}" data-name="{{ $item->name }}">
                                         <div class="w-[40%] flex flex-col gap-2">
                                             <div class="font-semibold w-[150px] truncate">{{ $item->name }}</div>
-                                            <div>
+                                            @if ($item->price)
+                                                <div>
                                                 +{{ number_format($item->price, '0', ',', '.') }}đ
                                             </div>
+                                            @endif
+                                            
                                             <input type="radio" name="options[{{ $key }}]"
                                                 id="variant_id_{{ $item->id }}"
                                                 {{ $item->price == 0 ? 'checked' : '' }} value="{{ $item->id }}"

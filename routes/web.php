@@ -45,8 +45,8 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
 });
 
 Route::post('/validation', [ValidationController::class, 'validation']);
-
 Route::get('/admin/dashboard', [DashboardController::class, 'view'])->middleware(['auth', 'verified'])->name('dashboard');
+
 Route::middleware(['web', 'auth'])->group(function () {
 
     // File ==================================================
@@ -84,61 +84,65 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::post('admin/permissions/update', [AdminPermissionController::class, 'update'])->name('admin.permissions.update');
 
     // Post ==================================================
-    Route::get('/admin/posts/categories', [AdminCategoryController::class, 'list'])->name('admin.posts.categories');
-    Route::post('/admin/posts/categories/store', [AdminCategoryController::class, 'store'])->name('admin.posts.categories.store');
-    Route::post('/admin/posts/categories/updateStatus', [AdminCategoryController::class, 'updateStatus']);
-    Route::get('/admin/posts/categories/edit', [AdminCategoryController::class, 'edit']);
-    Route::post('/admin/post/categories/update', [AdminCategoryController::class, 'update'])->name('admin.posts.categories.update');
-    Route::post('/admin/posts/categories/destroy/{category}', [AdminCategoryController::class, 'destroy'])->name('admin.posts.categories.destroy');
-    Route::post('/admin/posts/categories/action', [AdminCategoryController::class, 'action'])->name('admin.posts.categories.action');
+    Route::middleware('can:manager.post')->group(function(){
+        Route::get('/admin/posts/categories', [AdminCategoryController::class, 'list'])->name('admin.posts.categories');
+        Route::post('/admin/posts/categories/store', [AdminCategoryController::class, 'store'])->name('admin.posts.categories.store');
+        Route::post('/admin/posts/categories/updateStatus', [AdminCategoryController::class, 'updateStatus']);
+        Route::get('/admin/posts/categories/edit', [AdminCategoryController::class, 'edit']);
+        Route::post('/admin/post/categories/update', [AdminCategoryController::class, 'update'])->name('admin.posts.categories.update');
+        Route::post('/admin/posts/categories/destroy/{category}', [AdminCategoryController::class, 'destroy'])->name('admin.posts.categories.destroy');
+        Route::post('/admin/posts/categories/action', [AdminCategoryController::class, 'action'])->name('admin.posts.categories.action');
 
-    Route::get('/admin/posts', [AdminPostController::class, 'list'])->name('admin.posts');
-    Route::post('/admin/posts', [AdminPostController::class, 'list_filter']);
-    Route::post('/admin/posts/store', [AdminPostController::class, 'store'])->name('admin.posts.store');
-    Route::post('/admin/posts/destroy/{post}', [AdminPostController::class, 'destroy'])->name('admin.posts.destroy');
-    Route::get('admin/posts/edit', [AdminPostController::class, 'edit']);
-    Route::post('/admin/posts/update', [AdminPostController::class, 'update'])->name('admin.posts.update');
-    Route::post('/admin/posts/action', [AdminPostController::class, 'action'])->name('admin.posts.action');
-    Route::post('/admin/posts/updateStatus', [AdminPostController::class, 'updateStatus']);
-
-    // Product ==================================================
-
-    // Category
-    Route::get('/admin/products/categories', [AdminCategoryController::class, 'list'])->name('admin.products.categories');
-    Route::post('/admin/products/categories/store', [AdminCategoryController::class, 'store'])->name('admin.products.categories.store');
-    Route::post('/admin/products/categories/updateStatus', [AdminCategoryController::class, 'updateStatus']);
-    Route::get('/admin/products/categories/edit', [AdminCategoryController::class, 'edit']);
-    Route::post('/admin/products/categories/update', [AdminCategoryController::class, 'update'])->name('admin.products.categories.update');
-    Route::post('/admin/products/categories/destroy/{category}', [AdminCategoryController::class, 'destroy'])->name('admin.products.categories.destroy');
-    Route::post('/admin/products/categories/action', [AdminCategoryController::class, 'action'])->name('admin.products.categories.action');
+        Route::get('/admin/posts', [AdminPostController::class, 'list'])->name('admin.posts');
+        Route::post('/admin/posts', [AdminPostController::class, 'list_filter']);
+        Route::post('/admin/posts/store', [AdminPostController::class, 'store'])->name('admin.posts.store');
+        Route::post('/admin/posts/destroy/{post}', [AdminPostController::class, 'destroy'])->name('admin.posts.destroy');
+        Route::get('admin/posts/edit', [AdminPostController::class, 'edit']);
+        Route::post('/admin/posts/update', [AdminPostController::class, 'update'])->name('admin.posts.update');
+        Route::post('/admin/posts/action', [AdminPostController::class, 'action'])->name('admin.posts.action');
+        Route::post('/admin/posts/updateStatus', [AdminPostController::class, 'updateStatus']);
+    });
 
     // product
-    Route::get('/admin/products', [AdminProductController::class, 'list'])->name('admin.products');
-    Route::post('/admin/products', [AdminProductController::class, 'list_filter']);
-    Route::post('/admin/products/store', [AdminProductController::class, 'store'])->name('admin.products.store');
-    Route::get('/admin/products/getAtributeVariant', [AdminProductController::class, 'getAtributeVariant']);
-    Route::post('/admin/products/destroy/{product}', [AdminProductController::class, 'destroy'])->name('admin.products.destroy');
-    Route::get('/admin/products/edit', [AdminProductController::class, 'edit']);
-    Route::post('/admin/products/update', [AdminProductController::class, 'update'])->name('admin.products.update');
-    Route::post('/admin/products/action', [AdminProductController::class, 'action'])->name('admin.products.action');
-    Route::post('/admin/products/updateStatus', [AdminProductController::class, 'updateStatus']);
+    Route::middleware('can:manager.product')->group(function(){
+        Route::get('/admin/products/categories', [AdminCategoryController::class, 'list'])->name('admin.products.categories');
+        Route::post('/admin/products/categories/store', [AdminCategoryController::class, 'store'])->name('admin.products.categories.store');
+        Route::post('/admin/products/categories/updateStatus', [AdminCategoryController::class, 'updateStatus']);
+        Route::get('/admin/products/categories/edit', [AdminCategoryController::class, 'edit']);
+        Route::post('/admin/products/categories/update', [AdminCategoryController::class, 'update'])->name('admin.products.categories.update');
+        Route::post('/admin/products/categories/destroy/{category}', [AdminCategoryController::class, 'destroy'])->name('admin.products.categories.destroy');
+        Route::post('/admin/products/categories/action', [AdminCategoryController::class, 'action'])->name('admin.products.categories.action');
 
-    // attributes
-    Route::get('/admin/products/attributes',[AdminAttributeController::class,'list'])->name('admin.products.attributes');
-    Route::post('/admin/products/attributes/store',[AdminAttributeController::class,'store'])->name('admin.products.attributes.store');
-    Route::get('/admin/products/attributes/edit',[AdminAttributeController::class,'edit'])->name('admin.products.attributes.edit');
-    Route::post('/admin/products/attributes/action',[AdminAttributeController::class,'action'])->name('admin.products.attributes.action');
-    Route::post('/admin/products/attributes/destroy/{attribute}',[AdminAttributeController::class,'destroy'])->name('admin.products.attributes.destroy');
-    Route::post('/admin/products/attributes/update',[AdminAttributeController::class,'update'])->name('admin.products.attributes.update');
+        Route::get('/admin/products', [AdminProductController::class, 'list'])->name('admin.products');
+        Route::post('/admin/products', [AdminProductController::class, 'list_filter']);
+        Route::post('/admin/products/store', [AdminProductController::class, 'store'])->name('admin.products.store');
+        Route::get('/admin/products/getAtributeVariant', [AdminProductController::class, 'getAtributeVariant']);
+        Route::post('/admin/products/destroy/{product}', [AdminProductController::class, 'destroy'])->name('admin.products.destroy');
+        Route::get('/admin/products/edit', [AdminProductController::class, 'edit']);
+        Route::post('/admin/products/update', [AdminProductController::class, 'update'])->name('admin.products.update');
+        Route::post('/admin/products/action', [AdminProductController::class, 'action'])->name('admin.products.action');
+        Route::post('/admin/products/updateStatus', [AdminProductController::class, 'updateStatus']);
 
-    // variant
-    Route::get('/admin/products/variants',[AdminVariantController::class,'list'])->name('admin.products.variants');
-    Route::post('/admin/products/variants',[AdminVariantController::class,'list_filter']);
-    Route::post('/admin/products/variants/store',[AdminVariantController::class,'store'])->name('admin.products.variants.store');
-    Route::get('/admin/products/variants/edit',[AdminVariantController::class,'edit']);
-    Route::post('/admin/products/variants/update',[AdminVariantController::class,'update'])->name('admin.products.variants.update');
-    Route::post('/admin/products/variants/destroy/{variant}',[AdminVariantController::class,'destroy'])->name('admin.products.variants.destroy');
-    Route::post('/admin/products/variants/action',[AdminVariantController::class,'action'])->name('admin.products.variants.action');
+        // attributes
+        Route::get('/admin/products/attributes',[AdminAttributeController::class,'list'])->name('admin.products.attributes');
+        Route::post('/admin/products/attributes/store',[AdminAttributeController::class,'store'])->name('admin.products.attributes.store');
+        Route::get('/admin/products/attributes/edit',[AdminAttributeController::class,'edit'])->name('admin.products.attributes.edit');
+        Route::post('/admin/products/attributes/action',[AdminAttributeController::class,'action'])->name('admin.products.attributes.action');
+        Route::post('/admin/products/attributes/destroy/{attribute}',[AdminAttributeController::class,'destroy'])->name('admin.products.attributes.destroy');
+        Route::post('/admin/products/attributes/update',[AdminAttributeController::class,'update'])->name('admin.products.attributes.update');
+
+        // variant
+        Route::get('/admin/products/variants',[AdminVariantController::class,'list'])->name('admin.products.variants');
+        Route::post('/admin/products/variants',[AdminVariantController::class,'list_filter']);
+        Route::post('/admin/products/variants/store',[AdminVariantController::class,'store'])->name('admin.products.variants.store');
+        Route::get('/admin/products/variants/edit',[AdminVariantController::class,'edit']);
+        Route::post('/admin/products/variants/update',[AdminVariantController::class,'update'])->name('admin.products.variants.update');
+        Route::post('/admin/products/variants/destroy/{variant}',[AdminVariantController::class,'destroy'])->name('admin.products.variants.destroy');
+        Route::post('/admin/products/variants/action',[AdminVariantController::class,'action'])->name('admin.products.variants.action');
+    });
+    
+
+    
 
     // Slider ==================================================
     Route::get('/admin/sliders', [AdminSliderController::class, 'list'])->name('admin.sliders');
